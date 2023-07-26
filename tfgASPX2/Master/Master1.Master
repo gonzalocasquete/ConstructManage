@@ -1,0 +1,31 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Master1.master.cs" Inherits="tfgASPX2.Master.Master1" %>
+
+<!DOCTYPE html>
+
+<html lang="es">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="../Styles/MasterStyle.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <h1 class="mt-3">TFG NAME</h1>
+            <nav>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolderNavegacion" runat="server">
+                </asp:ContentPlaceHolder>
+
+                <a href="../Login.aspx">Logout</a>
+                <div class="animation start-home"></div>
+            </nav>
+
+            <asp:ContentPlaceHolder ID="ContentPlaceHolderContenido" runat="server">
+            </asp:ContentPlaceHolder>
+
+        </div>
+    </form>
+</body>
+</html>

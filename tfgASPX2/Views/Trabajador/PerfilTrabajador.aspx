@@ -1,0 +1,86 @@
+﻿<%@ Page Language="C#" MasterPageFile="~/Master/Master1.Master" AutoEventWireup="true" CodeBehind="PerfilTrabajador.aspx.cs" Inherits="tfgASPX2.Views.Trabajador.PerfilTrabajador" %>
+
+
+<asp:Content ID="PerfilTrabajadorHead" ContentPlaceHolderID="head" runat="server">
+    <link href="../../Styles/PerfilTrabajadorStyle.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+        rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+        crossorigin="anonymous" />
+    <script src="../../Scripts/Views/PerfilTrabajadorScripts.js"></script>
+</asp:Content>
+
+<asp:Content ID="PerfilTrabajadorNavegacion" ContentPlaceHolderID="ContentPlaceHolderNavegacion" runat="server">
+    <a href="InicialTrabajador.aspx">Menu</a>
+    <a href="PerfilTrabajador.aspx">Perfil</a>
+</asp:Content>
+
+<asp:Content ID="PerfilTrabajadorBody" ContentPlaceHolderID="ContentPlaceHolderContenido" runat="server">
+    <div class="auto-style1">
+        <asp:SqlDataSource runat="server" ID="SqlDataSource1" DataSourceMode="DataReader" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>"
+            SelectCommand="SELECT Trabajador.nombre, Trabajador.apellido, Trabajador.idUsuario, Trabajador.idCategoria, Usuario.nombreUsuario, Usuario.contraseñaUsuario FROM Trabajador INNER JOIN Usuario ON Trabajador.idUsuario = Usuario.idUsuario WHERE (Trabajador.idUsuario = @idUsuario)"
+            UpdateCommand="UPDATE Trabajador JOIN Usuario ON Trabajador.idUsuario = Usuario.idUsuario SET Trabajador.nombre = @nombre, Trabajador.apellido = @apellido, Trabajador.idCategoria = @idCategoria, Usuario.nombreUsuario = @nombreUsuario, Usuario.contraseñaUsuario = @contraseñaUsuario WHERE Trabajador.idUsuario = @idUsuario;">
+            <SelectParameters>
+                <asp:SessionParameter SessionField="idUsuario" Name="idUsuario"></asp:SessionParameter>
+            </SelectParameters>
+            <UpdateParameters>
+                <asp:Parameter Name="nombre"></asp:Parameter>
+                <asp:Parameter Name="apellido"></asp:Parameter>
+                <asp:Parameter Name="idCategoria"></asp:Parameter>
+                <asp:Parameter Name="nombreUsuario"></asp:Parameter>
+                <asp:Parameter Name="contrase&#241;aUsuario"></asp:Parameter>
+                <asp:Parameter Name="idUsuario"></asp:Parameter>
+            </UpdateParameters>
+        </asp:SqlDataSource>
+
+        <asp:FormView ID="FormView1" runat="server" DataSourceID="SqlDataSource1" DefaultMode="Edit">
+            <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
+            <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
+            <EditItemTemplate>
+                <div class="row">
+                    <div class="col">
+                        Nombre:
+                        <asp:TextBox Text='<%# Bind("nombre") %>' class="form-control" runat="server" ID="nombreTextBox" /><br />
+                    </div>
+                    <div class="col">
+                        Apellido:
+                        <asp:TextBox Text='<%# Bind("apellido") %>' class="form-control" runat="server" ID="apellidoTextBox" /><br />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        Categoria Profesional:
+                        <asp:DropDownList class="form-control" ID="DropDownList2" Text='<%# Bind("idCategoria") %>' runat="server" DataSourceID="CategoriaSqlDataSource" DataTextField="nombreCategoria" DataValueField="idCategoria"></asp:DropDownList>
+                        <asp:SqlDataSource ID="CategoriaSqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>"
+                            SelectCommand="SELECT idCategoria, nombreCategoria FROM CategoriaProfesional"></asp:SqlDataSource>
+                        <br />
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        Usuario:
+                        <asp:TextBox Text='<%# Bind("nombreUsuario") %>' class="form-control" runat="server" ID="nombreUsuarioTextBox" /><br />
+                    </div>
+                    <div class="col">
+                        Contraseña:
+                        <asp:TextBox Text='<%# Bind("contraseñaUsuario") %>' class="form-control" runat="server" ID="contraseñaUsuarioTextBox" TextMode="Password"/><br />
+                    </div>
+                </div>
+
+                <asp:TextBox Text='<%# Bind("idUsuario") %>' class="invisible" runat="server" ID="idUsuarioTextBox" />
+
+                <div class="mt-3 text-center">
+                    <asp:LinkButton runat="server" class="btn btn-success" Text="Actualizar" CommandName="Update" ID="UpdateButton" CausesValidation="True" />
+                    &nbsp;
+                    <asp:LinkButton runat="server" class="btn btn-danger" Text="Cancelar" CommandName="Cancel" ID="UpdateCancelButton" CausesValidation="False" />
+                </div>
+
+            </EditItemTemplate>
+            <PagerStyle BackColor="#FFCC66" ForeColor="#333333" HorizontalAlign="Center" />
+            <RowStyle BackColor="#FFFBD6" ForeColor="#333333" />
+        </asp:FormView>
+
+    </div>
+</asp:Content>
