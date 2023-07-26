@@ -40,7 +40,6 @@ namespace tfgASPX2.Views.Super
             if (DropDownListFiltroCategorias.SelectedValue != "")
                 consultaSQL += " AND nombreCategoria = '" + DropDownListFiltroCategorias.SelectedValue + "'";
 
-            Response.Write(consultaSQL);
 
             SqlDataSource1.SelectCommand = consultaSQL;
             SqlDataSource1.DataBind();
