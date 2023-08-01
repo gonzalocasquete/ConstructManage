@@ -65,10 +65,27 @@
         <asp:GridView ID="GridView1" class="table mt-3" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoConvenio" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical" AllowSorting="True">
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
-                <asp:BoundField DataField="nombre" HeaderText="Nombre" SortExpression="nombre"></asp:BoundField>
-                <asp:BoundField DataField="codigoConvenio" HeaderText="ID" ReadOnly="True" InsertVisible="False" SortExpression="codigoConvenio"></asp:BoundField>
-                <asp:BoundField DataField="fechaInicio" DataFormatString="{0:dd/MM/yy}" HeaderText="Fecha Inicio" SortExpression="fechaInicio"></asp:BoundField>
-                <asp:BoundField DataField="fechaFin" DataFormatString="{0:dd/MM/yy}" HeaderText="Fecha Fin" SortExpression="fechaFin"></asp:BoundField>
+                <asp:BoundField DataField="nombre" HeaderText="Nombre"></asp:BoundField>
+                <asp:BoundField DataField="codigoConvenio" HeaderText="ID" ReadOnly="True" InsertVisible="False"></asp:BoundField>
+
+                <asp:TemplateField HeaderText="Fecha Inicio" SortExpression="fechaInicio" >
+                    <ItemTemplate>
+                        <%# Eval("fechaInicio", "{0:dd/MM/yy}") %>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <input type="date" id="dateFechaInicio" runat="server" value='<%# Bind("fechaInicio", "{0:yyyy-MM-dd}") %>' />
+                    </EditItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Fecha Fin" SortExpression="fechaFin">
+                    <ItemTemplate>
+                        <%# Eval("fechaFin", "{0:dd/MM/yy}") %>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <input type="date" id="dateFechFin" runat="server" value='<%# Bind("fechaFin", "{0:yyyy-MM-dd}") %>' />
+                    </EditItemTemplate>
+                </asp:TemplateField>
+
                 <asp:CommandField SelectText="DetallesxCategoria" ShowDeleteButton="True" ShowEditButton="True" ShowSelectButton="True"></asp:CommandField>
             </Columns>
             <FooterStyle BackColor="#CCCCCC" />

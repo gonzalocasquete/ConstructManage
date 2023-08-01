@@ -17,7 +17,7 @@
 
         <%--Filtros--%>
         <hr />
-        <div>   
+        <div>
             <%--Usuario--%>
             <asp:Label ID="LabelFiltroUsuario" runat="server" Text="Usuario:"></asp:Label>
             <asp:TextBox ID="TextBoxFiltradoUsuario" class="form-control" runat="server"></asp:TextBox>
@@ -45,7 +45,7 @@
 
             <div class="text-center">
                 <asp:Button ID="ButtonFiltrado" class="form-control btn-primary btn-sm btn-block buttonFilter" runat="server" Text="Filtrar" OnClick="ButtonFiltrado_Click" />
-                <asp:Button runat="server" class="form-control btn-secondary btn-sm btn-block buttonFilter mt-1" Text="Limpiar" OnClick="Todos_Click"></asp:Button>
+                <asp:Button runat="server" class="form-control btn-secondary btn-sm btn-block buttonFilter mt-1" Text="Limpiar" OnClick="Limpiar_Click"></asp:Button>
             </div>
         </div>
 
@@ -65,13 +65,26 @@
                 <asp:Parameter Name="idUsuario" Type="Int32"></asp:Parameter>
             </UpdateParameters>
         </asp:SqlDataSource>
-        <asp:GridView ID="GridView1" class="table mt-3" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="idUsuario" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical">
+        <asp:GridView ID="GridView1" class="table mt-3" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="idUsuario" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical" AllowSorting="True">
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
-                <asp:BoundField DataField="idUsuario" HeaderText="ID" ReadOnly="True" InsertVisible="False" SortExpression="idUsuario"></asp:BoundField>
+                <asp:BoundField DataField="idUsuario" HeaderText="ID" ReadOnly="True" InsertVisible="False"></asp:BoundField>
                 <asp:BoundField DataField="nombreUsuario" HeaderText="Usuario" SortExpression="nombreUsuario"></asp:BoundField>
-                <asp:BoundField DataField="contrase&#241;aUsuario" HeaderText="Password" SortExpression="contrase&#241;aUsuario"></asp:BoundField>
-                <asp:BoundField DataField="rol" HeaderText="Rol" SortExpression="rol"></asp:BoundField>
+                <asp:BoundField DataField="contrase&#241;aUsuario" HeaderText="Password"></asp:BoundField>
+
+                <asp:TemplateField HeaderText="Rol" SortExpression="rol">
+                    <ItemTemplate>
+                        <%# Eval("rol") %>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:DropDownList Text='<%# Bind("rol") %>' class="form-control" runat="server" ID="rolDropDownList">
+                            <asp:ListItem Text="trabajador" Value="trabajador"></asp:ListItem>
+                            <asp:ListItem Text="coordinador" Value="coordinador"></asp:ListItem>
+                            <asp:ListItem Text="super" Value="super"></asp:ListItem>
+                        </asp:DropDownList>
+                    </EditItemTemplate>
+                </asp:TemplateField>
+
                 <asp:CommandField ShowDeleteButton="True" ShowEditButton="True"></asp:CommandField>
             </Columns>
             <FooterStyle BackColor="#CCCCCC" />

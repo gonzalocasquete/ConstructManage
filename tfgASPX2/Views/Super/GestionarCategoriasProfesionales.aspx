@@ -51,8 +51,8 @@
         <asp:GridView ID="GridView1" class="table mt-3" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="idCategoria" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical">
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
-                <asp:BoundField DataField="idCategoria" HeaderText="idCategoria" InsertVisible="False" ReadOnly="True" SortExpression="idCategoria" />
-                <asp:BoundField DataField="nombreCategoria" HeaderText="nombreCategoria" SortExpression="nombreCategoria" />
+                <asp:BoundField DataField="idCategoria" HeaderText="ID" InsertVisible="False" ReadOnly="True" />
+                <asp:BoundField DataField="nombreCategoria" HeaderText="Nombre" />
                 <asp:CommandField ShowDeleteButton="True" ShowEditButton="True"></asp:CommandField>
             </Columns>
             <FooterStyle BackColor="#CCCCCC" />

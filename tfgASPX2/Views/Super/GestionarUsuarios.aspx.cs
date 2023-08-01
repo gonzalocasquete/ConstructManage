@@ -51,9 +51,9 @@ namespace tfgASPX2.Views.Super
             SqlDataSource1.DataBind();
         }
 
-        protected void Todos_Click(object sender, EventArgs e)
+        protected void Limpiar_Click(object sender, EventArgs e)
         {
-            SqlDataSource1.SelectCommand = "SELECT * FROM Usuario";
+            SqlDataSource1.SelectCommand = "SELECT * FROM Usuario ORDER BY idUsuario";
             SqlDataSource1.DataBind();
             TextBoxFiltradoUsuario.Text = "";
             CheckBoxTrabajador.Checked = false;

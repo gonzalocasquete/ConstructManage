@@ -114,13 +114,30 @@
         <asp:GridView ID="GridView1" class="mt-3 table" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="CodigoProyecto" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" AllowSorting="True">
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
-                <asp:BoundField DataField="CodigoProyecto" HeaderText="CodigoProyecto" ReadOnly="True" InsertVisible="False" SortExpression="CodigoProyecto"></asp:BoundField>
-                <asp:BoundField DataField="NombreProyecto" HeaderText="NombreProyecto" SortExpression="NombreProyecto"></asp:BoundField>
-                <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" SortExpression="Descripcion" />
-                <asp:BoundField DataField="FechaInicio" DataFormatString="{0:dd/MM/yy}" HeaderText="FechaInicio" SortExpression="FechaInicio" />
-                <asp:BoundField DataField="FechaFin" DataFormatString="{0:dd/MM/yy}" HeaderText="FechaFin" SortExpression="FechaFin" />
+                <asp:BoundField DataField="CodigoProyecto" HeaderText="CodigoProyecto" ReadOnly="True" InsertVisible="False"></asp:BoundField>
+                <asp:BoundField DataField="NombreProyecto" HeaderText="NombreProyecto"></asp:BoundField>
+                <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" />
+
+                <asp:TemplateField HeaderText="Fecha Inicio" SortExpression="FechaInicio">
+                    <ItemTemplate>
+                        <%# Eval("FechaInicio", "{0:dd/MM/yy}") %>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <input type="date" id="dateFechaInicio" runat="server" value='<%# Bind("FechaInicio", "{0:yyyy-MM-dd}") %>' />
+                    </EditItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Fecha Inicio" SortExpression="fechaInicio">
+                    <ItemTemplate>
+                        <%# Eval("FechaFin", "{0:dd/MM/yy}") %>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <input type="date" id="dateFechaFin" runat="server" value='<%# Bind("FechaFin", "{0:yyyy-MM-dd}") %>' />
+                    </EditItemTemplate>
+                </asp:TemplateField>
+
                 <asp:BoundField DataField="Presupuesto" HeaderText="Presupuesto" SortExpression="Presupuesto" />
-                <asp:BoundField DataField="Comentarios" HeaderText="Comentario" SortExpression="Comentarios" />
+                <asp:BoundField DataField="Comentarios" HeaderText="Comentario" />
                 <asp:CommandField SelectText="Partidas" ShowDeleteButton="True" ShowEditButton="True" ShowSelectButton="True"></asp:CommandField>
             </Columns>
             <FooterStyle BackColor="#CCCCCC" />
