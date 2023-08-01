@@ -90,12 +90,39 @@
         <asp:GridView ID="GridView1" class="mt-3 table" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="CodigoPartida" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical" AllowSorting="True">
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
-                <asp:BoundField DataField="nombrePartida" HeaderText="Partida" SortExpression="nombrePartida"></asp:BoundField>
-                <asp:BoundField DataField="CodigoPartida" HeaderText="ID" ReadOnly="True" InsertVisible="False" SortExpression="CodigoPartida"></asp:BoundField>
-                <asp:BoundField DataField="FechaInicio" DataFormatString="{0:dd/MM/yy}" HeaderText="Fecha Inicio" SortExpression="FechaInicio"></asp:BoundField>
-                <asp:BoundField DataField="FechaFin" DataFormatString="{0:dd/MM/yy}" HeaderText="Fecha Fin" SortExpression="FechaFin"></asp:BoundField>
+                <asp:BoundField DataField="nombrePartida" HeaderText="Partida"></asp:BoundField>
+                <asp:BoundField DataField="CodigoPartida" HeaderText="ID" ReadOnly="True" InsertVisible="False"></asp:BoundField>
+
+                <asp:TemplateField HeaderText="Fecha Inicio" SortExpression="FechaFin">
+                    <ItemTemplate>
+                        <%# Eval("FechaInicio", "{0:dd/MM/yy}") %>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <input type="date" id="txtFechaInicio" runat="server" value='<%# Bind("FechaInicio", "{0:yyyy-MM-dd}") %>' />
+                    </EditItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Fecha Fin" SortExpression="FechaFin">
+                    <ItemTemplate>
+                        <%# Eval("FechaFin", "{0:dd/MM/yy}") %>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <input type="date" id="txtFechaFin" runat="server" value='<%# Bind("FechaFin", "{0:yyyy-MM-dd}") %>' />
+                    </EditItemTemplate>
+                </asp:TemplateField>
+
                 <asp:BoundField DataField="Costo" HeaderText="Costo" SortExpression="Costo"></asp:BoundField>
-                <asp:BoundField DataField="CodigoProyecto" HeaderText="Proyecto" SortExpression="CodigoProyecto"></asp:BoundField>
+
+                <asp:TemplateField HeaderText="Proyecto">
+                    <ItemTemplate>
+                        <%# Eval("CodigoProyecto") %>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:DropDownList Text='<%# Bind("CodigoProyecto") %>' class="dropdown form-control" ID="idProyectoDropDownList" runat="server" DataSourceID="idProyecto2SqlDataSource" DataTextField="NombreProyecto" DataValueField="CodigoProyecto"></asp:DropDownList>
+                        <asp:SqlDataSource ID="idProyecto2SqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT CodigoProyecto, NombreProyecto FROM Proyecto order by NombreProyecto"></asp:SqlDataSource>
+                    </EditItemTemplate>
+                </asp:TemplateField>
+
                 <asp:CommandField ShowDeleteButton="True" ShowEditButton="True"></asp:CommandField>
             </Columns>
             <FooterStyle BackColor="#CCCCCC" />

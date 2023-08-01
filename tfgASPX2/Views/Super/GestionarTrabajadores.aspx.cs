@@ -36,7 +36,11 @@ namespace tfgASPX2.Views.Super
                 " FROM Vista_trabajador" +
                 " WHERE (nombre LIKE '%"+TextBoxFiltradoTrabajador.Text.ToString()+ "%'"+
                 " OR apellido LIKE '%"+TextBoxFiltradoTrabajador.Text.ToString()+"%')";
-           
+
+            if (TextBoxUsuario.Text != "") 
+                consultaSQL+=" AND nombreUsuario LIKE '%"+TextBoxUsuario.Text.ToString()+"%'";
+
+
             if (DropDownListFiltroCategorias.SelectedValue != "")
                 consultaSQL += " AND nombreCategoria = '" + DropDownListFiltroCategorias.SelectedValue + "'";
 
@@ -51,6 +55,7 @@ namespace tfgASPX2.Views.Super
             
             SqlDataSource1.DataBind();
             TextBoxFiltradoTrabajador.Text = "";
+            TextBoxUsuario.Text = "";
             DropDownListFiltroCategorias.SelectedIndex = 0;
         }
     }

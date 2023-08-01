@@ -50,7 +50,7 @@
                     <asp:DropDownList class="form-control" data-toggle="tooltip" title="Categoria del trabajador" ID="DropDownListFiltroCategorias" runat="server" DataSourceID="CategoriaFiltroSqlDataSource" DataTextField="nombreCategoria" DataValueField="nombreCategoria" AppendDataBoundItems="true">
                          <asp:ListItem Text="" Value=""></asp:ListItem>
                     </asp:DropDownList>
-                    <asp:SqlDataSource ID="CategoriaFiltroSqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT idCategoria, nombreCategoria FROM CategoriaProfesional"></asp:SqlDataSource>
+                    <asp:SqlDataSource ID="CategoriaFiltroSqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT idCategoria, nombreCategoria FROM CategoriaProfesional ORDER BY nombreCategoria"></asp:SqlDataSource>
 
                 </div>
             </div>
