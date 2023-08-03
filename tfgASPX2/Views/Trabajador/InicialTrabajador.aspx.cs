@@ -14,8 +14,7 @@ namespace tfgASPX2.Views.Trabajador
             if (!IsPostBack) // Verifica si es la primera carga de la página (no es un PostBack)
             {
                 MostrarMensajeBienvenida();
-            }
-
+            }     
         }
 
         private void MostrarMensajeBienvenida()
@@ -40,6 +39,32 @@ namespace tfgASPX2.Views.Trabajador
         {
             //SqlDataSource1.SelectCommand = "SELECT * FROM CategoriaProfesional";
             SqlDataSource1.DataBind();
+        }
+
+        protected void CheckBoxHorasNormales_CheckedChanged(object sender, EventArgs e)
+        {
+            CalcularHorasTotales();
+        }
+
+        protected void CheckBoxHorasExtra_CheckedChanged(object sender, EventArgs e)
+        {
+            CalcularHorasTotales();
+        }
+
+        private void CalcularHorasTotales()
+        {
+            int numeroHoras = 0;
+
+            for (int i = 0; i < GridView1.Rows.Count; i++)
+            {
+                int horasNormales = int.Parse(GridView1.Rows[i].Cells[3].Text);
+                int horasExtra = int.Parse(GridView1.Rows[i].Cells[4].Text);
+
+                numeroHoras += CheckBoxHorasNormales.Checked ? horasNormales : 0;
+                numeroHoras += CheckBoxHorasExtra.Checked ? horasExtra : 0;
+            }
+
+            TextBoxHorasTotales.Text = numeroHoras.ToString();
         }
     }
 }

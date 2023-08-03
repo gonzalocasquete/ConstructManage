@@ -21,32 +21,50 @@
         <%--Bloque div para los filtros--%>
         <hr />
         <div>
+            <asp:Label ID="LabelFiltroHoras" runat="server" Text="Horas:"></asp:Label>
+            <asp:TextBox ID="TextBoxFiltrado" class="form-control" runat="server"></asp:TextBox>
 
-             <asp:Label ID="LabelFiltroHoras" runat="server" Text="Horas:"></asp:Label>
-             <asp:TextBox ID="TextBoxFiltrado" class="form-control" runat="server"></asp:TextBox>
-            
             <div class="text-center mt-2">
                 <asp:Button ID="ButtonFiltrado" class="form-control btn btn-primary btn-sm btn-block buttonFilter" runat="server" Text="Filtrar" OnClick="ButtonFiltrado_Click" />
                 <asp:Button runat="server" class="form-control btn-secondary btn-sm btn-block buttonFilter mt-1" Text="Limpiar" OnClick="Todos_Click"></asp:Button>
             </div>
-
         </div>
+
+        <%--Bloque div para el numero de horas totales del trabajador--%>
+        <div class="mt-2">
+            <asp:Label ID="LabelCalculoHoras" runat="server" Text="Horas totales:"></asp:Label>
+            <asp:TextBox ID="TextBoxHorasTotales" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+            <asp:Label ID="LabelTipoHoras" runat="server" Text="Tipo de horas:"></asp:Label>
+            <div>
+                <asp:CheckBox ID="CheckBoxHorasNormales" runat="server" OnCheckedChanged="CheckBoxHorasNormales_CheckedChanged" AutoPostBack="True" />
+                <label class="form-check-label" for="<%= CheckBoxHorasNormales.ClientID %>">
+                    Horas Normales
+                </label>
+            </div>
+            <div>
+                <asp:CheckBox ID="CheckBoxHorasExtra" runat="server" OnCheckedChanged="CheckBoxHorasExtra_CheckedChanged" AutoPostBack="True" />
+                <label class="form-check-label" for="<%= CheckBoxHorasExtra.ClientID %>">
+                  Horas extra
+                </label>
+            </div>
+        </div>
+
         <%--Bloque de sqldatasource y tabla para listado--%>
-        <div>  
+        <div>
             <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>"
                 SelectCommand="SELECT LT.codigoLinea,P.nombrePartida AS nombrePartida,N.nombre AS nombreNaturaleza,LT.horasNormales,LT.horasExtra FROM LineaTrabajo LT JOIN Partida P ON LT.codigoPartida = P.codigoPartida JOIN Naturaleza N ON LT.codigoNaturaleza = N.codigoNaturaleza WHERE ([codigoTrabajador] = @codigoTrabajador); ">
                 <SelectParameters>
                     <asp:SessionParameter SessionField="codigoTrabajador" Name="codigoTrabajador"></asp:SessionParameter>
                 </SelectParameters>
             </asp:SqlDataSource>
-            <asp:GridView ID="GridView1" runat="server" DataSourceID="SqlDataSource1" AutoGenerateColumns="False" DataKeyNames="codigoLinea" AllowPaging="True" AllowSorting="True">
+            <asp:GridView ID="GridView1" class="table mt-3" runat="server" DataSourceID="SqlDataSource1" AutoGenerateColumns="False" DataKeyNames="codigoLinea" AllowPaging="True" AllowSorting="True">
                 <AlternatingRowStyle BackColor="#CCCCCC" />
                 <Columns>
-                    <asp:BoundField DataField="codigoLinea" HeaderText="codigoLinea" ReadOnly="True" InsertVisible="False"></asp:BoundField>
-                    <asp:BoundField DataField="nombrePartida" HeaderText="nombrePartida"></asp:BoundField>
-                    <asp:BoundField DataField="nombreNaturaleza" HeaderText="nombreNaturaleza"></asp:BoundField>
-                    <asp:BoundField DataField="horasNormales" HeaderText="horasNormales" SortExpression="horasNormales"></asp:BoundField>
-                    <asp:BoundField DataField="horasExtra" HeaderText="horasExtra" SortExpression="horasExtra"></asp:BoundField>
+                    <asp:BoundField DataField="codigoLinea" HeaderText="Linea" ReadOnly="True" InsertVisible="False"></asp:BoundField>
+                    <asp:BoundField DataField="nombrePartida" HeaderText="Partida"></asp:BoundField>
+                    <asp:BoundField DataField="nombreNaturaleza" HeaderText="Naturaleza"></asp:BoundField>
+                    <asp:BoundField DataField="horasNormales" HeaderText="Horas Normales" SortExpression="horasNormales"></asp:BoundField>
+                    <asp:BoundField DataField="horasExtra" HeaderText="Horas Extra" SortExpression="horasExtra"></asp:BoundField>
                     <asp:CommandField ShowSelectButton="True"></asp:CommandField>
                 </Columns>
                 <FooterStyle BackColor="#CCCCCC" />
