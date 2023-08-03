@@ -133,6 +133,7 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Views\GestionarConvenioStyle.js" />
     <Content Include="Scripts\Views\GestionarProyectoStyle.js" />
     <Content Include="Scripts\Views\PerfilTrabajadorScripts.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />

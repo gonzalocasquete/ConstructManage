@@ -37,7 +37,7 @@
                 <div class="col">
                     <%--Fecha de Fin--%>
                     <asp:Label ID="LabelFechaMaxima" for="fechaMaxima" runat="server" Text="Fecha Maxima:"></asp:Label>
-                    <input id="fechaMaxima" class="form-control" runat="server" type="date" name="fechaMaxima" onclick="showDatePicker()">
+                    <input id="fechaMaxima" class="form-control" runat="server" type="date" name="fechaMaxima" max="2023-12-31" onclick ="showDatePicker()">
                 </div>
             </div>
 

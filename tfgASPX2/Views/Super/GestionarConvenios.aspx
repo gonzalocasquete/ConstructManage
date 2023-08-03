@@ -5,6 +5,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
         rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
         crossorigin="anonymous" />
+    <script src="../../Scripts/Views/GestionarConvenioStyle.js"></script>
 </asp:Content>
 
 <asp:Content ID="GestionarConveniosNavegacion" ContentPlaceHolderID="ContentPlaceHolderNavegacion" runat="server">
@@ -36,7 +37,7 @@
                 <div class="col">
                     <%--Fecha de Fin--%>
                     <asp:Label ID="LabelFechaMaxima" for="fechaMaxima" runat="server" Text="Fecha Maxima:"></asp:Label>
-                    <input id="fechaMaxima" class="form-control" runat="server" type="date" name="fechaMaxima">
+                    <input id="fechaMaxima" class="form-control" runat="server" type="date" name="fechaMaxima" onchange="validarFechaMaxima(this)">
                 </div>
             </div>
 

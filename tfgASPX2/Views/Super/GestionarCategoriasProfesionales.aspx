@@ -33,7 +33,11 @@
             </div>
         </div>
 
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" DeleteCommand="DELETE FROM [CategoriaProfesional] WHERE [codigoCategoria] = @original_codigoCategoria AND (([nombreCategoria] = @original_nombreCategoria) OR ([nombreCategoria] IS NULL AND @original_nombreCategoria IS NULL))" InsertCommand="INSERT INTO [CategoriaProfesional] ([nombreCategoria]) VALUES (@nombreCategoria)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [CategoriaProfesional]" UpdateCommand="UPDATE [CategoriaProfesional] SET [nombreCategoria] = @nombreCategoria WHERE [codigoCategoria] = @original_codigoCategoria AND (([nombreCategoria] = @original_nombreCategoria) OR ([nombreCategoria] IS NULL AND @original_nombreCategoria IS NULL))">
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" 
+            DeleteCommand="DELETE FROM [CategoriaProfesional] WHERE [codigoCategoria] = @original_codigoCategoria AND (([nombreCategoria] = @original_nombreCategoria) OR ([nombreCategoria] IS NULL AND @original_nombreCategoria IS NULL))" 
+            InsertCommand="INSERT INTO [CategoriaProfesional] ([nombreCategoria]) VALUES (@nombreCategoria)" OldValuesParameterFormatString="original_{0}"
+            SelectCommand="SELECT * FROM [CategoriaProfesional]" 
+            UpdateCommand="UPDATE [CategoriaProfesional] SET [nombreCategoria] = @nombreCategoria WHERE [codigoCategoria] = @original_codigoCategoria AND (([nombreCategoria] = @original_nombreCategoria) OR ([nombreCategoria] IS NULL AND @original_nombreCategoria IS NULL))">
             <DeleteParameters>
                 <asp:Parameter Name="original_codigoCategoria" Type="Int32" />
                 <asp:Parameter Name="original_nombreCategoria" Type="String" />
