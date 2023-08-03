@@ -63,9 +63,9 @@
 
 
 
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" DeleteCommand="DELETE FROM [Cliente] WHERE [CodigoCliente] = @CodigoCliente" InsertCommand="INSERT INTO [Cliente] ([NombreEntidad], [DireccionDF], [CodigoPostalDF], [UbicacionDF], [BancoDF], [DireccionDE], [CodigoPostalDE], [UbicacionDE]) VALUES (@NombreEntidad, @DireccionDF, @CodigoPostalDF, @UbicacionDF, @BancoDF, @DireccionDE, @CodigoPostalDE, @UbicacionDE)" SelectCommand="SELECT * FROM [Cliente]" UpdateCommand="UPDATE [Cliente] SET [NombreEntidad] = @NombreEntidad, [DireccionDF] = @DireccionDF, [CodigoPostalDF] = @CodigoPostalDF, [UbicacionDF] = @UbicacionDF, [BancoDF] = @BancoDF, [DireccionDE] = @DireccionDE, [CodigoPostalDE] = @CodigoPostalDE, [UbicacionDE] = @UbicacionDE WHERE [CodigoCliente] = @CodigoCliente">
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" DeleteCommand="DELETE FROM [Cliente] WHERE [codigoCliente] = @codigoCliente" InsertCommand="INSERT INTO [Cliente] ([NombreEntidad], [DireccionDF], [CodigoPostalDF], [UbicacionDF], [BancoDF], [DireccionDE], [CodigoPostalDE], [UbicacionDE]) VALUES (@NombreEntidad, @DireccionDF, @CodigoPostalDF, @UbicacionDF, @BancoDF, @DireccionDE, @CodigoPostalDE, @UbicacionDE)" SelectCommand="SELECT * FROM [Cliente]" UpdateCommand="UPDATE [Cliente] SET [NombreEntidad] = @NombreEntidad, [DireccionDF] = @DireccionDF, [CodigoPostalDF] = @CodigoPostalDF, [UbicacionDF] = @UbicacionDF, [BancoDF] = @BancoDF, [DireccionDE] = @DireccionDE, [CodigoPostalDE] = @CodigoPostalDE, [UbicacionDE] = @UbicacionDE WHERE [codigoCliente] = @codigoCliente">
             <DeleteParameters>
-                <asp:Parameter Name="CodigoCliente" Type="Int32" />
+                <asp:Parameter Name="codigoCliente" Type="Int32" />
             </DeleteParameters>
             <InsertParameters>
                 <asp:Parameter Name="NombreEntidad" Type="String" />
@@ -86,13 +86,13 @@
                 <asp:Parameter Name="DireccionDE" Type="String" />
                 <asp:Parameter Name="CodigoPostalDE" Type="String" />
                 <asp:Parameter Name="UbicacionDE" Type="String" />
-                <asp:Parameter Name="CodigoCliente" Type="Int32" />
+                <asp:Parameter Name="codigoCliente" Type="Int32" />
             </UpdateParameters>
         </asp:SqlDataSource>
-        <asp:GridView ID="GridView1" class="mt-3 table text-center" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="CodigoCliente" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical">
+        <asp:GridView ID="GridView1" class="mt-3 table text-center" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoCliente" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical">
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
-                <asp:BoundField DataField="CodigoCliente" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="CodigoCliente" />
+                <asp:BoundField DataField="codigoCliente" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="codigoCliente" />
                 <asp:BoundField DataField="NombreEntidad" HeaderText="Entidad" SortExpression="NombreEntidad" />
                 <asp:BoundField DataField="DireccionDF" HeaderText="Domicilio Fiscal" SortExpression="DireccionDF" />
                 <asp:BoundField DataField="CodigoPostalDF" HeaderText="Codigo Postal D.F" SortExpression="CodigoPostalDF" />
@@ -116,7 +116,7 @@
         <div class="auto-style6 mt-3">
             <asp:Panel ID="PanelInsertar" runat="server" Height="348px" Visible="False">
                 <div class="auto-style7">
-                    <asp:FormView ID="FormView1" runat="server" DataSourceID="SqlDataSource1" DataKeyNames="CodigoCliente" DefaultMode="Insert" CellPadding="4" ForeColor="#333333">
+                    <asp:FormView ID="FormView1" runat="server" DataSourceID="SqlDataSource1" DataKeyNames="codigoCliente" DefaultMode="Insert" CellPadding="4" ForeColor="#333333">
                         <FooterStyle BackColor="#990000" ForeColor="White" Font-Bold="True" />
                         <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
                         <InsertItemTemplate>

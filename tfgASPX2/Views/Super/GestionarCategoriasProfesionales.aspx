@@ -33,9 +33,9 @@
             </div>
         </div>
 
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" DeleteCommand="DELETE FROM [CategoriaProfesional] WHERE [idCategoria] = @original_idCategoria AND (([nombreCategoria] = @original_nombreCategoria) OR ([nombreCategoria] IS NULL AND @original_nombreCategoria IS NULL))" InsertCommand="INSERT INTO [CategoriaProfesional] ([nombreCategoria]) VALUES (@nombreCategoria)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [CategoriaProfesional]" UpdateCommand="UPDATE [CategoriaProfesional] SET [nombreCategoria] = @nombreCategoria WHERE [idCategoria] = @original_idCategoria AND (([nombreCategoria] = @original_nombreCategoria) OR ([nombreCategoria] IS NULL AND @original_nombreCategoria IS NULL))">
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" DeleteCommand="DELETE FROM [CategoriaProfesional] WHERE [codigoCategoria] = @original_codigoCategoria AND (([nombreCategoria] = @original_nombreCategoria) OR ([nombreCategoria] IS NULL AND @original_nombreCategoria IS NULL))" InsertCommand="INSERT INTO [CategoriaProfesional] ([nombreCategoria]) VALUES (@nombreCategoria)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [CategoriaProfesional]" UpdateCommand="UPDATE [CategoriaProfesional] SET [nombreCategoria] = @nombreCategoria WHERE [codigoCategoria] = @original_codigoCategoria AND (([nombreCategoria] = @original_nombreCategoria) OR ([nombreCategoria] IS NULL AND @original_nombreCategoria IS NULL))">
             <DeleteParameters>
-                <asp:Parameter Name="original_idCategoria" Type="Int32" />
+                <asp:Parameter Name="original_codigoCategoria" Type="Int32" />
                 <asp:Parameter Name="original_nombreCategoria" Type="String" />
             </DeleteParameters>
             <InsertParameters>
@@ -43,15 +43,15 @@
             </InsertParameters>
             <UpdateParameters>
                 <asp:Parameter Name="nombreCategoria" Type="String" />
-                <asp:Parameter Name="original_idCategoria" Type="Int32" />
+                <asp:Parameter Name="original_codigoCategoria" Type="Int32" />
                 <asp:Parameter Name="original_nombreCategoria" Type="String" />
             </UpdateParameters>
         </asp:SqlDataSource>
 
-        <asp:GridView ID="GridView1" class="table mt-3" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="idCategoria" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical">
+        <asp:GridView ID="GridView1" class="table mt-3" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoCategoria" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical">
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
-                <asp:BoundField DataField="idCategoria" HeaderText="ID" InsertVisible="False" ReadOnly="True" />
+                <asp:BoundField DataField="codigoCategoria" HeaderText="ID" InsertVisible="False" ReadOnly="True" />
                 <asp:BoundField DataField="nombreCategoria" HeaderText="Nombre" />
                 <asp:CommandField ShowDeleteButton="True" ShowEditButton="True"></asp:CommandField>
             </Columns>
@@ -67,9 +67,9 @@
         <asp:Button ID="ButtonInsertar" CssClass="ButtonStyle button1 mt-3" runat="server" Text="Insertar" OnClick="Button1_Click" />
 
         <asp:Panel ID="Panel1" class="mt-3" runat="server" Height="196px" Visible="False">
-            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" DeleteCommand="DELETE FROM [CategoriaProfesional] WHERE [idCategoria] = @original_idCategoria AND (([nombreCategoria] = @original_nombreCategoria) OR ([nombreCategoria] IS NULL AND @original_nombreCategoria IS NULL))" InsertCommand="INSERT INTO [CategoriaProfesional] ([nombreCategoria]) VALUES (@nombreCategoria)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT [idCategoria], [nombreCategoria] FROM [CategoriaProfesional]" UpdateCommand="UPDATE [CategoriaProfesional] SET [nombreCategoria] = @nombreCategoria WHERE [idCategoria] = @original_idCategoria AND (([nombreCategoria] = @original_nombreCategoria) OR ([nombreCategoria] IS NULL AND @original_nombreCategoria IS NULL))">
+            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" DeleteCommand="DELETE FROM [CategoriaProfesional] WHERE [codigoCategoria] = @original_codigoCategoria AND (([nombreCategoria] = @original_nombreCategoria) OR ([nombreCategoria] IS NULL AND @original_nombreCategoria IS NULL))" InsertCommand="INSERT INTO [CategoriaProfesional] ([nombreCategoria]) VALUES (@nombreCategoria)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT [codigoCategoria], [nombreCategoria] FROM [CategoriaProfesional]" UpdateCommand="UPDATE [CategoriaProfesional] SET [nombreCategoria] = @nombreCategoria WHERE [codigoCategoria] = @original_codigoCategoria AND (([nombreCategoria] = @original_nombreCategoria) OR ([nombreCategoria] IS NULL AND @original_nombreCategoria IS NULL))">
                 <DeleteParameters>
-                    <asp:Parameter Name="original_idCategoria" Type="Int32" />
+                    <asp:Parameter Name="original_codigoCategoria" Type="Int32" />
                     <asp:Parameter Name="original_nombreCategoria" Type="String" />
                 </DeleteParameters>
                 <InsertParameters>
@@ -77,11 +77,11 @@
                 </InsertParameters>
                 <UpdateParameters>
                     <asp:Parameter Name="nombreCategoria" Type="String" />
-                    <asp:Parameter Name="original_idCategoria" Type="Int32" />
+                    <asp:Parameter Name="original_codigoCategoria" Type="Int32" />
                     <asp:Parameter Name="original_nombreCategoria" Type="String" />
                 </UpdateParameters>
             </asp:SqlDataSource>
-            <asp:FormView ID="FormView1" class="form-control" runat="server" DataSourceID="SqlDataSource2" CellPadding="4" DataKeyNames="idCategoria" DefaultMode="Insert" ForeColor="#333333">
+            <asp:FormView ID="FormView1" class="form-control" runat="server" DataSourceID="SqlDataSource2" CellPadding="4" DataKeyNames="codigoCategoria" DefaultMode="Insert" ForeColor="#333333">
                 <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
                 <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
                 <InsertItemTemplate>

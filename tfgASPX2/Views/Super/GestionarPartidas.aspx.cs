@@ -35,7 +35,7 @@ namespace tfgASPX2.Views.Super
             String consultaSQL = "SELECT * FROM Partida WHERE nombrePartida LIKE '%" + TextBoxFiltradoPartida.Text.ToString() + "%'";
 
             if (DropDownListProyectos.SelectedValue != "")
-                consultaSQL += " AND CodigoProyecto=" + DropDownListProyectos.SelectedValue +"";
+                consultaSQL += " AND codigoProyecto=" + DropDownListProyectos.SelectedValue +"";
 
             if (fechaInicio.Value != "")
                 consultaSQL += " AND FechaInicio >= '" + fechaInicio.Value + "'";

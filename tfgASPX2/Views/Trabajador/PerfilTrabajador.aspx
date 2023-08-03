@@ -17,18 +17,18 @@
 <asp:Content ID="PerfilTrabajadorBody" ContentPlaceHolderID="ContentPlaceHolderContenido" runat="server">
     <div class="auto-style1">
         <asp:SqlDataSource runat="server" ID="SqlDataSource1" DataSourceMode="DataReader" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>"
-            SelectCommand="SELECT Trabajador.nombre, Trabajador.apellido, Trabajador.idUsuario, Trabajador.idCategoria, Usuario.nombreUsuario, Usuario.contraseñaUsuario FROM Trabajador INNER JOIN Usuario ON Trabajador.idUsuario = Usuario.idUsuario WHERE (Trabajador.idUsuario = @idUsuario)"
-            UpdateCommand="UPDATE Trabajador JOIN Usuario ON Trabajador.idUsuario = Usuario.idUsuario SET Trabajador.nombre = @nombre, Trabajador.apellido = @apellido, Trabajador.idCategoria = @idCategoria, Usuario.nombreUsuario = @nombreUsuario, Usuario.contraseñaUsuario = @contraseñaUsuario WHERE Trabajador.idUsuario = @idUsuario;">
+            SelectCommand="SELECT Trabajador.nombre, Trabajador.apellido, Trabajador.codigoUsuario, Trabajador.codigoCategoria, Usuario.nombreUsuario, Usuario.contraseñaUsuario FROM Trabajador INNER JOIN Usuario ON Trabajador.codigoUsuario = Usuario.codigoUsuario WHERE (Trabajador.codigoUsuario = @codigoUsuario)"
+            UpdateCommand="UPDATE Trabajador JOIN Usuario ON Trabajador.codigoUsuario = Usuario.codigoUsuario SET Trabajador.nombre = @nombre, Trabajador.apellido = @apellido, Trabajador.codigoCategoria = @codigoCategoria, Usuario.nombreUsuario = @nombreUsuario, Usuario.contraseñaUsuario = @contraseñaUsuario WHERE Trabajador.codigoUsuario = @codigoUsuario;">
             <SelectParameters>
-                <asp:SessionParameter SessionField="idUsuario" Name="idUsuario"></asp:SessionParameter>
+                <asp:SessionParameter SessionField="codigoUsuario" Name="codigoUsuario"></asp:SessionParameter>
             </SelectParameters>
             <UpdateParameters>
                 <asp:Parameter Name="nombre"></asp:Parameter>
                 <asp:Parameter Name="apellido"></asp:Parameter>
-                <asp:Parameter Name="idCategoria"></asp:Parameter>
+                <asp:Parameter Name="codigoCategoria"></asp:Parameter>
                 <asp:Parameter Name="nombreUsuario"></asp:Parameter>
                 <asp:Parameter Name="contrase&#241;aUsuario"></asp:Parameter>
-                <asp:Parameter Name="idUsuario"></asp:Parameter>
+                <asp:Parameter Name="codigoUsuario"></asp:Parameter>
             </UpdateParameters>
         </asp:SqlDataSource>
 
@@ -50,9 +50,9 @@
                 <div class="row">
                     <div class="col">
                         Categoria Profesional:
-                        <asp:DropDownList class="form-control" ID="DropDownList2" Text='<%# Bind("idCategoria") %>' runat="server" DataSourceID="CategoriaSqlDataSource" DataTextField="nombreCategoria" DataValueField="idCategoria"></asp:DropDownList>
+                        <asp:DropDownList class="form-control" ID="DropDownList2" Text='<%# Bind("codigoCategoria") %>' runat="server" DataSourceID="CategoriaSqlDataSource" DataTextField="nombreCategoria" DataValueField="codigoCategoria"></asp:DropDownList>
                         <asp:SqlDataSource ID="CategoriaSqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>"
-                            SelectCommand="SELECT idCategoria, nombreCategoria FROM CategoriaProfesional"></asp:SqlDataSource>
+                            SelectCommand="SELECT codigoCategoria, nombreCategoria FROM CategoriaProfesional"></asp:SqlDataSource>
                         <br />
                     </div>
 
@@ -69,7 +69,7 @@
                     </div>
                 </div>
 
-                <asp:TextBox Text='<%# Bind("idUsuario") %>' class="invisible" runat="server" ID="idUsuarioTextBox" />
+                <asp:TextBox Text='<%# Bind("codigoUsuario") %>' class="invisible" runat="server" ID="codigoUsuarioTextBox" />
 
                 <div class="mt-3 text-center">
                     <asp:LinkButton runat="server" class="btn btn-success" Text="Actualizar" CommandName="Update" ID="UpdateButton" CausesValidation="True" />

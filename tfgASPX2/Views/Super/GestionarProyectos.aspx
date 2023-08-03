@@ -5,15 +5,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
         rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
         crossorigin="anonymous" />
-    <style type="text/css">
-        .auto-style5 {
-            height: 822px;
-        }
-
-        .auto-style6 {
-            height: 348px;
-        }
-    </style>
     <script src="../../Scripts/Views/GestionarProyectoStyle.js"></script>
 </asp:Content>
 
@@ -71,14 +62,14 @@
 
         <%--SqldDataSource para recoger todos los proyectos--%>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>"
-            DeleteCommand="DELETE FROM [Proyecto] WHERE [CodigoProyecto] = @original_CodigoProyecto AND [NombreProyecto] = @original_NombreProyecto AND (([Descripcion] = @original_Descripcion) OR ([Descripcion] IS NULL AND @original_Descripcion IS NULL)) AND (([FechaInicio] = @original_FechaInicio) OR ([FechaInicio] IS NULL AND @original_FechaInicio IS NULL)) AND (([FechaFin] = @original_FechaFin) OR ([FechaFin] IS NULL AND @original_FechaFin IS NULL)) AND (([Presupuesto] = @original_Presupuesto) OR ([Presupuesto] IS NULL AND @original_Presupuesto IS NULL)) AND (([Comentarios] = @original_Comentarios) OR ([Comentarios] IS NULL AND @original_Comentarios IS NULL))"
+            DeleteCommand="DELETE FROM [Proyecto] WHERE [codigoProyecto] = @original_codigoProyecto AND [NombreProyecto] = @original_NombreProyecto AND (([Descripcion] = @original_Descripcion) OR ([Descripcion] IS NULL AND @original_Descripcion IS NULL)) AND (([FechaInicio] = @original_FechaInicio) OR ([FechaInicio] IS NULL AND @original_FechaInicio IS NULL)) AND (([FechaFin] = @original_FechaFin) OR ([FechaFin] IS NULL AND @original_FechaFin IS NULL)) AND (([Presupuesto] = @original_Presupuesto) OR ([Presupuesto] IS NULL AND @original_Presupuesto IS NULL)) AND (([Comentarios] = @original_Comentarios) OR ([Comentarios] IS NULL AND @original_Comentarios IS NULL))"
             InsertCommand="INSERT INTO [Proyecto] ([NombreProyecto], [Descripcion], [FechaInicio], [FechaFin], [Presupuesto], [Comentarios]) VALUES (@NombreProyecto, @Descripcion, @FechaInicio, @FechaFin, @Presupuesto, @Comentarios)"
             SelectCommand="SELECT * FROM [Proyecto]"
-            UpdateCommand="UPDATE [Proyecto] SET [NombreProyecto] = @NombreProyecto, [Descripcion] = @Descripcion, [FechaInicio] = @FechaInicio, [FechaFin] = @FechaFin, [Presupuesto] = @Presupuesto, [Comentarios] = @Comentarios WHERE [CodigoProyecto] = @original_CodigoProyecto AND [NombreProyecto] = @original_NombreProyecto AND (([Descripcion] = @original_Descripcion) OR ([Descripcion] IS NULL AND @original_Descripcion IS NULL)) AND (([FechaInicio] = @original_FechaInicio) OR ([FechaInicio] IS NULL AND @original_FechaInicio IS NULL)) AND (([FechaFin] = @original_FechaFin) OR ([FechaFin] IS NULL AND @original_FechaFin IS NULL)) AND (([Presupuesto] = @original_Presupuesto) OR ([Presupuesto] IS NULL AND @original_Presupuesto IS NULL)) AND (([Comentarios] = @original_Comentarios) OR ([Comentarios] IS NULL AND @original_Comentarios IS NULL))"
+            UpdateCommand="UPDATE [Proyecto] SET [NombreProyecto] = @NombreProyecto, [Descripcion] = @Descripcion, [FechaInicio] = @FechaInicio, [FechaFin] = @FechaFin, [Presupuesto] = @Presupuesto, [Comentarios] = @Comentarios WHERE [codigoProyecto] = @original_codigoProyecto AND [NombreProyecto] = @original_NombreProyecto AND (([Descripcion] = @original_Descripcion) OR ([Descripcion] IS NULL AND @original_Descripcion IS NULL)) AND (([FechaInicio] = @original_FechaInicio) OR ([FechaInicio] IS NULL AND @original_FechaInicio IS NULL)) AND (([FechaFin] = @original_FechaFin) OR ([FechaFin] IS NULL AND @original_FechaFin IS NULL)) AND (([Presupuesto] = @original_Presupuesto) OR ([Presupuesto] IS NULL AND @original_Presupuesto IS NULL)) AND (([Comentarios] = @original_Comentarios) OR ([Comentarios] IS NULL AND @original_Comentarios IS NULL))"
             ConflictDetection="CompareAllValues"
             OldValuesParameterFormatString="original_{0}">
             <DeleteParameters>
-                <asp:Parameter Name="original_CodigoProyecto" Type="Int32" />
+                <asp:Parameter Name="original_codigoProyecto" Type="Int32" />
                 <asp:Parameter Name="original_NombreProyecto" Type="String" />
                 <asp:Parameter Name="original_Descripcion" Type="String" />
                 <asp:Parameter DbType="Date" Name="original_FechaInicio" />
@@ -101,7 +92,7 @@
                 <asp:Parameter DbType="Date" Name="FechaFin" />
                 <asp:Parameter Name="Presupuesto" Type="Decimal" />
                 <asp:Parameter Name="Comentarios" Type="String" />
-                <asp:Parameter Name="original_CodigoProyecto" Type="Int32" />
+                <asp:Parameter Name="original_codigoProyecto" Type="Int32" />
                 <asp:Parameter Name="original_NombreProyecto" Type="String" />
                 <asp:Parameter Name="original_Descripcion" Type="String" />
                 <asp:Parameter DbType="Date" Name="original_FechaInicio" />
@@ -110,11 +101,12 @@
                 <asp:Parameter Name="original_Comentarios" Type="String" />
             </UpdateParameters>
         </asp:SqlDataSource>
+
         <%--Grid que muestra todos los proyectos--%>
-        <asp:GridView ID="GridView1" class="mt-3 table" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="CodigoProyecto" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" AllowSorting="True">
+        <asp:GridView ID="GridView1" class="mt-3 table" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoProyecto" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" AllowSorting="True" AutoPostBack="true">
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
-                <asp:BoundField DataField="CodigoProyecto" HeaderText="CodigoProyecto" ReadOnly="True" InsertVisible="False"></asp:BoundField>
+                <asp:BoundField DataField="codigoProyecto" HeaderText="codigoProyecto" ReadOnly="True" InsertVisible="False"></asp:BoundField>
                 <asp:BoundField DataField="NombreProyecto" HeaderText="NombreProyecto"></asp:BoundField>
                 <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" />
 
@@ -152,44 +144,72 @@
         <asp:Button ID="ButtonInsertarProyecto" CssClass="ButtonStyle button1 mt-3" runat="server" Text="Insertar" OnClick="ButtonInsertarProyecto_Click" />
 
         <%--Mostrado de los partes asociados al proyecto seleccionado--%>
-        <div class="auto-style5 mt-3">
-            <asp:Panel ID="PanelPartidas" runat="server" Height="347px" Visible="False">
+        <div class="mt-3">
+            <asp:Panel ID="PanelPartidas" runat="server" Visible="False">
                 <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>"
-                    DeleteCommand="DELETE FROM [Partida] WHERE [CodigoPartida] = @CodigoPartida"
-                    InsertCommand="INSERT INTO [Partida] ([nombrePartida], [FechaInicio], [FechaFin], [Costo], [CodigoProyecto]) VALUES (@nombrePartida, @FechaInicio, @FechaFin, @Costo, @CodigoProyecto)"
-                    SelectCommand="SELECT * FROM [Partida] WHERE ([CodigoProyecto] = @CodigoProyecto)"
-                    UpdateCommand="UPDATE [Partida] SET [nombrePartida] = @nombrePartida, [FechaInicio] = @FechaInicio, [FechaFin] = @FechaFin, [Costo] = @Costo, [CodigoProyecto] = @CodigoProyecto WHERE [CodigoPartida] = @CodigoPartida">
+                    DeleteCommand="DELETE FROM [Partida] WHERE [codigoPartida] = @codigoPartida"
+                    InsertCommand="INSERT INTO [Partida] ([nombrePartida], [FechaInicio], [FechaFin], [Costo], [codigoProyecto]) VALUES (@nombrePartida, @FechaInicio, @FechaFin, @Costo, @codigoProyecto)"
+                    SelectCommand="SELECT * FROM [Partida] WHERE ([codigoProyecto] = @codigoProyecto)"
+                    UpdateCommand="UPDATE [Partida] SET [nombrePartida] = @nombrePartida, [FechaInicio] = @FechaInicio, [FechaFin] = @FechaFin, [Costo] = @Costo, [codigoProyecto] = @codigoProyecto WHERE [codigoPartida] = @codigoPartida">
                     <DeleteParameters>
-                        <asp:Parameter Name="CodigoPartida" Type="Int32" />
+                        <asp:Parameter Name="codigoPartida" Type="Int32" />
                     </DeleteParameters>
                     <InsertParameters>
                         <asp:Parameter Name="nombrePartida" Type="String" />
                         <asp:Parameter DbType="Date" Name="FechaInicio" />
                         <asp:Parameter DbType="Date" Name="FechaFin" />
                         <asp:Parameter Name="Costo" Type="Decimal" />
-                        <asp:Parameter Name="CodigoProyecto" Type="Int32" />
+                        <asp:Parameter Name="codigoProyecto" Type="Int32" />
                     </InsertParameters>
                     <SelectParameters>
-                        <asp:ControlParameter ControlID="GridView1" Name="CodigoProyecto" PropertyName="SelectedValue" Type="Int32" />
+                        <asp:ControlParameter ControlID="GridView1" Name="codigoProyecto" PropertyName="SelectedValue" Type="Int32" />
                     </SelectParameters>
                     <UpdateParameters>
                         <asp:Parameter Name="nombrePartida" Type="String" />
                         <asp:Parameter DbType="Date" Name="FechaInicio" />
                         <asp:Parameter DbType="Date" Name="FechaFin" />
                         <asp:Parameter Name="Costo" Type="Decimal" />
-                        <asp:Parameter Name="CodigoProyecto" Type="Int32" />
-                        <asp:Parameter Name="CodigoPartida" Type="Int32" />
+                        <asp:Parameter Name="codigoProyecto" Type="Int32" />
+                        <asp:Parameter Name="codigoPartida" Type="Int32" />
                     </UpdateParameters>
                 </asp:SqlDataSource>
-                <asp:GridView ID="GridView2" class="table" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="CodigoPartida" DataSourceID="SqlDataSource2" ForeColor="Black" GridLines="Vertical">
+                <asp:GridView ID="GridView2" class="table" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoPartida" DataSourceID="SqlDataSource2" ForeColor="Black" GridLines="Vertical" AllowSorting="True">
                     <AlternatingRowStyle BackColor="#CCCCCC" />
                     <Columns>
-                        <asp:BoundField DataField="nombrePartida" HeaderText="Nombre" SortExpression="nombrePartida" />
-                        <asp:BoundField DataField="FechaInicio" DataFormatString="{0:dd/MM/yy}" HeaderText="Fecha Inicio" SortExpression="FechaInicio" />
-                        <asp:BoundField DataField="FechaFin" DataFormatString="{0:dd/MM/yy}" HeaderText="Fecha Fin" SortExpression="FechaFin" />
+                        <asp:BoundField DataField="nombrePartida" HeaderText="Nombre" />
+
+                        <asp:TemplateField HeaderText="Fecha Inicio" SortExpression="FechaInicio">
+                            <ItemTemplate>
+                                <%# Eval("FechaInicio", "{0:dd/MM/yy}") %>
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <input type="date" id="dateFechaInicio" runat="server" value='<%# Bind("FechaInicio", "{0:yyyy-MM-dd}") %>' />
+                            </EditItemTemplate>
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="Fecha Fin" SortExpression="FechaFin">
+                            <ItemTemplate>
+                                <%# Eval("FechaFin", "{0:dd/MM/yy}") %>
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <input type="date" id="dateFechaFin" runat="server" value='<%# Bind("FechaFin", "{0:yyyy-MM-dd}") %>' />
+                            </EditItemTemplate>
+                        </asp:TemplateField>
+
                         <asp:BoundField DataField="Costo" HeaderText="Costo" SortExpression="Costo" />
-                        <asp:BoundField DataField="CodigoProyecto" HeaderText="ID Proyecto" SortExpression="CodigoProyecto" />
-                        <asp:BoundField DataField="CodigoPartida" HeaderText="ID Partida" InsertVisible="False" ReadOnly="True" SortExpression="CodigoPartida" />
+
+                        <asp:TemplateField HeaderText="Proyecto" >
+                            <ItemTemplate>
+                                <%# Eval("codigoProyecto") %>
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:DropDownList Text='<%# Bind("codigoProyecto") %>' class="dropdown form-control" ID="idProyectoDropDownList" runat="server" DataSourceID="idProyecto2SqlDataSource" DataTextField="codigoProyecto" DataValueField="codigoProyecto"></asp:DropDownList>
+                                <asp:SqlDataSource ID="idProyecto2SqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT codigoProyecto FROM Proyecto order by NombreProyecto"></asp:SqlDataSource>
+                            </EditItemTemplate>
+                        </asp:TemplateField>
+
+                        <asp:BoundField DataField="codigoPartida" HeaderText="ID Partida" InsertVisible="False" ReadOnly="True" />
+
                         <asp:CommandField ShowDeleteButton="True" ShowEditButton="True"></asp:CommandField>
                     </Columns>
                     <FooterStyle BackColor="#CCCCCC" />
@@ -206,32 +226,32 @@
                 <asp:Button ID="ButtonInsertarPartida" CssClass="ButtonStyle button1" runat="server" Text="Insertar Partida" OnClick="ButtonInsertarPartida_Click" />
 
                 <div>
-                    <asp:Panel ID="PanelInsertarPartida" runat="server" Visible="False" HorizontalAlign="Center">
-                        <asp:SqlDataSource runat="server" ID="SqlDataSource4" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" DeleteCommand="DELETE FROM [Partida] WHERE [CodigoPartida] = @CodigoPartida" InsertCommand="INSERT INTO [Partida] ([nombrePartida], [FechaInicio], [FechaFin], [Costo], [CodigoProyecto]) VALUES (@nombrePartida, @FechaInicio, @FechaFin, @Costo, @CodigoProyecto)" SelectCommand="SELECT * FROM [Partida] WHERE ([CodigoProyecto] = @CodigoProyecto)" UpdateCommand="UPDATE [Partida] SET [nombrePartida] = @nombrePartida, [FechaInicio] = @FechaInicio, [FechaFin] = @FechaFin, [Costo] = @Costo, [CodigoProyecto] = @CodigoProyecto WHERE [CodigoPartida] = @CodigoPartida">
+                    <asp:Panel ID="PanelInsertarPartida" runat="server" Visible="False">
+                        <asp:SqlDataSource runat="server" ID="SqlDataSource4" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" DeleteCommand="DELETE FROM [Partida] WHERE [codigoPartida] = @codigoPartida" InsertCommand="INSERT INTO [Partida] ([nombrePartida], [FechaInicio], [FechaFin], [Costo], [codigoProyecto]) VALUES (@nombrePartida, @FechaInicio, @FechaFin, @Costo, @codigoProyecto)" SelectCommand="SELECT * FROM [Partida] WHERE ([codigoProyecto] = @codigoProyecto)" UpdateCommand="UPDATE [Partida] SET [nombrePartida] = @nombrePartida, [FechaInicio] = @FechaInicio, [FechaFin] = @FechaFin, [Costo] = @Costo, [codigoProyecto] = @codigoProyecto WHERE [codigoPartida] = @codigoPartida">
                             <DeleteParameters>
-                                <asp:Parameter Name="CodigoPartida" Type="Int32"></asp:Parameter>
+                                <asp:Parameter Name="codigoPartida" Type="Int32"></asp:Parameter>
                             </DeleteParameters>
                             <InsertParameters>
                                 <asp:Parameter Name="nombrePartida" Type="String"></asp:Parameter>
                                 <asp:Parameter DbType="Date" Name="FechaInicio"></asp:Parameter>
                                 <asp:Parameter DbType="Date" Name="FechaFin"></asp:Parameter>
                                 <asp:Parameter Name="Costo" Type="Decimal"></asp:Parameter>
-                                <asp:Parameter Name="CodigoProyecto" Type="Int32"></asp:Parameter>
+                                <asp:Parameter Name="codigoProyecto" Type="Int32"></asp:Parameter>
                             </InsertParameters>
                             <SelectParameters>
-                                <asp:ControlParameter ControlID="GridView1" PropertyName="SelectedValue" Name="CodigoProyecto" Type="Int32"></asp:ControlParameter>
+                                <asp:ControlParameter ControlID="GridView1" PropertyName="SelectedValue" Name="codigoProyecto" Type="Int32"></asp:ControlParameter>
                             </SelectParameters>
                             <UpdateParameters>
                                 <asp:Parameter Name="nombrePartida" Type="String"></asp:Parameter>
                                 <asp:Parameter DbType="Date" Name="FechaInicio"></asp:Parameter>
                                 <asp:Parameter DbType="Date" Name="FechaFin"></asp:Parameter>
                                 <asp:Parameter Name="Costo" Type="Decimal"></asp:Parameter>
-                                <asp:Parameter Name="CodigoProyecto" Type="Int32"></asp:Parameter>
-                                <asp:Parameter Name="CodigoPartida" Type="Int32"></asp:Parameter>
+                                <asp:Parameter Name="codigoProyecto" Type="Int32"></asp:Parameter>
+                                <asp:Parameter Name="codigoPartida" Type="Int32"></asp:Parameter>
                             </UpdateParameters>
                         </asp:SqlDataSource>
 
-                        <asp:FormView ID="FormView2" runat="server" DataSourceID="SqlDataSource4" DataKeyNames="CodigoPartida" DefaultMode="Insert">
+                        <asp:FormView ID="FormViewInsertarPartida" class="form-control" runat="server" DataSourceID="SqlDataSource4" DataKeyNames="codigoPartida" DefaultMode="Insert">
                             <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
                             <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
                             <InsertItemTemplate>
@@ -259,8 +279,8 @@
 
                                 <div class="row">
                                     <div class="col">
-                                        CodigoProyecto:
-                                        <asp:TextBox Text='<%# Bind("CodigoProyecto") %>' class="form-control" runat="server" ID="CodigoProyectoTextBox" /><br />
+                                        codigoProyecto:
+                                        <asp:TextBox Text='<%# Bind("codigoProyecto") %>' class="form-control" runat="server" ID="codigoProyectoTextBox" ReadOnly="true" /><br />
                                     </div>
                                 </div>
 
@@ -279,15 +299,16 @@
                 </div>
             </asp:Panel>
 
+
             <%--Panel para la insercion de un proyecto--%>
-            <div class="auto-style6">
+            <div>
                 <asp:Panel ID="PanelInsertarProyecto" runat="server" Height="267px" Visible="False">
                     <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>"
-                        DeleteCommand="DELETE FROM [Proyecto] WHERE [CodigoProyecto] = @original_CodigoProyecto AND [NombreProyecto] = @original_NombreProyecto AND (([Descripcion] = @original_Descripcion) OR ([Descripcion] IS NULL AND @original_Descripcion IS NULL)) AND (([FechaInicio] = @original_FechaInicio) OR ([FechaInicio] IS NULL AND @original_FechaInicio IS NULL)) AND (([FechaFin] = @original_FechaFin) OR ([FechaFin] IS NULL AND @original_FechaFin IS NULL)) AND (([Presupuesto] = @original_Presupuesto) OR ([Presupuesto] IS NULL AND @original_Presupuesto IS NULL)) AND (([Comentarios] = @original_Comentarios) OR ([Comentarios] IS NULL AND @original_Comentarios IS NULL))"
+                        DeleteCommand="DELETE FROM [Proyecto] WHERE [codigoProyecto] = @original_codigoProyecto AND [NombreProyecto] = @original_NombreProyecto AND (([Descripcion] = @original_Descripcion) OR ([Descripcion] IS NULL AND @original_Descripcion IS NULL)) AND (([FechaInicio] = @original_FechaInicio) OR ([FechaInicio] IS NULL AND @original_FechaInicio IS NULL)) AND (([FechaFin] = @original_FechaFin) OR ([FechaFin] IS NULL AND @original_FechaFin IS NULL)) AND (([Presupuesto] = @original_Presupuesto) OR ([Presupuesto] IS NULL AND @original_Presupuesto IS NULL)) AND (([Comentarios] = @original_Comentarios) OR ([Comentarios] IS NULL AND @original_Comentarios IS NULL))"
                         InsertCommand="INSERT INTO [Proyecto] ([NombreProyecto], [Descripcion], [FechaInicio], [FechaFin], [Presupuesto], [Comentarios]) VALUES (@NombreProyecto, @Descripcion, @FechaInicio, @FechaFin, @Presupuesto, @Comentarios)"
                         OldValuesParameterFormatString="original_{0}"
                         SelectCommand="SELECT * FROM [Proyecto]"
-                        UpdateCommand="UPDATE [Proyecto] SET [NombreProyecto] = @NombreProyecto, [Descripcion] = @Descripcion, [FechaInicio] = @FechaInicio, [FechaFin] = @FechaFin, [Presupuesto] = @Presupuesto, [Comentarios] = @Comentarios WHERE [CodigoProyecto] = @original_CodigoProyecto AND [NombreProyecto] = @original_NombreProyecto AND (([Descripcion] = @original_Descripcion) OR ([Descripcion] IS NULL AND @original_Descripcion IS NULL)) AND (([FechaInicio] = @original_FechaInicio) OR ([FechaInicio] IS NULL AND @original_FechaInicio IS NULL)) AND (([FechaFin] = @original_FechaFin) OR ([FechaFin] IS NULL AND @original_FechaFin IS NULL)) AND (([Presupuesto] = @original_Presupuesto) OR ([Presupuesto] IS NULL AND @original_Presupuesto IS NULL)) AND (([Comentarios] = @original_Comentarios) OR ([Comentarios] IS NULL AND @original_Comentarios IS NULL))">
+                        UpdateCommand="UPDATE [Proyecto] SET [NombreProyecto] = @NombreProyecto, [Descripcion] = @Descripcion, [FechaInicio] = @FechaInicio, [FechaFin] = @FechaFin, [Presupuesto] = @Presupuesto, [Comentarios] = @Comentarios WHERE [codigoProyecto] = @original_codigoProyecto AND [NombreProyecto] = @original_NombreProyecto AND (([Descripcion] = @original_Descripcion) OR ([Descripcion] IS NULL AND @original_Descripcion IS NULL)) AND (([FechaInicio] = @original_FechaInicio) OR ([FechaInicio] IS NULL AND @original_FechaInicio IS NULL)) AND (([FechaFin] = @original_FechaFin) OR ([FechaFin] IS NULL AND @original_FechaFin IS NULL)) AND (([Presupuesto] = @original_Presupuesto) OR ([Presupuesto] IS NULL AND @original_Presupuesto IS NULL)) AND (([Comentarios] = @original_Comentarios) OR ([Comentarios] IS NULL AND @original_Comentarios IS NULL))">
                         <InsertParameters>
                             <asp:Parameter Name="NombreProyecto" Type="String" />
                             <asp:Parameter Name="Descripcion" Type="String" />
@@ -297,7 +318,8 @@
                             <asp:Parameter Name="Comentarios" Type="String" />
                         </InsertParameters>
                     </asp:SqlDataSource>
-                    <asp:FormView ID="FormView1" class="form-control" runat="server" DataKeyNames="CodigoProyecto" DataSourceID="SqlDataSource3" DefaultMode="Insert" CellPadding="4" ForeColor="#333333">
+
+                    <asp:FormView ID="FormViewInsertarProyecto" class="form-control" runat="server" DataKeyNames="codigoProyecto" DataSourceID="SqlDataSource3" DefaultMode="Insert" CellPadding="4" ForeColor="#333333">
                         <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
                         <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
                         <InsertItemTemplate>

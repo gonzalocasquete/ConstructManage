@@ -50,7 +50,7 @@
                     <asp:DropDownList class="form-control" data-toggle="tooltip" title="Categoria del trabajador" ID="DropDownListFiltroCategorias" runat="server" DataSourceID="CategoriaFiltroSqlDataSource" DataTextField="nombreCategoria" DataValueField="nombreCategoria" AppendDataBoundItems="true">
                          <asp:ListItem Text="" Value=""></asp:ListItem>
                     </asp:DropDownList>
-                    <asp:SqlDataSource ID="CategoriaFiltroSqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT idCategoria, nombreCategoria FROM CategoriaProfesional ORDER BY nombreCategoria"></asp:SqlDataSource>
+                    <asp:SqlDataSource ID="CategoriaFiltroSqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT codigoCategoria, nombreCategoria FROM CategoriaProfesional ORDER BY nombreCategoria"></asp:SqlDataSource>
 
                 </div>
             </div>
@@ -80,23 +80,23 @@
         <asp:Panel ID="Panel1" class="mt-3" runat="server" Visible="False">
             <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>"
                 DeleteCommand="DELETE FROM [Trabajador] WHERE [codTrabajador] = @codTrabajador"
-                InsertCommand="INSERT INTO [Trabajador] ([nombre], [apellido], [idUsuario], [idCategoria]) VALUES (@nombre, @apellido, @idUsuario, @idCategoria)"
+                InsertCommand="INSERT INTO [Trabajador] ([nombre], [apellido], [codigoUsuario], [codigoCategoria]) VALUES (@nombre, @apellido, @codigoUsuario, @codigoCategoria)"
                 SelectCommand="SELECT * FROM [Trabajador]"
-                UpdateCommand="UPDATE [Trabajador] SET [nombre] = @nombre, [apellido] = @apellido, [idUsuario] = @idUsuario, [idCategoria] = @idCategoria WHERE [codTrabajador] = @codTrabajador">
+                UpdateCommand="UPDATE [Trabajador] SET [nombre] = @nombre, [apellido] = @apellido, [codigoUsuario] = @codigoUsuario, [codigoCategoria] = @codigoCategoria WHERE [codTrabajador] = @codTrabajador">
                 <DeleteParameters>
                     <asp:Parameter Name="codTrabajador" Type="Int32"></asp:Parameter>
                 </DeleteParameters>
                 <InsertParameters>
                     <asp:Parameter Name="nombre" Type="String"></asp:Parameter>
                     <asp:Parameter Name="apellido" Type="String"></asp:Parameter>
-                    <asp:Parameter Name="idUsuario" Type="Int32"></asp:Parameter>
-                    <asp:Parameter Name="idCategoria" Type="Int32"></asp:Parameter>
+                    <asp:Parameter Name="codigoUsuario" Type="Int32"></asp:Parameter>
+                    <asp:Parameter Name="codigoCategoria" Type="Int32"></asp:Parameter>
                 </InsertParameters>
                 <UpdateParameters>
                     <asp:Parameter Name="nombre" Type="String"></asp:Parameter>
                     <asp:Parameter Name="apellido" Type="String"></asp:Parameter>
-                    <asp:Parameter Name="idUsuario" Type="Int32"></asp:Parameter>
-                    <asp:Parameter Name="idCategoria" Type="Int32"></asp:Parameter>
+                    <asp:Parameter Name="codigoUsuario" Type="Int32"></asp:Parameter>
+                    <asp:Parameter Name="codigoCategoria" Type="Int32"></asp:Parameter>
                     <asp:Parameter Name="codTrabajador" Type="Int32"></asp:Parameter>
                 </UpdateParameters>
             </asp:SqlDataSource>
@@ -119,13 +119,13 @@
                     <div class="row">
                         <div class="col">
                             Cuenta de Usuario:
-                            <asp:DropDownList class="form-control" data-toggle="tooltip" title="Usuario" ID="idUsuarioDropDownList" Text='<%# Bind("idUsuario") %>' runat="server" DataSourceID="idUsuarioSqlDataSource" DataTextField="nombreUsuario" DataValueField="idUsuario"></asp:DropDownList>
-                            <asp:SqlDataSource ID="idUsuarioSqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT idUsuario, nombreUsuario FROM Usuario"></asp:SqlDataSource>
+                            <asp:DropDownList class="form-control" data-toggle="tooltip" title="Usuario" ID="codigoUsuarioDropDownList" Text='<%# Bind("codigoUsuario") %>' runat="server" DataSourceID="codigoUsuarioSqlDataSource" DataTextField="nombreUsuario" DataValueField="codigoUsuario"></asp:DropDownList>
+                            <asp:SqlDataSource ID="codigoUsuarioSqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT codigoUsuario, nombreUsuario FROM Usuario"></asp:SqlDataSource>
                         </div>
                         <div class="col">
                             Categoria Profesional:
-                            <asp:DropDownList class="form-control" data-toggle="tooltip" title="Contraseña" ID="DropDownList2" Text='<%# Bind("idCategoria") %>' runat="server" DataSourceID="CategoriaSqlDataSource" DataTextField="nombreCategoria" DataValueField="idCategoria"></asp:DropDownList>
-                            <asp:SqlDataSource ID="CategoriaSqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT idCategoria, nombreCategoria FROM CategoriaProfesional"></asp:SqlDataSource>
+                            <asp:DropDownList class="form-control" data-toggle="tooltip" title="Contraseña" ID="DropDownList2" Text='<%# Bind("codigoCategoria") %>' runat="server" DataSourceID="CategoriaSqlDataSource" DataTextField="nombreCategoria" DataValueField="codigoCategoria"></asp:DropDownList>
+                            <asp:SqlDataSource ID="CategoriaSqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT codigoCategoria, nombreCategoria FROM CategoriaProfesional"></asp:SqlDataSource>
                         </div>
                     </div>
 

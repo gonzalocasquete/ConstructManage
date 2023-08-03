@@ -52,13 +52,16 @@ namespace tfgASPX2.Views.Super
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            TextBox codigoProyecto = (TextBox)this.FormViewInsertarPartida.FindControl("codigoProyectoTextBox");
+            int codigo = Convert.ToInt32(this.GridView1.SelectedDataKey["codigoProyecto"]);
+            codigoProyecto.Text = codigo.ToString();
+
             if (!PanelPartidas.Visible)
             {
                 PanelInsertarProyecto.Visible = false;
                 PanelInsertarPartida.Visible = false;
                 ButtonInsertarPartida.Visible = true;
                 PanelPartidas.Visible = true;
-
             }
             else if (PanelInsertarProyecto.Visible)
             {

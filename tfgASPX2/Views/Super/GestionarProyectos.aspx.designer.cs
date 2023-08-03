@@ -195,13 +195,13 @@ namespace tfgASPX2.Views.Super
         protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource4;
 
         /// <summary>
-        /// Control FormView2.
+        /// Control FormViewInsertarPartida.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FormView FormView2;
+        protected global::System.Web.UI.WebControls.FormView FormViewInsertarPartida;
 
         /// <summary>
         /// Control PanelInsertarProyecto.
@@ -222,12 +222,12 @@ namespace tfgASPX2.Views.Super
         protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource3;
 
         /// <summary>
-        /// Control FormView1.
+        /// Control FormViewInsertarProyecto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FormView FormView1;
+        protected global::System.Web.UI.WebControls.FormView FormViewInsertarProyecto;
     }
 }

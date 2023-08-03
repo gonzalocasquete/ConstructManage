@@ -28,10 +28,10 @@
                 <div class="col">
                     <%--Proyectos para el filtro--%>
                     <asp:Label ID="LabelFiltroPartidaProyectos" runat="server" Text="Proyectos:"></asp:Label>
-                    <asp:DropDownList ID="DropDownListProyectos" class="dropdown form-control" runat="server" DataTextField="NombreProyecto" DataValueField="CodigoProyecto" DataSourceID="SqlDataSourceProyectos" AppendDataBoundItems="true">
+                    <asp:DropDownList ID="DropDownListProyectos" class="dropdown form-control" runat="server" DataTextField="NombreProyecto" DataValueField="codigoProyecto" DataSourceID="SqlDataSourceProyectos" AppendDataBoundItems="true">
                         <asp:ListItem Text="" Value=""></asp:ListItem>
                     </asp:DropDownList>
-                    <asp:SqlDataSource runat="server" ID="SqlDataSourceProyectos" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT [CodigoProyecto], [NombreProyecto] FROM [Proyecto] ORDER BY [CodigoProyecto]"></asp:SqlDataSource>
+                    <asp:SqlDataSource runat="server" ID="SqlDataSourceProyectos" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT [codigoProyecto], [NombreProyecto] FROM [Proyecto] ORDER BY [codigoProyecto]"></asp:SqlDataSource>
                 </div>
             </div>
 
@@ -67,31 +67,31 @@
             </div>
         </div>
 
-        <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT * FROM [Partida]" DeleteCommand="DELETE FROM [Partida] WHERE [CodigoPartida] = @original_CodigoPartida" InsertCommand="INSERT INTO [Partida] ([nombrePartida], [FechaInicio], [FechaFin], [Costo], [CodigoProyecto]) VALUES (@nombrePartida, @FechaInicio, @FechaFin, @Costo, @CodigoProyecto)" OldValuesParameterFormatString="original_{0}" UpdateCommand="UPDATE [Partida] SET [nombrePartida] = @nombrePartida, [FechaInicio] = @FechaInicio, [FechaFin] = @FechaFin, [Costo] = @Costo, [CodigoProyecto] = @CodigoProyecto WHERE [CodigoPartida] = @original_CodigoPartida">
+        <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT * FROM [Partida]" DeleteCommand="DELETE FROM [Partida] WHERE [codigoPartida] = @original_codigoPartida" InsertCommand="INSERT INTO [Partida] ([nombrePartida], [FechaInicio], [FechaFin], [Costo], [codigoProyecto]) VALUES (@nombrePartida, @FechaInicio, @FechaFin, @Costo, @codigoProyecto)" OldValuesParameterFormatString="original_{0}" UpdateCommand="UPDATE [Partida] SET [nombrePartida] = @nombrePartida, [FechaInicio] = @FechaInicio, [FechaFin] = @FechaFin, [Costo] = @Costo, [codigoProyecto] = @codigoProyecto WHERE [codigoPartida] = @original_codigoPartida">
             <DeleteParameters>
-                <asp:Parameter Name="original_CodigoPartida" Type="Int32"></asp:Parameter>
+                <asp:Parameter Name="original_codigoPartida" Type="Int32"></asp:Parameter>
             </DeleteParameters>
             <InsertParameters>
                 <asp:Parameter Name="nombrePartida" Type="String"></asp:Parameter>
                 <asp:Parameter DbType="Date" Name="FechaInicio"></asp:Parameter>
                 <asp:Parameter DbType="Date" Name="FechaFin"></asp:Parameter>
                 <asp:Parameter Name="Costo" Type="Decimal"></asp:Parameter>
-                <asp:Parameter Name="CodigoProyecto" Type="Int32"></asp:Parameter>
+                <asp:Parameter Name="codigoProyecto" Type="Int32"></asp:Parameter>
             </InsertParameters>
             <UpdateParameters>
                 <asp:Parameter Name="nombrePartida" Type="String"></asp:Parameter>
                 <asp:Parameter DbType="Date" Name="FechaInicio"></asp:Parameter>
                 <asp:Parameter DbType="Date" Name="FechaFin"></asp:Parameter>
                 <asp:Parameter Name="Costo" Type="Decimal"></asp:Parameter>
-                <asp:Parameter Name="CodigoProyecto" Type="Int32"></asp:Parameter>
-                <asp:Parameter Name="original_CodigoPartida" Type="Int32"></asp:Parameter>
+                <asp:Parameter Name="codigoProyecto" Type="Int32"></asp:Parameter>
+                <asp:Parameter Name="original_codigoPartida" Type="Int32"></asp:Parameter>
             </UpdateParameters>
         </asp:SqlDataSource>
-        <asp:GridView ID="GridView1" class="mt-3 table" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="CodigoPartida" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical" AllowSorting="True">
+        <asp:GridView ID="GridView1" class="mt-3 table" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoPartida" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical" AllowSorting="True">
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
                 <asp:BoundField DataField="nombrePartida" HeaderText="Partida"></asp:BoundField>
-                <asp:BoundField DataField="CodigoPartida" HeaderText="ID" ReadOnly="True" InsertVisible="False"></asp:BoundField>
+                <asp:BoundField DataField="codigoPartida" HeaderText="ID" ReadOnly="True" InsertVisible="False"></asp:BoundField>
 
                 <asp:TemplateField HeaderText="Fecha Inicio" SortExpression="FechaFin">
                     <ItemTemplate>
@@ -115,11 +115,11 @@
 
                 <asp:TemplateField HeaderText="Proyecto">
                     <ItemTemplate>
-                        <%# Eval("CodigoProyecto") %>
+                        <%# Eval("codigoProyecto") %>
                     </ItemTemplate>
                     <EditItemTemplate>
-                        <asp:DropDownList Text='<%# Bind("CodigoProyecto") %>' class="dropdown form-control" ID="idProyectoDropDownList" runat="server" DataSourceID="idProyecto2SqlDataSource" DataTextField="NombreProyecto" DataValueField="CodigoProyecto"></asp:DropDownList>
-                        <asp:SqlDataSource ID="idProyecto2SqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT CodigoProyecto, NombreProyecto FROM Proyecto order by NombreProyecto"></asp:SqlDataSource>
+                        <asp:DropDownList Text='<%# Bind("codigoProyecto") %>' class="dropdown form-control" ID="idProyectoDropDownList" runat="server" DataSourceID="idProyecto2SqlDataSource" DataTextField="NombreProyecto" DataValueField="codigoProyecto"></asp:DropDownList>
+                        <asp:SqlDataSource ID="idProyecto2SqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT codigoProyecto, NombreProyecto FROM Proyecto order by NombreProyecto"></asp:SqlDataSource>
                     </EditItemTemplate>
                 </asp:TemplateField>
 
@@ -131,7 +131,7 @@
         </asp:GridView>
         <asp:Button ID="ButtonInsertar" CssClass="ButtonStyle button1 mt-3" runat="server" Text="Insertar" OnClick="Button1_Click" />
         <asp:Panel ID="Panel1" runat="server" Visible="False">
-            <asp:FormView class="form-control mt-3" ID="FormView1" runat="server" DataKeyNames="CodigoPartida" DataSourceID="SqlDataSource1" DefaultMode="Insert">
+            <asp:FormView class="form-control mt-3" ID="FormView1" runat="server" DataKeyNames="codigoPartida" DataSourceID="SqlDataSource1" DefaultMode="Insert">
                 <InsertItemTemplate>
                     <footerstyle backcolor="#990000" font-bold="True" forecolor="White" />
                     <headerstyle backcolor="#990000" font-bold="True" forecolor="White" />
@@ -162,8 +162,8 @@
                     <div class="row">
                         <div class="col">
                             Proyecto:
-                            <asp:DropDownList Text='<%# Bind("CodigoProyecto") %>' class="dropdown form-control" ID="idProyectoDropDownList" runat="server" DataSourceID="idProyectoSqlDataSource" DataTextField="NombreProyecto" DataValueField="CodigoProyecto"></asp:DropDownList>
-                            <asp:SqlDataSource ID="idProyectoSqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT CodigoProyecto, NombreProyecto FROM Proyecto"></asp:SqlDataSource>
+                            <asp:DropDownList Text='<%# Bind("codigoProyecto") %>' class="dropdown form-control" ID="idProyectoDropDownList" runat="server" DataSourceID="idProyectoSqlDataSource" DataTextField="NombreProyecto" DataValueField="codigoProyecto"></asp:DropDownList>
+                            <asp:SqlDataSource ID="idProyectoSqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT codigoProyecto, NombreProyecto FROM Proyecto"></asp:SqlDataSource>
                         </div>
                     </div>
 

@@ -49,9 +49,9 @@
             </div>
         </div>
 
-        <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" DeleteCommand="DELETE FROM [Usuario] WHERE [idUsuario] = @idUsuario" InsertCommand="INSERT INTO [Usuario] ([nombreUsuario], [contraseñaUsuario], [rol]) VALUES (@nombreUsuario, @contraseñaUsuario, @rol)" SelectCommand="SELECT * FROM [Usuario]" UpdateCommand="UPDATE [Usuario] SET [nombreUsuario] = @nombreUsuario, [contraseñaUsuario] = @contraseñaUsuario, [rol] = @rol WHERE [idUsuario] = @idUsuario">
+        <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" DeleteCommand="DELETE FROM [Usuario] WHERE [codigoUsuario] = @codigoUsuario" InsertCommand="INSERT INTO [Usuario] ([nombreUsuario], [contraseñaUsuario], [rol]) VALUES (@nombreUsuario, @contraseñaUsuario, @rol)" SelectCommand="SELECT * FROM [Usuario]" UpdateCommand="UPDATE [Usuario] SET [nombreUsuario] = @nombreUsuario, [contraseñaUsuario] = @contraseñaUsuario, [rol] = @rol WHERE [codigoUsuario] = @codigoUsuario">
             <DeleteParameters>
-                <asp:Parameter Name="idUsuario" Type="Int32"></asp:Parameter>
+                <asp:Parameter Name="codigoUsuario" Type="Int32"></asp:Parameter>
             </DeleteParameters>
             <InsertParameters>
                 <asp:Parameter Name="nombreUsuario" Type="String"></asp:Parameter>
@@ -62,13 +62,13 @@
                 <asp:Parameter Name="nombreUsuario" Type="String"></asp:Parameter>
                 <asp:Parameter Name="contrase&#241;aUsuario" Type="String"></asp:Parameter>
                 <asp:Parameter Name="rol" Type="String"></asp:Parameter>
-                <asp:Parameter Name="idUsuario" Type="Int32"></asp:Parameter>
+                <asp:Parameter Name="codigoUsuario" Type="Int32"></asp:Parameter>
             </UpdateParameters>
         </asp:SqlDataSource>
-        <asp:GridView ID="GridView1" class="table mt-3" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="idUsuario" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical" AllowSorting="True">
+        <asp:GridView ID="GridView1" class="table mt-3" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoUsuario" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical" AllowSorting="True">
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
-                <asp:BoundField DataField="idUsuario" HeaderText="ID" ReadOnly="True" InsertVisible="False"></asp:BoundField>
+                <asp:BoundField DataField="codigoUsuario" HeaderText="ID" ReadOnly="True" InsertVisible="False"></asp:BoundField>
                 <asp:BoundField DataField="nombreUsuario" HeaderText="Usuario" SortExpression="nombreUsuario"></asp:BoundField>
                 <asp:BoundField DataField="contrase&#241;aUsuario" HeaderText="Password"></asp:BoundField>
 
@@ -93,9 +93,9 @@
         </asp:GridView>
 
         <asp:Button ID="ButtonInsertar" CssClass="ButtonStyle button1 mt-3" runat="server" Text="Insertar" OnClick="Button1_Click" />
-        <asp:SqlDataSource runat="server" ID="SqlDataSource2" DataSourceMode="DataReader" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" DeleteCommand="DELETE FROM [Usuario] WHERE [idUsuario] = @idUsuario" InsertCommand="INSERT INTO [Usuario] ([nombreUsuario], [contraseñaUsuario], [rol]) VALUES (@nombreUsuario, @contraseñaUsuario, @rol)" SelectCommand="SELECT * FROM [Usuario]" UpdateCommand="UPDATE [Usuario] SET [nombreUsuario] = @nombreUsuario, [contraseñaUsuario] = @contraseñaUsuario, [rol] = @rol WHERE [idUsuario] = @idUsuario">
+        <asp:SqlDataSource runat="server" ID="SqlDataSource2" DataSourceMode="DataReader" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" DeleteCommand="DELETE FROM [Usuario] WHERE [codigoUsuario] = @codigoUsuario" InsertCommand="INSERT INTO [Usuario] ([nombreUsuario], [contraseñaUsuario], [rol]) VALUES (@nombreUsuario, @contraseñaUsuario, @rol)" SelectCommand="SELECT * FROM [Usuario]" UpdateCommand="UPDATE [Usuario] SET [nombreUsuario] = @nombreUsuario, [contraseñaUsuario] = @contraseñaUsuario, [rol] = @rol WHERE [codigoUsuario] = @codigoUsuario">
             <DeleteParameters>
-                <asp:Parameter Name="idUsuario" Type="Int32"></asp:Parameter>
+                <asp:Parameter Name="codigoUsuario" Type="Int32"></asp:Parameter>
             </DeleteParameters>
             <InsertParameters>
                 <asp:Parameter Name="nombreUsuario" Type="String"></asp:Parameter>
@@ -106,12 +106,12 @@
                 <asp:Parameter Name="nombreUsuario" Type="String"></asp:Parameter>
                 <asp:Parameter Name="contrase&#241;aUsuario" Type="String"></asp:Parameter>
                 <asp:Parameter Name="rol" Type="String"></asp:Parameter>
-                <asp:Parameter Name="idUsuario" Type="Int32"></asp:Parameter>
+                <asp:Parameter Name="codigoUsuario" Type="Int32"></asp:Parameter>
             </UpdateParameters>
         </asp:SqlDataSource>
 
         <asp:Panel ID="Panel1" class="mt-3" runat="server" Height="196px" Visible="False">
-            <asp:FormView ID="FormView1" class="form-control" runat="server" DataSourceID="SqlDataSource2" DataKeyNames="idUsuario" DefaultMode="Insert">
+            <asp:FormView ID="FormView1" class="form-control" runat="server" DataSourceID="SqlDataSource2" DataKeyNames="codigoUsuario" DefaultMode="Insert">
                 <InsertItemTemplate>
                     <footerstyle backcolor="#990000" font-bold="True" forecolor="White" />
                     <headerstyle backcolor="#990000" font-bold="True" forecolor="White" />

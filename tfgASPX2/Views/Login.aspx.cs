@@ -21,48 +21,68 @@ namespace tfgASPX
 
         protected void Entrar_Click(object sender, EventArgs e)
         {
-            String connectionString, consulta, rol = null;
-            SqlConnection cnn;
-            SqlCommand cmd;
-            SqlDataReader adap;
             Session["rol"] = "";
-            Session["idUsuario"] = "";
+            Session["codigoUsuario"] = "";
             Session["nombreUsuario"] = "";
+            Session["codigoTrabajador"] = "";
 
             String usuario, contraseña;
             usuario = TextBoxUsuario.Text.ToString();
             contraseña = TextBoxContraseña.Text.ToString();
+            string consulta = "SELECT codigoUsuario, nombreUsuario, contraseñaUsuario, rol FROM USUARIO WHERE " +
+                              "nombreUsuario=@usuario AND contraseñaUsuario=@contraseña";
 
-            consulta = "SELECT idUsuario,nombreUsuario, contraseñaUsuario, rol FROM USUARIO WHERE " +
-                "nombreUsuario='" + usuario + "' AND" +
-                " contraseñaUsuario ='" + contraseña + "'";
+            string connectionString = "Data Source=miservertfg.database.windows.net;Initial Catalog=mibasededatostfg;Persist Security Info=True;User ID=adminsql;Password=Josele6072";
 
-            connectionString = "Data Source=miservertfg.database.windows.net;Initial Catalog=mibasededatostfg;Persist Security Info=True;User ID=adminsql;Password=Josele6072";
-            Session["cadenaConexion"] = connectionString;
-
-            cnn = new SqlConnection(Session["cadenaConexion"].ToString());
-            cnn.Open();
-            cmd = new SqlCommand(consulta, cnn);
-            adap = cmd.ExecuteReader();
-
-            if (adap.Read())
+            using (SqlConnection cnn = new SqlConnection(connectionString))
             {
-                try
+                cnn.Open();
+                using (SqlCommand cmd = new SqlCommand(consulta, cnn))
                 {
-                    rol = adap.GetString(3);
-                    Session["idUsuario"] = adap.GetInt32(0);
-                    Session["nombreUsuario"] = adap.GetString(1);
-                    Session["rol"] = rol;
-                }
-                catch (Exception ex)
-                {
-                    Response.Write(ex.Message.ToString());
-                }
-                adap.Close();
-            }
+                    cmd.Parameters.AddWithValue("@usuario", usuario);
+                    cmd.Parameters.AddWithValue("@contraseña", contraseña);
 
-            cnn.Close();
-            adap.Close();
+                    using (SqlDataReader adap = cmd.ExecuteReader())
+                    {
+                        if (adap.Read())
+                        {
+                            try
+                            {
+                                string rol = adap.GetString(3);
+                                Session["codigoUsuario"] = adap.GetInt32(0);
+                                Session["nombreUsuario"] = adap.GetString(1);
+                                Session["rol"] = rol;
+                            }
+                            catch (Exception ex)
+                            {
+                                Response.Write(ex.Message.ToString());
+                            }
+                        }
+                    }
+                }
+
+                // Evitar reutilizar el mismo objeto SqlCommand y SqlDataReader, mejor usar nuevos objetos
+                string consultaTrabajador = "SELECT codigoTrabajador FROM Trabajador WHERE codigoUsuario = @codigoUsuario";
+                using (SqlCommand cmdTrabajador = new SqlCommand(consultaTrabajador, cnn))
+                {
+                    cmdTrabajador.Parameters.AddWithValue("@codigoUsuario", Session["codigoUsuario"]);
+
+                    using (SqlDataReader adapTrabajador = cmdTrabajador.ExecuteReader())
+                    {
+                        if (adapTrabajador.Read())
+                        {
+                            try
+                            {
+                                Session["codigoTrabajador"] = adapTrabajador.GetInt32(0);
+                            }
+                            catch (Exception ex)
+                            {
+                                Response.Write(ex.Message.ToString());
+                            }
+                        }
+                    }
+                }
+            }
 
             if (Session["rol"].ToString() == "super")
             {
