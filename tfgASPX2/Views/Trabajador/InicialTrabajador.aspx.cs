@@ -31,13 +31,21 @@ namespace tfgASPX2.Views.Trabajador
 
         protected void ButtonFiltrado_Click(object sender, EventArgs e)
         {
-            //SqlDataSource1.SelectCommand = "SELECT * FROM CategoriaProfesional WHERE (nombreCategoria LIKE '%" + TextBoxFiltrado.Text.ToString() + "%')";
+            string consultaSQL = "SELECT LT.codigoLinea,P.nombrePartida AS nombrePartida,N.nombre AS nombreNaturaleza,LT.horasNormales,LT.horasExtra FROM LineaTrabajo LT JOIN Partida P ON LT.codigoPartida = P.codigoPartida JOIN Naturaleza N ON LT.codigoNaturaleza = N.codigoNaturaleza WHERE [codigoTrabajador] = " + Session["codigoTrabajador"] +"";
+            
+            if (horasMinimas.Value.Length !=0)
+                consultaSQL += " AND horasNormales>=" + horasMinimas.Value + "";
+
+            if (horasMaximas.Value.Length != 0)
+                consultaSQL += " AND horasNormales<=" + horasMaximas.Value + "";
+
+            SqlDataSource1.SelectCommand = consultaSQL;
             SqlDataSource1.DataBind();
         }
 
         protected void Todos_Click(object sender, EventArgs e)
         {
-            //SqlDataSource1.SelectCommand = "SELECT * FROM CategoriaProfesional";
+            SqlDataSource1.SelectCommand = "SELECT LT.codigoLinea,P.nombrePartida AS nombrePartida,N.nombre AS nombreNaturaleza,LT.horasNormales,LT.horasExtra FROM LineaTrabajo LT JOIN Partida P ON LT.codigoPartida = P.codigoPartida JOIN Naturaleza N ON LT.codigoNaturaleza = N.codigoNaturaleza WHERE ([codigoTrabajador] = " +Session["codigoTrabajador"]+")";
             SqlDataSource1.DataBind();
         }
 

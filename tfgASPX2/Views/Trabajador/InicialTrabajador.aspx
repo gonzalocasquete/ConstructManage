@@ -14,41 +14,57 @@
 
 <asp:Content ID="TrabajadorBody" ContentPlaceHolderID="ContentPlaceHolderContenido" runat="server">
     <div class="auto-style1">
-        <div>
-            <asp:Label ID="LabelMensajeBienvenida" runat="server" Text=""></asp:Label>
+        <div class="row">
+            <div class="col">
+                <asp:Label ID="LabelMensajeBienvenida" class="alert alert-info" runat="server" Text=""></asp:Label>
+            </div>
         </div>
 
         <%--Bloque div para los filtros--%>
         <hr />
         <div>
-            <asp:Label ID="LabelFiltroHoras" runat="server" Text="Horas:"></asp:Label>
-            <asp:TextBox ID="TextBoxFiltrado" class="form-control" runat="server"></asp:TextBox>
+            <div class="row">
+                <div class="col">
+                    <asp:Label ID="LabelFiltroHorasMinimas" runat="server" Text="Horas Minimas:"></asp:Label>
+                    <input id="horasMinimas" class="form-control" runat="server" type="number" name="horasMinimas">
+                </div>
+                <div class="col">
+                    <asp:Label ID="LabelHorasMaximas" runat="server" Text="Horas Maximas:"></asp:Label>
+                    <input id="horasMaximas" class="form-control" runat="server" type="number" name="horasMaximas">
+                </div>
+            </div>
 
             <div class="text-center mt-2">
                 <asp:Button ID="ButtonFiltrado" class="form-control btn btn-primary btn-sm btn-block buttonFilter" runat="server" Text="Filtrar" OnClick="ButtonFiltrado_Click" />
                 <asp:Button runat="server" class="form-control btn-secondary btn-sm btn-block buttonFilter mt-1" Text="Limpiar" OnClick="Todos_Click"></asp:Button>
             </div>
-        </div>
 
-        <%--Bloque div para el numero de horas totales del trabajador--%>
-        <div class="mt-2">
-            <asp:Label ID="LabelCalculoHoras" runat="server" Text="Horas totales:"></asp:Label>
-            <asp:TextBox ID="TextBoxHorasTotales" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
-            <asp:Label ID="LabelTipoHoras" runat="server" Text="Tipo de horas:"></asp:Label>
-            <div>
-                <asp:CheckBox ID="CheckBoxHorasNormales" runat="server" OnCheckedChanged="CheckBoxHorasNormales_CheckedChanged" AutoPostBack="True" />
-                <label class="form-check-label" for="<%= CheckBoxHorasNormales.ClientID %>">
-                    Horas Normales
-                </label>
-            </div>
-            <div>
-                <asp:CheckBox ID="CheckBoxHorasExtra" runat="server" OnCheckedChanged="CheckBoxHorasExtra_CheckedChanged" AutoPostBack="True" />
-                <label class="form-check-label" for="<%= CheckBoxHorasExtra.ClientID %>">
-                  Horas extra
-                </label>
+
+            <%--Bloque div para el numero de horas totales del trabajador--%>
+            <div class="mt-2">
+                <div class="row">
+                    <div class="col">
+                        <asp:Label ID="LabelCalculoHoras" runat="server" Text="Horas totales:"></asp:Label>
+                        <asp:TextBox ID="TextBoxHorasTotales" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                    </div>
+                    <div class="col">
+                        <asp:Label ID="LabelTipoHoras" runat="server" Text="Tipo de horas:"></asp:Label>
+                        <div>
+                            <asp:CheckBox ID="CheckBoxHorasNormales" runat="server" OnCheckedChanged="CheckBoxHorasNormales_CheckedChanged" AutoPostBack="True" />
+                            <label class="form-check-label" for="<%= CheckBoxHorasNormales.ClientID %>">
+                                Horas Normales
+                            </label>
+                        </div>
+                        <div>
+                            <asp:CheckBox ID="CheckBoxHorasExtra" runat="server" OnCheckedChanged="CheckBoxHorasExtra_CheckedChanged" AutoPostBack="True" />
+                            <label class="form-check-label" for="<%= CheckBoxHorasExtra.ClientID %>">
+                                Horas extra
+                            </label>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
         <%--Bloque de sqldatasource y tabla para listado--%>
         <div>
             <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>"

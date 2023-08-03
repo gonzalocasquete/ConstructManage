@@ -24,22 +24,40 @@ namespace tfgASPX2.Views.Trabajador
         protected global::System.Web.UI.WebControls.Label LabelMensajeBienvenida;
 
         /// <summary>
-        /// Control LabelFiltroHoras.
+        /// Control LabelFiltroHorasMinimas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelFiltroHoras;
+        protected global::System.Web.UI.WebControls.Label LabelFiltroHorasMinimas;
 
         /// <summary>
-        /// Control TextBoxFiltrado.
+        /// Control horasMinimas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxFiltrado;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl horasMinimas;
+
+        /// <summary>
+        /// Control LabelHorasMaximas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelHorasMaximas;
+
+        /// <summary>
+        /// Control horasMaximas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl horasMaximas;
 
         /// <summary>
         /// Control ButtonFiltrado.

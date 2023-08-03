@@ -85,10 +85,10 @@ namespace tfgASPX2.Views.Super
                 consultaSQL += " AND FechaFin <= '" + fechaMaxima.Value + "'";
 
             if (presupuestoMinimo.Value.Length != 0)
-                consultaSQL += " AND Presupuesto>" + presupuestoMinimo.Value + "";
+                consultaSQL += " AND Presupuesto>=" + presupuestoMinimo.Value + "";
 
             if (presupuestoMaximo.Value.Length != 0)
-                consultaSQL += " AND Presupuesto<" + presupuestoMaximo.Value + "";
+                consultaSQL += " AND Presupuesto<=" + presupuestoMaximo.Value + "";
 
             SqlDataSource1.SelectCommand = consultaSQL;
             SqlDataSource1.DataBind();
