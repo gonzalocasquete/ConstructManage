@@ -14,7 +14,7 @@ namespace tfgASPX2.Views.Trabajador
             if (!IsPostBack) // Verifica si es la primera carga de la página (no es un PostBack)
             {
                 MostrarMensajeBienvenida();
-            }     
+            }
         }
 
         private void MostrarMensajeBienvenida()
@@ -31,13 +31,20 @@ namespace tfgASPX2.Views.Trabajador
 
         protected void ButtonFiltrado_Click(object sender, EventArgs e)
         {
-            string consultaSQL = "SELECT LT.codigoLinea,P.nombrePartida AS nombrePartida,N.nombre AS nombreNaturaleza,LT.horasNormales,LT.horasExtra FROM LineaTrabajo LT JOIN Partida P ON LT.codigoPartida = P.codigoPartida JOIN Naturaleza N ON LT.codigoNaturaleza = N.codigoNaturaleza WHERE [codigoTrabajador] = " + Session["codigoTrabajador"] +"";
-            
-            if (horasMinimas.Value.Length !=0)
+            string consultaSQL = "SELECT LT.codigoLinea,P.nombrePartida AS nombrePartida,N.nombre AS nombreNaturaleza,LT.horasNormales,LT.horasExtra FROM LineaTrabajo LT JOIN Partida P ON LT.codigoPartida = P.codigoPartida JOIN Naturaleza N ON LT.codigoNaturaleza = N.codigoNaturaleza WHERE [codigoTrabajador] = " + Session["codigoTrabajador"] + "";
+
+            if (horasMinimas.Value.Length != 0)
                 consultaSQL += " AND horasNormales>=" + horasMinimas.Value + "";
 
             if (horasMaximas.Value.Length != 0)
                 consultaSQL += " AND horasNormales<=" + horasMaximas.Value + "";
+
+            if (horasExtraMinimas.Value.Length != 0)
+                consultaSQL += " AND horasExtra>=" + horasExtraMinimas.Value + "";
+
+            if (horasMaximas.Value.Length != 0)
+                consultaSQL += " AND horasExtra<=" + horasExtraMaximas.Value + "";
+
 
             SqlDataSource1.SelectCommand = consultaSQL;
             SqlDataSource1.DataBind();
@@ -45,7 +52,11 @@ namespace tfgASPX2.Views.Trabajador
 
         protected void Todos_Click(object sender, EventArgs e)
         {
-            SqlDataSource1.SelectCommand = "SELECT LT.codigoLinea,P.nombrePartida AS nombrePartida,N.nombre AS nombreNaturaleza,LT.horasNormales,LT.horasExtra FROM LineaTrabajo LT JOIN Partida P ON LT.codigoPartida = P.codigoPartida JOIN Naturaleza N ON LT.codigoNaturaleza = N.codigoNaturaleza WHERE ([codigoTrabajador] = " +Session["codigoTrabajador"]+")";
+            horasMinimas.Value = null;
+            horasMaximas.Value = null;
+            horasExtraMinimas.Value = null;
+            horasExtraMaximas.Value = null;
+            SqlDataSource1.SelectCommand = "SELECT LT.codigoLinea,P.nombrePartida AS nombrePartida,N.nombre AS nombreNaturaleza,LT.horasNormales,LT.horasExtra FROM LineaTrabajo LT JOIN Partida P ON LT.codigoPartida = P.codigoPartida JOIN Naturaleza N ON LT.codigoNaturaleza = N.codigoNaturaleza WHERE ([codigoTrabajador] = " + Session["codigoTrabajador"] + ")";
             SqlDataSource1.DataBind();
         }
 

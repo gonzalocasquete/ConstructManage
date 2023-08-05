@@ -67,7 +67,7 @@
             </div>
         </div>
 
-        <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT * FROM [Partida]" DeleteCommand="DELETE FROM [Partida] WHERE [codigoPartida] = @original_codigoPartida" InsertCommand="INSERT INTO [Partida] ([nombrePartida], [FechaInicio], [FechaFin], [Costo], [codigoProyecto]) VALUES (@nombrePartida, @FechaInicio, @FechaFin, @Costo, @codigoProyecto)" OldValuesParameterFormatString="original_{0}" UpdateCommand="UPDATE [Partida] SET [nombrePartida] = @nombrePartida, [FechaInicio] = @FechaInicio, [FechaFin] = @FechaFin, [Costo] = @Costo, [codigoProyecto] = @codigoProyecto WHERE [codigoPartida] = @original_codigoPartida">
+        <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT * FROM [Partida]" DeleteCommand="DELETE FROM [Partida] WHERE [codigoPartida] = @original_codigoPartida" InsertCommand="INSERT INTO [Partida] ([nombrePartida], [fechaInicio], [fechaFin], [Costo], [codigoProyecto]) VALUES (@nombrePartida, @FechaInicio, @FechaFin, @Costo, @codigoProyecto)" OldValuesParameterFormatString="original_{0}" UpdateCommand="UPDATE [Partida] SET [nombrePartida] = @nombrePartida, [fechaInicio] = @FechaInicio, [fechaFin] = @FechaFin, [Costo] = @Costo, [codigoProyecto] = @codigoProyecto WHERE [codigoPartida] = @original_codigoPartida">
             <DeleteParameters>
                 <asp:Parameter Name="original_codigoPartida" Type="Int32"></asp:Parameter>
             </DeleteParameters>
@@ -93,18 +93,18 @@
                 <asp:BoundField DataField="nombrePartida" HeaderText="Partida"></asp:BoundField>
                 <asp:BoundField DataField="codigoPartida" HeaderText="ID" ReadOnly="True" InsertVisible="False"></asp:BoundField>
 
-                <asp:TemplateField HeaderText="Fecha Inicio" SortExpression="FechaFin">
+                <asp:TemplateField HeaderText="Fecha Inicio" SortExpression="fechaInicio">
                     <ItemTemplate>
-                        <%# Eval("FechaInicio", "{0:dd/MM/yy}") %>
+                        <%# Eval("fechaInicio", "{0:dd/MM/yy}") %>
                     </ItemTemplate>
                     <EditItemTemplate>
                         <input type="date" id="txtFechaInicio" runat="server" value='<%# Bind("FechaInicio", "{0:yyyy-MM-dd}") %>' />
                     </EditItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="Fecha Fin" SortExpression="FechaFin">
+                <asp:TemplateField HeaderText="Fecha Fin" SortExpression="fechaFin">
                     <ItemTemplate>
-                        <%# Eval("FechaFin", "{0:dd/MM/yy}") %>
+                        <%# Eval("fechaFin", "{0:dd/MM/yy}") %>
                     </ItemTemplate>
                     <EditItemTemplate>
                         <input type="date" id="txtFechaFin" runat="server" value='<%# Bind("FechaFin", "{0:yyyy-MM-dd}") %>' />
@@ -155,7 +155,7 @@
                         </div>
                         <div class="col">
                             Fecha Fin:
-                            <input type="date" class="form-control" data-toggle="tooltip" title="Fecha de baja de la partida" runat="server" id="FechaFinTextBox" value='<%# Bind("FechaFin", "{0:yyyy-MM-dd}") %>' />
+                            <input type="date" class="form-control" data-toggle="tooltip" title="Fecha de baja de la partida" runat="server" id="FechaFinTextBox" value='<%# Bind("fechaFin", "{0:yyyy-MM-dd}") %>' />
                         </div>
                     </div>
 

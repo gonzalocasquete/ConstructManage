@@ -88,9 +88,12 @@ namespace tfgASPX
             {
                 Response.Redirect("Super/MenuSuper.aspx");
             }
-            else if (Session["rol"].ToString()=="trabajador")
+            else if (Session["rol"].ToString() == "trabajador")
             {
                 Response.Redirect("Trabajador/InicialTrabajador.aspx");
+
+            } else if (Session["rol"].ToString()=="coordinador") {
+                Response.Redirect("Coordinador/InicialCoordinador.aspx");
             }
             else {
                 Response.Redirect("Login.aspx");

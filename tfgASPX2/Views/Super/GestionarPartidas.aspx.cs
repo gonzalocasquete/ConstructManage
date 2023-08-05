@@ -38,7 +38,7 @@ namespace tfgASPX2.Views.Super
                 consultaSQL += " AND codigoProyecto=" + DropDownListProyectos.SelectedValue +"";
 
             if (fechaInicio.Value != "")
-                consultaSQL += " AND FechaInicio >= '" + fechaInicio.Value + "'";
+                consultaSQL += " AND fechaInicio >= '" + fechaInicio.Value + "'";
 
             if (fechaFin.Value != "")
                 consultaSQL += " AND FechaFin <= '" + fechaFin.Value + "'";

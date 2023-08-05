@@ -34,6 +34,17 @@
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col">
+                    <asp:Label ID="LabelFiltroHorasExtraMinimas" runat="server" Text="Horas Extra Minimas:"></asp:Label>
+                    <input id="horasExtraMinimas" class="form-control" runat="server" type="number" name="horasExtraMinimas">
+                </div>
+                <div class="col">
+                    <asp:Label ID="LabelFiltroHorasExtraMaximas" runat="server" Text="Horas Extra Maximas:"></asp:Label>
+                    <input id="horasExtraMaximas" class="form-control" runat="server" type="number" name="horasExtraMaximas">
+                </div>
+            </div>
+
             <div class="text-center mt-2">
                 <asp:Button ID="ButtonFiltrado" class="form-control btn btn-primary btn-sm btn-block buttonFilter" runat="server" Text="Filtrar" OnClick="ButtonFiltrado_Click" />
                 <asp:Button runat="server" class="form-control btn-secondary btn-sm btn-block buttonFilter mt-1" Text="Limpiar" OnClick="Todos_Click"></asp:Button>
