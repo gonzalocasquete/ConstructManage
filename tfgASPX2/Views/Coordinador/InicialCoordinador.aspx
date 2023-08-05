@@ -8,9 +8,9 @@
 </asp:Content>
 
 <asp:Content ID="InicialCoordinadorNavegacion" ContentPlaceHolderID="ContentPlaceHolderNavegacion" runat="server">
-    <a href="InicialCoordinador.aspx">Menu</a>
+    <a href="InicialCoordinador.aspx">Inicio</a>
     <%--<a href="InsertarParte.aspx">Parte</a>--%>
-    <%--<a href="PerfilCoordinador.aspx">Perfil</a>--%>
+    <a href="../Comun/Perfil.aspx">Perfil</a>
 </asp:Content>
 
 <asp:Content ID="InicialCoordinadorBody" ContentPlaceHolderID="ContentPlaceHolderContenido" runat="server">
@@ -22,19 +22,18 @@
                     <asp:SessionParameter SessionField="codigoTrabajador" Name="codigoTrabajador" Type="Int32"></asp:SessionParameter>
                 </SelectParameters>
             </asp:SqlDataSource>
-            <asp:GridView ID="GridView1" class="table" runat="server" DataSourceID="SqlDataSource1" AutoGenerateColumns="False" DataKeyNames="codigoParte" AllowPaging="True">
+            <asp:GridView ID="GridView1" class="table" runat="server" DataSourceID="SqlDataSource1" AutoGenerateColumns="False" DataKeyNames="codigoParte" AllowPaging="True" AllowSorting="True">
                 <AlternatingRowStyle BackColor="#CCCCCC" />
                 <Columns>
-                    <asp:BoundField DataField="codigoParte" HeaderText="Parte" ReadOnly="True" InsertVisible="False" SortExpression="codigoParte"></asp:BoundField>
-                   
+                    <asp:BoundField DataField="codigoParte" HeaderText="Parte" ReadOnly="True" InsertVisible="False" SortExpression="codigoParte"></asp:BoundField>        
                     <asp:TemplateField HeaderText="Tipo" SortExpression="tipo">
                         <ItemTemplate>
                             <asp:Label ID="lblTipo" runat="server" Text='<%# Eval("tipo").ToString() == "1" ? "Asociado" : "No asociado" %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:BoundField DataField="NombreProyecto" HeaderText="Proyecto" SortExpression="NombreProyecto"></asp:BoundField>
-                    <asp:BoundField DataField="NombreEntidad" HeaderText="Cliente" SortExpression="NombreEntidad"></asp:BoundField>
-                    <asp:BoundField DataField="fecha" HeaderText="Fecha" SortExpression="fecha"></asp:BoundField>
+                    <asp:BoundField DataField="NombreProyecto" HeaderText="Proyecto"></asp:BoundField>
+                    <asp:BoundField DataField="NombreEntidad" HeaderText="Cliente"></asp:BoundField>
+                    <asp:BoundField DataField="fecha" DataFormatString="{0:dd/MM/yy}" HeaderText="Fecha" SortExpression="fecha"></asp:BoundField>
                     <asp:CommandField SelectText="Consultar" ShowSelectButton="True"></asp:CommandField>
                 </Columns>
                 <FooterStyle BackColor="#CCCCCC" />

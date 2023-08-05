@@ -8,8 +8,8 @@
 </asp:Content>
 
 <asp:Content ID="TrabajadorNavegacion" ContentPlaceHolderID="ContentPlaceHolderNavegacion" runat="server">
-    <a href="InicialTrabajador.aspx">Menu</a>
-    <a href="PerfilTrabajador.aspx">Perfil</a>
+    <a href="InicialTrabajador.aspx">Inicio</a>
+    <a href="../Comun/Perfil.aspx">Perfil</a>
 </asp:Content>
 
 <asp:Content ID="TrabajadorBody" ContentPlaceHolderID="ContentPlaceHolderContenido" runat="server">

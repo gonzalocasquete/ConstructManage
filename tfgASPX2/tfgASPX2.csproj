@@ -183,7 +183,7 @@
     <Content Include="Views\Super\GestionarUsuarios.aspx" />
     <Content Include="Views\Super\MenuSuper.aspx" />
     <Content Include="Views\Trabajador\InicialTrabajador.aspx" />
-    <Content Include="Views\Trabajador\PerfilTrabajador.aspx" />
+    <Content Include="Views\Comun\Perfil.aspx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
     <Content Include="Site.Mobile.Master" />
@@ -321,12 +321,12 @@
     <Compile Include="Views\Trabajador\InicialTrabajador.aspx.designer.cs">
       <DependentUpon>InicialTrabajador.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Trabajador\PerfilTrabajador.aspx.cs">
-      <DependentUpon>PerfilTrabajador.aspx</DependentUpon>
+    <Compile Include="Views\Comun\Perfil.aspx.cs">
+      <DependentUpon>Perfil.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\Trabajador\PerfilTrabajador.aspx.designer.cs">
-      <DependentUpon>PerfilTrabajador.aspx</DependentUpon>
+    <Compile Include="Views\Comun\Perfil.aspx.designer.cs">
+      <DependentUpon>Perfil.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

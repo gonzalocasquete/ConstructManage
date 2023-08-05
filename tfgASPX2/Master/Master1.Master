@@ -17,7 +17,6 @@
             <nav>
                 <asp:ContentPlaceHolder ID="ContentPlaceHolderNavegacion" runat="server">
                 </asp:ContentPlaceHolder>
-
                 <a href="../Login.aspx">Logout</a>
                 <div class="animation start-home"></div>
             </nav>

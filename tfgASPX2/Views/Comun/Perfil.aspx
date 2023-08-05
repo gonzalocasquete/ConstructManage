@@ -1,5 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Master/Master1.Master" AutoEventWireup="true" CodeBehind="PerfilTrabajador.aspx.cs" Inherits="tfgASPX2.Views.Trabajador.PerfilTrabajador" %>
-
+﻿<%@ Page Language="C#" MasterPageFile="~/Master/Master1.Master" AutoEventWireup="true" CodeBehind="Perfil.aspx.cs" Inherits="tfgASPX2.Views.Trabajador.PerfilTrabajador" %>
 
 <asp:Content ID="PerfilTrabajadorHead" ContentPlaceHolderID="head" runat="server">
     <link href="../../Styles/PerfilTrabajadorStyle.css" rel="stylesheet" />
@@ -10,8 +9,23 @@
 </asp:Content>
 
 <asp:Content ID="PerfilTrabajadorNavegacion" ContentPlaceHolderID="ContentPlaceHolderNavegacion" runat="server">
-    <a href="InicialTrabajador.aspx">Menu</a>
-    <a href="PerfilTrabajador.aspx">Perfil</a>
+    <% if (Session["rol"] == null)
+        { %>
+    <!-- Código para mostrar enlaces cuando la sesión "rol" es nula o no está definida -->
+    <a href="../Login.aspx">Logout</a>
+    <% }
+        else if (Session["rol"].ToString() == "trabajador")
+        { %>
+    <!-- Código para mostrar enlaces cuando la sesión "rol" es "trabajador" -->
+    <a href="../Trabajador/InicialTrabajador.aspx">Inicio</a>
+    <a href="Perfil.aspx">Perfil</a>
+    <% }
+        else if (Session["rol"].ToString() == "coordinador")
+        { %>
+    <!-- Código para mostrar enlaces cuando la sesión "rol" es "coordinador" -->
+    <a href="../Coordinador/InicialCoordinador.aspx">Inicio</a>
+    <a href="Perfil.aspx">Perfil</a>
+    <% } %>
 </asp:Content>
 
 <asp:Content ID="PerfilTrabajadorBody" ContentPlaceHolderID="ContentPlaceHolderContenido" runat="server">
@@ -65,7 +79,7 @@
                     </div>
                     <div class="col">
                         Contraseña:
-                        <asp:TextBox Text='<%# Bind("contraseñaUsuario") %>' class="form-control" runat="server" ID="contraseñaUsuarioTextBox" TextMode="Password"/><br />
+                        <asp:TextBox Text='<%# Bind("contraseñaUsuario") %>' class="form-control" runat="server" ID="contraseñaUsuarioTextBox" TextMode="Password" /><br />
                     </div>
                 </div>
 

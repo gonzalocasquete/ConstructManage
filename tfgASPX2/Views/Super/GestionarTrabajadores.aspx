@@ -29,7 +29,64 @@
 
         <%--Filtros--%>
         <hr />
-        <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" DeleteCommand="DELETE FROM Trabajador WHERE (codigoTrabajador = @codigoTrabajador)" SelectCommand="SELECT Trabajador.codigoTrabajador, Trabajador.nombre, Trabajador.apellido, Trabajador.codigoUsuario, Trabajador.codigoCategoria, Usuario.nombreUsuario, CategoriaProfesional.nombreCategoria, Usuario.rol FROM Trabajador INNER JOIN Usuario ON Trabajador.codigoUsuario = Usuario.codigoUsuario INNER JOIN CategoriaProfesional ON Trabajador.codigoCategoria = CategoriaProfesional.codigoCategoria" UpdateCommand="UPDATE Trabajador SET nombre =@nombre, apellido =@apellido, codigoUsuario =@codigoUsuario, codigoCategoria =@codigoCategoria">
+        <div>
+
+            <div class="row">
+                <div class="col">
+                    <%--Nombre Trabajador--%>
+                    <asp:Label ID="LabelFiltroNombreTrabajador" runat="server" Text="Nombre:"></asp:Label>
+                    <asp:TextBox ID="TextBoxFiltradoNombre" class="form-control" runat="server"></asp:TextBox>
+                </div>
+                <div class="col">
+                    <%--Apellido Trabajador--%>
+                    <asp:Label ID="LabelFiltroApellidoTrabajador" runat="server" Text="Apellido:"></asp:Label>
+                    <asp:TextBox ID="TextBoxFiltradoApellido" class="form-control" runat="server"></asp:TextBox>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <%--Categorias para los trabajadores--%>
+                    <asp:Label ID="LabelFiltroCategorias" runat="server" Text="Categorias:"></asp:Label>
+                    <asp:DropDownList ID="DropDownListCategorias" class="dropdown form-control" runat="server" DataTextField="nombreCategoria" DataValueField="codigoCategoria" DataSourceID="SqlDataSourceCategorias" AppendDataBoundItems="true">
+                        <asp:ListItem Text="" Value=""></asp:ListItem>
+                    </asp:DropDownList>
+                    <asp:SqlDataSource runat="server" ID="SqlDataSourceCategorias" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT [codigoCategoria], [nombreCategoria] FROM [CategoriaProfesional] ORDER BY [nombreCategoria]"></asp:SqlDataSource>
+                </div>
+                <div class="col">
+                    <%--Rol--%>
+                    <asp:Label ID="LabelFiltroRoles" runat="server" Text="Roles:"></asp:Label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="CheckBoxTrabajador" runat="server">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Trabajador
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="CheckBoxCoordinador" runat="server">
+                        <label class="form-check-label" for="CheckBoxCoordinador">
+                            Coordinador
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="CheckBoxSuper" runat="server">
+                        <label class="form-check-label" for="CheckBoxSuper">
+                            Super
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-2">
+                <asp:Button ID="ButtonFiltrado" class="form-control btn btn-primary btn-sm btn-block buttonFilter" runat="server" Text="Filtrar" OnClick="ButtonFiltrado_Click" />
+                <asp:Button ID="ButtonLimpiar" class="form-control btn-secondary btn-sm btn-block buttonFilter mt-1" runat="server"  Text="Limpiar" OnClick="Limpiar_Click"></asp:Button>
+            </div>
+        </div>
+
+        <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" 
+            DeleteCommand="DELETE FROM Trabajador WHERE (codigoTrabajador = @codigoTrabajador)" 
+            SelectCommand="SELECT Trabajador.codigoTrabajador, Trabajador.nombre, Trabajador.apellido, Trabajador.codigoUsuario, Trabajador.codigoCategoria, Usuario.nombreUsuario, CategoriaProfesional.nombreCategoria, Usuario.rol FROM Trabajador INNER JOIN Usuario ON Trabajador.codigoUsuario = Usuario.codigoUsuario INNER JOIN CategoriaProfesional ON Trabajador.codigoCategoria = CategoriaProfesional.codigoCategoria" 
+            UpdateCommand="UPDATE Trabajador SET nombre =@nombre, apellido =@apellido, codigoUsuario =@codigoUsuario, codigoCategoria =@codigoCategoria">
             <DeleteParameters>
                 <asp:Parameter Name="codigoTrabajador"></asp:Parameter>
             </DeleteParameters>
@@ -40,7 +97,7 @@
                 <asp:Parameter Name="codigoCategoria" Type="Int32"></asp:Parameter>
             </UpdateParameters>
         </asp:SqlDataSource>
-        <asp:GridView ID="GridView1" runat="server" class="table" DataSourceID="SqlDataSource1" AutoGenerateColumns="False" DataKeyNames="codigoTrabajador" AllowPaging="True">
+        <asp:GridView ID="GridView1" runat="server" class="table mt-3" DataSourceID="SqlDataSource1" AutoGenerateColumns="False" DataKeyNames="codigoTrabajador" AllowPaging="True">
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
                 <asp:BoundField DataField="codigoTrabajador" HeaderText="Codigo" ReadOnly="True" InsertVisible="False"></asp:BoundField>
