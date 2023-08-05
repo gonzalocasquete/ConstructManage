@@ -15,38 +15,57 @@
     <div class="auto-style1">
         <h2 class="font-weight-bold">Gestión Usuarios</h2>
 
-        <%--Filtros--%>
-        <hr />
         <div>
-            <%--Usuario--%>
-            <asp:Label ID="LabelFiltroUsuario" runat="server" Text="Usuario:"></asp:Label>
-            <asp:TextBox ID="TextBoxFiltradoUsuario" class="form-control" runat="server"></asp:TextBox>
-
-            <%--Rol--%>
-            <asp:Label ID="LabelFiltroRoles" runat="server" Text="Roles:"></asp:Label>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="CheckBoxTrabajador" runat="server">
-                <label class="form-check-label" for="flexCheckDefault">
-                    Trabajador
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="CheckBoxCoordinador" runat="server">
-                <label class="form-check-label" for="CheckBoxCoordinador">
-                    Coordinador
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="CheckBoxSuper" runat="server">
-                <label class="form-check-label" for="CheckBoxSuper">
-                    Super
-                </label>
+            <div class="row">
+                <div class="col">
+                    <asp:Button ID="ButtonFiltros" class="form-control btn-secondary btn-sm btn-block buttonFilter mt-1" runat="server" Text="Filtros" OnClick="ButtonFiltros_Click" />
+                </div>
             </div>
 
-            <div class="text-center">
-                <asp:Button ID="ButtonFiltrado" class="form-control btn-primary btn-sm btn-block buttonFilter" runat="server" Text="Filtrar" OnClick="ButtonFiltrado_Click" />
-                <asp:Button runat="server" class="form-control btn-secondary btn-sm btn-block buttonFilter mt-1" Text="Limpiar" OnClick="Limpiar_Click"></asp:Button>
-            </div>
+            <asp:Panel ID="PanelFiltros" runat="server" Visible="False">
+                <%--  Filtros--%>
+                <hr style="margin-bottom: 2px;" />
+                <div>
+                    <div class="row">
+                        <div class="col">
+                            <%-- Usuario--%>
+                            <asp:Label ID="LabelFiltroUsuario" runat="server" Text="Usuario:"></asp:Label>
+                            <asp:TextBox ID="TextBoxFiltradoUsuario" class="form-control" runat="server"></asp:TextBox>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <%--Rol--%>
+                            <asp:Label ID="LabelFiltroRoles" runat="server" Text="Roles:"></asp:Label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="CheckBoxTrabajador" runat="server">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Trabajador
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="CheckBoxCoordinador" runat="server">
+                                <label class="form-check-label" for="CheckBoxCoordinador">
+                                    Coordinador
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="CheckBoxSuper" runat="server">
+                                <label class="form-check-label" for="CheckBoxSuper">
+                                    Super
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-2">
+                        <asp:Button ID="ButtonFiltrado" class="form-control btn-primary btn-sm btn-block buttonFilter" runat="server" Text="Filtrar" OnClick="ButtonFiltrado_Click" />
+                        <asp:Button runat="server" class="form-control btn-secondary btn-sm btn-block buttonFilter mt-1" Text="Limpiar" OnClick="Limpiar_Click"></asp:Button>
+                    </div>
+                </div>
+
+            </asp:Panel>
         </div>
 
         <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" DeleteCommand="DELETE FROM [Usuario] WHERE [codigoUsuario] = @codigoUsuario" InsertCommand="INSERT INTO [Usuario] ([nombreUsuario], [contraseñaUsuario], [rol]) VALUES (@nombreUsuario, @contraseñaUsuario, @rol)" SelectCommand="SELECT * FROM [Usuario]" UpdateCommand="UPDATE [Usuario] SET [nombreUsuario] = @nombreUsuario, [contraseñaUsuario] = @contraseñaUsuario, [rol] = @rol WHERE [codigoUsuario] = @codigoUsuario">
@@ -65,7 +84,8 @@
                 <asp:Parameter Name="codigoUsuario" Type="Int32"></asp:Parameter>
             </UpdateParameters>
         </asp:SqlDataSource>
-        <asp:GridView ID="GridView1" class="table mt-3" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoUsuario" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical" AllowSorting="True">
+
+        <asp:GridView ID="GridView1" class="table mt-3" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoUsuario" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical" AllowSorting="True" OnRowDataBound="GridView1_RowDataBound">
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
                 <asp:BoundField DataField="codigoUsuario" HeaderText="ID" ReadOnly="True" InsertVisible="False"></asp:BoundField>
