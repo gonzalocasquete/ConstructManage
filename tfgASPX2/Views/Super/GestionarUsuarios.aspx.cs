@@ -107,10 +107,5 @@ namespace tfgASPX2.Views.Super
                 }
             }
         }
-
-
-
-
-
     }
 }

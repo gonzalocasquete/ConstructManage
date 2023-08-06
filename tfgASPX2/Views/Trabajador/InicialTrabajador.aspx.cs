@@ -43,11 +43,11 @@ namespace tfgASPX2.Views.Trabajador
                 consultaSQL += " AND horasExtra>=" + horasExtraMinimas.Value + "";
 
             if (horasMaximas.Value.Length != 0)
-                consultaSQL += " AND horasExtra<=" + horasExtraMaximas.Value + "";
-
-
+                consultaSQL += " AND horasExtra<=" + horasExtraMaximas.Value + "";   
             SqlDataSource1.SelectCommand = consultaSQL;
             SqlDataSource1.DataBind();
+            GridView1.DataBind();
+            CalcularHorasTotales();
         }
 
         protected void Todos_Click(object sender, EventArgs e)
@@ -58,6 +58,8 @@ namespace tfgASPX2.Views.Trabajador
             horasExtraMaximas.Value = null;
             SqlDataSource1.SelectCommand = "SELECT LT.codigoLinea,P.nombrePartida AS nombrePartida,N.nombre AS nombreNaturaleza,LT.horasNormales,LT.horasExtra FROM LineaTrabajo LT JOIN Partida P ON LT.codigoPartida = P.codigoPartida JOIN Naturaleza N ON LT.codigoNaturaleza = N.codigoNaturaleza WHERE ([codigoTrabajador] = " + Session["codigoTrabajador"] + ")";
             SqlDataSource1.DataBind();
+            GridView1.DataBind();
+            CalcularHorasTotales();
         }
 
         protected void CheckBoxHorasNormales_CheckedChanged(object sender, EventArgs e)

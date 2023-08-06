@@ -14,15 +14,15 @@
 
 <asp:Content ID="TrabajadorBody" ContentPlaceHolderID="ContentPlaceHolderContenido" runat="server">
     <div class="auto-style1">
-        <div class="row">
-            <div class="col">
-                <asp:Label ID="LabelMensajeBienvenida" class="alert alert-info" runat="server" Text=""></asp:Label>
+                    <div class="row">
+                <div class="col">
+                    <asp:Label ID="LabelMensajeBienvenida" class="alert alert-info" runat="server" Text=""></asp:Label>
+                </div>
             </div>
-        </div>
 
-        <%--Bloque div para los filtros--%>
-        <hr />
+        <%--Bloque div para los filtros--%>  
         <div>
+             <hr />
             <div class="row">
                 <div class="col">
                     <asp:Label ID="LabelFiltroHorasMinimas" runat="server" Text="Horas Minimas:"></asp:Label>
@@ -87,7 +87,7 @@
             <asp:GridView ID="GridView1" class="table mt-3" runat="server" DataSourceID="SqlDataSource1" AutoGenerateColumns="False" DataKeyNames="codigoLinea" AllowPaging="True" AllowSorting="True">
                 <AlternatingRowStyle BackColor="#CCCCCC" />
                 <Columns>
-                    <asp:BoundField DataField="codigoLinea" HeaderText="Linea" ReadOnly="True" InsertVisible="False"></asp:BoundField>
+                    <asp:BoundField DataField="codigoLinea" HeaderText="Linea" ReadOnly="True" InsertVisible="False" SortExpression="codigoLinea"></asp:BoundField>
                     <asp:BoundField DataField="nombrePartida" HeaderText="Partida"></asp:BoundField>
                     <asp:BoundField DataField="nombreNaturaleza" HeaderText="Naturaleza"></asp:BoundField>
                     <asp:BoundField DataField="horasNormales" HeaderText="Horas Normales" SortExpression="horasNormales"></asp:BoundField>
