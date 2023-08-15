@@ -18,6 +18,18 @@ namespace tfgASPX2.Views.Coordinador
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
             PanelConsultarLineasParte.Visible = true;
+            if (GridView1.SelectedIndex >= 0)
+            {
+                // Obtén el valor de codigoParte de la fila seleccionada
+                string codigoParteSeleccionado = GridView1.SelectedDataKey["codigoParte"].ToString();
+
+                // Establece el valor en el campo codigoParte del FormView
+                TextBox codigoParteTextBox = FormViewInsertarLinea.FindControl("codigoParteTextBox") as TextBox;
+                if (codigoParteTextBox != null)
+                {
+                    codigoParteTextBox.Text = codigoParteSeleccionado;
+                }
+            }
         }
 
         protected void ButtonInsertarParte_Click(object sender, EventArgs e)
@@ -29,7 +41,9 @@ namespace tfgASPX2.Views.Coordinador
                 ButtonInsertarParte.Text = "Ocultar";
             }
             else {
-                PanelConsultarLineasParte.Visible = true;
+                if(GridView2.Rows.Count !=0) /*Solo se mostrara si hay valores que mostrar*/
+                    PanelConsultarLineasParte.Visible = true;
+
                 PanelInsertarParte.Visible = false;
                 ButtonInsertarParte.Text = "Insertar Parte";
             }
@@ -45,6 +59,19 @@ namespace tfgASPX2.Views.Coordinador
                 {
                     codigoTrabajadorTextBox.Text = Session["codigoTrabajador"].ToString();
                 }
+            }
+        }
+
+        protected void ButtonInsertarLinea_Click(object sender, EventArgs e)
+        {
+            if (!PanelInsertarLinea.Visible)
+            {
+               PanelInsertarLinea.Visible = true;
+                ButtonInsertarLinea.Text = "Ocultar";
+            }
+            else {
+                PanelInsertarLinea.Visible = false;
+                ButtonInsertarLinea.Text = "Insertar Linea";
             }
         }
 

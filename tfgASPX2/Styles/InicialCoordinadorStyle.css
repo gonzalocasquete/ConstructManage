@@ -48,6 +48,15 @@
     }
 
 /*Formulario*/
+.custom-dropdown {
+    background-color: #fff; /* Fondo blanco */
+    border: 1px solid #ccc; /* Borde gris */
+    color: #555; /* Texto oscuro */
+    cursor: not-allowed; /* Cambiar el cursor al indicador de no permitido */
+    pointer-events: none; /* Evitar eventos de puntero */
+    opacity: 0.8; /* Opacidad reducida */
+}
+
 
 /*Filtros*/
 .buttonFilter {
