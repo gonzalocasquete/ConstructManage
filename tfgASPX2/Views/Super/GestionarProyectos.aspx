@@ -105,8 +105,8 @@
         <asp:GridView ID="GridView1" class="mt-3 table" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoProyecto" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" AllowSorting="True" AutoPostBack="true">
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
-                <asp:BoundField DataField="codigoProyecto" HeaderText="codigoProyecto" ReadOnly="True" InsertVisible="False"></asp:BoundField>
-                <asp:BoundField DataField="NombreProyecto" HeaderText="NombreProyecto"></asp:BoundField>
+                <asp:BoundField DataField="codigoProyecto" HeaderText="ID" ReadOnly="True" InsertVisible="False"></asp:BoundField>
+                <asp:BoundField DataField="NombreProyecto" HeaderText="Proyecti" SortExpression="NombreProyecto"></asp:BoundField>
                 <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" />
 
                 <asp:TemplateField HeaderText="Fecha Inicio" SortExpression="FechaInicio">
@@ -118,7 +118,7 @@
                     </EditItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="Fecha Inicio" SortExpression="fechaInicio">
+                <asp:TemplateField HeaderText="Fecha Fin" SortExpression="fechaFin">
                     <ItemTemplate>
                         <%# Eval("FechaFin", "{0:dd/MM/yy}") %>
                     </ItemTemplate>

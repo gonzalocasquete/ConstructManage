@@ -15,7 +15,7 @@
     <div class="auto-style1">
         <h2 class="font-weight-bold">Gestión Usuarios</h2>
 
-        <div>
+        <div style="width:200px">
             <div class="row">
                 <div class="col">
                     <asp:Button ID="ButtonFiltros" class="form-control btn-secondary btn-sm btn-block buttonFilter mt-1" runat="server" Text="Filtros" OnClick="ButtonFiltros_Click" />

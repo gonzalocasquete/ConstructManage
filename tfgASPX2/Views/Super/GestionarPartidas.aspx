@@ -90,8 +90,8 @@
         <asp:GridView ID="GridView1" class="mt-3 table" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoPartida" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical" AllowSorting="True">
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
-                <asp:BoundField DataField="nombrePartida" HeaderText="Partida"></asp:BoundField>
                 <asp:BoundField DataField="codigoPartida" HeaderText="ID" ReadOnly="True" InsertVisible="False"></asp:BoundField>
+                <asp:BoundField DataField="nombrePartida" HeaderText="Partida" SortExpression="nombrePartida"></asp:BoundField>
 
                 <asp:TemplateField HeaderText="Fecha Inicio" SortExpression="fechaInicio">
                     <ItemTemplate>

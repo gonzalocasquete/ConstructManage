@@ -13,7 +13,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <h1 class="mt-3">TFG NAME</h1>
+            <h1 class="mt-3">ConstructManage</h1>
             <nav>
                 <asp:ContentPlaceHolder ID="ContentPlaceHolderNavegacion" runat="server">
                 </asp:ContentPlaceHolder>

@@ -97,14 +97,14 @@
                 <asp:Parameter Name="codigoCategoria" Type="Int32"></asp:Parameter>
             </UpdateParameters>
         </asp:SqlDataSource>
-        <asp:GridView ID="GridView1" runat="server" class="table mt-3" DataSourceID="SqlDataSource1" AutoGenerateColumns="False" DataKeyNames="codigoTrabajador" AllowPaging="True">
+        <asp:GridView ID="GridView1" runat="server" class="table mt-3" DataSourceID="SqlDataSource1" AutoGenerateColumns="False" DataKeyNames="codigoTrabajador" AllowPaging="True" AllowSorting="True">
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
-                <asp:BoundField DataField="codigoTrabajador" HeaderText="Codigo" ReadOnly="True" InsertVisible="False"></asp:BoundField>
+                <asp:BoundField DataField="codigoTrabajador" HeaderText="ID" ReadOnly="True" InsertVisible="False" ></asp:BoundField>
                 <asp:BoundField DataField="nombre" HeaderText="Nombre" SortExpression="nombre"></asp:BoundField>
                 <asp:BoundField DataField="apellido" HeaderText="Apellido" SortExpression="apellido"></asp:BoundField>
 
-                <asp:TemplateField HeaderText="Usuario">
+                <asp:TemplateField HeaderText="Usuario" SortExpression="nombreUsuario">
                     <ItemTemplate>
                         <%# Eval("nombreUsuario") %>
                     </ItemTemplate>
@@ -114,7 +114,7 @@
                     </EditItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="Categoria">
+                <asp:TemplateField HeaderText="Categoria" SortExpression="nombreCategoria">
                     <ItemTemplate>
                         <%# Eval("nombreCategoria") %>
                     </ItemTemplate>
@@ -124,7 +124,7 @@
                     </EditItemTemplate>
                 </asp:TemplateField>
 
-                <asp:BoundField DataField="rol" HeaderText="rol" ReadOnly="True" InsertVisible="False"></asp:BoundField>
+                <asp:BoundField DataField="rol" HeaderText="rol" ReadOnly="True" InsertVisible="False" SortExpression="rol"></asp:BoundField>
                 <asp:CommandField ShowDeleteButton="True" ShowEditButton="True"></asp:CommandField>
             </Columns>
             <FooterStyle BackColor="#CCCCCC" />
