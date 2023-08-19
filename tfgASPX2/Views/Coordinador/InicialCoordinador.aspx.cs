@@ -75,5 +75,72 @@ namespace tfgASPX2.Views.Coordinador
             }
         }
 
+        protected void ButtonFiltros_Click(object sender, EventArgs e)
+        {
+            if (!PanelFiltros.Visible)
+            {
+                PanelFiltros.Visible = true;
+                ButtonFiltros.Text = "Ocultar filtros";
+            }
+            else
+            {
+
+                PanelFiltros.Visible = false;
+                ButtonFiltros.Text = "Mostrar filtros";
+            }
+        }
+
+        protected void ButtonFiltrado_Click(object sender, EventArgs e)
+        {
+            String consultaSQL = "SELECT Parte.codigoParte, Parte.fecha, Parte.tipo, Parte.codigoTrabajador, Proyecto.NombreProyecto, Cliente.NombreEntidad" +
+                " FROM Parte LEFT JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto LEFT JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente";
+
+            bool whereAdded = false; // Bandera para controlar la adición del primer "WHERE"
+
+            if (!string.IsNullOrEmpty(TextBoxFiltradoProyecto.Text))
+            {
+                consultaSQL += " WHERE NombreProyecto LIKE '%" + TextBoxFiltradoProyecto.Text + "%'";
+                whereAdded = true;
+            }
+
+            if (!string.IsNullOrEmpty(TextBoxFiltradoCliente.Text))
+            {
+                consultaSQL += (whereAdded ? " AND" : " WHERE") + " NombreEntidad LIKE '%" + TextBoxFiltradoCliente.Text + "%'";
+                whereAdded = true;
+            }
+
+            if (DropDownListTipo.SelectedIndex != 0)
+            {
+                consultaSQL += (whereAdded ? " AND" : " WHERE") + " Tipo = " + DropDownListTipo.SelectedValue;
+                whereAdded = true;
+            }
+
+            if (!string.IsNullOrEmpty(fechaMinima.Value))
+            {
+                consultaSQL += (whereAdded ? " AND" : " WHERE") + " fecha >= '" + fechaMinima.Value + "'";
+                whereAdded = true;
+            }
+
+            if (!string.IsNullOrEmpty(fechaMaxima.Value))
+            {
+                consultaSQL += (whereAdded ? " AND" : " WHERE") + " fecha <= '" + fechaMaxima.Value + "'";
+            }
+
+            SqlDataSource1.SelectCommand = consultaSQL;
+            SqlDataSource1.DataBind();
+        }
+
+
+        protected void Limpiar_Click(object sender, EventArgs e)
+        {
+            SqlDataSource1.SelectCommand = "SELECT Parte.codigoParte, Parte.fecha, Parte.tipo, Parte.codigoTrabajador, Proyecto.NombreProyecto, Cliente.NombreEntidad FROM Parte LEFT JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto LEFT JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE Parte.codigoTrabajador = " + Session["codigoTrabajador"] +"";
+            SqlDataSource1.DataBind();
+            TextBoxFiltradoProyecto.Text = "";
+            TextBoxFiltradoCliente.Text = "";
+            fechaMinima.Value = null;
+            fechaMaxima.Value = null;
+            DropDownListTipo.SelectedIndex = 0;
+        }
+
     }
 }

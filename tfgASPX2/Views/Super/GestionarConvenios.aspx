@@ -17,6 +17,14 @@
 
         <h2 class="font-weight-bold">Gestión de Convenios</h2>
 
+          <div style="width:200px">
+      <div class="row">
+          <div class="col">
+              <asp:Button ID="ButtonFiltros" class="form-control btn-secondary btn-sm btn-block buttonFilter mt-1" runat="server" Text="Filtros" OnClick="ButtonFiltros_Click" />
+          </div>
+      </div>
+
+      <asp:Panel ID="PanelFiltros" runat="server" Visible="False">   
         <%--Filtros--%>
         <hr />
         <div>
@@ -46,6 +54,8 @@
                 <asp:Button runat="server" class="form-control btn-secondary btn-sm btn-block buttonFilter mt-1" Text="Limpiar" OnClick="Todos_Click"></asp:Button>
             </div>
         </div>
+              </asp:Panel>
+</div>
 
         <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" DeleteCommand="DELETE FROM [Convenio] WHERE [codigoConvenio] = @codigoConvenio" InsertCommand="INSERT INTO [Convenio] ([fechaInicio], [fechaFin], [nombre]) VALUES (@fechaInicio, @fechaFin, @nombre)" SelectCommand="SELECT * FROM [Convenio]" UpdateCommand="UPDATE [Convenio] SET [fechaInicio] = @fechaInicio, [fechaFin] = @fechaFin, [nombre] = @nombre WHERE [codigoConvenio] = @codigoConvenio">
             <DeleteParameters>

@@ -15,56 +15,66 @@
     <div class="auto-style1">
         <h2 class="font-weight-bold">Gestión de Partidas</h2>
 
-        <%--Filtros--%>
-        <hr />
-        <div>
-
+        <div style="width: 200px">
             <div class="row">
                 <div class="col">
-                    <%--Nombre Partida--%>
-                    <asp:Label ID="LabelFiltroPartida" runat="server" Text="Partida:"></asp:Label>
-                    <asp:TextBox ID="TextBoxFiltradoPartida" class="form-control" runat="server"></asp:TextBox>
-                </div>
-                <div class="col">
-                    <%--Proyectos para el filtro--%>
-                    <asp:Label ID="LabelFiltroPartidaProyectos" runat="server" Text="Proyectos:"></asp:Label>
-                    <asp:DropDownList ID="DropDownListProyectos" class="dropdown form-control" runat="server" DataTextField="NombreProyecto" DataValueField="codigoProyecto" DataSourceID="SqlDataSourceProyectos" AppendDataBoundItems="true">
-                        <asp:ListItem Text="" Value=""></asp:ListItem>
-                    </asp:DropDownList>
-                    <asp:SqlDataSource runat="server" ID="SqlDataSourceProyectos" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT [codigoProyecto], [NombreProyecto] FROM [Proyecto] ORDER BY [codigoProyecto]"></asp:SqlDataSource>
+                    <asp:Button ID="ButtonFiltros" class="form-control btn-secondary btn-sm btn-block buttonFilter mt-1" runat="server" Text="Filtros" OnClick="ButtonFiltros_Click" />
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col">
-                    <%--Fecha de Inicio--%>
-                    <asp:Label ID="LabelFechaInicio" for="fechaInicio" runat="server" Text="Fecha mínima:"></asp:Label>
-                    <input id="fechaInicio" class="form-control" runat="server" type="date" name="fecha">
-                </div>
-                <div class="col">
-                    <%--Fecha de Fin--%>
-                    <asp:Label ID="LabelFechaFin" for="fechaFin" runat="server" Text="Fecha máxima:"></asp:Label>
-                    <input id="fechaFin" class="form-control" runat="server" type="date" name="fecha">
-                </div>
-            </div>
+            <asp:Panel ID="PanelFiltros" runat="server" Visible="False">
+                <%--Filtros--%>
+                <hr />
+                <div>
 
-            <div class="row">
-                <div class="col">
-                    <%--Coste Minimo--%>
-                    <asp:Label ID="LabelCosteMinimo" for="costeMinimo" runat="server" Text="Coste mínimo:"></asp:Label>
-                    <input id="costeMinimo" class="form-control" runat="server" type="number" name="costeMinimo">
-                </div>
-                <div class="col">
-                    <%--Coste Maximo--%>
-                    <asp:Label ID="LabelCosteMaximo" for="costeMaximo" runat="server" Text="Coste máximo:"></asp:Label>
-                    <input id="costeMaximo" class="form-control" runat="server" type="number" name="costeMaximo">
-                </div>
-            </div>
+                    <div class="row">
+                        <div class="col">
+                            <%--Nombre Partida--%>
+                            <asp:Label ID="LabelFiltroPartida" runat="server" Text="Partida:"></asp:Label>
+                            <asp:TextBox ID="TextBoxFiltradoPartida" class="form-control" runat="server"></asp:TextBox>
+                        </div>
+                        <div class="col">
+                            <%--Proyectos para el filtro--%>
+                            <asp:Label ID="LabelFiltroPartidaProyectos" runat="server" Text="Proyectos:"></asp:Label>
+                            <asp:DropDownList ID="DropDownListProyectos" class="dropdown form-control" runat="server" DataTextField="NombreProyecto" DataValueField="codigoProyecto" DataSourceID="SqlDataSourceProyectos" AppendDataBoundItems="true">
+                                <asp:ListItem Text="" Value=""></asp:ListItem>
+                            </asp:DropDownList>
+                            <asp:SqlDataSource runat="server" ID="SqlDataSourceProyectos" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT [codigoProyecto], [NombreProyecto] FROM [Proyecto] ORDER BY [codigoProyecto]"></asp:SqlDataSource>
+                        </div>
+                    </div>
 
-            <div class="text-center mt-2">
-                <asp:Button ID="ButtonFiltrado" class="form-control btn btn-primary btn-sm btn-block buttonFilter" runat="server" Text="Filtrar" OnClick="ButtonFiltrado_Click" />
-                <asp:Button runat="server" class="form-control btn-secondary btn-sm btn-block buttonFilter mt-1" Text="Limpiar" OnClick="Todos_Click"></asp:Button>
-            </div>
+                    <div class="row">
+                        <div class="col">
+                            <%--Fecha de Inicio--%>
+                            <asp:Label ID="LabelFechaInicio" for="fechaInicio" runat="server" Text="Fecha mínima:"></asp:Label>
+                            <input id="fechaInicio" class="form-control" runat="server" type="date" name="fecha">
+                        </div>
+                        <div class="col">
+                            <%--Fecha de Fin--%>
+                            <asp:Label ID="LabelFechaFin" for="fechaFin" runat="server" Text="Fecha máxima:"></asp:Label>
+                            <input id="fechaFin" class="form-control" runat="server" type="date" name="fecha">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <%--Coste Minimo--%>
+                            <asp:Label ID="LabelCosteMinimo" for="costeMinimo" runat="server" Text="Coste mínimo:"></asp:Label>
+                            <input id="costeMinimo" class="form-control" runat="server" type="number" name="costeMinimo">
+                        </div>
+                        <div class="col">
+                            <%--Coste Maximo--%>
+                            <asp:Label ID="LabelCosteMaximo" for="costeMaximo" runat="server" Text="Coste máximo:"></asp:Label>
+                            <input id="costeMaximo" class="form-control" runat="server" type="number" name="costeMaximo">
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-2">
+                        <asp:Button ID="ButtonFiltrado" class="form-control btn btn-primary btn-sm btn-block buttonFilter" runat="server" Text="Filtrar" OnClick="ButtonFiltrado_Click" />
+                        <asp:Button runat="server" class="form-control btn-secondary btn-sm btn-block buttonFilter mt-1" Text="Limpiar" OnClick="Todos_Click"></asp:Button>
+                    </div>
+                </div>
+            </asp:Panel>
         </div>
 
         <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT * FROM [Partida]" DeleteCommand="DELETE FROM [Partida] WHERE [codigoPartida] = @original_codigoPartida" InsertCommand="INSERT INTO [Partida] ([nombrePartida], [fechaInicio], [fechaFin], [Costo], [codigoProyecto]) VALUES (@nombrePartida, @FechaInicio, @FechaFin, @Costo, @codigoProyecto)" OldValuesParameterFormatString="original_{0}" UpdateCommand="UPDATE [Partida] SET [nombrePartida] = @nombrePartida, [fechaInicio] = @FechaInicio, [fechaFin] = @FechaFin, [Costo] = @Costo, [codigoProyecto] = @codigoProyecto WHERE [codigoPartida] = @original_codigoPartida">

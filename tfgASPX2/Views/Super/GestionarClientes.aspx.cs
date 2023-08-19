@@ -38,6 +38,21 @@ namespace tfgASPX2.Views.Super
             }
         }
 
+        protected void ButtonFiltros_Click(object sender, EventArgs e)
+        {
+            if (!PanelFiltros.Visible)
+            {
+                PanelFiltros.Visible = true;
+                ButtonFiltros.Text = "Ocultar filtros";
+            }
+            else
+            {
+
+                PanelFiltros.Visible = false;
+                ButtonFiltros.Text = "Mostrar filtros";
+            }
+        }
+
         protected void ButtonFiltrado_Click(object sender, EventArgs e)
         {
             String consultaSQL = "SELECT * FROM Cliente WHERE NombreEntidad LIKE '%" + TextBoxFiltradoEntidad.Text.ToString() + "%'";

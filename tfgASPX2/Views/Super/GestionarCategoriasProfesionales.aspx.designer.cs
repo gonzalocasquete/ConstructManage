@@ -15,6 +15,24 @@ namespace tfgASPX2.Views.Super
     {
 
         /// <summary>
+        /// Control ButtonFiltros.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonFiltros;
+
+        /// <summary>
+        /// Control PanelFiltros.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelFiltros;
+
+        /// <summary>
         /// Control LabelFiltroNombreCategoria.
         /// </summary>
         /// <remarks>

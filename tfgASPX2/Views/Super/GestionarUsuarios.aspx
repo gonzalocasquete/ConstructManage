@@ -15,6 +15,7 @@
     <div class="auto-style1">
         <h2 class="font-weight-bold">Gestión Usuarios</h2>
 
+        <%--  Filtros--%>
         <div style="width:200px">
             <div class="row">
                 <div class="col">
@@ -22,8 +23,7 @@
                 </div>
             </div>
 
-            <asp:Panel ID="PanelFiltros" runat="server" Visible="False">
-                <%--  Filtros--%>
+            <asp:Panel ID="PanelFiltros" runat="server" Visible="False">   
                 <hr style="margin-bottom: 2px;" />
                 <div>
                     <div class="row">

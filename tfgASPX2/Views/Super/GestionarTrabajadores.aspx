@@ -28,6 +28,14 @@
         <h2 class="font-weight-bold">Gestión Trabajadores</h2>
 
         <%--Filtros--%>
+          <div style="width:200px">
+      <div class="row">
+          <div class="col">
+              <asp:Button ID="ButtonFiltros" class="form-control btn-secondary btn-sm btn-block buttonFilter mt-1" runat="server" Text="Filtros" OnClick="ButtonFiltros_Click" />
+          </div>
+      </div>
+
+      <asp:Panel ID="PanelFiltros" runat="server" Visible="False">   
         <hr />
         <div>
 
@@ -82,6 +90,8 @@
                 <asp:Button ID="ButtonLimpiar" class="form-control btn-secondary btn-sm btn-block buttonFilter mt-1" runat="server"  Text="Limpiar" OnClick="Limpiar_Click"></asp:Button>
             </div>
         </div>
+              </asp:Panel>
+</div>
 
         <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" 
             DeleteCommand="DELETE FROM Trabajador WHERE (codigoTrabajador = @codigoTrabajador)" 

@@ -16,6 +16,66 @@
 
 <asp:Content ID="InicialCoordinadorBody" ContentPlaceHolderID="ContentPlaceHolderContenido" runat="server">
     <div class="auto-style1">
+
+        <%--  Filtros--%>
+        <div style="width: 250px">
+            <div class="row">
+                <div class="col">
+                    <asp:Button ID="ButtonFiltros" class="form-control btn-secondary btn-sm btn-block buttonFilter mt-1" runat="server" Text="Filtros" OnClick="ButtonFiltros_Click" />
+                </div>
+            </div>
+
+            <asp:Panel ID="PanelFiltros" runat="server" Visible="False">
+                <hr style="margin-bottom: 2px;" />
+                <div>
+                    <div class="row">
+                        <div class="col">
+                            <%-- Proyecto--%>
+                            <asp:Label ID="LabelFiltroProyecto" runat="server" Text="Proyecto:"></asp:Label>
+                            <asp:TextBox ID="TextBoxFiltradoProyecto" class="form-control" runat="server"></asp:TextBox>
+                        </div>
+                        <div class="col">
+                            <%--Cliente--%>
+                            <asp:Label ID="LabelCliente" runat="server" Text="Cliente:"></asp:Label>
+                            <asp:TextBox ID="TextBoxFiltradoCliente" class="form-control" runat="server"></asp:TextBox>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <%--Fecha de Inicio--%>
+                            <asp:Label ID="LabelFechaMinima" for="fechaMinima" runat="server" Text="Fecha Minima:"></asp:Label>
+                            <input id="fechaMinima" class="form-control" runat="server" type="date" name="fechaMinima">
+                        </div>
+                        <div class="col">
+                            <%--Fecha de Fin--%>
+                            <asp:Label ID="LabelFechaMaxima" for="fechaMaxima" runat="server" Text="Fecha Maxima:"></asp:Label>
+                            <input id="fechaMaxima" class="form-control" runat="server" type="date" name="fechaMaxima" max="2023-12-31" onclick="showDatePicker()">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <%--Tipo--%>
+                            <asp:Label ID="LabelFiltroTipo" runat="server" Text="Tipo:"></asp:Label>
+                            <asp:DropDownList ID="DropDownListTipo" class="dropdown form-control" runat="server" DataTextField="nombreCategoria" DataValueField="codigoCategoria" AppendDataBoundItems="true">
+                                <asp:ListItem Text="" Value=""></asp:ListItem>
+                                <asp:ListItem Text="Asociado" Value="1"></asp:ListItem>
+                                <asp:ListItem Text="No Asociado" Value="2"></asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-2">
+                        <asp:Button ID="ButtonFiltrado" class="form-control btn-primary btn-sm btn-block buttonFilter" runat="server" Text="Filtrar" OnClick="ButtonFiltrado_Click" />
+                        <asp:Button runat="server" class="form-control btn-secondary btn-sm btn-block buttonFilter mt-1" Text="Limpiar" OnClick="Limpiar_Click"></asp:Button>
+                    </div>
+                </div>
+
+            </asp:Panel>
+        </div>
+
+
         <div>
             <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>"
                 SelectCommand="SELECT Parte.codigoParte, Parte.fecha, Parte.tipo, Parte.codigoTrabajador, Proyecto.NombreProyecto, Cliente.NombreEntidad FROM Parte LEFT JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto LEFT JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE ([codigoTrabajador] = @codigoTrabajador)">
@@ -23,17 +83,17 @@
                     <asp:SessionParameter SessionField="codigoTrabajador" Name="codigoTrabajador" Type="Int32"></asp:SessionParameter>
                 </SelectParameters>
             </asp:SqlDataSource>
-            <asp:GridView ID="GridView1" class="table" runat="server" DataSourceID="SqlDataSource1" AutoGenerateColumns="False" DataKeyNames="codigoParte" AllowPaging="True" AllowSorting="True" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+            <asp:GridView ID="GridView1" class="table mt-3" runat="server" DataSourceID="SqlDataSource1" AutoGenerateColumns="False" DataKeyNames="codigoParte" AllowPaging="True" AllowSorting="True" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
                 <AlternatingRowStyle BackColor="#CCCCCC" />
                 <Columns>
-                    <asp:BoundField DataField="codigoParte" HeaderText="Parte" ReadOnly="True" InsertVisible="False" SortExpression="codigoParte"></asp:BoundField>
+                    <asp:BoundField DataField="codigoParte" HeaderText="ID" ReadOnly="True" InsertVisible="False"></asp:BoundField>
+                    <asp:BoundField DataField="NombreProyecto" HeaderText="Proyecto"></asp:BoundField>
+                    <asp:BoundField DataField="NombreEntidad" HeaderText="Cliente"></asp:BoundField>
                     <asp:TemplateField HeaderText="Tipo" SortExpression="tipo">
                         <ItemTemplate>
                             <asp:Label ID="lblTipo" runat="server" Text='<%# Eval("tipo").ToString() == "1" ? "Asociado" : "No asociado" %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:BoundField DataField="NombreProyecto" HeaderText="Proyecto"></asp:BoundField>
-                    <asp:BoundField DataField="NombreEntidad" HeaderText="Cliente"></asp:BoundField>
                     <asp:BoundField DataField="fecha" DataFormatString="{0:dd/MM/yy}" HeaderText="Fecha" SortExpression="fecha"></asp:BoundField>
                     <asp:CommandField SelectText="Consultar" ShowSelectButton="True"></asp:CommandField>
                 </Columns>
@@ -250,6 +310,7 @@
     <%--Bloque de Scripts--%>
     <script type="text/javascript">
 
+        //Controles para la insercion de nuevos parte
         function handleFieldsProyecto() {
             var proyectoDropdown = document.getElementById('<%= FormViewInsertarParte.FindControl("DropDownListProyectos").ClientID %>');
             var clienteDropdown = document.getElementById('<%= FormViewInsertarParte.FindControl("DropDownListClientes").ClientID %>');
@@ -267,5 +328,25 @@
             proyectoDropdown.value = ""; // Establecer proyecto en null si se selecciona cliente
             tipoDropdown.value = "2"; // Establecer tipo como "No asociado"
         }
+
+        //Controles para la manipulacion de los filtros
+        var proyectoField = document.getElementById('<%= TextBoxFiltradoProyecto.ClientID %>');
+        var clienteField = document.getElementById('<%= TextBoxFiltradoCliente.ClientID %>');
+
+        function handleProyectoInputChange() {
+            if (proyectoField.value !== "") {
+                clienteField.value = "";
+            }
+        }
+
+        function handleClienteInputChange() {
+            if (clienteField.value !== "") {
+                proyectoField.value = "";
+            }
+        }
+
+        proyectoField.addEventListener('input', handleProyectoInputChange);
+        clienteField.addEventListener('input', handleClienteInputChange);
+
     </script>
 </asp:Content>
