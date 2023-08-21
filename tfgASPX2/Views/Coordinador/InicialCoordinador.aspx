@@ -223,19 +223,19 @@
                 </asp:GridView>
 
                 <asp:Button ID="ButtonInsertarLinea" class="ButtonStyle button1 mt-3" runat="server" Text="Insertar Linea" OnClick="ButtonInsertarLinea_Click" />
-
+                <%--Bloque div para la inserción de una nueva línea--%>
                 <asp:Panel ID="PanelInsertarLinea" runat="server" Visible="false">
                     <asp:SqlDataSource runat="server" ID="SqlDataSourceInsertarLinea" ConnectionString='<%$ ConnectionStrings:mibasededatostfgConnectionString %>' DeleteCommand="DELETE FROM [LineaTrabajo] WHERE [codigoLinea] = @codigoLinea" InsertCommand="INSERT INTO [LineaTrabajo] ([codigoParte], [codigoTrabajador], [codigoPartida], [codigoNaturaleza], [horasNormales], [horasExtra]) VALUES (@codigoParte, @codigoTrabajador, @codigoPartida, @codigoNaturaleza, @horasNormales, @horasExtra)" SelectCommand="SELECT * FROM [LineaTrabajo]" UpdateCommand="UPDATE [LineaTrabajo] SET [codigoParte] = @codigoParte, [codigoTrabajador] = @codigoTrabajador, [codigoPartida] = @codigoPartida, [codigoNaturaleza] = @codigoNaturaleza, [horasNormales] = @horasNormales, [horasExtra] = @horasExtra WHERE [codigoLinea] = @codigoLinea">
                         <DeleteParameters>
                             <asp:Parameter Name="codigoLinea" Type="Int32"></asp:Parameter>
                         </DeleteParameters>
                         <InsertParameters>
-                            <asp:Parameter Name="codigoParte" Type="Int32"></asp:Parameter>
-                            <asp:Parameter Name="codigoTrabajador" Type="Int32"></asp:Parameter>
-                            <asp:Parameter Name="codigoPartida" Type="Int32"></asp:Parameter>
-                            <asp:Parameter Name="codigoNaturaleza" Type="Int32"></asp:Parameter>
-                            <asp:Parameter Name="horasNormales" Type="Int32"></asp:Parameter>
-                            <asp:Parameter Name="horasExtra" Type="Int32"></asp:Parameter>
+                            <asp:Parameter Name="codigoParteLinea" Type="Int32"></asp:Parameter>
+                            <asp:Parameter Name="codigoTrabajadorLinea" Type="Int32"></asp:Parameter>
+                            <asp:Parameter Name="codigoPartidaLinea" Type="Int32"></asp:Parameter>
+                            <asp:Parameter Name="codigoNaturalezaLinea" Type="Int32"></asp:Parameter>
+                            <asp:Parameter Name="horasNormalesLinea" Type="Int32"></asp:Parameter>
+                            <asp:Parameter Name="horasExtraLinea" Type="Int32"></asp:Parameter>
                         </InsertParameters>
                         <UpdateParameters>
                             <asp:Parameter Name="codigoParte" Type="Int32"></asp:Parameter>
@@ -248,55 +248,44 @@
                         </UpdateParameters>
                     </asp:SqlDataSource>
 
+
                     <asp:FormView ID="FormViewInsertarLinea" class="form-control mt-4" runat="server" DataKeyNames="codigoLinea" DataSourceID="SqlDataSourceInsertarLinea" DefaultMode="Insert">
                         <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
                         <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
                         <InsertItemTemplate>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="DropDownListProyectos">Proyecto:</label>
-                                            <asp:DropDownList Text='<%# Bind("codigoProyecto") %>' class="form-control" ID="DropDownListProyectos" runat="server" DataSourceID="SqlDataSourceCodigoProyecto" DataTextField="NombreProyecto" DataValueField="codigoProyecto" AppendDataBoundItems="true" onchange="handleFieldsProyecto()">
-                                                <asp:ListItem Text="" Value=""></asp:ListItem>
-                                            </asp:DropDownList>
-                                            <asp:SqlDataSource ID="SqlDataSourceCodigoProyecto" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT codigoProyecto, NombreProyecto FROM Proyecto order by NombreProyecto"></asp:SqlDataSource>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="DropDownListClientes">Cliente:</label>
-                                            <asp:DropDownList Text='<%# Bind("codigoCliente") %>' class="form-control" ID="DropDownListClientes" runat="server" DataSourceID="SqlDataSourceCodigoCliente" DataTextField="NombreEntidad" DataValueField="codigoCliente" AppendDataBoundItems="true" onchange="handleFieldsCliente()">
-                                                <asp:ListItem Text="" Value=""></asp:ListItem>
-                                            </asp:DropDownList>
-                                            <asp:SqlDataSource ID="SqlDataSourceCodigoCliente" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT codigoCliente, NombreEntidad FROM Cliente"></asp:SqlDataSource>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="FechaTextBox">Fecha:</label>
-                                            <input type="date" class="form-control" data-toggle="tooltip" title="Fecha" runat="server" id="FechaTextBox" value='<%# Bind("fecha", "{0:yyyy-MM-dd}") %>' />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="tipoDropDownList">Tipo:</label>
-                                            <br />
-                                            <asp:DropDownList runat="server" class="form-control" ID="tipoDropDownList" SelectedValue='<%# Bind("tipo") %>' Enabled="false">
-                                                <asp:ListItem Text="" Value="" />
-                                                <asp:ListItem Text="Asociado" Value="1" />
-                                                <asp:ListItem Text="No asociado" Value="2" />
-                                            </asp:DropDownList>
-                                        </div>
-                                    </div>
+
+                            <asp:TextBox Text='<%# Bind("codigoParteLinea") %>' class="form-control" runat="server" ID="TextBoxCodigoParteLinea" ReadOnly="true" Visible="true" />
+
+                            <label for="DropDownListTrabajadorLinea">Trabajador:</label>
+                            <asp:DropDownList Text='<%# Bind("codigoTrabajadorLinea") %>' class="form-control" ID="DropDownListTrabajadorLinea" runat="server" DataSourceID="SqlDataSourceCodigosTrabajadoresLinea" DataTextField="nombre_completo" DataValueField="codigoTrabajador" AppendDataBoundItems="true">
+                                <asp:ListItem Text="" Value=""></asp:ListItem>
+                            </asp:DropDownList>
+                            <asp:SqlDataSource ID="SqlDataSourceCodigosTrabajadoresLinea" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT CONCAT(nombre, ' ', apellido) AS nombre_completo, codigoTrabajador  FROM Trabajador  ORDER BY nombre_completo;"></asp:SqlDataSource>
+
+                            <label for="DropDownListPartidaLinea">Partida:</label>
+                            <asp:DropDownList Text='<%# Bind("codigoPartidaLinea") %>' class="form-control" ID="DropDownListPartidaLinea" runat="server" DataSourceID="SqlDataSourceCodigosPartidasLinea" DataTextField="nombrePartida" DataValueField="codigoPartida" AppendDataBoundItems="true">
+                                <asp:ListItem Text="" Value=""></asp:ListItem>
+                            </asp:DropDownList>
+                            <asp:SqlDataSource ID="SqlDataSourceCodigosPartidasLinea" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT codigoPartida, nombrePartida FROM Partida ORDER BY nombrePartida"></asp:SqlDataSource>
+
+                            <label for="DropDownListNaturalezaLinea">Naturaleza:</label>
+                            <asp:DropDownList Text='<%# Bind("codigoNaturalezaLinea") %>' class="form-control" ID="DropDownListNaturalezaLinea" runat="server" DataSourceID="SqlDataSourceCodigosNaturalezasLinea" DataTextField="nombre" DataValueField="codigoNaturaleza" AppendDataBoundItems="true">
+                                <asp:ListItem Text="" Value=""></asp:ListItem>
+                            </asp:DropDownList>
+                            <asp:SqlDataSource ID="SqlDataSourceCodigosNaturalezasLinea" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT codigoNaturaleza, nombre FROM Naturaleza ORDER BY nombre"></asp:SqlDataSource>
+
+                            <label for="InputHorasNormalesLinea">Horas normales:</label>
+                            <input type="number" class="form-control" id="InputHorasNormalesLinea" runat="server" value='<%# Bind("horasNormalesLinea") %>' />
+
+                            <label for="InputHorasExtraLinea">Horas extra:</label>
+                            <input type="number" class="form-control" id="InputHorasExtraLinea" runat="server" value='<%# Bind("horasExtraLinea") %>' />
+
+                            <div class="row mt-3">
+                                <div class="col-md-12 text-center">
+                                    <asp:LinkButton ID="InsertButton" class="btn btn-success" runat="server" CausesValidation="True" CommandName="Insert" Text="Insertar" />
+                                    <asp:LinkButton ID="InsertCancelButton" class="btn btn-danger" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancelar" />
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <asp:TextBox Text='<%# Bind("codigoTrabajador") %>' class="form-control" runat="server" ID="codigoTrabajadorTextBox" ReadOnly="true" Visible="false" />
-                                    </div>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-md-12 text-center">
-                                        <asp:LinkButton ID="InsertButton" class="btn btn-success" runat="server" CausesValidation="True" CommandName="Insert" Text="Insertar" />
-                                        <asp:LinkButton ID="InsertCancelButton" class="btn btn-danger" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancelar" />
-                                    </div>
-                                </div>
+                            </div>
                             </div>
                         </InsertItemTemplate>
                         <PagerStyle BackColor="#FFCC66" ForeColor="#333333" HorizontalAlign="Center" />

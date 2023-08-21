@@ -58,7 +58,7 @@
                         <asp:Label ID="LabelCalculoHoras" runat="server" Text="Horas totales:"></asp:Label>
                         <asp:TextBox ID="TextBoxHorasTotales" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                     </div>
-                    <div class="col">
+                    <div class="col">codigoNaturaleza
                         <asp:Label ID="LabelTipoHoras" runat="server" Text="Tipo de horas:"></asp:Label>
                         <div>
                             <asp:CheckBox ID="CheckBoxHorasNormales" runat="server" OnCheckedChanged="CheckBoxHorasNormales_CheckedChanged" AutoPostBack="True" />

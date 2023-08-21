@@ -11,7 +11,7 @@ namespace tfgASPX2.Views.Super
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+          
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -87,25 +87,31 @@ namespace tfgASPX2.Views.Super
                 // Verifica si los valores de nombreUsuario y rol son "super".
                 if (nombreUsuario == "super" && rol == "super")
                 {
-                    // Deshabilita la edición de la fila.
+                    // Deshabilita la edición y eliminación de la fila.
                     e.Row.Enabled = false;
                     e.Row.Attributes["style"] = "background-color: #f2f2f2;"; // Cambia el color de fondo de la fila para indicar que está deshabilitada.
 
                     // Encuentra el control del botón de edición y establece el texto como una cadena vacía.
-                    LinkButton editButton = e.Row.Cells[e.Row.Cells.Count - 2].Controls[0] as LinkButton; // El botón de edición es el penúltimo control en la fila.
+                    LinkButton editButton = e.Row.Cells[e.Row.Cells.Count - 1].Controls[0] as LinkButton; // El botón de edición es el penúltimo control en la fila.
                     if (editButton != null)
                     {
                         editButton.Text = "";
                     }
 
                     // Encuentra el control del botón de eliminación y establece el texto como una cadena vacía.
-                    LinkButton deleteButton = e.Row.Cells[e.Row.Cells.Count - 1].Controls[0] as LinkButton; // El botón de eliminación es el último control en la fila.
+                    LinkButton deleteButton = e.Row.Cells[e.Row.Cells.Count-1].Controls[2] as LinkButton; // El botón de eliminación es el último control en la fila.
                     if (deleteButton != null)
                     {
                         deleteButton.Text = "";
                     }
                 }
             }
+        }
+
+        //Mantener el ancho de la tabla
+            protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            GridView1.Width = Unit.Pixel(500); 
         }
     }
 }

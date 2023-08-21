@@ -293,7 +293,6 @@
                                     </div>
                                 </div>
 
-
                                 <div class="mt-3 text-center">
                                     <asp:LinkButton runat="server" class="btn btn-success" Text="Insertar" CommandName="Insert" ID="InsertButton" CausesValidation="True" />
                                     &nbsp;

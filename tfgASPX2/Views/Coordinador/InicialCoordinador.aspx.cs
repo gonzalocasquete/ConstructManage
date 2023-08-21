@@ -24,13 +24,14 @@ namespace tfgASPX2.Views.Coordinador
                 string codigoParteSeleccionado = GridView1.SelectedDataKey["codigoParte"].ToString();
 
                 // Establece el valor en el campo codigoParte del FormView
-                TextBox codigoParteTextBox = FormViewInsertarLinea.FindControl("codigoParteTextBox") as TextBox;
+                TextBox codigoParteTextBox = FormViewInsertarLinea.FindControl("TextBoxCodigoParteLinea") as TextBox; // Corrección aquí
                 if (codigoParteTextBox != null)
                 {
                     codigoParteTextBox.Text = codigoParteSeleccionado;
                 }
             }
         }
+
 
         protected void ButtonInsertarParte_Click(object sender, EventArgs e)
         {
