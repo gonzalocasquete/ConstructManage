@@ -15,39 +15,30 @@ namespace tfgASPX
     {
 
         /// <summary>
-        /// Control form1.
+        /// Control InputUsuario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText InputUsuario;
 
         /// <summary>
-        /// Control TextBoxUsuario.
+        /// Control InputPassword.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxUsuario;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword InputPassword;
 
         /// <summary>
-        /// Control TextBoxContraseña.
+        /// Control ButtonEntrar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxContraseña;
-
-        /// <summary>
-        /// Control Entrar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Entrar;
+        protected global::System.Web.UI.WebControls.Button ButtonEntrar;
     }
 }

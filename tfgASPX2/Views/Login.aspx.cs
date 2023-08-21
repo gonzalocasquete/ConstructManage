@@ -27,8 +27,11 @@ namespace tfgASPX
             Session["codigoTrabajador"] = "";
 
             String usuario, contraseña;
-            usuario = TextBoxUsuario.Text.ToString();
-            contraseña = TextBoxContraseña.Text.ToString();
+            usuario = InputUsuario.Value.ToString();
+            contraseña = InputPassword.Value.ToString();
+            Console.Write(usuario);
+            Response.Write("usuario: " + usuario + "password: " + contraseña);
+
             string consulta = "SELECT codigoUsuario, nombreUsuario, contraseñaUsuario, rol FROM USUARIO WHERE " +
                               "nombreUsuario=@usuario AND contraseñaUsuario=@contraseña";
 
@@ -61,7 +64,7 @@ namespace tfgASPX
                     }
                 }
 
-                // Evitar reutilizar el mismo objeto SqlCommand y SqlDataReader, mejor usar nuevos objetos
+                //Evitar reutilizar el mismo objeto SqlCommand y SqlDataReader, mejor usar nuevos objetos
                 string consultaTrabajador = "SELECT codigoTrabajador FROM Trabajador WHERE codigoUsuario = @codigoUsuario";
                 using (SqlCommand cmdTrabajador = new SqlCommand(consultaTrabajador, cnn))
                 {
@@ -92,10 +95,13 @@ namespace tfgASPX
             {
                 Response.Redirect("Trabajador/InicialTrabajador.aspx");
 
-            } else if (Session["rol"].ToString()=="coordinador") {
+            }
+            else if (Session["rol"].ToString() == "coordinador")
+            {
                 Response.Redirect("Coordinador/InicialCoordinador.aspx");
             }
-            else {
+            else
+            {
                 Response.Redirect("Login.aspx");
             }
         }

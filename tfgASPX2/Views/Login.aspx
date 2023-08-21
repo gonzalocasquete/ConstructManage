@@ -2,39 +2,19 @@
 
 <!DOCTYPE html>
 
-<link href="../Styles/LoginStyle.css" rel="stylesheet" />
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
 <head runat="server">
+    <link href="../Styles/LoginStyle.css" rel="stylesheet" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title></title>
+    <title>Login</title> 
 </head>
 <body>
-    <div class="wrapper fadeInDown">
-        <div id="formContent">
-
-            <!-- Icon -->
-            <div class="fadeIn first">
-            </div>
-
-            <!-- Login Form -->
-            <form id="form1" runat="server">
-                &nbsp;
-                <asp:TextBox ID="TextBoxUsuario" CssClass="input_focus" runat="server" placeholder="usuario"></asp:TextBox>
-                <asp:TextBox ID="TextBoxContraseña" CssClass="password_input input_focus" runat="server" placeholder="contraseña" TextMode="Password"></asp:TextBox>
-                <asp:Button ID="Entrar" runat="server" OnClick="Entrar_Click" Text="Entrar" />
-                &nbsp;
-            </form>
-
-            <!-- Remind Passowrd -->
-            <div id="formFooter">
-                <a class="underlineHover" href="#">Forgot Password?</a>
-            </div>
-        </div>
-    </div>
+    <form runat="server" class="form-box">
+        <h1 class="form-title">ConstructManage</h1>
+        <input id="InputUsuario" type ="text" placeholder="Username" runat="server"/>
+        <input id="InputPassword" type="password" placeholder="Password" runat="server"/>
+        <asp:Button ID="ButtonEntrar" class="form-button" runat="server" Text="Entrar" OnClick="Entrar_Click"/>
+    </form>
 </body>
 </html>
 
