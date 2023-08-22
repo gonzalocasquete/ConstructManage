@@ -2,10 +2,6 @@
 
 <asp:Content ID="GestionarTrabajadoresHead" ContentPlaceHolderID="head" runat="server">
     <link href="../../Styles/GestionarTrabajadoresStyle.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-        rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
-        crossorigin="anonymous" />
-
     <style type="text/css">
         .auto-style5 {
             display: flex;
@@ -54,8 +50,6 @@
                             <asp:TextBox ID="TextBoxFiltradoApellido" class="form-control" runat="server"></asp:TextBox>
                         </div>
                     </div>
-
-
 
                     <div class="row">
                         <div class="col">
@@ -112,7 +106,7 @@
                 <asp:Parameter Name="codigoCategoria" Type="Int32"></asp:Parameter>
             </UpdateParameters>
         </asp:SqlDataSource>
-        <asp:GridView ID="GridView1" runat="server" class="table mt-3" DataSourceID="SqlDataSource1" AutoGenerateColumns="False" DataKeyNames="codigoTrabajador" AllowPaging="True" AllowSorting="True">
+        <asp:GridView ID="GridView1" runat="server" class="table mt-3 mi-gridview" DataSourceID="SqlDataSource1" AutoGenerateColumns="False" DataKeyNames="codigoTrabajador" AllowPaging="True" AllowSorting="True">
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
                 <asp:BoundField DataField="codigoTrabajador" HeaderText="ID" ReadOnly="True" InsertVisible="False"></asp:BoundField>

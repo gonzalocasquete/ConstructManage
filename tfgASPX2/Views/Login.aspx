@@ -5,6 +5,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es">
 <head runat="server">
     <link href="../Styles/LoginStyle.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+        rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+        crossorigin="anonymous" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Login</title> 
 </head>

@@ -1,4 +1,17 @@
-﻿/*Tabla y boton*/
+﻿/*body y html*/
+body, html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #2f3542;
+    justify-content: center;
+    align-items: center;
+}
+
+/*Tabla y boton*/
 .auto-style1 {
     display: flex;
     flex-direction: column;
@@ -55,10 +68,4 @@
     cursor: not-allowed; /* Cambiar el cursor al indicador de no permitido */
     pointer-events: none; /* Evitar eventos de puntero */
     opacity: 0.8; /* Opacidad reducida */
-}
-
-
-/*Filtros*/
-.buttonFilter {
-    width: 48%;
 }

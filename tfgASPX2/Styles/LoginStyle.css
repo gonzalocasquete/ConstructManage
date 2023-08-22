@@ -2,19 +2,20 @@
     height:100%;
 }
 
-body{
-    margin:0;
+body {
+    margin: 0;
     padding: 0;
     background: #2f3542;
-
     display: flex;
-    flex-direction:row;
-    flex-wrap:wrap;
-    justify-content:center;
-    align-items:center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start; /* Cambiar de 'center' a 'flex-start' */
 }
 
+
 .form-box{
+    margin-top:200px;
     width: 400px;
     padding: 40px;
     background: #191919;
@@ -22,10 +23,11 @@ body{
     border-radius: 24px;
 }
 
-.form-title{
-   color: #fff;
-   font-weight:500;
-   font-size:xx-large;
+.form-title {
+    color: #fff;
+    font-weight: 500;
+    font-size: 40px;
+    text-shadow: 1px 1px 2px #000000;
 }
 
 .form-box input[type="text"],
@@ -47,7 +49,7 @@ body{
 
 .form-box input[type="text"]:focus, 
 .form-box input[type="password"]:focus {
-    width:250px;
+    width:300px;
     border-color: #fff;
 }
 

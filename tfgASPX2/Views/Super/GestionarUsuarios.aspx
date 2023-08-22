@@ -1,10 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Master/Master1.Master" AutoEventWireup="true" CodeBehind="GestionarUsuarios.aspx.cs" Inherits="tfgASPX2.Views.Super.GestionarUsuarios" %>
 
 <asp:Content ID="GestionarUsuariosHead" ContentPlaceHolderID="head" runat="server">
-    <link href="../../Styles/GestionarUsuariosStyle.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-        rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
-        crossorigin="anonymous" />
+    <link href="../../Styles/GestionarUsuariosStyle.css" rel="stylesheet" /> 
 </asp:Content>
 
 <asp:Content ID="GestionarUsuariosNavegacion" ContentPlaceHolderID="ContentPlaceHolderNavegacion" runat="server">
@@ -13,13 +10,12 @@
 
 <asp:Content ID="GestionarUsuariosBody" ContentPlaceHolderID="ContentPlaceHolderContenido" runat="server">
     <div class="auto-style1">
-        <h2 class="font-weight-bold">Gestión Usuarios</h2>
-
+        <h2>Gestión Usuarios</h2>
         <%--  Filtros--%>
         <div style="width:200px">
             <div class="row">
                 <div class="col">
-                    <asp:Button ID="ButtonFiltros" class="form-control btn-secondary btn-sm btn-block buttonFilter mt-1" runat="server" Text="Filtros" OnClick="ButtonFiltros_Click" />
+                    <asp:Button ID="ButtonFiltros" class="form-control btn-secondary btn-sm btn-block mt-1" runat="server" Text="Filtros" OnClick="ButtonFiltros_Click" />
                 </div>
             </div>
 
@@ -85,13 +81,12 @@
             </UpdateParameters>
         </asp:SqlDataSource>
 
-        <asp:GridView ID="GridView1" class="table mt-3 fixed-table" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoUsuario" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical" AllowSorting="True" OnRowDataBound="GridView1_RowDataBound">
-            <AlternatingRowStyle BackColor="#CCCCCC" />
+        <asp:GridView ID="GridView1" class="table mt-3 mi-gridview" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="WhiteSmoke" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoUsuario" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical" AllowSorting="True" OnRowDataBound="GridView1_RowDataBound">
+            <AlternatingRowStyle BackColor="#ABA2D5" />
             <Columns>
                 <asp:BoundField DataField="codigoUsuario" HeaderText="ID" ReadOnly="True" InsertVisible="False"></asp:BoundField>
                 <asp:BoundField DataField="nombreUsuario" HeaderText="Usuario" SortExpression="nombreUsuario"></asp:BoundField>
                 <asp:BoundField DataField="contrase&#241;aUsuario" HeaderText="Password"></asp:BoundField>
-
                 <asp:TemplateField HeaderText="Rol" SortExpression="rol">
                     <ItemTemplate>
                         <%# Eval("rol") %>
@@ -107,9 +102,9 @@
 
                 <asp:CommandField ShowDeleteButton="True" ShowEditButton="True"></asp:CommandField>
             </Columns>
-            <FooterStyle BackColor="#CCCCCC" />
-            <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
-            <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+            <FooterStyle BackColor="#6c757d" />
+            <HeaderStyle BackColor="#6c757d" Font-Bold="true" ForeColor="White" />
+            <PagerStyle BackColor="#6c757d" ForeColor="White" HorizontalAlign="Center" />
         </asp:GridView>
 
         <asp:Button ID="ButtonInsertar" CssClass="ButtonStyle button1 mt-3" runat="server" Text="Insertar" OnClick="Button1_Click" />

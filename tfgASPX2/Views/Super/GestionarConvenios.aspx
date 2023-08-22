@@ -2,9 +2,6 @@
 
 <asp:Content ID="GestionarConveniosHead" ContentPlaceHolderID="head" runat="server">
     <link href="../../Styles/GestionarConveniosStyles.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-        rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
-        crossorigin="anonymous" />
     <script src="../../Scripts/Views/GestionarConvenioStyle.js"></script>
 </asp:Content>
 
@@ -73,7 +70,7 @@
                 <asp:Parameter Name="codigoConvenio" Type="Int32"></asp:Parameter>
             </UpdateParameters>
         </asp:SqlDataSource>
-        <asp:GridView ID="GridView1" class="table mt-3" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoConvenio" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical" AllowSorting="True">
+        <asp:GridView ID="GridView1" class="table mt-3 mi-gridview" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoConvenio" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical" AllowSorting="True">
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
                 <asp:BoundField DataField="codigoConvenio" HeaderText="ID" ReadOnly="True" InsertVisible="False"></asp:BoundField>
@@ -114,7 +111,7 @@
                     <asp:ControlParameter ControlID="GridView1" PropertyName="SelectedValue" Name="codigoConvenio" Type="Int32"></asp:ControlParameter>
                 </SelectParameters>
             </asp:SqlDataSource>
-            <asp:GridView ID="GridView2" class="table mt-3" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoAsociacionCoste,Expr1" DataSourceID="SqlDataSource2" ForeColor="Black" GridLines="Vertical">
+            <asp:GridView ID="GridView2" class="table mt-3 mi-gridview" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoAsociacionCoste,Expr1" DataSourceID="SqlDataSource2" ForeColor="Black" GridLines="Vertical">
                 <AlternatingRowStyle BackColor="#CCCCCC" />
                 <Columns>
                     <asp:BoundField DataField="codigoAsociacionCoste" HeaderText="ID " ReadOnly="True" InsertVisible="False" SortExpression="codigoAsociacionCoste"></asp:BoundField>

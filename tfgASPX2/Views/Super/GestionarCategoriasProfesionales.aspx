@@ -1,10 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Master/Master1.Master" AutoEventWireup="true" CodeBehind="GestionarCategoriasProfesionales.aspx.cs" Inherits="tfgASPX2.Views.Super.GestionarCategoriasProfesionales" %>
 
 <asp:Content ID="GestionarCategoriasProfesionalesHead" ContentPlaceHolderID="head" runat="server">
-    <link href="../../Styles/GestionarCategoriaStyle.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-        rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
-        crossorigin="anonymous" />
+    <link href="../../Styles/GestionarCategoriaStyle.css" rel="stylesheet" /> 
     <style type="text/css">
         .auto-style5 {
             height: 728px;
@@ -15,7 +12,6 @@
 <asp:Content ID="GestionarCategoriasProfesionalesNavegacion" ContentPlaceHolderID="ContentPlaceHolderNavegacion" runat="server">
     <a href="MenuSuper.aspx">Menú</a>
 </asp:Content>
-
 
 <asp:Content ID="GestionarCategoriasProfesionalesBody" ContentPlaceHolderID="ContentPlaceHolderContenido" runat="server">
     <div class="auto-style1">
@@ -62,7 +58,7 @@
             </UpdateParameters>
         </asp:SqlDataSource>
 
-        <asp:GridView ID="GridView1" class="table mt-3" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoCategoria" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical" AllowSorting="True">
+        <asp:GridView ID="GridView1" class="table mt-3 mi-gridview" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoCategoria" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical" AllowSorting="True">
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
                 <asp:BoundField DataField="codigoCategoria" HeaderText="ID" InsertVisible="False" ReadOnly="True" />

@@ -2,9 +2,6 @@
 
 <asp:Content ID="GestionarPartidasHead" ContentPlaceHolderID="head" runat="server">
     <link href="../../Styles/GestionarPartidas.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-        rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
-        crossorigin="anonymous" />
 </asp:Content>
 
 <asp:Content ID="GestionarPartidasNavegacion" ContentPlaceHolderID="ContentPlaceHolderNavegacion" runat="server">
@@ -97,7 +94,7 @@
                 <asp:Parameter Name="original_codigoPartida" Type="Int32"></asp:Parameter>
             </UpdateParameters>
         </asp:SqlDataSource>
-        <asp:GridView ID="GridView1" class="mt-3 table" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoPartida" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical" AllowSorting="True">
+        <asp:GridView ID="GridView1" class="mt-3 table mi-gridview" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoPartida" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical" AllowSorting="True">
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
                 <asp:BoundField DataField="codigoPartida" HeaderText="ID" ReadOnly="True" InsertVisible="False"></asp:BoundField>

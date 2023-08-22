@@ -2,9 +2,6 @@
 
 <asp:Content ID="GestionarClientesHead" ContentPlaceHolderID="head" runat="server">
     <link href="../../Styles/GestionarClientesStyle.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-        rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
-        crossorigin="anonymous">
     <style type="text/css">
         .auto-style5 {
             display: flex;
@@ -71,8 +68,6 @@
              </asp:Panel>
 </div>
 
-
-
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" DeleteCommand="DELETE FROM [Cliente] WHERE [codigoCliente] = @codigoCliente" InsertCommand="INSERT INTO [Cliente] ([NombreEntidad], [DireccionDF], [CodigoPostalDF], [UbicacionDF], [BancoDF], [DireccionDE], [CodigoPostalDE], [UbicacionDE]) VALUES (@NombreEntidad, @DireccionDF, @CodigoPostalDF, @UbicacionDF, @BancoDF, @DireccionDE, @CodigoPostalDE, @UbicacionDE)" SelectCommand="SELECT * FROM [Cliente]" UpdateCommand="UPDATE [Cliente] SET [NombreEntidad] = @NombreEntidad, [DireccionDF] = @DireccionDF, [CodigoPostalDF] = @CodigoPostalDF, [UbicacionDF] = @UbicacionDF, [BancoDF] = @BancoDF, [DireccionDE] = @DireccionDE, [CodigoPostalDE] = @CodigoPostalDE, [UbicacionDE] = @UbicacionDE WHERE [codigoCliente] = @codigoCliente">
             <DeleteParameters>
                 <asp:Parameter Name="codigoCliente" Type="Int32" />
@@ -99,7 +94,7 @@
                 <asp:Parameter Name="codigoCliente" Type="Int32" />
             </UpdateParameters>
         </asp:SqlDataSource>
-        <asp:GridView ID="GridView1" class="mt-3 table text-center" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoCliente" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical">
+        <asp:GridView ID="GridView1" class="mt-3 table mi-gridview" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoCliente" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical">
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
                 <asp:BoundField DataField="codigoCliente" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="codigoCliente" />

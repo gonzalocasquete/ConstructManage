@@ -1,10 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Master/Master1.Master" AutoEventWireup="true" CodeBehind="GestionarProyectos.aspx.cs" Inherits="tfgASPX2.Views.Super.GestionarProyectos" %>
 
 <asp:Content ID="GestionarProyectosHead" ContentPlaceHolderID="head" runat="server">
-    <link href="../../Styles/GestionarProyectoStyle.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-        rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
-        crossorigin="anonymous" />
+    <link href="../../Styles/GestionarProyectoStyle.css" rel="stylesheet" /> 
     <script src="../../Scripts/Views/GestionarProyectoStyle.js"></script>
 </asp:Content>
 
@@ -112,7 +109,7 @@
         </asp:SqlDataSource>
 
         <%--Grid que muestra todos los proyectos--%>
-        <asp:GridView ID="GridView1" class="mt-3 table" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoProyecto" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" AllowSorting="True" AutoPostBack="true">
+        <asp:GridView ID="GridView1" class="mt-3 table mi-gridview" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoProyecto" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" AllowSorting="True" AutoPostBack="true">
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
                 <asp:BoundField DataField="codigoProyecto" HeaderText="ID" ReadOnly="True" InsertVisible="False"></asp:BoundField>
@@ -182,7 +179,7 @@
                         <asp:Parameter Name="codigoPartida" Type="Int32" />
                     </UpdateParameters>
                 </asp:SqlDataSource>
-                <asp:GridView ID="GridView2" class="table" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoPartida" DataSourceID="SqlDataSource2" ForeColor="Black" GridLines="Vertical" AllowSorting="True">
+                <asp:GridView ID="GridView2" class="table mi-gridview" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoPartida" DataSourceID="SqlDataSource2" ForeColor="Black" GridLines="Vertical" AllowSorting="True">
                     <AlternatingRowStyle BackColor="#CCCCCC" />
                     <Columns>
                         <asp:BoundField DataField="nombrePartida" HeaderText="Nombre" />
