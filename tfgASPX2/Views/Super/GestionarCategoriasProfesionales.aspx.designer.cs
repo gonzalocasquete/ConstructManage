@@ -15,6 +15,15 @@ namespace tfgASPX2.Views.Super
     {
 
         /// <summary>
+        /// Control ButtonInsertarCategoria.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonInsertarCategoria;
+
+        /// <summary>
         /// Control ButtonFiltros.
         /// </summary>
         /// <remarks>
@@ -78,15 +87,6 @@ namespace tfgASPX2.Views.Super
         protected global::System.Web.UI.WebControls.GridView GridView1;
 
         /// <summary>
-        /// Control ButtonInsertar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonInsertar;
-
-        /// <summary>
         /// Control Panel1.
         /// </summary>
         /// <remarks>
@@ -105,12 +105,12 @@ namespace tfgASPX2.Views.Super
         protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource2;
 
         /// <summary>
-        /// Control FormView1.
+        /// Control FormViewInsertarCategoria.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FormView FormView1;
+        protected global::System.Web.UI.WebControls.FormView FormViewInsertarCategoria;
     }
 }

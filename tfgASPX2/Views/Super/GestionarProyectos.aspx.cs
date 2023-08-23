@@ -24,15 +24,27 @@ namespace tfgASPX2.Views.Super
             if (PanelInsertarProyecto.Visible)
             {
                 PanelInsertarProyecto.Visible = false;
-                PanelPartidas.Visible = true;
-                ButtonInsertarPartida.Visible = true;
+
+                PanelPartidas.Visible = false;
+
+                GridView1.Visible = true;
+                ButtonInsertarPartida.Visible = false;
+                ButtonFiltros.Visible= true;
                 ButtonInsertarProyecto.Text = "Insertar Proyecto";
+                SqlDataSource1.SelectCommand = "Select * FROM Proyecto";
+                SqlDataSource1.DataBind();
             }
             else
             {
                 PanelInsertarProyecto.Visible = true;
+
+                PanelFiltros.Visible = false;
+                ButtonFiltros.Text = "Mostrar filtros";
+                ButtonFiltros.Visible = false;
+                ButtonInsertarPartida.Visible = false;
+                GridView1.Visible = false;
                 PanelPartidas.Visible = false;
-                ButtonInsertarProyecto.Text = "Ocultar";
+                ButtonInsertarProyecto.Text = "Ocultar";      
             }
         }
 
@@ -42,11 +54,21 @@ namespace tfgASPX2.Views.Super
             {
                 PanelInsertarPartida.Visible = false;
                 ButtonInsertarPartida.Text = "Insertar Partida";
+                SqlDataSource1.SelectCommand = "Select * FROM Proyecto";
+                SqlDataSource1.DataBind();
             }
             else
             {
                 PanelInsertarPartida.Visible = true;
                 ButtonInsertarPartida.Text = "Ocultar";
+                if (GridView1.SelectedIndex >= 0)
+                {
+                    int rowIndex = GridView1.SelectedIndex;
+                    string codigoProyectoStr = GridView1.DataKeys[rowIndex]["codigoProyecto"].ToString();
+                    int.TryParse(codigoProyectoStr, out int codigoProyecto);
+                    SqlDataSource1.SelectCommand = "Select * FROM Proyecto WHERE codigoProyecto=" + codigoProyecto;
+                    SqlDataSource1.DataBind();
+                }           
             }
         }
 
@@ -56,21 +78,12 @@ namespace tfgASPX2.Views.Super
             int codigo = Convert.ToInt32(this.GridView1.SelectedDataKey["codigoProyecto"]);
             codigoProyecto.Text = codigo.ToString();
 
-            if (!PanelPartidas.Visible)
-            {
-                PanelInsertarProyecto.Visible = false;
-                PanelInsertarPartida.Visible = false;
-                ButtonInsertarPartida.Visible = true;
-                PanelPartidas.Visible = true;
-            }
-            else if (PanelInsertarProyecto.Visible)
-            {
-                PanelPartidas.Visible = false;
-                PanelInsertarProyecto.Visible = false;
-                PanelInsertarPartida.Visible = false;
-                ButtonInsertarPartida.Visible = false;
-                ButtonInsertarProyecto.Text = "Insertar Proyecto";
-            }
+            PanelPartidas.Visible = true;
+            PanelInsertarProyecto.Visible = false;
+            PanelInsertarPartida.Visible = false;
+            ButtonInsertarPartida.Visible = true;
+            ButtonInsertarProyecto.Text = "Insertar Proyecto";
+            ButtonInsertarPartida.Text = "Insertar Partida";
         }
 
         //Filtros
@@ -118,6 +131,34 @@ namespace tfgASPX2.Views.Super
             fechaMaxima.Value = "";
             presupuestoMinimo.Value = null;
             presupuestoMaximo.Value = null;
+        }
+
+        protected void FormViewInsertarProyecto_ItemCommand(object sender, FormViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Cancel")
+            {
+                PanelInsertarProyecto.Visible = false;
+
+                PanelPartidas.Visible = false;
+
+                GridView1.Visible = true;
+                ButtonInsertarPartida.Visible = false;
+                ButtonFiltros.Visible = true;
+                ButtonInsertarProyecto.Text = "Insertar Proyecto";
+                SqlDataSource1.SelectCommand = "Select * FROM Proyecto";
+                SqlDataSource1.DataBind();
+            }
+        }
+
+        protected void FormViewInsertarPartida_ItemCommand(object sender, FormViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Cancel")
+            {
+                PanelInsertarPartida.Visible = false;
+                ButtonInsertarPartida.Text = "Insertar Partida";
+                SqlDataSource1.SelectCommand = "Select * FROM Proyecto";
+                SqlDataSource1.DataBind();
+            }
         }
     }
 }

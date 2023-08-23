@@ -2,6 +2,7 @@
 
 <asp:Content ID="GestionarPartidasHead" ContentPlaceHolderID="head" runat="server">
     <link href="../../Styles/GestionarPartidas.css" rel="stylesheet" />
+    <link href="../../Styles/ComunesStyle.css" rel="stylesheet" />
 </asp:Content>
 
 <asp:Content ID="GestionarPartidasNavegacion" ContentPlaceHolderID="ContentPlaceHolderNavegacion" runat="server">
@@ -181,7 +182,7 @@
                     </div>
                 </InsertItemTemplate>
                 <PagerStyle BackColor="#FFCC66" ForeColor="#333333" HorizontalAlign="Center" />
-                <RowStyle BackColor="#FFFBD6" ForeColor="#333333" />
+                <RowStyle BackColor="#6c757d" ForeColor="White" />
             </asp:FormView>
         </asp:Panel>
     </div>

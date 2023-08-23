@@ -14,19 +14,27 @@ namespace tfgASPX2.Views.Super
 
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void ButtonInsertarTrabajador_Click(object sender, EventArgs e)
         {
             if (PanelInsertar.Visible)
             {
                 // Si el panel es visible, ocultarlo y cambiar el texto del botón a "Mostrar"
                 PanelInsertar.Visible = false;
-                ButtonInsertar.Text = "Insertar";
+                GridView1.Visible = true;
+                ButtonFiltros.Visible = true;
+                ButtonInsertarTrabajador.Text = "Insertar";
             }
             else
             {
                 // Si el panel no es visible, mostrarlo y cambiar el texto del botón a "Ocultar"
                 PanelInsertar.Visible = true;
-                ButtonInsertar.Text = "Ocultar";
+
+                PanelFiltros.Visible = false;
+                ButtonFiltros.Text = "Mostrar filtros";
+                ButtonFiltros.Visible = false;
+
+                GridView1.Visible = false;
+                ButtonInsertarTrabajador.Text = "Ocultar";
             }
         }
 
@@ -75,6 +83,49 @@ namespace tfgASPX2.Views.Super
             CheckBoxTrabajador.Checked = false;
             CheckBoxCoordinador.Checked = false;
             CheckBoxSuper.Checked = false;
+        }
+
+        protected void FormViewInsertarTrabajador_ItemInserting(object sender, FormViewInsertEventArgs e)
+        {
+            // Validar que los campos necesarios no estén vacíos o con valor inválido
+            TextBox nombreTextBox = (TextBox)FormViewInsertarTrabajador.FindControl("nombreTextBox");
+            TextBox apellidoTextBox = (TextBox)FormViewInsertarTrabajador.FindControl("apellidoTextBox");
+            DropDownList idUsuariosDropDownList = (DropDownList)FormViewInsertarTrabajador.FindControl("idUsuariosDropDownList");
+            DropDownList idCategoriasDropDownList = (DropDownList)FormViewInsertarTrabajador.FindControl("idCategoriasDropDownList");
+
+            if (string.IsNullOrEmpty(nombreTextBox.Text) || string.IsNullOrEmpty(apellidoTextBox.Text) ||
+                idUsuariosDropDownList.SelectedIndex == 0 || idCategoriasDropDownList.SelectedIndex == 0)
+            {
+                e.Cancel = true; // Cancelar la inserción
+                                 // Mostrar mensaje de error
+                ScriptManager.RegisterStartupScript(this, GetType(), "Error", "alert('Todos los campos deben ser completados.');", true);
+            }
+        }
+
+        protected void FormViewInsertarTrabajador_ItemInserted(object sender, FormViewInsertedEventArgs e)
+        {
+            if (e.Exception == null)
+            {
+                // Mostrar mensaje de éxito
+                ScriptManager.RegisterStartupScript(this, GetType(), "Success", "alert('Trabajador insertado exitosamente.');", true);
+            }
+            else
+            {
+                // Mostrar mensaje de error en caso de excepción
+                ScriptManager.RegisterStartupScript(this, GetType(), "Error", "alert('Error al insertar trabajador.');", true);
+                e.ExceptionHandled = true;
+            }
+        }
+
+        protected void FormViewInsertarTrabajador_ItemCommand(object sender, FormViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Cancel")
+            {
+                PanelInsertar.Visible = false;
+                GridView1.Visible = true;
+                ButtonFiltros.Visible = true;
+                ButtonInsertarTrabajador.Text = "Insertar";
+            }
         }
     }
 }

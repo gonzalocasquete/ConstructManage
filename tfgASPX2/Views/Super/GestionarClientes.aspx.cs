@@ -13,28 +13,47 @@ namespace tfgASPX2.Views.Super
         {
             if (!IsPostBack)
             {
-                // Configurar el estado inicial del panel y el botón
-                PanelInsertar.Visible = false;
-                //Comprobacion de que el rol es 'super'
-                //if (Session["rol"].ToString() != "super") {
-                //    Response.Redirect("Login.aspx");
-                //}
+                // Definir la lista de provincias de España
+                List<string> provincias = new List<string>
+                {
+                    "","Álava", "Albacete", "Alicante", "Almería", "Asturias", "Ávila", "Badajoz", "Barcelona", "Burgos",
+                    "Cáceres", "Cádiz", "Cantabria", "Castellón", "Ciudad Real", "Córdoba", "Cuenca", "Gerona", "Granada",
+                    "Guadalajara", "Guipúzcoa", "Huelva", "Huesca", "Islas Baleares", "Jaén", "La Coruña", "La Rioja",
+                    "Las Palmas", "León", "Lérida", "Lugo", "Madrid", "Málaga", "Murcia", "Navarra", "Orense", "Palencia",
+                    "Pontevedra", "Salamanca", "Santa Cruz de Tenerife", "Segovia", "Sevilla", "Soria", "Tarragona",
+                    "Teruel", "Toledo", "Valencia", "Valladolid", "Vizcaya", "Zamora", "Zaragoza"
+                };
+
+                // Asignar la lista de provincias al DropDownList
+                DropDownListUbicacionDE.DataSource = provincias;
+                DropDownListUbicacionDE.DataBind();
+
+                DropDownListUbicacionDF.DataSource = provincias;
+                DropDownListUbicacionDF.DataBind();
             }
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void ButtonInsertarCliente_Click(object sender, EventArgs e)
         {
             if (PanelInsertar.Visible)
             {
                 // Si el panel es visible, ocultarlo y cambiar el texto del botón a "Mostrar"
                 PanelInsertar.Visible = false;
-                ButtonInsertar.Text = "Insertar";
+                GridView1.Visible = true;
+                ButtonFiltros.Visible = true;
+                ButtonInsertarCliente.Text = "Insertar Cliente";
             }
             else
             {
                 // Si el panel no es visible, mostrarlo y cambiar el texto del botón a "Ocultar"
                 PanelInsertar.Visible = true;
-                ButtonInsertar.Text = "Ocultar";
+
+                PanelFiltros.Visible = false;
+                ButtonFiltros.Text = "Mostrar filtros";
+                ButtonFiltros.Visible = false;
+
+                GridView1.Visible = false;
+                ButtonInsertarCliente.Text = "Ocultar";
             }
         }
 
@@ -55,18 +74,67 @@ namespace tfgASPX2.Views.Super
 
         protected void ButtonFiltrado_Click(object sender, EventArgs e)
         {
-            String consultaSQL = "SELECT * FROM Cliente WHERE NombreEntidad LIKE '%" + TextBoxFiltradoEntidad.Text.ToString() + "%'";
+            String consultaSQL = "SELECT * FROM Cliente WHERE nombreEntidad LIKE '%" + TextBoxFiltradoEntidad.Text.ToString() + "%'";
 
-            Response.Write(consultaSQL);
+            if (DropDownListUbicacionDF.SelectedItem.Text.ToString() != "") {
+                consultaSQL += " AND UbicacionDF ='"+DropDownListUbicacionDF.SelectedItem.Text.ToString()+"'";
+            }
+
+            if (DropDownListUbicacionDE.SelectedItem.Text.ToString() != "")
+            {
+                consultaSQL += " AND UbicacionDE ='" + DropDownListUbicacionDE.SelectedItem.Text.ToString() + "'";
+            }
+
             SqlDataSource1.SelectCommand = consultaSQL;
             SqlDataSource1.DataBind();
         }
 
-        protected void Todos_Click(object sender, EventArgs e)
+        protected void Limpiar_Click(object sender, EventArgs e)
         {
             SqlDataSource1.SelectCommand = "SELECT * FROM Cliente";
             SqlDataSource1.DataBind();
-            TextBoxFiltradoEntidad.Text = "";      
+            TextBoxFiltradoEntidad.Text = "";
+            DropDownListUbicacionDF.SelectedIndex = 0;
+            DropDownListUbicacionDE.SelectedIndex = 0;
         }
+
+        protected void FormViewInsertarCliente_ItemInserting(object sender, FormViewInsertEventArgs e)
+        {
+            TextBox nombreEntidadTextBox = (TextBox)FormViewInsertarCliente.FindControl("nombreEntidadTextBox");
+            TextBox ubicacionDFTextBox = (TextBox)FormViewInsertarCliente.FindControl("UbicacionDFTextBox");
+            TextBox ubicacionDETextBox = (TextBox)FormViewInsertarCliente.FindControl("UbicacionDETextBox");
+
+            if (string.IsNullOrEmpty(nombreEntidadTextBox.Text))
+            {
+                e.Cancel = true;
+                ScriptManager.RegisterStartupScript(this, GetType(), "Error", "alert('El nombre de la entidad no puede estar vacía.');", true);
+            }
+
+            if (string.IsNullOrEmpty(ubicacionDFTextBox.Text))
+            {
+                e.Cancel = true;
+                ScriptManager.RegisterStartupScript(this, GetType(), "Error", "alert('La ubicación del domicilio fiscal no puede estar vacía.');", true);
+
+            }
+
+            if (string.IsNullOrEmpty(ubicacionDETextBox.Text))
+            {
+                e.Cancel = true;
+                ScriptManager.RegisterStartupScript(this, GetType(), "Error", "alert('La ubicación del domicilio empresarial no puede estar vacía.');", true);
+
+            }
+        }
+
+        protected void FormViewInsertarCliente_ItemCommand(object sender, FormViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Cancel")
+            {
+                PanelInsertar.Visible = false;
+                GridView1.Visible = true;
+                ButtonFiltros.Visible = true;
+                ButtonInsertarCliente.Text = "Insertar";
+            }
+        }
+
     }
 }

@@ -8,6 +8,7 @@
 </asp:Content>
 
 <asp:Content ID="TrabajadorNavegacion" ContentPlaceHolderID="ContentPlaceHolderNavegacion" runat="server">
+    <link href="../../Styles/ComunesStyle.css" rel="stylesheet" />
     <a href="InicialTrabajador.aspx">Inicio</a>
     <a href="../Comun/Perfil.aspx">Perfil</a>
 </asp:Content>
@@ -58,7 +59,7 @@
                         <asp:Label ID="LabelCalculoHoras" runat="server" Text="Horas totales:"></asp:Label>
                         <asp:TextBox ID="TextBoxHorasTotales" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                     </div>
-                    <div class="col">codigoNaturaleza
+                    <div class="col">
                         <asp:Label ID="LabelTipoHoras" runat="server" Text="Tipo de horas:"></asp:Label>
                         <div>
                             <asp:CheckBox ID="CheckBoxHorasNormales" runat="server" OnCheckedChanged="CheckBoxHorasNormales_CheckedChanged" AutoPostBack="True" />
@@ -92,7 +93,6 @@
                     <asp:BoundField DataField="nombreNaturaleza" HeaderText="Naturaleza"></asp:BoundField>
                     <asp:BoundField DataField="horasNormales" HeaderText="Horas Normales" SortExpression="horasNormales"></asp:BoundField>
                     <asp:BoundField DataField="horasExtra" HeaderText="Horas Extra" SortExpression="horasExtra"></asp:BoundField>
-                    <asp:CommandField ShowSelectButton="True"></asp:CommandField>
                 </Columns>
                 <FooterStyle BackColor="#CCCCCC" />
                 <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />

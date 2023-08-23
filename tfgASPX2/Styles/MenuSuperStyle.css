@@ -1,37 +1,24 @@
-﻿/*body y html*/
-body, html {
-    height: 100%;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    background: #090623;
-    justify-content: center;
-    align-items: center;
-}
-
-.vertical-menu {
+﻿.vertical-menu {
     margin: 20px auto;
     width: 350px;
     height: 420px;
-    background: #ABA2D5;
+    background: black;
     border-radius: 24px;
-    font-size: 17px;
+    font-size: 18px;
 }
 
     .vertical-menu a {
         border: 0;
-        background: #968EBA;
+        background: none;
         display: block;
         margin: auto;
         margin-top: 15px;
-        padding: 7px;
+        padding: 5px;
         text-align: center;
         border: 2px solid #5352ed;
         width: 250px;
         outline: none;
-        color: black;
+        color: white;
         border-radius: 18px;
         text-decoration: none;
         transition: width 0.3s ease;

@@ -2,15 +2,12 @@
 
 <asp:Content ID="InicialCoordinadorHead" ContentPlaceHolderID="head" runat="server">
     <link href="../../Styles/InicialCoordinadorStyle.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-        rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
-        crossorigin="anonymous" />
+    <link href="../../Styles/ComunesStyle.css" rel="stylesheet" />
     <script src="../../Scripts/Views/InicialCoordinadorScript.js"></script>
 </asp:Content>
 
 <asp:Content ID="InicialCoordinadorNavegacion" ContentPlaceHolderID="ContentPlaceHolderNavegacion" runat="server">
     <a href="InicialCoordinador.aspx">Inicio</a>
-    <%--<a href="InsertarParte.aspx">Parte</a>--%>
     <a href="../Comun/Perfil.aspx">Perfil</a>
 </asp:Content>
 
@@ -78,7 +75,7 @@
 
         <div>
             <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>"
-                SelectCommand="SELECT Parte.codigoParte, Parte.fecha, Parte.tipo, Parte.codigoTrabajador, Proyecto.NombreProyecto, Cliente.NombreEntidad FROM Parte LEFT JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto LEFT JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE ([codigoTrabajador] = @codigoTrabajador)">
+                SelectCommand="SELECT Parte.codigoParte, Parte.fecha, Parte.tipo, Parte.codigoTrabajador, Proyecto.NombreProyecto, Cliente.nombreEntidad FROM Parte LEFT JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto LEFT JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE ([codigoTrabajador] = @codigoTrabajador)">
                 <SelectParameters>
                     <asp:SessionParameter SessionField="codigoTrabajador" Name="codigoTrabajador" Type="Int32"></asp:SessionParameter>
                 </SelectParameters>
@@ -88,7 +85,7 @@
                 <Columns>
                     <asp:BoundField DataField="codigoParte" HeaderText="ID" ReadOnly="True" InsertVisible="False"></asp:BoundField>
                     <asp:BoundField DataField="NombreProyecto" HeaderText="Proyecto"></asp:BoundField>
-                    <asp:BoundField DataField="NombreEntidad" HeaderText="Cliente"></asp:BoundField>
+                    <asp:BoundField DataField="nombreEntidad" HeaderText="Cliente"></asp:BoundField>
                     <asp:TemplateField HeaderText="Tipo" SortExpression="tipo">
                         <ItemTemplate>
                             <asp:Label ID="lblTipo" runat="server" Text='<%# Eval("tipo").ToString() == "1" ? "Asociado" : "No asociado" %>'></asp:Label>
@@ -150,10 +147,10 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="DropDownListClientes">Cliente:</label>
-                                    <asp:DropDownList Text='<%# Bind("codigoCliente") %>' class="form-control" ID="DropDownListClientes" runat="server" DataSourceID="SqlDataSourceCodigoCliente" DataTextField="NombreEntidad" DataValueField="codigoCliente" AppendDataBoundItems="true" onchange="handleFieldsCliente()">
+                                    <asp:DropDownList Text='<%# Bind("codigoCliente") %>' class="form-control" ID="DropDownListClientes" runat="server" DataSourceID="SqlDataSourceCodigoCliente" DataTextField="nombreEntidad" DataValueField="codigoCliente" AppendDataBoundItems="true" onchange="handleFieldsCliente()">
                                         <asp:ListItem Text="" Value=""></asp:ListItem>
                                     </asp:DropDownList>
-                                    <asp:SqlDataSource ID="SqlDataSourceCodigoCliente" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT codigoCliente, NombreEntidad FROM Cliente"></asp:SqlDataSource>
+                                    <asp:SqlDataSource ID="SqlDataSourceCodigoCliente" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT codigoCliente, nombreEntidad FROM Cliente"></asp:SqlDataSource>
                                 </div>
                             </div>
                         </div>

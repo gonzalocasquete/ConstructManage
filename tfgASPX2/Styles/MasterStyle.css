@@ -126,9 +126,15 @@ p {
 }
 
 /* Estilo personalizado para el GridView */
-.mi-gridview {
-    border-radius: 10px;
-    overflow: hidden;
-    border:none;
+.fixed-table {
+    table-layout: fixed;
+    width: 1000px
 }
 
+.edit-dropdown {
+    padding: 6px 12px 6px 12px;
+}
+
+.edit-textbox {
+    width: 125px;
+}

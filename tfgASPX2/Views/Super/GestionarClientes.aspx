@@ -2,6 +2,7 @@
 
 <asp:Content ID="GestionarClientesHead" ContentPlaceHolderID="head" runat="server">
     <link href="../../Styles/GestionarClientesStyle.css" rel="stylesheet" />
+    <link href="../../Styles/ComunesStyle.css" rel="stylesheet" />
     <style type="text/css">
         .auto-style5 {
             display: flex;
@@ -44,36 +45,61 @@
     <div class="auto-style1">
         <h2 class="font-weight-bold">Gestión Clientes</h2>
 
-         <div style="width:200px">
-     <div class="row">
-         <div class="col">
-             <asp:Button ID="ButtonFiltros" class="form-control btn-secondary btn-sm btn-block buttonFilter mt-1" runat="server" Text="Filtros" OnClick="ButtonFiltros_Click" />
-         </div>
-     </div>
-
-     <asp:Panel ID="PanelFiltros" runat="server" Visible="False">   
-
-        <%--Filtros--%>
-        <hr />
-        <div>
-            <%--Entidad--%>
-            <asp:Label ID="LabelFiltroEntidad" runat="server" Text="Entidad:"></asp:Label>
-            <asp:TextBox ID="TextBoxFiltradoEntidad" class="form-control" runat="server"></asp:TextBox>
-  
-            <div class="text-center mt-2">
-                <asp:Button ID="ButtonFiltrado" class="form-control btn btn-primary btn-sm btn-block buttonFilter" runat="server" Text="Filtrar" OnClick="ButtonFiltrado_Click" />
-                <asp:Button runat="server" class="form-control btn-secondary btn-sm btn-block buttonFilter mt-1" Text="Limpiar" OnClick="Todos_Click"></asp:Button>
+        <div style="width: 250px">
+            <div class="row">
+                <div class="col">
+                    <asp:Button ID="ButtonInsertarCliente" class="form-control btn-secondary btn-sm btn-block  mt-1" runat="server" Text="Insertar Cliente" OnClick="ButtonInsertarCliente_Click" />
+                </div>
             </div>
-        </div>
-             </asp:Panel>
-</div>
+            <div class="row">
+                <div class="col">
+                    <asp:Button ID="ButtonFiltros" class="form-control btn-secondary btn-sm btn-block  mt-1" runat="server" Text="Filtros" OnClick="ButtonFiltros_Click" />
+                </div>
+            </div>
 
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" DeleteCommand="DELETE FROM [Cliente] WHERE [codigoCliente] = @codigoCliente" InsertCommand="INSERT INTO [Cliente] ([NombreEntidad], [DireccionDF], [CodigoPostalDF], [UbicacionDF], [BancoDF], [DireccionDE], [CodigoPostalDE], [UbicacionDE]) VALUES (@NombreEntidad, @DireccionDF, @CodigoPostalDF, @UbicacionDF, @BancoDF, @DireccionDE, @CodigoPostalDE, @UbicacionDE)" SelectCommand="SELECT * FROM [Cliente]" UpdateCommand="UPDATE [Cliente] SET [NombreEntidad] = @NombreEntidad, [DireccionDF] = @DireccionDF, [CodigoPostalDF] = @CodigoPostalDF, [UbicacionDF] = @UbicacionDF, [BancoDF] = @BancoDF, [DireccionDE] = @DireccionDE, [CodigoPostalDE] = @CodigoPostalDE, [UbicacionDE] = @UbicacionDE WHERE [codigoCliente] = @codigoCliente">
+            <asp:Panel ID="PanelFiltros" runat="server" Visible="False">
+                <hr style="height: 2px; width: auto; border-width: 0; color: whitesmoke; background-color: whitesmoke">
+
+                <%--Filtros--%>
+                <div>
+                    <div class="row">
+                        <div class="col">
+                            <%--Entidad--%>
+                            <asp:Label ID="LabelFiltroEntidad" class="text-light" runat="server" Text="Entidad:"></asp:Label>
+                            <asp:TextBox ID="TextBoxFiltradoEntidad" class="form-control" runat="server"></asp:TextBox>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <%--Ubicacion D.F--%>
+                            <asp:Label ID="LabelFiltroUbicacionDF" class="text-light" runat="server" Text="Ubicacion DF:"></asp:Label>
+                            <asp:DropDownList ID="DropDownListUbicacionDF" class="form-control" runat="server"></asp:DropDownList>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <%--Ubicacion D.E--%>
+                            <asp:Label ID="LabelFiltroUbicacionDE" class="text-light" runat="server" Text="Ubicacion DE:"></asp:Label>
+                            <asp:DropDownList ID="DropDownListUbicacionDE" class="form-control" runat="server"></asp:DropDownList>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-2">
+                        <asp:Button ID="ButtonFiltrado" class="form-control btn btn-primary btn-sm btn-block buttonFilter" runat="server" Text="Filtrar" OnClick="ButtonFiltrado_Click" />
+                        <asp:Button runat="server" class="form-control btn-secondary btn-sm btn-block buttonFilter mt-1" Text="Limpiar" OnClick="Limpiar_Click"></asp:Button>
+                    </div>
+                </div>
+            </asp:Panel>
+        </div>
+
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" DeleteCommand="DELETE FROM [Cliente] WHERE [codigoCliente] = @codigoCliente" InsertCommand="INSERT INTO [Cliente] ([nombreEntidad], [DireccionDF], [CodigoPostalDF], [UbicacionDF], [BancoDF], [DireccionDE], [CodigoPostalDE], [UbicacionDE]) VALUES (@nombreEntidad, @DireccionDF, @CodigoPostalDF, @UbicacionDF, @BancoDF, @DireccionDE, @CodigoPostalDE, @UbicacionDE)" SelectCommand="SELECT * FROM [Cliente]" UpdateCommand="UPDATE [Cliente] SET [nombreEntidad] = @nombreEntidad, [DireccionDF] = @DireccionDF, [CodigoPostalDF] = @CodigoPostalDF, [UbicacionDF] = @UbicacionDF, [BancoDF] = @BancoDF, [DireccionDE] = @DireccionDE, [CodigoPostalDE] = @CodigoPostalDE, [UbicacionDE] = @UbicacionDE WHERE [codigoCliente] = @codigoCliente">
             <DeleteParameters>
                 <asp:Parameter Name="codigoCliente" Type="Int32" />
             </DeleteParameters>
             <InsertParameters>
-                <asp:Parameter Name="NombreEntidad" Type="String" />
+                <asp:Parameter Name="nombreEntidad" Type="String" />
                 <asp:Parameter Name="DireccionDF" Type="String" />
                 <asp:Parameter Name="CodigoPostalDF" Type="String" />
                 <asp:Parameter Name="UbicacionDF" Type="String" />
@@ -83,7 +109,7 @@
                 <asp:Parameter Name="UbicacionDE" Type="String" />
             </InsertParameters>
             <UpdateParameters>
-                <asp:Parameter Name="NombreEntidad" Type="String" />
+                <asp:Parameter Name="nombreEntidad" Type="String" />
                 <asp:Parameter Name="DireccionDF" Type="String" />
                 <asp:Parameter Name="CodigoPostalDF" Type="String" />
                 <asp:Parameter Name="UbicacionDF" Type="String" />
@@ -94,18 +120,89 @@
                 <asp:Parameter Name="codigoCliente" Type="Int32" />
             </UpdateParameters>
         </asp:SqlDataSource>
-        <asp:GridView ID="GridView1" class="mt-3 table mi-gridview" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoCliente" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical">
+        <asp:GridView ID="GridView1" class="mt-3 table tamanio-cliente" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoCliente" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical">
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
                 <asp:BoundField DataField="codigoCliente" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="codigoCliente" />
-                <asp:BoundField DataField="NombreEntidad" HeaderText="Entidad" SortExpression="NombreEntidad" />
-                <asp:BoundField DataField="DireccionDF" HeaderText="Domicilio Fiscal" SortExpression="DireccionDF" />
-                <asp:BoundField DataField="CodigoPostalDF" HeaderText="Codigo Postal D.F" SortExpression="CodigoPostalDF" />
-                <asp:BoundField DataField="UbicacionDF" HeaderText="Ubicacion D.F" SortExpression="UbicacionDF" />
-                <asp:BoundField DataField="BancoDF" HeaderText="Banco D.F" SortExpression="BancoDF" />
-                <asp:BoundField DataField="DireccionDE" HeaderText="Direccion D.E" SortExpression="DireccionDE" />
-                <asp:BoundField DataField="CodigoPostalDE" HeaderText="CodigoPostal D.E" SortExpression="CodigoPostalDE" />
-                <asp:BoundField DataField="UbicacionDE" HeaderText="Ubicacion D.E" SortExpression="UbicacionDE" />
+                <asp:TemplateField HeaderText="Entidad" SortExpression="nombreEntidad">
+                    <ItemTemplate>
+
+                        <%# Eval("nombreEntidad") %>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox Text='<%# Bind("nombreEntidad") %>' class="form-control edit-textbox" runat="server" ID="nombreEntidadTextBox" />
+                    </EditItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Domicilio Fiscal" SortExpression="DireccionDF">
+                    <ItemTemplate>
+
+                        <%# Eval("DireccionDF") %>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox Text='<%# Bind("DireccionDF") %>' class="form-control edit-textbox" runat="server" ID="direccionDFTextBox" />
+                    </EditItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Codigo Postal D.F" SortExpression="CodigoPostalDF">
+                    <ItemTemplate>
+
+                        <%# Eval("CodigoPostalDF") %>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox Text='<%# Bind("CodigoPostalDF") %>' class="form-control edit-textbox" runat="server" ID="codigoPostalDFTextBox" />
+                    </EditItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Ubicacion D.F" SortExpression="UbicacionDF">
+                    <ItemTemplate>
+
+                        <%# Eval("UbicacionDF") %>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox Text='<%# Bind("UbicacionDF") %>' class="form-control edit-textbox" runat="server" ID="ubicacionDFTextBox" />
+                    </EditItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Banco D.F" SortExpression="BancoDF">
+                    <ItemTemplate>
+
+                        <%# Eval("BancoDF") %>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox Text='<%# Bind("BancoDF") %>' class="form-control edit-textbox" runat="server" ID="bancoDFTextBox" />
+                    </EditItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Direccion D.E" SortExpression="DireccionDE">
+                    <ItemTemplate>
+
+                        <%# Eval("DireccionDE") %>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox Text='<%# Bind("DireccionDE") %>' class="form-control edit-textbox" runat="server" ID="direccionDETextBox" />
+                    </EditItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="CodigoPostal D.E" SortExpression="CodigoPostalDE">
+                    <ItemTemplate>
+
+                        <%# Eval("CodigoPostalDE") %>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox Text='<%# Bind("CodigoPostalDE") %>' class="form-control edit-textbox" runat="server" ID="codigoPostalDETextBox" />
+                    </EditItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Ubicacion D.E" SortExpression="UbicacionDE">
+                    <ItemTemplate>
+
+                        <%# Eval("UbicacionDE") %>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox Text='<%# Bind("UbicacionDE") %>' class="form-control edit-textbox" runat="server" ID="ubicacionDETextBox" />
+                    </EditItemTemplate>
+                </asp:TemplateField>
                 <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
             </Columns>
             <FooterStyle BackColor="#CCCCCC" />
@@ -117,71 +214,69 @@
             <SortedDescendingCellStyle BackColor="#CAC9C9" />
             <SortedDescendingHeaderStyle BackColor="#383838" />
         </asp:GridView>
-        <asp:Button ID="ButtonInsertar" CssClass="ButtonStyle button1 mt-3" runat="server" Text="Insertar" OnClick="Button1_Click" />
-        <div class="auto-style6 mt-3">
-            <asp:Panel ID="PanelInsertar" runat="server" Height="348px" Visible="False">
-                <div class="auto-style7">
-                    <asp:FormView ID="FormView1" runat="server" DataSourceID="SqlDataSource1" DataKeyNames="codigoCliente" DefaultMode="Insert" CellPadding="4" ForeColor="#333333">
-                        <FooterStyle BackColor="#990000" ForeColor="White" Font-Bold="True" />
-                        <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
-                        <InsertItemTemplate>
 
-                            <div class="row">
-                                <div class="col">
-                                    NombreEntidad:
-                                    <asp:TextBox ID="NombreEntidadTextBox" class="form-control" data-toggle="tooltip" title="Nombre de la entidad" runat="server" Text='<%# Bind("NombreEntidad") %>' />
-                                </div>
-                                <div class="col">
-                                    DireccionDF:
+        <asp:Panel ID="PanelInsertar" class="mt-3" runat="server" Height="348px" Visible="False">
+            <div class="auto-style7">
+                <asp:FormView ID="FormViewInsertarCliente" runat="server" DataSourceID="SqlDataSource1" DataKeyNames="codigoCliente" DefaultMode="Insert" CellPadding="4" ForeColor="#333333" OnItemCommand="FormViewInsertarCliente_ItemCommand">
+                    <FooterStyle BackColor="#990000" ForeColor="White" Font-Bold="True" />
+                    <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
+                    <InsertItemTemplate>
+
+                        <div class="row">
+                            <div class="col">
+                                Entidad:
+                                    <asp:TextBox ID="nombreEntidadTextBox" class="form-control" data-toggle="tooltip" title="Nombre de la entidad" runat="server" Text='<%# Bind("nombreEntidad") %>' />
+                            </div>
+                            <div class="col">
+                                DireccionDF:
                                     <asp:TextBox ID="DireccionDFTextBox" class="form-control" data-toggle="tooltip" title="Dirección del domicilio fiscal" runat="server" Text='<%# Bind("DireccionDF") %>' />
-                                </div>
                             </div>
+                        </div>
 
-                            <div class="row">
-                                <div class="col">
-                                    CodigoPostalDF:
+                        <div class="row">
+                            <div class="col">
+                                CodigoPostalDF:
                                     <asp:TextBox ID="CodigoPostalDFTextBox" class="form-control" data-toggle="tooltip" title="Codigo postal del domicilio fiscal" runat="server" Text='<%# Bind("CodigoPostalDF") %>' />
-                                </div>
-                                <div class="col">
-                                    UbicacionDF:
+                            </div>
+                            <div class="col">
+                                UbicacionDF:
                                     <asp:TextBox ID="UbicacionDFTextBox" class="form-control" data-toggle="tooltip" title="Ubicacion del domicilio fiscal" runat="server" Text='<%# Bind("UbicacionDF") %>' />
-                                </div>
                             </div>
+                        </div>
 
-                            <div class="row">
-                                <div class="col">
-                                    BancoDF:
+                        <div class="row">
+                            <div class="col">
+                                BancoDF:
                                     <asp:TextBox ID="BancoDFTextBox" class="form-control" data-toggle="tooltip" title="Banco asignado al domicilio fiscal" runat="server" Text='<%# Bind("BancoDF") %>' />
-                                </div>
-                                <div class="col">
-                                    DireccionDE:
+                            </div>
+                            <div class="col">
+                                DireccionDE:
                                     <asp:TextBox ID="DireccionDETextBox" class="form-control" data-toggle="tooltip" title="Direccion del domicilio empresarial" runat="server" Text='<%# Bind("DireccionDE") %>' />
-                                </div>
                             </div>
+                        </div>
 
-                            <div class="row">
-                                <div class="col">
-                                    CodigoPostalDE:
+                        <div class="row">
+                            <div class="col">
+                                CodigoPostalDE:
                                     <asp:TextBox ID="CodigoPostalDETextBox" class="form-control" data-toggle="tooltip" title="Codigo postal del domicilio empresarial" runat="server" Text='<%# Bind("CodigoPostalDE") %>' />
-                                </div>
-                                <div class="col">
-                                    UbicacionDE:
+                            </div>
+                            <div class="col">
+                                UbicacionDE:
                                     <asp:TextBox ID="UbicacionDETextBox" class="form-control" data-toggle="tooltip" title="Ubicacion del domicilio empresarial" runat="server" Text='<%# Bind("UbicacionDE") %>' />
-                                </div>
                             </div>
+                        </div>
 
-                            <div class="mt-3 text-center">
-                                <asp:LinkButton ID="InsertButton" class="btn btn-success" runat="server" CausesValidation="True" CommandName="Insert" Text="Insertar" />
-                                &nbsp;
+                        <div class="mt-3 text-center">
+                            <asp:LinkButton ID="InsertButton" class="btn btn-success" runat="server" CausesValidation="True" CommandName="Insert" Text="Insertar" />
+                            &nbsp;
                                 <asp:LinkButton ID="InsertCancelButton" class="btn btn-danger" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancelar" />
-                            </div>
-                        </InsertItemTemplate>
-                        <PagerStyle BackColor="#FFCC66" ForeColor="#333333" HorizontalAlign="Center" />
-                        <RowStyle BackColor="#FFFBD6" ForeColor="#333333" />
-                    </asp:FormView>
-                </div>
-            </asp:Panel>
-        </div>
+                        </div>
+                    </InsertItemTemplate>
+                    <PagerStyle BackColor="#FFCC66" ForeColor="#333333" HorizontalAlign="Center" />
+                    <RowStyle BackColor="#6c757d" ForeColor="White" />
+                </asp:FormView>
+            </div>
+        </asp:Panel>
     </div>
 </asp:Content>
 

@@ -142,6 +142,7 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Views\GestionarTrabajadorScript.js" />
     <Content Include="Scripts\Views\InicialCoordinadorScript.js" />
     <Content Include="Scripts\Views\GestionarConvenioStyle.js" />
     <Content Include="Scripts\Views\GestionarProyectoStyle.js" />
@@ -168,6 +169,7 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
+    <Content Include="Styles\ComunesStyle.css" />
     <Content Include="Styles\InicialCoordinadorStyle.css" />
     <Content Include="Styles\InicialTrabajadorStyle.css" />
     <Content Include="Styles\PerfilTrabajadorStyle.css" />

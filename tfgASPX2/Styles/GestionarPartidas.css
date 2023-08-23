@@ -1,18 +1,4 @@
-﻿/*body y html*/
-body, html {
-    height: 100%;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    background: #2f3542;
-    justify-content: center;
-    align-items: center;
-}
-
-
-/*Tabla y boton*/
+﻿/*Tabla y boton*/
 .auto-style1 {
     display: flex;
     flex-direction: column;
@@ -49,14 +35,3 @@ body {
     cursor: pointer;
     width: 630px
 }
-
-.button1 {
-    background-color: white;
-    color: black;
-    border: 2px solid #555555;
-}
-
-    .button1:hover {
-        background-color: #555555;
-        color: white;
-    }

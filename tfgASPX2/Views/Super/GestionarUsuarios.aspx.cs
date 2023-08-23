@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,8 +12,9 @@ namespace tfgASPX2.Views.Super
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-          
+            
         }
+
 
         protected void Button1_Click(object sender, EventArgs e)
         {
@@ -20,12 +22,20 @@ namespace tfgASPX2.Views.Super
             {
                 // Si el panel es visible, ocultarlo y cambiar el texto del botón a "Mostrar"
                 Panel1.Visible = false;
-                ButtonInsertar.Text = "Insertar";
+                GridView1.Visible = true;
+                ButtonFiltros.Visible = true;
+                ButtonInsertar.Text = "Insertar Usuario";
             }
             else
             {
                 // Si el panel no es visible, mostrarlo y cambiar el texto del botón a "Ocultar"
                 Panel1.Visible = true;
+
+                PanelFiltros.Visible = false;
+                ButtonFiltros.Text = "Mostrar filtros";
+                ButtonFiltros.Visible = false;
+
+                GridView1.Visible=false;
                 ButtonInsertar.Text = "Ocultar";
             }
         }
@@ -75,6 +85,7 @@ namespace tfgASPX2.Views.Super
             }
         }
 
+        //No se permite editar al usuario admin 
         protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             // Verifica si es una fila de datos y no es la fila de encabezado o pie de página.
@@ -85,7 +96,7 @@ namespace tfgASPX2.Views.Super
                 string rol = DataBinder.Eval(e.Row.DataItem, "rol").ToString();
 
                 // Verifica si los valores de nombreUsuario y rol son "super".
-                if (nombreUsuario == "super" && rol == "super")
+                if (nombreUsuario == "admin" && rol == "super")
                 {
                     // Deshabilita la edición y eliminación de la fila.
                     e.Row.Enabled = false;
@@ -108,10 +119,78 @@ namespace tfgASPX2.Views.Super
             }
         }
 
-        //Mantener el ancho de la tabla
-            protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
+        protected void FormViewInsertarUsuario_ItemInserting(object sender, FormViewInsertEventArgs e)
         {
-            GridView1.Width = Unit.Pixel(500); 
+            TextBox nombreUsuarioTextBox = (TextBox)FormViewInsertarUsuario.FindControl("nombreUsuarioTextBox");
+            TextBox contraseñaUsuarioTextBox = (TextBox)FormViewInsertarUsuario.FindControl("contraseñaUsuarioTextBox");
+            
+            if (string.IsNullOrEmpty(nombreUsuarioTextBox.Text) ||string.IsNullOrEmpty(contraseñaUsuarioTextBox.Text))
+            {
+                if (string.IsNullOrEmpty(nombreUsuarioTextBox.Text))
+                {
+                    // Cancelar la inserción
+                    e.Cancel = true;
+                    // Mostrar mensaje de error
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Error", "alert('El usuario no puede estar vacio.');", true);
+                }
+
+                if (string.IsNullOrEmpty(contraseñaUsuarioTextBox.Text))
+                {
+                    // Cancelar la inserción
+                    e.Cancel = true;
+                    // Mostrar mensaje de error
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Error", "alert('La contraseña no puede estar vacia');", true);
+                }
+            }
+
+            string consulta = "SELECT nombreUsuario FROM Usuario WHERE nombreUsuario = @nombreUsuario";
+
+            string connectionString = "Data Source=miservertfg.database.windows.net;Initial Catalog=mibasededatostfg;Persist Security Info=True;User ID=adminsql;Password=Josele6072";
+
+            using (SqlConnection cnn = new SqlConnection(connectionString))
+            {
+                cnn.Open();
+                using (SqlCommand cmd = new SqlCommand(consulta, cnn))
+                {
+                    cmd.Parameters.AddWithValue("@nombreUsuario", nombreUsuarioTextBox.Text.ToString());
+
+                    using (SqlDataReader adap = cmd.ExecuteReader())
+                    {
+                        if (adap.Read())
+                        {
+                            e.Cancel = true;
+                            ScriptManager.RegisterStartupScript(this, GetType(), "Error", "alert('El nombre de usuario ya existe en la base de datos');", true);
+                        }
+                    }
+                }
+            }
         }
+
+        protected void FormViewInsertarUsuario_ItemInserted(object sender, FormViewInsertedEventArgs e)
+        {
+            if (e.Exception == null)
+            {
+                // Mostrar mensaje de éxito
+                ScriptManager.RegisterStartupScript(this, GetType(), "Success", "alert('Usuario insertado exitosamente.');", true);
+            }
+            else
+            {
+                // Mostrar mensaje de error en caso de excepción
+                ScriptManager.RegisterStartupScript(this, GetType(), "Error", "alert('Error al insertar usuario.');", true);
+                e.ExceptionHandled = true;
+            }
+        }
+
+        protected void FormViewInsertarUsuario_ItemCommand(object sender, FormViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Cancel")
+            {
+                Panel1.Visible = false;
+                GridView1.Visible = true;
+                ButtonFiltros.Visible = true;
+                ButtonInsertar.Text = "Insertar";
+            }
+        }
+
     }
 }

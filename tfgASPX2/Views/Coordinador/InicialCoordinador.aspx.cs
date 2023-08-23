@@ -93,7 +93,7 @@ namespace tfgASPX2.Views.Coordinador
 
         protected void ButtonFiltrado_Click(object sender, EventArgs e)
         {
-            String consultaSQL = "SELECT Parte.codigoParte, Parte.fecha, Parte.tipo, Parte.codigoTrabajador, Proyecto.NombreProyecto, Cliente.NombreEntidad" +
+            String consultaSQL = "SELECT Parte.codigoParte, Parte.fecha, Parte.tipo, Parte.codigoTrabajador, Proyecto.NombreProyecto, Cliente.nombreEntidad" +
                 " FROM Parte LEFT JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto LEFT JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente";
 
             bool whereAdded = false; // Bandera para controlar la adición del primer "WHERE"
@@ -106,7 +106,7 @@ namespace tfgASPX2.Views.Coordinador
 
             if (!string.IsNullOrEmpty(TextBoxFiltradoCliente.Text))
             {
-                consultaSQL += (whereAdded ? " AND" : " WHERE") + " NombreEntidad LIKE '%" + TextBoxFiltradoCliente.Text + "%'";
+                consultaSQL += (whereAdded ? " AND" : " WHERE") + " nombreEntidad LIKE '%" + TextBoxFiltradoCliente.Text + "%'";
                 whereAdded = true;
             }
 
@@ -134,7 +134,7 @@ namespace tfgASPX2.Views.Coordinador
 
         protected void Limpiar_Click(object sender, EventArgs e)
         {
-            SqlDataSource1.SelectCommand = "SELECT Parte.codigoParte, Parte.fecha, Parte.tipo, Parte.codigoTrabajador, Proyecto.NombreProyecto, Cliente.NombreEntidad FROM Parte LEFT JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto LEFT JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE Parte.codigoTrabajador = " + Session["codigoTrabajador"] +"";
+            SqlDataSource1.SelectCommand = "SELECT Parte.codigoParte, Parte.fecha, Parte.tipo, Parte.codigoTrabajador, Proyecto.NombreProyecto, Cliente.nombreEntidad FROM Parte LEFT JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto LEFT JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE Parte.codigoTrabajador = " + Session["codigoTrabajador"] +"";
             SqlDataSource1.DataBind();
             TextBoxFiltradoProyecto.Text = "";
             TextBoxFiltradoCliente.Text = "";

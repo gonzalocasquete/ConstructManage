@@ -2,6 +2,7 @@
 
 <asp:Content ID="MenuSuperHead" ContentPlaceHolderID="head" runat="server">
     <link href="../../Styles/MenuSuperStyle.css" rel="stylesheet" />
+    <link href="../../Styles/ComunesStyle.css" rel="stylesheet" />
     <title>MenuAdmin</title> 
 </asp:Content>
 

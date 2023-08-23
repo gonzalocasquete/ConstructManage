@@ -15,6 +15,15 @@ namespace tfgASPX2.Views.Super
     {
 
         /// <summary>
+        /// Control ButtonInsertarCliente.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonInsertarCliente;
+
+        /// <summary>
         /// Control ButtonFiltros.
         /// </summary>
         /// <remarks>
@@ -51,6 +60,42 @@ namespace tfgASPX2.Views.Super
         protected global::System.Web.UI.WebControls.TextBox TextBoxFiltradoEntidad;
 
         /// <summary>
+        /// Control LabelFiltroUbicacionDF.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelFiltroUbicacionDF;
+
+        /// <summary>
+        /// Control DropDownListUbicacionDF.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListUbicacionDF;
+
+        /// <summary>
+        /// Control LabelFiltroUbicacionDE.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelFiltroUbicacionDE;
+
+        /// <summary>
+        /// Control DropDownListUbicacionDE.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListUbicacionDE;
+
+        /// <summary>
         /// Control ButtonFiltrado.
         /// </summary>
         /// <remarks>
@@ -78,15 +123,6 @@ namespace tfgASPX2.Views.Super
         protected global::System.Web.UI.WebControls.GridView GridView1;
 
         /// <summary>
-        /// Control ButtonInsertar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonInsertar;
-
-        /// <summary>
         /// Control PanelInsertar.
         /// </summary>
         /// <remarks>
@@ -96,12 +132,12 @@ namespace tfgASPX2.Views.Super
         protected global::System.Web.UI.WebControls.Panel PanelInsertar;
 
         /// <summary>
-        /// Control FormView1.
+        /// Control FormViewInsertarCliente.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FormView FormView1;
+        protected global::System.Web.UI.WebControls.FormView FormViewInsertarCliente;
     }
 }
