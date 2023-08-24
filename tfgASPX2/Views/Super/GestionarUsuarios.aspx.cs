@@ -15,7 +15,6 @@ namespace tfgASPX2.Views.Super
             
         }
 
-
         protected void Button1_Click(object sender, EventArgs e)
         {
             if (Panel1.Visible)
@@ -159,7 +158,7 @@ namespace tfgASPX2.Views.Super
                         if (adap.Read())
                         {
                             e.Cancel = true;
-                            ScriptManager.RegisterStartupScript(this, GetType(), "Error", "alert('El nombre de usuario ya existe en la base de datos');", true);
+                            ScriptManager.RegisterStartupScript(this, GetType(), "Error", "alert('El nombre de usuario ya se encuentra registrado');", true);
                         }
                     }
                 }

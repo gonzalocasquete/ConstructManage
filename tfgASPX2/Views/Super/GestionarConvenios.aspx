@@ -15,97 +15,83 @@
 
         <h2 class="font-weight-bold">Gestión de Convenios</h2>
 
-          <div style="width:200px">
-      <div class="row">
-          <div class="col">
-              <asp:Button ID="ButtonFiltros" class="form-control btn-secondary btn-sm btn-block buttonFilter mt-1" runat="server" Text="Filtros" OnClick="ButtonFiltros_Click" />
-          </div>
-      </div>
-
-      <asp:Panel ID="PanelFiltros" runat="server" Visible="False">   
-        <%--Filtros--%>
-        <hr />
-        <div>
+        <div style="width: 250px">
             <div class="row">
                 <div class="col">
-                    <%--Nombre Proyecto--%>
-                    <asp:Label ID="LabelFiltroConvenio" runat="server" Text="Convenio:"></asp:Label>
-                    <asp:TextBox ID="TextBoxFiltradoConvenio" class="form-control" runat="server"></asp:TextBox>
+                    <asp:Button ID="ButtonInsertar" class="form-control btn-secondary btn-sm btn-block mt-1" runat="server" Text="Insertar" OnClick="Button1_Click" />
                 </div>
             </div>
+
 
             <div class="row">
                 <div class="col">
-                    <%--Fecha de Inicio--%>
-                    <asp:Label ID="LabelFechaMinima" for="fechaMinima" runat="server" Text="Fecha Minima:"></asp:Label>
-                    <input id="fechaMinima" class="form-control" runat="server" type="date" name="fechaMinima">
-                </div>
-                <div class="col">
-                    <%--Fecha de Fin--%>
-                    <asp:Label ID="LabelFechaMaxima" for="fechaMaxima" runat="server" Text="Fecha Maxima:"></asp:Label>
-                    <input id="fechaMaxima" class="form-control" runat="server" type="date" name="fechaMaxima" onchange="validarFechaMaxima(this)">
+                    <asp:Button ID="ButtonFiltros" class="form-control btn-secondary btn-sm btn-block mt-1" runat="server" Text="Filtros" OnClick="ButtonFiltros_Click" />
                 </div>
             </div>
 
-            <div class="text-center mt-2">
-                <asp:Button ID="ButtonFiltrado" class="form-control btn btn-primary btn-sm btn-block buttonFilter" runat="server" Text="Filtrar" OnClick="ButtonFiltrado_Click" />
-                <asp:Button runat="server" class="form-control btn-secondary btn-sm btn-block buttonFilter mt-1" Text="Limpiar" OnClick="Todos_Click"></asp:Button>
-            </div>
+            <asp:Panel ID="PanelFiltros" runat="server" Visible="False">
+                <%--Filtros--%>
+                <hr style="height: 2px; width: auto; border-width: 0; color: whitesmoke; background-color: whitesmoke">
+                <div>
+                    <div class="row">
+                        <div class="col">
+                            <%--Nombre Convenio--%>
+                            <asp:Label ID="LabelFiltroConvenio" class="text-light" runat="server" Text="Convenio:"></asp:Label>
+                            <asp:TextBox ID="TextBoxFiltradoConvenio" class="form-control" runat="server"></asp:TextBox>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <%--Fecha de Inicio--%>
+                            <asp:Label ID="LabelFechaMinima" class="text-light" for="fechaMinima" runat="server" Text="Fecha Minima:"></asp:Label>
+                            <%--                    <input id="fechaMinima" class="form-control" runat="server" type="date" name="fechaMinima">--%>
+                        </div>
+                        <div class="col">
+                            <%--Fecha de Fin--%>
+                            <asp:Label ID="LabelFechaMaxima" class="text-light" for="fechaMaxima" runat="server" Text="Fecha Maxima:"></asp:Label>
+                            <%--                    <input id="fechaMaxima" class="form-control" runat="server" type="date" name="fechaMaxima" onchange="validarFechaMaxima(this)">--%>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-2">
+                        <asp:Button ID="ButtonFiltrado" class="form-control btn btn-primary btn-sm btn-block buttonFilter" runat="server" Text="Filtrar" OnClick="ButtonFiltrado_Click" />
+                        <asp:Button runat="server" class="form-control btn-secondary btn-sm btn-block buttonFilter mt-1" Text="Limpiar" OnClick="Todos_Click"></asp:Button>
+                    </div>
+                </div>
+            </asp:Panel>
         </div>
-              </asp:Panel>
-</div>
 
-        <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" DeleteCommand="DELETE FROM [Convenio] WHERE [codigoConvenio] = @codigoConvenio" InsertCommand="INSERT INTO [Convenio] ([fechaInicio], [fechaFin], [nombre]) VALUES (@fechaInicio, @fechaFin, @nombre)" SelectCommand="SELECT * FROM [Convenio]" UpdateCommand="UPDATE [Convenio] SET [fechaInicio] = @fechaInicio, [fechaFin] = @fechaFin, [nombre] = @nombre WHERE [codigoConvenio] = @codigoConvenio">
+        <asp:GridView ID="GridView1" class="table mt-3 tamanio-convenio" runat="server" AutoGenerateColumns="False" DataKeyNames="codigoConvenio" DataSourceID="SqlDataSource1" AllowPaging="True" AllowSorting="True" BackColor="WhiteSmoke" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical">
+            <AlternatingRowStyle BackColor="#CCCCCC" />
+            <Columns>
+                <asp:BoundField DataField="codigoConvenio" HeaderText="ID" ReadOnly="True" InsertVisible="False" SortExpression="codigoConvenio"></asp:BoundField>
+                <asp:BoundField DataField="nombreConvenio" HeaderText="Convenio" SortExpression="nombreConvenio"></asp:BoundField>
+                <asp:BoundField DataField="fechaInicio" HeaderText="Fecha Inicio" SortExpression="fechaInicio" DataFormatString="{0:dd/MM/yyyy}"></asp:BoundField>
+                <asp:BoundField DataField="fechaFin" HeaderText="Fecha Fin" SortExpression="fechaFin" DataFormatString="{0:dd/MM/yyyy}"></asp:BoundField>
+                <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" ShowSelectButton="True" SelectText="AsociacionCategorias"></asp:CommandField>
+            </Columns>
+             <FooterStyle BackColor="#CCCCCC" />
+            <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
+            <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+        </asp:GridView>
+
+        <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString='<%$ ConnectionStrings:mibasededatostfgConnectionString %>' DeleteCommand="DELETE FROM [Convenio] WHERE [codigoConvenio] = @codigoConvenio" InsertCommand="INSERT INTO [Convenio] ([fechaInicio], [fechaFin], [nombreConvenio]) VALUES (@fechaInicio, @fechaFin, @nombreConvenio)" SelectCommand="SELECT * FROM [Convenio]" UpdateCommand="UPDATE [Convenio] SET [fechaInicio] = @fechaInicio, [fechaFin] = @fechaFin, [nombreConvenio] = @nombreConvenio WHERE [codigoConvenio] = @codigoConvenio">
             <DeleteParameters>
                 <asp:Parameter Name="codigoConvenio" Type="Int32"></asp:Parameter>
             </DeleteParameters>
             <InsertParameters>
                 <asp:Parameter DbType="Date" Name="fechaInicio"></asp:Parameter>
                 <asp:Parameter DbType="Date" Name="fechaFin"></asp:Parameter>
-                <asp:Parameter Name="nombre" Type="String"></asp:Parameter>
+                <asp:Parameter Name="nombreConvenio" Type="String"></asp:Parameter>
             </InsertParameters>
             <UpdateParameters>
                 <asp:Parameter DbType="Date" Name="fechaInicio"></asp:Parameter>
                 <asp:Parameter DbType="Date" Name="fechaFin"></asp:Parameter>
-                <asp:Parameter Name="nombre" Type="String"></asp:Parameter>
+                <asp:Parameter Name="nombreConvenio" Type="String"></asp:Parameter>
                 <asp:Parameter Name="codigoConvenio" Type="Int32"></asp:Parameter>
             </UpdateParameters>
         </asp:SqlDataSource>
-        <asp:GridView ID="GridView1" class="table mt-3 mi-gridview" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoConvenio" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical" AllowSorting="True">
-            <AlternatingRowStyle BackColor="#CCCCCC" />
-            <Columns>
-                <asp:BoundField DataField="codigoConvenio" HeaderText="ID" ReadOnly="True" InsertVisible="False"></asp:BoundField>
-                <asp:BoundField DataField="nombre" HeaderText="Nombre" SortExpression="nombre"></asp:BoundField>
-
-                <asp:TemplateField HeaderText="Fecha Inicio" SortExpression="fechaInicio" >
-                    <ItemTemplate>
-                        <%# Eval("fechaInicio", "{0:dd/MM/yy}") %>
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <input type="date" id="dateFechaInicio" runat="server" value='<%# Bind("fechaInicio", "{0:yyyy-MM-dd}") %>' />
-                    </EditItemTemplate>
-                </asp:TemplateField>
-
-                <asp:TemplateField HeaderText="Fecha Fin" SortExpression="fechaFin">
-                    <ItemTemplate>
-                        <%# Eval("fechaFin", "{0:dd/MM/yy}") %>
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <input type="date" id="dateFechFin" runat="server" value='<%# Bind("fechaFin", "{0:yyyy-MM-dd}") %>' />
-                    </EditItemTemplate>
-                </asp:TemplateField>
-
-                <asp:CommandField SelectText="DetallesxCategoria" ShowDeleteButton="True" ShowEditButton="True" ShowSelectButton="True"></asp:CommandField>
-            </Columns>
-            <FooterStyle BackColor="#CCCCCC" />
-            <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
-            <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
-            <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
-        </asp:GridView>
-
-        <asp:Button ID="ButtonInsertar" CssClass="ButtonStyle button1 mt-3" runat="server" Text="Insertar" OnClick="Button1_Click" />
-
-
         <asp:Panel ID="Panel1" runat="server">
             <asp:SqlDataSource runat="server" ID="SqlDataSource2" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT AsociacionCostes.*, AsociacionCostes.codigoAsociacionCoste AS Expr1, AsociacionCostes.codigoConvenio AS Expr2, AsociacionCostes.codigoCategoria AS Expr3, AsociacionCostes.precioHora AS Expr4, AsociacionCostes.precioHoraExtra AS Expr5, AsociacionCostes.horasMaxDia AS Expr6, CategoriaProfesional.nombreCategoria, Convenio.nombre FROM AsociacionCostes INNER JOIN CategoriaProfesional ON AsociacionCostes.codigoCategoria = CategoriaProfesional.codigoCategoria INNER JOIN Convenio ON AsociacionCostes.codigoConvenio = Convenio.codigoConvenio WHERE (AsociacionCostes.codigoConvenio = @codigoConvenio)">
                 <SelectParameters>
@@ -145,11 +131,11 @@
                     <div class="row">
                         <div class="col">
                             Fecha de Inicio:
-                            <input type="date" id="fechaInicio" class="form-control" data-toggle="tooltip" title="Fecha de alta del proyecto" runat="server" value='<%# Bind("fechaInicio", "{0:yyyy-MM-dd}") %>' />
+                            <%--                            <input type="date" id="fechaInicio" class="form-control" data-toggle="tooltip" title="Fecha de alta del proyecto" runat="server" value='<%# Bind("fechaInicio", "{0:yyyy-MM-dd}") %>' />--%>
                         </div>
                         <div class="col">
                             Fecha Fin:
-                            <input type="date" id="fechaFin" class="form-control" data-toggle="tooltip" title="Fecha de fin del proyecto" runat="server" value='<%# Bind("fechaInicio", "{0:yyyy-MM-dd}") %>' />
+                            <%--                            <input type="date" id="fechaFin" class="form-control" data-toggle="tooltip" title="Fecha de fin del proyecto" runat="server" value='<%# Bind("fechaInicio", "{0:yyyy-MM-dd}") %>' />--%>
                         </div>
                     </div>
 

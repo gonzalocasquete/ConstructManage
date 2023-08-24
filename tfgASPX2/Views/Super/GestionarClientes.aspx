@@ -126,7 +126,6 @@
                 <asp:BoundField DataField="codigoCliente" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="codigoCliente" />
                 <asp:TemplateField HeaderText="Entidad" SortExpression="nombreEntidad">
                     <ItemTemplate>
-
                         <%# Eval("nombreEntidad") %>
                     </ItemTemplate>
                     <EditItemTemplate>
@@ -136,7 +135,6 @@
 
                 <asp:TemplateField HeaderText="Domicilio Fiscal" SortExpression="DireccionDF">
                     <ItemTemplate>
-
                         <%# Eval("DireccionDF") %>
                     </ItemTemplate>
                     <EditItemTemplate>
@@ -146,7 +144,6 @@
 
                 <asp:TemplateField HeaderText="Codigo Postal D.F" SortExpression="CodigoPostalDF">
                     <ItemTemplate>
-
                         <%# Eval("CodigoPostalDF") %>
                     </ItemTemplate>
                     <EditItemTemplate>
@@ -156,17 +153,66 @@
 
                 <asp:TemplateField HeaderText="Ubicacion D.F" SortExpression="UbicacionDF">
                     <ItemTemplate>
-
                         <%# Eval("UbicacionDF") %>
                     </ItemTemplate>
                     <EditItemTemplate>
-                        <asp:TextBox Text='<%# Bind("UbicacionDF") %>' class="form-control edit-textbox" runat="server" ID="ubicacionDFTextBox" />
+                        <asp:DropDownList Text='<%# Bind("UbicacionDF") %>' class="form-control edit-dropdown" runat="server" ID="ubicacionDFDropDownList">
+                            <asp:ListItem Text="Álava" Value="Álava" />
+                            <asp:ListItem Text="Albacete" Value="Albacete" />
+                            <asp:ListItem Text="Alicante" Value="Alicante" />
+                            <asp:ListItem Text="Almería" Value="Almería" />
+                            <asp:ListItem Text="Asturias" Value="Asturias" />
+                            <asp:ListItem Text="Ávila" Value="Ávila" />
+                            <asp:ListItem Text="Badajoz" Value="Badajoz" />
+                            <asp:ListItem Text="Barcelona" Value="Barcelona" />
+                            <asp:ListItem Text="Burgos" Value="Burgos" />
+                            <asp:ListItem Text="Cáceres" Value="Cáceres" />
+                            <asp:ListItem Text="Cádiz" Value="Cádiz" />
+                            <asp:ListItem Text="Cantabria" Value="Cantabria" />
+                            <asp:ListItem Text="Castellón" Value="Castellón" />
+                            <asp:ListItem Text="Ciudad Real" Value="Ciudad Real" />
+                            <asp:ListItem Text="Córdoba" Value="Córdoba" />
+                            <asp:ListItem Text="Cuenca" Value="Cuenca" />
+                            <asp:ListItem Text="Gerona" Value="Gerona" />
+                            <asp:ListItem Text="Granada" Value="Granada" />
+                            <asp:ListItem Text="Guadalajara" Value="Guadalajara" />
+                            <asp:ListItem Text="Guipúzcoa" Value="Guipúzcoa" />
+                            <asp:ListItem Text="Huelva" Value="Huelva" />
+                            <asp:ListItem Text="Huesca" Value="Huesca" />
+                            <asp:ListItem Text="Islas Baleares" Value="Islas Baleares" />
+                            <asp:ListItem Text="Jaén" Value="Jaén" />
+                            <asp:ListItem Text="La Coruña" Value="La Coruña" />
+                            <asp:ListItem Text="La Rioja" Value="La Rioja" />
+                            <asp:ListItem Text="Las Palmas" Value="Las Palmas" />
+                            <asp:ListItem Text="León" Value="León" />
+                            <asp:ListItem Text="Lérida" Value="Lérida" />
+                            <asp:ListItem Text="Lugo" Value="Lugo" />
+                            <asp:ListItem Text="Madrid" Value="Madrid" />
+                            <asp:ListItem Text="Málaga" Value="Málaga" />
+                            <asp:ListItem Text="Murcia" Value="Murcia" />
+                            <asp:ListItem Text="Navarra" Value="Navarra" />
+                            <asp:ListItem Text="Orense" Value="Orense" />
+                            <asp:ListItem Text="Palencia" Value="Palencia" />
+                            <asp:ListItem Text="Pontevedra" Value="Pontevedra" />
+                            <asp:ListItem Text="Salamanca" Value="Salamanca" />
+                            <asp:ListItem Text="Santa Cruz de Tenerife" Value="Santa Cruz de Tenerife" />
+                            <asp:ListItem Text="Segovia" Value="Segovia" />
+                            <asp:ListItem Text="Sevilla" Value="Sevilla" />
+                            <asp:ListItem Text="Soria" Value="Soria" />
+                            <asp:ListItem Text="Tarragona" Value="Tarragona" />
+                            <asp:ListItem Text="Teruel" Value="Teruel" />
+                            <asp:ListItem Text="Toledo" Value="Toledo" />
+                            <asp:ListItem Text="Valencia" Value="Valencia" />
+                            <asp:ListItem Text="Valladolid" Value="Valladolid" />
+                            <asp:ListItem Text="Vizcaya" Value="Vizcaya" />
+                            <asp:ListItem Text="Zamora" Value="Zamora" />
+                            <asp:ListItem Text="Zaragoza" Value="Zaragoza" />
+                        </asp:DropDownList>
                     </EditItemTemplate>
                 </asp:TemplateField>
 
                 <asp:TemplateField HeaderText="Banco D.F" SortExpression="BancoDF">
                     <ItemTemplate>
-
                         <%# Eval("BancoDF") %>
                     </ItemTemplate>
                     <EditItemTemplate>
@@ -176,7 +222,6 @@
 
                 <asp:TemplateField HeaderText="Direccion D.E" SortExpression="DireccionDE">
                     <ItemTemplate>
-
                         <%# Eval("DireccionDE") %>
                     </ItemTemplate>
                     <EditItemTemplate>
@@ -186,7 +231,6 @@
 
                 <asp:TemplateField HeaderText="CodigoPostal D.E" SortExpression="CodigoPostalDE">
                     <ItemTemplate>
-
                         <%# Eval("CodigoPostalDE") %>
                     </ItemTemplate>
                     <EditItemTemplate>
@@ -196,11 +240,61 @@
 
                 <asp:TemplateField HeaderText="Ubicacion D.E" SortExpression="UbicacionDE">
                     <ItemTemplate>
-
                         <%# Eval("UbicacionDE") %>
                     </ItemTemplate>
                     <EditItemTemplate>
-                        <asp:TextBox Text='<%# Bind("UbicacionDE") %>' class="form-control edit-textbox" runat="server" ID="ubicacionDETextBox" />
+                        <asp:DropDownList Text='<%# Bind("UbicacionDE") %>' class="form-control edit-dropdown" runat="server" ID="ubicacionDEDropDownList">
+                            <asp:ListItem Text="Álava" Value="Álava" />
+                            <asp:ListItem Text="Albacete" Value="Albacete" />
+                            <asp:ListItem Text="Alicante" Value="Alicante" />
+                            <asp:ListItem Text="Almería" Value="Almería" />
+                            <asp:ListItem Text="Asturias" Value="Asturias" />
+                            <asp:ListItem Text="Ávila" Value="Ávila" />
+                            <asp:ListItem Text="Badajoz" Value="Badajoz" />
+                            <asp:ListItem Text="Barcelona" Value="Barcelona" />
+                            <asp:ListItem Text="Burgos" Value="Burgos" />
+                            <asp:ListItem Text="Cáceres" Value="Cáceres" />
+                            <asp:ListItem Text="Cádiz" Value="Cádiz" />
+                            <asp:ListItem Text="Cantabria" Value="Cantabria" />
+                            <asp:ListItem Text="Castellón" Value="Castellón" />
+                            <asp:ListItem Text="Ciudad Real" Value="Ciudad Real" />
+                            <asp:ListItem Text="Córdoba" Value="Córdoba" />
+                            <asp:ListItem Text="Cuenca" Value="Cuenca" />
+                            <asp:ListItem Text="Gerona" Value="Gerona" />
+                            <asp:ListItem Text="Granada" Value="Granada" />
+                            <asp:ListItem Text="Guadalajara" Value="Guadalajara" />
+                            <asp:ListItem Text="Guipúzcoa" Value="Guipúzcoa" />
+                            <asp:ListItem Text="Huelva" Value="Huelva" />
+                            <asp:ListItem Text="Huesca" Value="Huesca" />
+                            <asp:ListItem Text="Islas Baleares" Value="Islas Baleares" />
+                            <asp:ListItem Text="Jaén" Value="Jaén" />
+                            <asp:ListItem Text="La Coruña" Value="La Coruña" />
+                            <asp:ListItem Text="La Rioja" Value="La Rioja" />
+                            <asp:ListItem Text="Las Palmas" Value="Las Palmas" />
+                            <asp:ListItem Text="León" Value="León" />
+                            <asp:ListItem Text="Lérida" Value="Lérida" />
+                            <asp:ListItem Text="Lugo" Value="Lugo" />
+                            <asp:ListItem Text="Madrid" Value="Madrid" />
+                            <asp:ListItem Text="Málaga" Value="Málaga" />
+                            <asp:ListItem Text="Murcia" Value="Murcia" />
+                            <asp:ListItem Text="Navarra" Value="Navarra" />
+                            <asp:ListItem Text="Orense" Value="Orense" />
+                            <asp:ListItem Text="Palencia" Value="Palencia" />
+                            <asp:ListItem Text="Pontevedra" Value="Pontevedra" />
+                            <asp:ListItem Text="Salamanca" Value="Salamanca" />
+                            <asp:ListItem Text="Santa Cruz de Tenerife" Value="Santa Cruz de Tenerife" />
+                            <asp:ListItem Text="Segovia" Value="Segovia" />
+                            <asp:ListItem Text="Sevilla" Value="Sevilla" />
+                            <asp:ListItem Text="Soria" Value="Soria" />
+                            <asp:ListItem Text="Tarragona" Value="Tarragona" />
+                            <asp:ListItem Text="Teruel" Value="Teruel" />
+                            <asp:ListItem Text="Toledo" Value="Toledo" />
+                            <asp:ListItem Text="Valencia" Value="Valencia" />
+                            <asp:ListItem Text="Valladolid" Value="Valladolid" />
+                            <asp:ListItem Text="Vizcaya" Value="Vizcaya" />
+                            <asp:ListItem Text="Zamora" Value="Zamora" />
+                            <asp:ListItem Text="Zaragoza" Value="Zaragoza" />
+                        </asp:DropDownList>
                     </EditItemTemplate>
                 </asp:TemplateField>
                 <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
@@ -217,12 +311,17 @@
 
         <asp:Panel ID="PanelInsertar" class="mt-3" runat="server" Height="348px" Visible="False">
             <div class="auto-style7">
-                <asp:FormView ID="FormViewInsertarCliente" runat="server" DataSourceID="SqlDataSource1" DataKeyNames="codigoCliente" DefaultMode="Insert" CellPadding="4" ForeColor="#333333" OnItemCommand="FormViewInsertarCliente_ItemCommand">
+                <asp:FormView ID="FormViewInsertarCliente" runat="server" DataSourceID="SqlDataSource1" DataKeyNames="codigoCliente" DefaultMode="Insert" CellPadding="4" ForeColor="#333333" OnItemInserting="FormViewInsertarCliente_ItemInserting" OnItemCommand="FormViewInsertarCliente_ItemCommand">
                     <FooterStyle BackColor="#990000" ForeColor="White" Font-Bold="True" />
                     <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
                     <InsertItemTemplate>
-
                         <div class="row">
+                            <div class="col text-center">
+                                <h3>Insertar Cliente</h3>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
                             <div class="col">
                                 Entidad:
                                     <asp:TextBox ID="nombreEntidadTextBox" class="form-control" data-toggle="tooltip" title="Nombre de la entidad" runat="server" Text='<%# Bind("nombreEntidad") %>' />
@@ -240,7 +339,58 @@
                             </div>
                             <div class="col">
                                 UbicacionDF:
-                                    <asp:TextBox ID="UbicacionDFTextBox" class="form-control" data-toggle="tooltip" title="Ubicacion del domicilio fiscal" runat="server" Text='<%# Bind("UbicacionDF") %>' />
+                                <asp:DropDownList Text='<%# Bind("UbicacionDF") %>' class="form-control edit-dropdown" runat="server" ID="ubicacionDFDropDownList">
+                                    <asp:ListItem Text="Álava" Value="Álava" />
+                                    <asp:ListItem Text="Albacete" Value="Albacete" />
+                                    <asp:ListItem Text="Alicante" Value="Alicante" />
+                                    <asp:ListItem Text="Almería" Value="Almería" />
+                                    <asp:ListItem Text="Asturias" Value="Asturias" />
+                                    <asp:ListItem Text="Ávila" Value="Ávila" />
+                                    <asp:ListItem Text="Badajoz" Value="Badajoz" />
+                                    <asp:ListItem Text="Barcelona" Value="Barcelona" />
+                                    <asp:ListItem Text="Burgos" Value="Burgos" />
+                                    <asp:ListItem Text="Cáceres" Value="Cáceres" />
+                                    <asp:ListItem Text="Cádiz" Value="Cádiz" />
+                                    <asp:ListItem Text="Cantabria" Value="Cantabria" />
+                                    <asp:ListItem Text="Castellón" Value="Castellón" />
+                                    <asp:ListItem Text="Ciudad Real" Value="Ciudad Real" />
+                                    <asp:ListItem Text="Córdoba" Value="Córdoba" />
+                                    <asp:ListItem Text="Cuenca" Value="Cuenca" />
+                                    <asp:ListItem Text="Gerona" Value="Gerona" />
+                                    <asp:ListItem Text="Granada" Value="Granada" />
+                                    <asp:ListItem Text="Guadalajara" Value="Guadalajara" />
+                                    <asp:ListItem Text="Guipúzcoa" Value="Guipúzcoa" />
+                                    <asp:ListItem Text="Huelva" Value="Huelva" />
+                                    <asp:ListItem Text="Huesca" Value="Huesca" />
+                                    <asp:ListItem Text="Islas Baleares" Value="Islas Baleares" />
+                                    <asp:ListItem Text="Jaén" Value="Jaén" />
+                                    <asp:ListItem Text="La Coruña" Value="La Coruña" />
+                                    <asp:ListItem Text="La Rioja" Value="La Rioja" />
+                                    <asp:ListItem Text="Las Palmas" Value="Las Palmas" />
+                                    <asp:ListItem Text="León" Value="León" />
+                                    <asp:ListItem Text="Lérida" Value="Lérida" />
+                                    <asp:ListItem Text="Lugo" Value="Lugo" />
+                                    <asp:ListItem Text="Madrid" Value="Madrid" />
+                                    <asp:ListItem Text="Málaga" Value="Málaga" />
+                                    <asp:ListItem Text="Murcia" Value="Murcia" />
+                                    <asp:ListItem Text="Navarra" Value="Navarra" />
+                                    <asp:ListItem Text="Orense" Value="Orense" />
+                                    <asp:ListItem Text="Palencia" Value="Palencia" />
+                                    <asp:ListItem Text="Pontevedra" Value="Pontevedra" />
+                                    <asp:ListItem Text="Salamanca" Value="Salamanca" />
+                                    <asp:ListItem Text="Santa Cruz de Tenerife" Value="Santa Cruz de Tenerife" />
+                                    <asp:ListItem Text="Segovia" Value="Segovia" />
+                                    <asp:ListItem Text="Sevilla" Value="Sevilla" />
+                                    <asp:ListItem Text="Soria" Value="Soria" />
+                                    <asp:ListItem Text="Tarragona" Value="Tarragona" />
+                                    <asp:ListItem Text="Teruel" Value="Teruel" />
+                                    <asp:ListItem Text="Toledo" Value="Toledo" />
+                                    <asp:ListItem Text="Valencia" Value="Valencia" />
+                                    <asp:ListItem Text="Valladolid" Value="Valladolid" />
+                                    <asp:ListItem Text="Vizcaya" Value="Vizcaya" />
+                                    <asp:ListItem Text="Zamora" Value="Zamora" />
+                                    <asp:ListItem Text="Zaragoza" Value="Zaragoza" />
+                                </asp:DropDownList>
                             </div>
                         </div>
 
@@ -262,7 +412,58 @@
                             </div>
                             <div class="col">
                                 UbicacionDE:
-                                    <asp:TextBox ID="UbicacionDETextBox" class="form-control" data-toggle="tooltip" title="Ubicacion del domicilio empresarial" runat="server" Text='<%# Bind("UbicacionDE") %>' />
+                                <asp:DropDownList Text='<%# Bind("UbicacionDE") %>' class="form-control edit-dropdown" runat="server" ID="ubicacionDEDropDownList">
+                                    <asp:ListItem Text="Álava" Value="Álava" />
+                                    <asp:ListItem Text="Albacete" Value="Albacete" />
+                                    <asp:ListItem Text="Alicante" Value="Alicante" />
+                                    <asp:ListItem Text="Almería" Value="Almería" />
+                                    <asp:ListItem Text="Asturias" Value="Asturias" />
+                                    <asp:ListItem Text="Ávila" Value="Ávila" />
+                                    <asp:ListItem Text="Badajoz" Value="Badajoz" />
+                                    <asp:ListItem Text="Barcelona" Value="Barcelona" />
+                                    <asp:ListItem Text="Burgos" Value="Burgos" />
+                                    <asp:ListItem Text="Cáceres" Value="Cáceres" />
+                                    <asp:ListItem Text="Cádiz" Value="Cádiz" />
+                                    <asp:ListItem Text="Cantabria" Value="Cantabria" />
+                                    <asp:ListItem Text="Castellón" Value="Castellón" />
+                                    <asp:ListItem Text="Ciudad Real" Value="Ciudad Real" />
+                                    <asp:ListItem Text="Córdoba" Value="Córdoba" />
+                                    <asp:ListItem Text="Cuenca" Value="Cuenca" />
+                                    <asp:ListItem Text="Gerona" Value="Gerona" />
+                                    <asp:ListItem Text="Granada" Value="Granada" />
+                                    <asp:ListItem Text="Guadalajara" Value="Guadalajara" />
+                                    <asp:ListItem Text="Guipúzcoa" Value="Guipúzcoa" />
+                                    <asp:ListItem Text="Huelva" Value="Huelva" />
+                                    <asp:ListItem Text="Huesca" Value="Huesca" />
+                                    <asp:ListItem Text="Islas Baleares" Value="Islas Baleares" />
+                                    <asp:ListItem Text="Jaén" Value="Jaén" />
+                                    <asp:ListItem Text="La Coruña" Value="La Coruña" />
+                                    <asp:ListItem Text="La Rioja" Value="La Rioja" />
+                                    <asp:ListItem Text="Las Palmas" Value="Las Palmas" />
+                                    <asp:ListItem Text="León" Value="León" />
+                                    <asp:ListItem Text="Lérida" Value="Lérida" />
+                                    <asp:ListItem Text="Lugo" Value="Lugo" />
+                                    <asp:ListItem Text="Madrid" Value="Madrid" />
+                                    <asp:ListItem Text="Málaga" Value="Málaga" />
+                                    <asp:ListItem Text="Murcia" Value="Murcia" />
+                                    <asp:ListItem Text="Navarra" Value="Navarra" />
+                                    <asp:ListItem Text="Orense" Value="Orense" />
+                                    <asp:ListItem Text="Palencia" Value="Palencia" />
+                                    <asp:ListItem Text="Pontevedra" Value="Pontevedra" />
+                                    <asp:ListItem Text="Salamanca" Value="Salamanca" />
+                                    <asp:ListItem Text="Santa Cruz de Tenerife" Value="Santa Cruz de Tenerife" />
+                                    <asp:ListItem Text="Segovia" Value="Segovia" />
+                                    <asp:ListItem Text="Sevilla" Value="Sevilla" />
+                                    <asp:ListItem Text="Soria" Value="Soria" />
+                                    <asp:ListItem Text="Tarragona" Value="Tarragona" />
+                                    <asp:ListItem Text="Teruel" Value="Teruel" />
+                                    <asp:ListItem Text="Toledo" Value="Toledo" />
+                                    <asp:ListItem Text="Valencia" Value="Valencia" />
+                                    <asp:ListItem Text="Valladolid" Value="Valladolid" />
+                                    <asp:ListItem Text="Vizcaya" Value="Vizcaya" />
+                                    <asp:ListItem Text="Zamora" Value="Zamora" />
+                                    <asp:ListItem Text="Zaragoza" Value="Zaragoza" />
+                                </asp:DropDownList>
                             </div>
                         </div>
 

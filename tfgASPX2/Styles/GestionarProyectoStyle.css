@@ -25,6 +25,15 @@
 }
 
 .tamanio-proyecto {
+    border-radius: 18px;
+    overflow: hidden;
     table-layout: fixed;
-    width: 1480px
+    width: 1700px
+}
+
+.tamanio-partida {
+    border-radius: 18px;
+    overflow: hidden;
+    table-layout: fixed;
+    width: 1100px
 }

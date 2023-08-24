@@ -35,3 +35,10 @@
     cursor: pointer;
     width: 630px
 }
+
+.tamanio-partida {
+    border-radius: 18px;
+    overflow: hidden;
+    table-layout: fixed;
+    width: 1100px;
+}

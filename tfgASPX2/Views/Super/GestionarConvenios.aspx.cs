@@ -58,26 +58,26 @@ namespace tfgASPX2.Views.Super
 
         protected void ButtonFiltrado_Click(object sender, EventArgs e)
         {
-            String consultaSQL = "SELECT * FROM Convenio WHERE nombre LIKE '%" + TextBoxFiltradoConvenio.Text + "%'";
+            //    String consultaSQL = "SELECT * FROM Convenio WHERE nombreConvenio LIKE '%" + TextBoxFiltradoConvenio.Text + "%'";
 
-            if (fechaMinima.Value != "")
-                consultaSQL += " AND fechaInicio >= '" + fechaMinima.Value + "'";
+            //    if (fechaMinima.Value != "")
+            //        consultaSQL += " AND fechaInicio >= '" + fechaMinima.Value + "'";
 
-            if (fechaMaxima.Value != "")
-                consultaSQL += " AND fechaFin <= '" + fechaMaxima.Value + "'";
+            //    if (fechaMaxima.Value != "")
+            //        consultaSQL += " AND fechaFin <= '" + fechaMaxima.Value + "'";
 
-            SqlDataSource1.SelectCommand = consultaSQL;
-            SqlDataSource1.DataBind();
+            //    SqlDataSource1.SelectCommand = consultaSQL;
+            //    SqlDataSource1.DataBind();
         }
 
         protected void Todos_Click(object sender, EventArgs e)
         {
-            SqlDataSource1.SelectCommand = "SELECT * FROM Convenio";
-            SqlDataSource1.DataBind();
-            TextBoxFiltradoConvenio.Text = "";
-            fechaMinima.Value = "";
-            fechaMaxima.Value = "";
+            //    SqlDataSource1.SelectCommand = "SELECT * FROM Convenio";
+            //    SqlDataSource1.DataBind();
+            //    TextBoxFiltradoConvenio.Text = "";
+            //    fechaMinima.Value = "";
+            //    fechaMaxima.Value = "";
         }
 
-    }
+}
 }

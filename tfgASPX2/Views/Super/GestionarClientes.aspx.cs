@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -123,6 +124,33 @@ namespace tfgASPX2.Views.Super
                 ScriptManager.RegisterStartupScript(this, GetType(), "Error", "alert('La ubicación del domicilio empresarial no puede estar vacía.');", true);
 
             }
+
+            string consulta = "SELECT nombreEntidad FROM Cliente WHERE nombreEntidad = @nombreEntidad";
+
+            string connectionString = "Data Source=miservertfg.database.windows.net;Initial Catalog=mibasededatostfg;Persist Security Info=True;User ID=adminsql;Password=Josele6072";
+
+            using (SqlConnection cnn = new SqlConnection(connectionString))
+            {
+                cnn.Open();
+                using (SqlCommand cmd = new SqlCommand(consulta, cnn))
+                {
+                    cmd.Parameters.AddWithValue("@nombreEntidad", nombreEntidadTextBox.Text.ToString());
+
+                    using (SqlDataReader adap = cmd.ExecuteReader())
+                    {
+                        if (adap.Read())
+                        {
+                            e.Cancel = true;
+                            ScriptManager.RegisterStartupScript(this, GetType(), "Error", "alert('El nombre de la entidad ya se encuentra registrado');", true);
+                        }
+                    }
+                }
+            }
+
+
+
+
+
         }
 
         protected void FormViewInsertarCliente_ItemCommand(object sender, FormViewCommandEventArgs e)

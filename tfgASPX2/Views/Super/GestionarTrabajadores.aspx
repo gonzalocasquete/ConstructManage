@@ -27,7 +27,7 @@
         <div style="width: 250px">
             <div class="row">
                 <div class="col">
-                      <asp:Button ID="ButtonInsertarTrabajador" class="form-control btn-secondary btn-sm btn-block mt-1" runat="server" Text="Insertar Trabajador" OnClick="ButtonInsertarTrabajador_Click" />
+                    <asp:Button ID="ButtonInsertarTrabajador" class="form-control btn-secondary btn-sm btn-block mt-1" runat="server" Text="Insertar Trabajador" OnClick="ButtonInsertarTrabajador_Click" />
                 </div>
             </div>
             <div class="row">
@@ -37,7 +37,7 @@
             </div>
 
             <asp:Panel ID="PanelFiltros" runat="server" Visible="False">
-            <hr style="height: 2px; width: auto; border-width: 0; color: whitesmoke; background-color: whitesmoke">
+                <hr style="height: 2px; width: auto; border-width: 0; color: whitesmoke; background-color: whitesmoke">
                 <div>
 
                     <div class="row">
@@ -98,7 +98,7 @@
         </div>
 
         <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>"
-            DeleteCommand="DELETE FROM Trabajador WHERE (codigoTrabajador = @codigoTrabajador)"
+            DeleteCommand="DELETE FROM Trabajador WHERE codigoTrabajador = @codigoTrabajador;"
             SelectCommand="SELECT Trabajador.codigoTrabajador, Trabajador.nombre, Trabajador.apellido, Trabajador.codigoUsuario, Trabajador.codigoCategoria, Usuario.nombreUsuario, CategoriaProfesional.nombreCategoria, Usuario.rol FROM Trabajador INNER JOIN Usuario ON Trabajador.codigoUsuario = Usuario.codigoUsuario INNER JOIN CategoriaProfesional ON Trabajador.codigoCategoria = CategoriaProfesional.codigoCategoria"
             UpdateCommand="UPDATE Trabajador SET nombre =@nombre, apellido =@apellido, codigoUsuario =@codigoUsuario, codigoCategoria =@codigoCategoria">
             <DeleteParameters>
@@ -117,29 +117,30 @@
             <Columns>
                 <asp:BoundField DataField="codigoTrabajador" HeaderText="ID" ReadOnly="True" InsertVisible="False" ItemStyle-CssClass="small-column"></asp:BoundField>
                 <asp:TemplateField HeaderText="Nombre" SortExpression="nombre">
-            <ItemTemplate>
-                <%# Eval("nombre") %>
-            </ItemTemplate>
-            <EditItemTemplate>
-                <asp:TextBox Text='<%# Bind("nombre") %>' class="form-control edit-textbox" style="width: 125px;" runat="server" ID="nombreTextBox" />
-            </EditItemTemplate>
-        </asp:TemplateField>
-        
-        <asp:TemplateField HeaderText="Apellido" SortExpression="apellido">
-            <ItemTemplate>
-                <%# Eval("apellido") %>
-            </ItemTemplate>
-            <EditItemTemplate>
-                <asp:TextBox Text='<%# Bind("apellido") %>' class="form-control edit-textbox" style="width: 125px;" runat="server" ID="apellidoTextBox" />
-            </EditItemTemplate>
-        </asp:TemplateField>
+                    <ItemTemplate>
+                        <%# Eval("nombre") %>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox Text='<%# Bind("nombre") %>' class="form-control edit-textbox" Style="width: 125px;" runat="server" ID="nombreTextBox" />
+                    </EditItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Apellido" SortExpression="apellido">
+                    <ItemTemplate>
+                        <%# Eval("apellido") %>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox Text='<%# Bind("apellido") %>' class="form-control edit-textbox" Style="width: 125px;" runat="server" ID="apellidoTextBox" />
+                    </EditItemTemplate>
+                </asp:TemplateField>
                 <asp:TemplateField HeaderText="Usuario" SortExpression="nombreUsuario">
                     <ItemTemplate>
                         <%# Eval("nombreUsuario") %>
                     </ItemTemplate>
                     <EditItemTemplate>
                         <asp:DropDownList Text='<%# Bind("codigoUsuario") %>' class="dropdown form-control edit-dropdown" ID="idUsuariosDropDownList" runat="server" DataSourceID="UsuariosSqlDataSourceEditarTrabajador" DataTextField="nombreUsuario" DataValueField="codigoUsuario"></asp:DropDownList>
-                        <asp:SqlDataSource ID="UsuariosSqlDataSourceEditarTrabajador" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT codigoUsuario, nombreUsuario FROM Usuario  WHERE codigoUsuario NOT IN (SELECT codigoUsuario FROM Trabajador) ORDER BY nombreUsuario;"></asp:SqlDataSource>                    </EditItemTemplate>
+                        <asp:SqlDataSource ID="UsuariosSqlDataSourceEditarTrabajador" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT codigoUsuario, nombreUsuario FROM Usuario WHERE rol <> 'super'"></asp:SqlDataSource>
+                    </EditItemTemplate>
                 </asp:TemplateField>
 
                 <asp:TemplateField HeaderText="Categoria" SortExpression="nombreCategoria">
@@ -190,6 +191,12 @@
                 <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
                 <InsertItemTemplate>
                     <div class="row">
+                        <div class="col text-center">
+                            <h3>Insertar Trabajador</h3>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
                         <div class="col">
                             Nombre:
                             <asp:TextBox Text='<%# Bind("nombre") %>' class="form-control" runat="server" ID="nombreTextBox" /><br />
@@ -205,12 +212,12 @@
                            <asp:DropDownList Text='<%# Bind("codigoUsuario") %>' class="dropdown form-control" ID="idUsuariosDropDownList" runat="server" DataSourceID="UsuariosSqlDataSourceInsertar" DataTextField="nombreUsuario" DataValueField="codigoUsuario" AppendDataBoundItems="true">
                                <asp:ListItem Text="" Value=""></asp:ListItem>
                            </asp:DropDownList>
-                           <asp:SqlDataSource ID="UsuariosSqlDataSourceInsertar" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT codigoUsuario, nombreUsuario FROM Usuario  WHERE codigoUsuario NOT IN (SELECT codigoUsuario FROM Trabajador) ORDER BY nombreUsuario;"></asp:SqlDataSource>
+                            <asp:SqlDataSource ID="UsuariosSqlDataSourceInsertar" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT codigoUsuario, nombreUsuario FROM Usuario WHERE codigoUsuario NOT IN (SELECT codigoUsuario FROM Trabajador) AND rol <> 'super' ORDER BY nombreUsuario;"></asp:SqlDataSource>
                         </div>
                         <div class="col">
                             Categoria:
                               <asp:DropDownList Text='<%# Bind("codigoCategoria") %>' class="dropdown form-control" ID="idCategoriasDropDownList" runat="server" DataSourceID="CategoriasSqlDataSourceInsertar" DataTextField="nombreCategoria" DataValueField="codigoCategoria" AppendDataBoundItems="true">
-                                   <asp:ListItem Text="" Value=""></asp:ListItem>
+                                  <asp:ListItem Text="" Value=""></asp:ListItem>
                               </asp:DropDownList>
                             <asp:SqlDataSource ID="CategoriasSqlDataSourceInsertar" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT codigoCategoria, nombreCategoria FROM CategoriaProfesional order by nombreCategoria"></asp:SqlDataSource>
                         </div>

@@ -90,10 +90,10 @@
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
                 <asp:BoundField DataField="codigoUsuario" HeaderText="ID" ReadOnly="True" InsertVisible="False"></asp:BoundField>
-                
+
                 <asp:TemplateField HeaderText="Usuario" SortExpression="nombreUsuario">
-                    <ItemTemplate>  
-                            <%# Eval("nombreUsuario") %>                     
+                    <ItemTemplate>
+                        <%# Eval("nombreUsuario") %>
                     </ItemTemplate>
                     <EditItemTemplate>
                         <asp:TextBox Text='<%# Bind("nombreUsuario") %>' class="form-control edit-textbox" runat="server" ID="nombreUsuarioTextBox" />
@@ -101,8 +101,8 @@
                 </asp:TemplateField>
 
                 <asp:TemplateField HeaderText="Contraseña">
-                    <ItemTemplate>                      
-                            <%# Eval("contraseñaUsuario") %>             
+                    <ItemTemplate>
+                        <%# Eval("contraseñaUsuario") %>
                     </ItemTemplate>
                     <EditItemTemplate>
                         <asp:TextBox Text='<%# Bind("contraseñaUsuario") %>' class="form-control edit-textbox" runat="server" ID="contraseñaUsuarioTextBox" />
@@ -129,7 +129,7 @@
             <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
         </asp:GridView>
 
-   <asp:SqlDataSource runat="server" ID="SqlDataSource2" DataSourceMode="DataReader" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" DeleteCommand="DELETE FROM [Usuario] WHERE [codigoUsuario] = @codigoUsuario" InsertCommand="INSERT INTO [Usuario] ([nombreUsuario], [contraseñaUsuario], [rol]) VALUES (@nombreUsuario, @contraseñaUsuario, @rol)" SelectCommand="SELECT * FROM [Usuario]" UpdateCommand="UPDATE [Usuario] SET [nombreUsuario] = @nombreUsuario, [contraseñaUsuario] = @contraseñaUsuario, [rol] = @rol WHERE [codigoUsuario] = @codigoUsuario">
+        <asp:SqlDataSource runat="server" ID="SqlDataSource2" DataSourceMode="DataReader" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" DeleteCommand="DELETE FROM [Usuario] WHERE [codigoUsuario] = @codigoUsuario" InsertCommand="INSERT INTO [Usuario] ([nombreUsuario], [contraseñaUsuario], [rol]) VALUES (@nombreUsuario, @contraseñaUsuario, @rol)" SelectCommand="SELECT * FROM [Usuario]" UpdateCommand="UPDATE [Usuario] SET [nombreUsuario] = @nombreUsuario, [contraseñaUsuario] = @contraseñaUsuario, [rol] = @rol WHERE [codigoUsuario] = @codigoUsuario">
             <DeleteParameters>
                 <asp:Parameter Name="codigoUsuario" Type="Int32"></asp:Parameter>
             </DeleteParameters>
@@ -148,10 +148,16 @@
 
         <asp:Panel ID="Panel1" class="mt-3" runat="server" Height="196px" Visible="False">
             <asp:FormView ID="FormViewInsertarUsuario" class="form-control" runat="server" DataSourceID="SqlDataSource2" DataKeyNames="codigoUsuario" DefaultMode="Insert" OnItemInserting="FormViewInsertarUsuario_ItemInserting" OnItemInserted="FormViewInsertarUsuario_ItemInserted" OnItemCommand="FormViewInsertarUsuario_ItemCommand">
+                <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
                 <InsertItemTemplate>
-                    <footerstyle backcolor="#990000" font-bold="True" forecolor="White" />
-                    <headerstyle backcolor="#990000" font-bold="True" forecolor="White" />
                     <div class="row">
+                        <div class="col text-center">
+                            <h3>Insertar Usuario</h3>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
                         <div class="col">
                             Usuario:
                             <asp:TextBox Text='<%# Bind("nombreUsuario") %>' class="form-control" runat="server" ID="nombreUsuarioTextBox" data-toggle="tooltip" title="Usuario" />

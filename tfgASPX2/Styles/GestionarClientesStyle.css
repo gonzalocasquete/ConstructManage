@@ -20,23 +20,9 @@
     height: 631px;
 }
 
-.ButtonStyle {
-    background-color: #e7e7e7; /* Green */
-    border: none;
-    color: black;
-    padding: 16px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-    cursor: pointer;
-    width:1020px
-}
-
 .tamanio-cliente {
+    border-radius: 18px;
+    overflow: hidden;
     table-layout: fixed;
     width: 1450px
 }
