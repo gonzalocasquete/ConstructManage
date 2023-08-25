@@ -46,9 +46,6 @@
                             </asp:DropDownList>
                             <asp:SqlDataSource runat="server" ID="SqlDataSourceProyectos" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT [codigoProyecto], [NombreProyecto] FROM [Proyecto] ORDER BY [codigoProyecto]"></asp:SqlDataSource>
                         </div>
-
-
-
                     </div>
 
                     <div class="row">
@@ -86,7 +83,7 @@
         </div>
 
         <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>"
-            SelectCommand="SELECT P.*, Pr.nombreProyecto FROM Partida P INNER JOIN Proyecto Pr ON P.codigoProyecto = Pr.codigoProyecto;"
+            SelectCommand="SELECT P.*, Pr.nombreProyecto FROM Partida P INNER JOIN Proyecto Pr ON P.codigoProyecto = Pr.codigoProyecto order by P.codigoPartida DESC;"
             DeleteCommand="DELETE FROM [Partida] WHERE [codigoPartida] = @original_codigoPartida"
             InsertCommand="INSERT INTO [Partida] ([nombrePartida], [fechaInicio], [fechaFin], [Presupuesto], [codigoProyecto]) VALUES (@nombrePartida, @FechaInicio, @FechaFin, @Presupuesto, @codigoProyecto)"
             OldValuesParameterFormatString="original_{0}"

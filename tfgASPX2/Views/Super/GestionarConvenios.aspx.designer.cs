@@ -87,6 +87,15 @@ namespace tfgASPX2.Views.Super
         protected global::System.Web.UI.WebControls.Label LabelFechaMinima;
 
         /// <summary>
+        /// Control fechaMinima.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl fechaMinima;
+
+        /// <summary>
         /// Control LabelFechaMaxima.
         /// </summary>
         /// <remarks>
@@ -94,6 +103,15 @@ namespace tfgASPX2.Views.Super
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LabelFechaMaxima;
+
+        /// <summary>
+        /// Control fechaMaxima.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl fechaMaxima;
 
         /// <summary>
         /// Control ButtonFiltrado.
@@ -159,6 +177,24 @@ namespace tfgASPX2.Views.Super
         protected global::System.Web.UI.WebControls.Panel PanelInsertarAsociacion;
 
         /// <summary>
+        /// Control SqlDataSourceInsertarAsociacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceInsertarAsociacion;
+
+        /// <summary>
+        /// Control FormViewInsertarAsociacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FormView FormViewInsertarAsociacion;
+
+        /// <summary>
         /// Control PanelInsertarConvenio.
         /// </summary>
         /// <remarks>
@@ -168,21 +204,21 @@ namespace tfgASPX2.Views.Super
         protected global::System.Web.UI.WebControls.Panel PanelInsertarConvenio;
 
         /// <summary>
-        /// Control SqlDataSource3.
+        /// Control SqlDataSourceInsertarConvenio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource3;
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceInsertarConvenio;
 
         /// <summary>
-        /// Control FormView1.
+        /// Control FormViewInsertarConvenio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FormView FormView1;
+        protected global::System.Web.UI.WebControls.FormView FormViewInsertarConvenio;
     }
 }

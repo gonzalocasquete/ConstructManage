@@ -117,13 +117,39 @@ namespace tfgASPX2.Views.Super
                 }
             }
         }
+ 
+        protected void FormViewInsertarUsuario_ItemInserted(object sender, FormViewInsertedEventArgs e)
+        {
+            if (e.Exception == null)
+            {
+                // Mostrar mensaje de éxito
+                ScriptManager.RegisterStartupScript(this, GetType(), "Success", "alert('Usuario insertado exitosamente.');", true);
+            }
+            else
+            {
+                // Mostrar mensaje de error en caso de excepción
+                ScriptManager.RegisterStartupScript(this, GetType(), "Error", "alert('Error al insertar usuario.');", true);
+                e.ExceptionHandled = true;
+            }
+        }
+
+        protected void FormViewInsertarUsuario_ItemCommand(object sender, FormViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Cancel")
+            {
+                Panel1.Visible = false;
+                GridView1.Visible = true;
+                ButtonFiltros.Visible = true;
+                ButtonInsertar.Text = "Insertar Usuario";
+            }
+        }
 
         protected void FormViewInsertarUsuario_ItemInserting(object sender, FormViewInsertEventArgs e)
         {
             TextBox nombreUsuarioTextBox = (TextBox)FormViewInsertarUsuario.FindControl("nombreUsuarioTextBox");
             TextBox contraseñaUsuarioTextBox = (TextBox)FormViewInsertarUsuario.FindControl("contraseñaUsuarioTextBox");
-            
-            if (string.IsNullOrEmpty(nombreUsuarioTextBox.Text) ||string.IsNullOrEmpty(contraseñaUsuarioTextBox.Text))
+
+            if (string.IsNullOrEmpty(nombreUsuarioTextBox.Text) || string.IsNullOrEmpty(contraseñaUsuarioTextBox.Text))
             {
                 if (string.IsNullOrEmpty(nombreUsuarioTextBox.Text))
                 {
@@ -162,32 +188,6 @@ namespace tfgASPX2.Views.Super
                         }
                     }
                 }
-            }
-        }
-
-        protected void FormViewInsertarUsuario_ItemInserted(object sender, FormViewInsertedEventArgs e)
-        {
-            if (e.Exception == null)
-            {
-                // Mostrar mensaje de éxito
-                ScriptManager.RegisterStartupScript(this, GetType(), "Success", "alert('Usuario insertado exitosamente.');", true);
-            }
-            else
-            {
-                // Mostrar mensaje de error en caso de excepción
-                ScriptManager.RegisterStartupScript(this, GetType(), "Error", "alert('Error al insertar usuario.');", true);
-                e.ExceptionHandled = true;
-            }
-        }
-
-        protected void FormViewInsertarUsuario_ItemCommand(object sender, FormViewCommandEventArgs e)
-        {
-            if (e.CommandName == "Cancel")
-            {
-                Panel1.Visible = false;
-                GridView1.Visible = true;
-                ButtonFiltros.Visible = true;
-                ButtonInsertar.Text = "Insertar Usuario";
             }
         }
 

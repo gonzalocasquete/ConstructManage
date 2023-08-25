@@ -105,7 +105,7 @@
 
         <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>"
             DeleteCommand="DELETE FROM Trabajador WHERE codigoTrabajador = @codigoTrabajador;"
-            SelectCommand="SELECT Trabajador.codigoTrabajador, Trabajador.nombre, Trabajador.apellido, Trabajador.codigoUsuario, Trabajador.codigoCategoria, Usuario.nombreUsuario, CategoriaProfesional.nombreCategoria, Usuario.rol FROM Trabajador INNER JOIN Usuario ON Trabajador.codigoUsuario = Usuario.codigoUsuario INNER JOIN CategoriaProfesional ON Trabajador.codigoCategoria = CategoriaProfesional.codigoCategoria"
+            SelectCommand="SELECT Trabajador.codigoTrabajador, Trabajador.nombre, Trabajador.apellido, Trabajador.codigoUsuario, Trabajador.codigoCategoria, Usuario.nombreUsuario, CategoriaProfesional.nombreCategoria, Usuario.rol FROM Trabajador INNER JOIN Usuario ON Trabajador.codigoUsuario = Usuario.codigoUsuario INNER JOIN CategoriaProfesional ON Trabajador.codigoCategoria = CategoriaProfesional.codigoCategoria order by codigoTrabajador DESC"
             UpdateCommand="UPDATE Trabajador SET nombre =@nombre, apellido =@apellido, codigoUsuario =@codigoUsuario, codigoCategoria =@codigoCategoria">
             <DeleteParameters>
                 <asp:Parameter Name="codigoTrabajador"></asp:Parameter>

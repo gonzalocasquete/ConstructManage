@@ -61,7 +61,7 @@
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>"
             DeleteCommand="DELETE FROM [CategoriaProfesional] WHERE [codigoCategoria] = @original_codigoCategoria"
             InsertCommand="INSERT INTO [CategoriaProfesional] ([nombreCategoria]) VALUES (@nombreCategoria)" OldValuesParameterFormatString="original_{0}"
-            SelectCommand="SELECT * FROM [CategoriaProfesional]"
+            SelectCommand="SELECT * FROM [CategoriaProfesional] order by codigoCategoria DESC"
             UpdateCommand="UPDATE [CategoriaProfesional] SET [nombreCategoria] = @nombreCategoria WHERE [codigoCategoria] = @original_codigoCategoria AND (([nombreCategoria] = @original_nombreCategoria) OR ([nombreCategoria] IS NULL AND @original_nombreCategoria IS NULL))">
             <DeleteParameters>
                 <asp:Parameter Name="original_codigoCategoria" Type="Int32" />
@@ -139,15 +139,54 @@
         </asp:Panel>
 
         <asp:Panel ID="PanelMostrarAsociaciones" class="mt-3" runat="server" Visible="False">
-            <asp:GridView ID="GridView2" class="table mt-3" runat="server" DataSourceID="SqlDataSource3" AutoGenerateColumns="False" DataKeyNames="codigoAsociacionCoste" AllowPaging="True" AllowSorting="True" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical">
+            <asp:GridView ID="GridView2" class="table mt-3 tamanio-asociacion" runat="server" DataSourceID="SqlDataSource3" AutoGenerateColumns="False" DataKeyNames="codigoAsociacionCoste" AllowPaging="True" AllowSorting="True" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical">
                 <AlternatingRowStyle BackColor="#CCCCCC" />
                 <Columns>
                     <asp:BoundField DataField="codigoAsociacionCoste" HeaderText="ID" ReadOnly="True" InsertVisible="False" SortExpression="codigoAsociacionCoste"></asp:BoundField>
-                    <asp:BoundField DataField="codigoConvenio" HeaderText="Convenio" SortExpression="codigoConvenio"></asp:BoundField>
-                    <asp:BoundField DataField="codigoCategoria" HeaderText="Categoria" SortExpression="codigoCategoria"></asp:BoundField>
-                    <asp:BoundField DataField="precioHora" HeaderText="PrecioHora" SortExpression="precioHora"></asp:BoundField>
-                    <asp:BoundField DataField="precioHoraExtra" HeaderText="PrecioHoraExtra" SortExpression="precioHoraExtra"></asp:BoundField>
-                    <asp:BoundField DataField="horasMaxDia" HeaderText="HorasMaxDia" SortExpression="horasMaxDia"></asp:BoundField>
+                    <asp:TemplateField HeaderText="Convenio" SortExpression="codigoConvenio">
+            <ItemTemplate>
+               <%# Eval("codigoConvenio") %>
+            </ItemTemplate>
+            <EditItemTemplate>
+                <asp:TextBox ID="txtConvenio" class="form-control edit-textbox" runat="server" Text='<%# Bind("codigoConvenio") %>'></asp:TextBox>
+            </EditItemTemplate>
+        </asp:TemplateField>
+
+        <asp:TemplateField HeaderText="Categoria" SortExpression="codigoCategoria">
+            <ItemTemplate>
+                <%# Eval("codigoCategoria") %>
+            </ItemTemplate>
+            <EditItemTemplate>
+                <asp:TextBox ID="txtCategoria" class="form-control edit-textbox" runat="server" Text='<%# Bind("codigoCategoria") %>'></asp:TextBox>
+            </EditItemTemplate>
+        </asp:TemplateField>
+
+        <asp:TemplateField HeaderText="Precio Hora" SortExpression="precioHora">
+            <ItemTemplate>
+               <%# Eval("precioHora") %>
+            </ItemTemplate>
+            <EditItemTemplate>
+                <asp:TextBox ID="txtPrecioHora" class="form-control edit-textbox" runat="server" Text='<%# Bind("precioHora") %>'></asp:TextBox>
+            </EditItemTemplate>
+        </asp:TemplateField>
+
+        <asp:TemplateField HeaderText="Precio Hora Extra" SortExpression="precioHoraExtra">
+            <ItemTemplate>
+               <%# Eval("precioHoraExtra") %>
+            </ItemTemplate>
+            <EditItemTemplate>
+                <asp:TextBox ID="txtPrecioHoraExtra" class="form-control edit-textbox" runat="server" Text='<%# Bind("precioHoraExtra") %>'></asp:TextBox>
+            </EditItemTemplate>
+        </asp:TemplateField>
+
+        <asp:TemplateField HeaderText="Horas Máximas" SortExpression="horasMaxDia">
+            <ItemTemplate>
+               <%# Eval("horasMaxDia") %>
+            </ItemTemplate>
+            <EditItemTemplate>
+                <asp:TextBox ID="txtHorasMaxDia" class="form-control edit-textbox" runat="server" Text='<%# Bind("horasMaxDia") %>'></asp:TextBox>
+            </EditItemTemplate>
+        </asp:TemplateField>
                     <asp:CommandField ShowDeleteButton="True" ShowEditButton="True"></asp:CommandField>
                 </Columns>
                 <FooterStyle BackColor="#CCCCCC" />
@@ -163,7 +202,7 @@
             <asp:SqlDataSource runat="server" ID="SqlDataSource3" ConnectionString='<%$ ConnectionStrings:mibasededatostfgConnectionString %>'
                 DeleteCommand="DELETE FROM [AsociacionCostes] WHERE [codigoAsociacionCoste] = @codigoAsociacionCoste"
                 InsertCommand="INSERT INTO [AsociacionCostes] ([codigoConvenio], [codigoCategoria], [precioHora], [precioHoraExtra], [horasMaxDia]) VALUES (@codigoConvenio, @codigoCategoria, @precioHora, @precioHoraExtra, @horasMaxDia)"
-                SelectCommand="SELECT * FROM [AsociacionCostes] WHERE ([codigoCategoria] = @codigoCategoria)"
+                SelectCommand="SELECT * FROM [AsociacionCostes] WHERE ([codigoCategoria] = @codigoCategoria) order by codigoAsociacion DESC"
                 UpdateCommand="UPDATE [AsociacionCostes] SET [codigoConvenio] = @codigoConvenio, [codigoCategoria] = @codigoCategoria, [precioHora] = @precioHora, [precioHoraExtra] = @precioHoraExtra, [horasMaxDia] = @horasMaxDia WHERE [codigoAsociacionCoste] = @codigoAsociacionCoste">
                 <DeleteParameters>
                     <asp:Parameter Name="codigoAsociacionCoste" Type="Int32"></asp:Parameter>
@@ -212,24 +251,57 @@
                 </UpdateParameters>
             </asp:SqlDataSource>
 
-            <asp:FormView ID="FormViewInsertarAsociacion" runat="server" DataSourceID="SqlDataSource3" DefaultMode="Insert" DataKeyNames="codigoAsociacionCoste">
+            <asp:FormView ID="FormViewInsertarAsociacion" class="form-control" runat="server" DataSourceID="SqlDataSource3" DefaultMode="Insert" DataKeyNames="codigoAsociacionCoste" OnItemInserting="FormViewInsertarAsociacion_ItemInserting" OnItemCommand="FormViewInsertarAsociacion_ItemCommand">
+                <FooterStyle BackColor="#990000" ForeColor="White" Font-Bold="True" />
+                <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
                 <InsertItemTemplate>
-                    codigoConvenio:
-                    <asp:TextBox Text='<%# Bind("codigoConvenio") %>' runat="server" ID="codigoConvenioTextBox" /><br />
-                    codigoCategoria:
-                    <asp:TextBox Text='<%# Bind("codigoCategoria") %>' runat="server" ID="codigoCategoriaTextBox" /><br />
-                    precioHora:
-                    <asp:TextBox Text='<%# Bind("precioHora") %>' runat="server" ID="precioHoraTextBox" /><br />
-                    precioHoraExtra:
-                    <asp:TextBox Text='<%# Bind("precioHoraExtra") %>' runat="server" ID="precioHoraExtraTextBox" /><br />
-                    horasMaxDia:
-                    <asp:TextBox Text='<%# Bind("horasMaxDia") %>' runat="server" ID="horasMaxDiaTextBox" /><br />
-                    <asp:LinkButton runat="server" Text="Insertar" CommandName="Insert" ID="InsertButton" CausesValidation="True" />&nbsp;<asp:LinkButton runat="server" Text="Cancelar" CommandName="Cancel" ID="InsertCancelButton" CausesValidation="False" />
+                    <div class="row">
+                        <div class="col text-center">
+                            <h3>Insertar Asociacion</h3>
+                        </div>
+                    </div>
+
+                    <asp:TextBox Text='<%# Bind("codigoCategoria") %>' class="form-control" runat="server" ID="codigoCategoriaTextBoxInsertarAsociacion" Visible="false" /><br />
+
+                    <div class="row">
+                        <div class="col">
+                            Convenio:
+                           <asp:DropDownList Text='<%# Bind("codigoConvenio") %>' class="dropdown form-control" ID="idConveniosDropDownList" runat="server" DataSourceID="ConveniosSqlDataSourceInsertar" DataTextField="nombreConvenio" DataValueField="codigoConvenio" AppendDataBoundItems="true"></asp:DropDownList>
+                            <asp:SqlDataSource ID="ConveniosSqlDataSourceInsertar" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT nombreConvenio, codigoConvenio FROM Convenio;"></asp:SqlDataSource>
+                        </div>
+                        <div class="col">
+                            Horas Máximas Día:
+                            <input type="number" value='<%# Bind("horasMaxDia") %>' class="form-control" runat="server" id="HorasMaxDiaInput" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            Precio Hora:
+                            <input type="text" value='<%# Bind("precioHora") %>' class="form-control" runat="server" id="PrecioHoraInput" onblur="replaceCommaWithDot(this)" />
+                        </div>
+                        <div class="col">
+                            Precio Hora Extra:
+                            <input type="text" value='<%# Bind("precioHoraExtra") %>' class="form-control" runat="server" id="PrecioHoraExtraInput" onblur="replaceCommaWithDot(this)" />
+                        </div>
+                    </div>
+
+                    <div class="mt-3 text-center">
+                        <asp:LinkButton runat="server" class="btn btn-success" Text="Insertar" CommandName="Insert" ID="InsertButton" CausesValidation="True" />
+                        &nbsp;
+                       <asp:LinkButton runat="server" class="btn btn-danger" Text="Cancelar" CommandName="Cancel" ID="InsertCancelButton" CausesValidation="False" />
+                    </div>
                 </InsertItemTemplate>
-
+                <PagerStyle BackColor="#FFCC66" ForeColor="#333333" HorizontalAlign="Center" />
+                <RowStyle BackColor="#6c757d" ForeColor="White" />
             </asp:FormView>
-
         </asp:Panel>
-
     </div>
+
+    <script>
+        function replaceCommaWithDot(input) {
+            input.value = input.value.replace(",", ".");
+        }
+    </script>
+
 </asp:Content>

@@ -94,7 +94,11 @@
             </asp:Panel>
         </div>
 
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" DeleteCommand="DELETE FROM [Cliente] WHERE [codigoCliente] = @codigoCliente" InsertCommand="INSERT INTO [Cliente] ([nombreEntidad], [DireccionDF], [CodigoPostalDF], [UbicacionDF], [BancoDF], [DireccionDE], [CodigoPostalDE], [UbicacionDE]) VALUES (@nombreEntidad, @DireccionDF, @CodigoPostalDF, @UbicacionDF, @BancoDF, @DireccionDE, @CodigoPostalDE, @UbicacionDE)" SelectCommand="SELECT * FROM [Cliente]" UpdateCommand="UPDATE [Cliente] SET [nombreEntidad] = @nombreEntidad, [DireccionDF] = @DireccionDF, [CodigoPostalDF] = @CodigoPostalDF, [UbicacionDF] = @UbicacionDF, [BancoDF] = @BancoDF, [DireccionDE] = @DireccionDE, [CodigoPostalDE] = @CodigoPostalDE, [UbicacionDE] = @UbicacionDE WHERE [codigoCliente] = @codigoCliente">
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" 
+            DeleteCommand="DELETE FROM [Cliente] WHERE [codigoCliente] = @codigoCliente" 
+            InsertCommand="INSERT INTO [Cliente] ([nombreEntidad], [DireccionDF], [CodigoPostalDF], [UbicacionDF], [BancoDF], [DireccionDE], [CodigoPostalDE], [UbicacionDE]) VALUES (@nombreEntidad, @DireccionDF, @CodigoPostalDF, @UbicacionDF, @BancoDF, @DireccionDE, @CodigoPostalDE, @UbicacionDE)" 
+            SelectCommand="SELECT * FROM [Cliente] order by codigoCliente DESC"
+            UpdateCommand="UPDATE [Cliente] SET [nombreEntidad] = @nombreEntidad, [DireccionDF] = @DireccionDF, [CodigoPostalDF] = @CodigoPostalDF, [UbicacionDF] = @UbicacionDF, [BancoDF] = @BancoDF, [DireccionDE] = @DireccionDE, [CodigoPostalDE] = @CodigoPostalDE, [UbicacionDE] = @UbicacionDE WHERE [codigoCliente] = @codigoCliente">
             <DeleteParameters>
                 <asp:Parameter Name="codigoCliente" Type="Int32" />
             </DeleteParameters>
@@ -311,7 +315,7 @@
 
         <asp:Panel ID="PanelInsertar" class="mt-3" runat="server" Height="348px" Visible="False">
             <div class="auto-style7">
-                <asp:FormView ID="FormViewInsertarCliente" runat="server" DataSourceID="SqlDataSource1" DataKeyNames="codigoCliente" DefaultMode="Insert" CellPadding="4" ForeColor="#333333" OnItemInserting="FormViewInsertarCliente_ItemInserting" OnItemCommand="FormViewInsertarCliente_ItemCommand">
+                <asp:FormView ID="FormViewInsertarCliente" class="form-control" runat="server" DataSourceID="SqlDataSource1" DataKeyNames="codigoCliente" DefaultMode="Insert" CellPadding="4" ForeColor="#333333" OnItemInserting="FormViewInsertarCliente_ItemInserting" OnItemCommand="FormViewInsertarCliente_ItemCommand">
                     <FooterStyle BackColor="#990000" ForeColor="White" Font-Bold="True" />
                     <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
                     <InsertItemTemplate>

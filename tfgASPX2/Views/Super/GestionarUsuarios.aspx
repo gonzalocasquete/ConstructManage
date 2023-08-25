@@ -69,7 +69,11 @@
             </asp:Panel>
         </div>
 
-        <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" DeleteCommand="DELETE FROM [Usuario] WHERE [codigoUsuario] = @codigoUsuario" InsertCommand="INSERT INTO [Usuario] ([nombreUsuario], [contraseñaUsuario], [rol]) VALUES (@nombreUsuario, @contraseñaUsuario, @rol)" SelectCommand="SELECT * FROM [Usuario]" UpdateCommand="UPDATE [Usuario] SET [nombreUsuario] = @nombreUsuario, [contraseñaUsuario] = @contraseñaUsuario, [rol] = @rol WHERE [codigoUsuario] = @codigoUsuario">
+        <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>"
+            DeleteCommand="DELETE FROM [Usuario] WHERE [codigoUsuario] = @codigoUsuario" 
+            InsertCommand="INSERT INTO [Usuario] ([nombreUsuario], [contraseñaUsuario], [rol]) VALUES (@nombreUsuario, @contraseñaUsuario, @rol)" 
+            SelectCommand="SELECT * FROM [Usuario]"
+            UpdateCommand="UPDATE [Usuario] SET [nombreUsuario] = @nombreUsuario, [contraseñaUsuario] = @contraseñaUsuario, [rol] = @rol WHERE [codigoUsuario] = @codigoUsuario">
             <DeleteParameters>
                 <asp:Parameter Name="codigoUsuario" Type="Int32"></asp:Parameter>
             </DeleteParameters>

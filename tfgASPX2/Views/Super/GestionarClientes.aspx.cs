@@ -99,6 +99,18 @@ namespace tfgASPX2.Views.Super
             DropDownListUbicacionDE.SelectedIndex = 0;
         }
 
+    
+        protected void FormViewInsertarCliente_ItemCommand(object sender, FormViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Cancel")
+            {
+                PanelInsertar.Visible = false;
+                GridView1.Visible = true;
+                ButtonFiltros.Visible = true;
+                ButtonInsertarCliente.Text = "Insertar";
+            }
+        }
+
         protected void FormViewInsertarCliente_ItemInserting(object sender, FormViewInsertEventArgs e)
         {
             TextBox nombreEntidadTextBox = (TextBox)FormViewInsertarCliente.FindControl("nombreEntidadTextBox");
@@ -146,23 +158,6 @@ namespace tfgASPX2.Views.Super
                     }
                 }
             }
-
-
-
-
-
         }
-
-        protected void FormViewInsertarCliente_ItemCommand(object sender, FormViewCommandEventArgs e)
-        {
-            if (e.CommandName == "Cancel")
-            {
-                PanelInsertar.Visible = false;
-                GridView1.Visible = true;
-                ButtonFiltros.Visible = true;
-                ButtonInsertarCliente.Text = "Insertar";
-            }
-        }
-
-    }
+    } 
 }

@@ -108,7 +108,7 @@ namespace tfgASPX2.Views.Super
             SqlDataSource1.DataBind();
         }
 
-        //Filtros
+
         protected void ButtonFiltros_Click(object sender, EventArgs e)
         {
             if (!PanelFiltros.Visible)
@@ -237,8 +237,7 @@ namespace tfgASPX2.Views.Super
 
             if (string.IsNullOrEmpty(nombrePartida) || string.IsNullOrEmpty(presupuesto) || string.IsNullOrEmpty(fechaInicio) || string.IsNullOrEmpty(fechaFin))
             {
-                ShowErrorMessage("Todos los campos son obligatorios." + nombrePartida + " " + fechaInicio + " " + fechaFin + " " + presupuesto);
-                e.Cancel = true;
+                ShowErrorMessage("Todos los campos son obligatorios.");
                 return;
             }
 
@@ -272,7 +271,7 @@ namespace tfgASPX2.Views.Super
                 return;
             }
 
-            string consulta = "SELECT nombrePaetida FROM Partida WHERE nombrePartida = @nombrePartida";
+            string consulta = "SELECT nombrePartida FROM Partida WHERE nombrePartida = @nombrePartida";
 
             string connectionString = "Data Source=miservertfg.database.windows.net;Initial Catalog=mibasededatostfg;Persist Security Info=True;User ID=adminsql;Password=Josele6072";
 

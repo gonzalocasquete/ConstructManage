@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace tfgASPX2.Views.Super
@@ -18,9 +20,11 @@ namespace tfgASPX2.Views.Super
 
         protected void ButtonInsertarCategoria_Click(object sender, EventArgs e)
         {
+            PanelInsertarAsociacion.Visible = false;
             if (PanelInsertarCategoria.Visible)
             {
                 // Si el panel es visible, ocultarlo y cambiar el texto del botón a "Mostrar"
+                
                 PanelInsertarCategoria.Visible = false;
                 GridView1.Visible = true;
                 ButtonFiltros.Visible = true;
@@ -77,9 +81,9 @@ namespace tfgASPX2.Views.Super
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TextBox codigoProyecto = (TextBox)this.FormViewInsertarAsociacion.FindControl("codigoCategoriaTextBox");
+            TextBox codigoCategoria = (TextBox)this.FormViewInsertarAsociacion.FindControl("codigoCategoriaTextBoxInsertarAsociacion");
             int codigo = Convert.ToInt32(this.GridView1.SelectedDataKey["codigoCategoria"]);
-            codigoProyecto.Text = codigo.ToString();
+            codigoCategoria.Text = codigo.ToString();
 
             ButtonVolver.Visible = true;
 
@@ -100,40 +104,6 @@ namespace tfgASPX2.Views.Super
 
                 SqlDataSource2.SelectCommand = "Select * FROM AsociacionCostes WHERE codigoCategoria=" + codigoCategoriaInt;
                 SqlDataSource2.DataBind();
-            }
-        }
-
-        protected void FormViewInsertarCategoria_ItemInserting(object sender, FormViewInsertEventArgs e)
-        {
-            TextBox nombreCategoriaTextBox = (TextBox)FormViewInsertarCategoria.FindControl("nombreCategoriaTextBoxInsertar");
-
-            if (string.IsNullOrEmpty(nombreCategoriaTextBox.Text) )
-            {
-                    // Cancelar la inserción
-                    e.Cancel = true;
-                    // Mostrar mensaje de error
-                    ScriptManager.RegisterStartupScript(this, GetType(), "Error", "alert('El nombre de la categoria no puede estar vacia.');", true);    
-            }
-            string consulta = "SELECT nombreCategoria FROM CategoriaProfesional WHERE nombreCategoria = @nombreCategoria";
-
-            string connectionString = "Data Source=miservertfg.database.windows.net;Initial Catalog=mibasededatostfg;Persist Security Info=True;User ID=adminsql;Password=Josele6072";
-
-            using (SqlConnection cnn = new SqlConnection(connectionString))
-            {
-                cnn.Open();
-                using (SqlCommand cmd = new SqlCommand(consulta, cnn))
-                {
-                    cmd.Parameters.AddWithValue("@nombreCategoria", nombreCategoriaTextBox.Text.ToString());
-
-                    using (SqlDataReader adap = cmd.ExecuteReader())
-                    {
-                        if (adap.Read())
-                        {
-                            e.Cancel = true;
-                            ScriptManager.RegisterStartupScript(this, GetType(), "Error", "alert('La categoria profesional ya existe en la base de datos');", true);
-                        }
-                    }
-                }
             }
         }
 
@@ -164,6 +134,7 @@ namespace tfgASPX2.Views.Super
             ButtonVolver.Visible = false;
             ButtonInsertarAsociacion.Visible = false;
             GridView1.SelectedIndex = -1;
+            PanelInsertarAsociacion.Visible = false;
 
             ButtonInsertarCategoria.Text = "Insertar Asociacion";
             SqlDataSource1.SelectCommand = "Select * FROM CategoriaProfesional order by codigoCategoria DESC";
@@ -194,5 +165,109 @@ namespace tfgASPX2.Views.Super
                 ButtonInsertarCategoria.Text = "Insertar Categoria";
             }
         }
+ 
+        protected void FormViewInsertarAsociacion_ItemCommand(object sender, FormViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Cancel")
+            {
+                PanelMostrarAsociaciones.Visible = true;
+                PanelInsertarAsociacion.Visible = false;
+                ButtonInsertarAsociacion.Text = "Insertar Asociacion";
+
+                PanelInsertarCategoria.Visible = false;
+
+                GridView1.Visible = true;
+                ButtonInsertarAsociacion.Visible = true;
+                ButtonFiltros.Visible = false;
+                ButtonInsertarCategoria.Text = "Insertar Categoria";
+            }
+        }
+
+        protected void FormViewInsertarCategoria_ItemInserting(object sender, FormViewInsertEventArgs e)
+        {
+            TextBox nombreCategoriaTextBox = (TextBox)FormViewInsertarCategoria.FindControl("nombreCategoriaTextBoxInsertar");
+
+            if (string.IsNullOrEmpty(nombreCategoriaTextBox.Text))
+            {
+                // Cancelar la inserción
+                e.Cancel = true;
+                // Mostrar mensaje de error
+                ScriptManager.RegisterStartupScript(this, GetType(), "Error", "alert('El nombre de la categoria no puede estar vacia.');", true);
+            }
+            string consulta = "SELECT nombreCategoria FROM CategoriaProfesional WHERE nombreCategoria = @nombreCategoria";
+
+            string connectionString = "Data Source=miservertfg.database.windows.net;Initial Catalog=mibasededatostfg;Persist Security Info=True;User ID=adminsql;Password=Josele6072";
+
+            using (SqlConnection cnn = new SqlConnection(connectionString))
+            {
+                cnn.Open();
+                using (SqlCommand cmd = new SqlCommand(consulta, cnn))
+                {
+                    cmd.Parameters.AddWithValue("@nombreCategoria", nombreCategoriaTextBox.Text.ToString());
+
+                    using (SqlDataReader adap = cmd.ExecuteReader())
+                    {
+                        if (adap.Read())
+                        {
+                            e.Cancel = true;
+                            ScriptManager.RegisterStartupScript(this, GetType(), "Error", "alert('La categoria profesional ya existe en la base de datos');", true);
+                        }
+                    }
+                }
+            }
+        }
+
+        protected void FormViewInsertarAsociacion_ItemInserting(object sender, FormViewInsertEventArgs e)
+        {
+            HtmlInputGenericControl horasMaximasInp = (HtmlInputGenericControl)FormViewInsertarAsociacion.FindControl("HorasMaxDiaInput");
+            HtmlInputGenericControl precioHoraInp = (HtmlInputGenericControl)FormViewInsertarAsociacion.FindControl("PrecioHoraInput");
+            HtmlInputGenericControl precioHoraExtraInp = (HtmlInputGenericControl)FormViewInsertarAsociacion.FindControl("PrecioHoraExtraInput");
+
+            string horasMaximas = horasMaximasInp.Value.Trim();
+            string precioHora = precioHoraInp.Value.Trim();
+            string precioHoraExtra = precioHoraExtraInp.Value.Trim();
+
+            if (string.IsNullOrEmpty(horasMaximas) || string.IsNullOrEmpty(precioHora) || string.IsNullOrEmpty(precioHoraExtra))
+            {
+                ShowErrorMessage("Todos los campos son obligatorios.");
+                e.Cancel = true;
+                return;
+            }
+
+            if (!float.TryParse(horasMaximas, out float horasMaximaFloat))
+            {
+                ShowErrorMessage("Las horas máximas deben ser un número válido.");
+                e.Cancel = true;
+                return;
+            }
+
+            if (horasMaximaFloat > 12.0f) // Verifica si las horas máximas superan 12 horas
+            {
+                ShowErrorMessage("Las horas máximas no pueden ser mayores a 12 horas.");
+                e.Cancel = true;
+                return;
+            }
+
+            if (!float.TryParse(precioHora, out float precioHoraFloat))
+            {
+                ShowErrorMessage("El precio hora debe ser un número válido.");
+                e.Cancel = true;
+                return;
+            }
+
+            if (!float.TryParse(precioHoraExtra, out float precioHoraExtraFloat))
+            {
+                ShowErrorMessage("El precio hora extra debe ser un número válido.");
+                e.Cancel = true;
+                return;
+            }
+        }
+
+
+        private void ShowErrorMessage(string message)
+        {
+            ScriptManager.RegisterStartupScript(this, GetType(), "Error", "alert('" + message + "');", true);
+        }
+
     }
 }
