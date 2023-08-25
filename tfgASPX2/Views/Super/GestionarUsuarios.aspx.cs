@@ -187,7 +187,7 @@ namespace tfgASPX2.Views.Super
                 Panel1.Visible = false;
                 GridView1.Visible = true;
                 ButtonFiltros.Visible = true;
-                ButtonInsertar.Text = "Insertar";
+                ButtonInsertar.Text = "Insertar Usuario";
             }
         }
 

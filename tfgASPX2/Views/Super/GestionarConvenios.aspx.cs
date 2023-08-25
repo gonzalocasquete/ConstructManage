@@ -9,36 +9,55 @@ namespace tfgASPX2.Views.Super
 {
     public partial class GestionarConvenios : System.Web.UI.Page
     {
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void ButtonInsertarConvenio_Click(object sender, EventArgs e)
         {
-            if (Panel1.Visible)
+            if (PanelInsertarConvenio.Visible)
             {
-                Panel1.Visible = false;
-                Panel2.Visible = true;
-                ButtonInsertar.Text = "Ocultar";
+                // Si el panel es visible, ocultarlo y cambiar el texto del botón a "Mostrar"
+                PanelInsertarConvenio.Visible = false;
+                GridView1.Visible = true;
+                ButtonFiltros.Visible = true;
+                ButtonInsertarConvenio.Text = "Insertar Convenio";
+                GridView1.SelectedIndex = -1;
             }
             else
             {
-                Panel1.Visible = true;
-                Panel2.Visible = false;
-                ButtonInsertar.Text = "Insertar";
+                // Si el panel no es visible, mostrarlo y cambiar el texto del botón a "Ocultar"
+                PanelInsertarConvenio.Visible = true;
+
+                PanelFiltros.Visible = false;
+                ButtonFiltros.Text = "Mostrar filtros";
+                ButtonFiltros.Visible = false;
+                PanelInsertarAsociacion.Visible = false;
+                GridView1.Visible = false;
+                ButtonInsertarConvenio.Text = "Ocultar";
             }
         }
 
-        protected void SqlDataSource1_Selected(object sender, SqlDataSourceStatusEventArgs e)
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Panel2.Visible)
+            ButtonVolver.Visible = true;
+
+            PanelMostrarAsociaciones.Visible = true;
+            PanelInsertarConvenio.Visible = false;
+            PanelInsertarAsociacion.Visible = false;
+            ButtonInsertarAsociacion.Visible = true;
+            ButtonInsertarConvenio.Text = "Insertar Convenio";
+            ButtonInsertarAsociacion.Text = "Insertar Asociacion";
+
+            if (GridView1.SelectedIndex >= 0)
             {
-                Panel2.Visible = false;
-                Panel1.Visible = true;
-                ButtonInsertar.Text = "Insertar";
+                int rowIndex = GridView1.SelectedIndex;
+                string codigoConvenioStr = GridView1.DataKeys[rowIndex]["codigoConvenio"].ToString();
+                int.TryParse(codigoConvenioStr, out int codigoConvenioInt);
+                SqlDataSource1.SelectCommand = "Select * FROM Convenio WHERE codigoConvenio=" + codigoConvenioInt;
+                SqlDataSource1.DataBind();
+
+                SqlDataSource2.SelectCommand = "Select * FROM AsociacionCostes WHERE codigoConvenio=" + codigoConvenioInt;
+                SqlDataSource2.DataBind();
             }
-            else
-            {
-                Panel1.Visible = true;
-                Panel2.Visible = false;
-                ButtonInsertar.Text = "Insertar";
-            }
+
+
         }
 
         protected void ButtonFiltros_Click(object sender, EventArgs e)
@@ -50,9 +69,42 @@ namespace tfgASPX2.Views.Super
             }
             else
             {
-
                 PanelFiltros.Visible = false;
                 ButtonFiltros.Text = "Mostrar filtros";
+            }
+        }
+
+        protected void ButtonVolver_Click(object sender, EventArgs e)
+        {
+            ButtonVolver.Visible = false;
+            ButtonInsertarConvenio.Visible = true;
+            ButtonInsertarAsociacion.Visible = false;
+            GridView1.SelectedIndex = -1;
+
+            ButtonInsertarConvenio.Text = "Insertar Convenio";
+            SqlDataSource1.SelectCommand = "Select * FROM Convenio order by codigoConvenio DESC";
+            SqlDataSource1.DataBind();
+        }
+
+        protected void ButtonInsertarAsociacion_Click(object sender, EventArgs e)
+        {
+            if (PanelInsertarAsociacion.Visible)
+            {
+                PanelMostrarAsociaciones.Visible = true;
+                PanelInsertarConvenio.Visible = false;
+                ButtonInsertarAsociacion.Text = "Insertar Asociacion";
+            }
+            else
+            {
+                PanelInsertarAsociacion.Visible = true;
+                PanelMostrarAsociaciones.Visible = false;
+                ButtonInsertarAsociacion.Text = "Ocultar";
+                if (GridView1.SelectedIndex >= 0)
+                {
+                    int rowIndex = GridView1.SelectedIndex;
+                    string codigoConvenioStr = GridView1.DataKeys[rowIndex]["codigoConvenio"].ToString();
+                    int.TryParse(codigoConvenioStr, out int codigoConvenio);
+                }
             }
         }
 

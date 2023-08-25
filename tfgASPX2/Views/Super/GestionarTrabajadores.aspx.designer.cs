@@ -33,6 +33,15 @@ namespace tfgASPX2.Views.Super
         protected global::System.Web.UI.WebControls.Button ButtonFiltros;
 
         /// <summary>
+        /// Control ButtonInsertarUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonInsertarUsuario;
+
+        /// <summary>
         /// Control PanelFiltros.
         /// </summary>
         /// <remarks>
@@ -202,5 +211,32 @@ namespace tfgASPX2.Views.Super
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FormView FormViewInsertarTrabajador;
+
+        /// <summary>
+        /// Control SqlDataSourceInsertarUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceInsertarUsuario;
+
+        /// <summary>
+        /// Control PanelInsertarUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelInsertarUsuario;
+
+        /// <summary>
+        /// Control FormViewInsertarUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FormView FormViewInsertarUsuario;
     }
 }

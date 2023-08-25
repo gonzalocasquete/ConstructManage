@@ -36,6 +36,12 @@
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col">
+                    <asp:Button ID="ButtonInsertarUsuario" class="form-control btn-info btn-sm btn-block mt-1" runat="server" Text="Insertar Usuario" OnClick="ButtonInsertarUsuario_Click" Visible="false" />
+                </div>
+            </div>
+
             <asp:Panel ID="PanelFiltros" runat="server" Visible="False">
                 <hr style="height: 2px; width: auto; border-width: 0; color: whitesmoke; background-color: whitesmoke">
                 <div>
@@ -232,6 +238,68 @@
                 <RowStyle BackColor="#6c757d" ForeColor="White" />
             </asp:FormView>
         </asp:Panel>
+
+         <asp:SqlDataSource runat="server" ID="SqlDataSourceInsertarUsuario" DataSourceMode="DataReader" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" DeleteCommand="DELETE FROM [Usuario] WHERE [codigoUsuario] = @codigoUsuario" InsertCommand="INSERT INTO [Usuario] ([nombreUsuario], [contraseñaUsuario], [rol]) VALUES (@nombreUsuario, @contraseñaUsuario, @rol)" SelectCommand="SELECT * FROM [Usuario]" UpdateCommand="UPDATE [Usuario] SET [nombreUsuario] = @nombreUsuario, [contraseñaUsuario] = @contraseñaUsuario, [rol] = @rol WHERE [codigoUsuario] = @codigoUsuario">
+            <DeleteParameters>
+                <asp:Parameter Name="codigoUsuario" Type="Int32"></asp:Parameter>
+            </DeleteParameters>
+            <InsertParameters>
+                <asp:Parameter Name="nombreUsuario" Type="String"></asp:Parameter>
+                <asp:Parameter Name="contrase&#241;aUsuario" Type="String"></asp:Parameter>
+                <asp:Parameter Name="rol" Type="String"></asp:Parameter>
+            </InsertParameters>
+            <UpdateParameters>
+                <asp:Parameter Name="nombreUsuario" Type="String"></asp:Parameter>
+                <asp:Parameter Name="contrase&#241;aUsuario" Type="String"></asp:Parameter>
+                <asp:Parameter Name="rol" Type="String"></asp:Parameter>
+                <asp:Parameter Name="codigoUsuario" Type="Int32"></asp:Parameter>
+            </UpdateParameters>
+        </asp:SqlDataSource>
+
+        <asp:Panel ID="PanelInsertarUsuario" class="mt-3" runat="server" Height="196px" Visible="False">
+            <asp:FormView ID="FormViewInsertarUsuario" class="form-control" runat="server" DataSourceID="SqlDataSourceInsertarUsuario" DataKeyNames="codigoUsuario" DefaultMode="Insert" OnItemInserting="FormViewInsertarUsuario_ItemInserting" OnItemInserted="FormViewInsertarUsuario_ItemInserted" OnItemCommand="FormViewInsertarUsuario_ItemCommand">
+                <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
+                <InsertItemTemplate>
+                    <div class="row">
+                        <div class="col text-center">
+                            <h3>Insertar Usuario</h3>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col">
+                            Usuario:
+                            <asp:TextBox Text='<%# Bind("nombreUsuario") %>' class="form-control" runat="server" ID="nombreUsuarioTextBox" data-toggle="tooltip" title="Usuario" />
+                        </div>
+                        <div class="col">
+                            Contraseña:
+                            <asp:TextBox Text='<%# Bind("contraseñaUsuario") %>' class="form-control" runat="server" ID="contraseñaUsuarioTextBox" data-toggle="tooltip" title="Contraseña" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col">
+                            Rol:
+                            <asp:DropDownList Text='<%# Bind("rol") %>' class="form-control" runat="server" ID="rolDropDownList">
+                                <asp:ListItem Text="trabajador" Value="trabajador"></asp:ListItem>
+                                <asp:ListItem Text="coordinador" Value="coordinador"></asp:ListItem>    
+                            </asp:DropDownList>
+                        </div>
+                    </div>
+
+                    <div class="mt-3 text-center">
+                        <asp:LinkButton class="btn btn-success" runat="server" Text="Insertar" CommandName="Insert" ID="InsertButton" CausesValidation="True" />
+                        &nbsp;
+                        <asp:LinkButton class="btn btn-danger" runat="server" Text="Cancelar" CommandName="Cancel" ID="InsertCancelButton" CausesValidation="False" />
+                    </div>
+                </InsertItemTemplate>
+                <PagerStyle BackColor="#FFCC66" ForeColor="#333333" HorizontalAlign="Center" />
+                <RowStyle BackColor="#6c757d" ForeColor="White" />
+            </asp:FormView>
+        </asp:Panel>
+
     </div>
 
 </asp:Content>

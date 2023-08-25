@@ -11,9 +11,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Login</title> 
 </head>
-<body>
+<body style="background:#2f3542;">
     <form runat="server" class="form-box">
         <h1 class="form-title">ConstructManage</h1>
+        <asp:Label ID="ErrorMessageLabel" class="" runat="server" ForeColor="Red" Visible="false"></asp:Label>
         <input id="InputUsuario" type ="text" placeholder="Username" runat="server"/>
         <input id="InputPassword" type="password" placeholder="Password" runat="server"/>
         <asp:Button ID="ButtonEntrar" class="form-button" runat="server" Text="Entrar" OnClick="Entrar_Click"/>

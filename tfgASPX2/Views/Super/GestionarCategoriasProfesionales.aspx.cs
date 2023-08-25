@@ -18,18 +18,26 @@ namespace tfgASPX2.Views.Super
 
         protected void ButtonInsertarCategoria_Click(object sender, EventArgs e)
         {
-            if (Panel1.Visible)
+            if (PanelInsertarCategoria.Visible)
             {
                 // Si el panel es visible, ocultarlo y cambiar el texto del botón a "Mostrar"
-                Panel1.Visible = false;
+                PanelInsertarCategoria.Visible = false;
                 GridView1.Visible = true;
                 ButtonFiltros.Visible = true;
                 ButtonInsertarCategoria.Text = "Insertar Categoria";
+
+                PanelInsertarCategoria.Visible = false;
+                PanelMostrarAsociaciones.Visible = false;
+                ButtonInsertarAsociacion.Visible = false;
+                ButtonVolver.Visible = false;
             }
             else
             {
                 // Si el panel no es visible, mostrarlo y cambiar el texto del botón a "Ocultar"
-                Panel1.Visible = true;
+                PanelInsertarCategoria.Visible = true;
+                PanelMostrarAsociaciones.Visible=false;
+                ButtonInsertarAsociacion.Visible = false;
+                ButtonVolver.Visible = false;
 
                 PanelFiltros.Visible = false;
                 ButtonFiltros.Text = "Mostrar filtros";
@@ -67,9 +75,37 @@ namespace tfgASPX2.Views.Super
             SqlDataSource1.DataBind();
         }
 
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            TextBox codigoProyecto = (TextBox)this.FormViewInsertarAsociacion.FindControl("codigoCategoriaTextBox");
+            int codigo = Convert.ToInt32(this.GridView1.SelectedDataKey["codigoCategoria"]);
+            codigoProyecto.Text = codigo.ToString();
+
+            ButtonVolver.Visible = true;
+
+            PanelMostrarAsociaciones.Visible = true;
+            PanelInsertarCategoria.Visible = false;
+            PanelInsertarAsociacion.Visible = false;
+            ButtonInsertarAsociacion.Visible = true;
+            ButtonInsertarCategoria.Text = "Insertar Categoria";
+            ButtonInsertarAsociacion.Text = "Insertar Asociacion";
+
+            if (GridView1.SelectedIndex >= 0)
+            {
+                int rowIndex = GridView1.SelectedIndex;
+                string codigoCategoriaStr = GridView1.DataKeys[rowIndex]["codigoCategoria"].ToString();
+                int.TryParse(codigoCategoriaStr, out int codigoCategoriaInt);
+                SqlDataSource1.SelectCommand = "Select * FROM CategoriaProfesional WHERE codigoCategoria=" + codigoCategoriaInt;
+                SqlDataSource1.DataBind();
+
+                SqlDataSource2.SelectCommand = "Select * FROM AsociacionCostes WHERE codigoCategoria=" + codigoCategoriaInt;
+                SqlDataSource2.DataBind();
+            }
+        }
+
         protected void FormViewInsertarCategoria_ItemInserting(object sender, FormViewInsertEventArgs e)
         {
-            TextBox nombreCategoriaTextBox = (TextBox)FormViewInsertarCategoria.FindControl("nombreCategoriaTextBox");
+            TextBox nombreCategoriaTextBox = (TextBox)FormViewInsertarCategoria.FindControl("nombreCategoriaTextBoxInsertar");
 
             if (string.IsNullOrEmpty(nombreCategoriaTextBox.Text) )
             {
@@ -101,6 +137,38 @@ namespace tfgASPX2.Views.Super
             }
         }
 
+        protected void ButtonInsertarAsociacion_Click(object sender, EventArgs e)
+        {
+            if (PanelInsertarAsociacion.Visible)
+            {
+                PanelMostrarAsociaciones.Visible = true;
+                PanelInsertarAsociacion.Visible = false;
+                ButtonInsertarAsociacion.Text = "Insertar Asociacion";
+            }
+            else
+            {
+                PanelInsertarAsociacion.Visible = true;
+                PanelMostrarAsociaciones.Visible = false;
+                ButtonInsertarAsociacion.Text = "Ocultar";
+                if (GridView1.SelectedIndex >= 0)
+                {
+                    int rowIndex = GridView1.SelectedIndex;
+                    string codigoProyectoStr = GridView1.DataKeys[rowIndex]["codigoCategoria"].ToString();
+                    int.TryParse(codigoProyectoStr, out int codigoProyecto);
+                }
+            }
+        }
+
+        protected void ButtonVolver_Click(object sender, EventArgs e)
+        {
+            ButtonVolver.Visible = false;
+            ButtonInsertarAsociacion.Visible = false;
+            GridView1.SelectedIndex = -1;
+
+            ButtonInsertarCategoria.Text = "Insertar Asociacion";
+            SqlDataSource1.SelectCommand = "Select * FROM CategoriaProfesional order by codigoCategoria DESC";
+            SqlDataSource1.DataBind();
+        }
         protected void FormViewInsertarCategoria_ItemInserted(object sender, FormViewInsertedEventArgs e)
         {
             if (e.Exception == null)
@@ -120,10 +188,10 @@ namespace tfgASPX2.Views.Super
         {
             if (e.CommandName == "Cancel")
             {
-                Panel1.Visible = false;
+                PanelInsertarCategoria.Visible = false;
                 GridView1.Visible = true;
                 ButtonFiltros.Visible = true;
-                ButtonInsertarCategoria.Text = "Insertar";
+                ButtonInsertarCategoria.Text = "Insertar Categoria";
             }
         }
     }

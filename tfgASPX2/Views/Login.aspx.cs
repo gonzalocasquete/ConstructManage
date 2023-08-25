@@ -21,12 +21,10 @@ namespace tfgASPX
 
         protected void Entrar_Click(object sender, EventArgs e)
         {
-            Session["rol"] = "";
-            Session["codigoUsuario"] = "";
-            Session["nombreUsuario"] = "";
-            Session["codigoTrabajador"] = "";
+            // Clear existing session data
+            Session.Clear();
 
-            String usuario, contraseña;
+            string usuario, contraseña;
             usuario = InputUsuario.Value.ToString();
             contraseña = InputPassword.Value.ToString();
 
@@ -53,55 +51,36 @@ namespace tfgASPX
                                 Session["codigoUsuario"] = adap.GetInt32(0);
                                 Session["nombreUsuario"] = adap.GetString(1);
                                 Session["rol"] = rol;
+
+                                // Redirect based on role
+                                if (rol == "admin")
+                                {
+                                    Response.Redirect("Super/MenuSuper.aspx");
+                                }
+                                else if (rol == "trabajador")
+                                {
+                                    Response.Redirect("Trabajador/InicialTrabajador.aspx");
+                                }
+                                else if (rol == "coordinador")
+                                {
+                                    Response.Redirect("Coordinador/InicialCoordinador.aspx");
+                                }
                             }
                             catch (Exception ex)
                             {
                                 Response.Write(ex.Message.ToString());
                             }
                         }
-                    }
-                }
-
-                //Evitar reutilizar el mismo objeto SqlCommand y SqlDataReader, mejor usar nuevos objetos
-                string consultaTrabajador = "SELECT codigoTrabajador FROM Trabajador WHERE codigoUsuario = @codigoUsuario";
-                using (SqlCommand cmdTrabajador = new SqlCommand(consultaTrabajador, cnn))
-                {
-                    cmdTrabajador.Parameters.AddWithValue("@codigoUsuario", Session["codigoUsuario"]);
-
-                    using (SqlDataReader adapTrabajador = cmdTrabajador.ExecuteReader())
-                    {
-                        if (adapTrabajador.Read())
+                        else
                         {
-                            try
-                            {
-                                Session["codigoTrabajador"] = adapTrabajador.GetInt32(0);
-                            }
-                            catch (Exception ex)
-                            {
-                                Response.Write(ex.Message.ToString());
-                            }
+                            // User does not exist, display an error message
+                            ErrorMessageLabel.Visible = true;
+                            ErrorMessageLabel.Text = "Usuario y/o contraseña incorrectos.";
                         }
                     }
                 }
-            }
-
-            if (Session["rol"].ToString() == "super")
-            {
-                Response.Redirect("Super/MenuSuper.aspx");
-            }
-            else if (Session["rol"].ToString() == "trabajador")
-            {
-                Response.Redirect("Trabajador/InicialTrabajador.aspx");
-
-            }
-            else if (Session["rol"].ToString() == "coordinador")
-            {
-                Response.Redirect("Coordinador/InicialCoordinador.aspx");
-            }
-            else
-            {
-                Response.Redirect("Login.aspx");
             }
         }
+
     }
 }

@@ -117,7 +117,6 @@
                         <asp:DropDownList Text='<%# Bind("rol") %>' class="form-control" runat="server" ID="rolDropDownList">
                             <asp:ListItem Text="trabajador" Value="trabajador"></asp:ListItem>
                             <asp:ListItem Text="coordinador" Value="coordinador"></asp:ListItem>
-                            <asp:ListItem Text="super" Value="super"></asp:ListItem>
                         </asp:DropDownList>
                     </EditItemTemplate>
                 </asp:TemplateField>
@@ -174,8 +173,7 @@
                             Rol:
                             <asp:DropDownList Text='<%# Bind("rol") %>' class="form-control" runat="server" ID="rolDropDownList">
                                 <asp:ListItem Text="trabajador" Value="trabajador"></asp:ListItem>
-                                <asp:ListItem Text="coordinador" Value="coordinador"></asp:ListItem>
-                                <asp:ListItem Text="super" Value="super"></asp:ListItem>
+                                <asp:ListItem Text="coordinador" Value="coordinador"></asp:ListItem>    
                             </asp:DropDownList>
                         </div>
                     </div>
@@ -192,5 +190,4 @@
         </asp:Panel>
 
     </div>
-    ipt>
 </asp:Content>
