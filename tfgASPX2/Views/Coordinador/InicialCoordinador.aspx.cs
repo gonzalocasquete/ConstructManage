@@ -19,6 +19,7 @@ namespace tfgASPX2.Views.Coordinador
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
             PanelConsultarLineasParte.Visible = true;
+            ButtonInsertarLinea.Visible = true;
             if (GridView1.SelectedIndex >= 0)
             {
                 // Obtén el valor de codigoParte de la fila seleccionada

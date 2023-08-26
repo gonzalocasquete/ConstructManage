@@ -33,6 +33,15 @@ namespace tfgASPX2.Views.Coordinador
         protected global::System.Web.UI.WebControls.Button ButtonFiltros;
 
         /// <summary>
+        /// Control ButtonInsertarLinea.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonInsertarLinea;
+
+        /// <summary>
         /// Control PanelFiltros.
         /// </summary>
         /// <remarks>
@@ -211,15 +220,6 @@ namespace tfgASPX2.Views.Coordinador
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridView2;
-
-        /// <summary>
-        /// Control ButtonInsertarLinea.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonInsertarLinea;
 
         /// <summary>
         /// Control PanelInsertarLinea.

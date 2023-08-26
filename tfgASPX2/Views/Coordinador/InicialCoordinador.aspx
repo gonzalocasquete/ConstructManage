@@ -28,6 +28,14 @@
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col">
+                    <asp:Button ID="ButtonInsertarLinea" class="form-control btn-info btn-sm btn-block buttonFilter mt-1" runat="server" Text="Insertar Linea" OnClick="ButtonInsertarLinea_Click" Visible="false" />
+                </div>
+            </div>
+
+
+
             <asp:Panel ID="PanelFiltros" runat="server" Visible="False">
                 <hr style="margin-bottom: 2px;" />
                 <div>
@@ -106,7 +114,7 @@
             </UpdateParameters>
         </asp:SqlDataSource>
 
-        <asp:GridView ID="GridView1" class="table mt-3 " runat="server" DataSourceID="SqlDataSource1" AutoGenerateColumns="False" DataKeyNames="codigoParte" AllowPaging="True" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical" AllowSorting="True">
+        <asp:GridView ID="GridView1" class="table mt-3 tamanio-partes" runat="server" DataSourceID="SqlDataSource1" AutoGenerateColumns="False" DataKeyNames="codigoParte" AllowPaging="True" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical" AllowSorting="True" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
                 <asp:BoundField DataField="codigoParte" HeaderText="ID" ReadOnly="True" InsertVisible="False"></asp:BoundField>
@@ -247,124 +255,122 @@
 
         <%--Bloque div para la consulta de un parte--%>
         <asp:Panel ID="PanelConsultarLineasParte" runat="server" Visible="false">
+            <asp:SqlDataSource runat="server" ID="SqlDataSourceLineas" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>"
+                SelectCommand="SELECT LineaTrabajo.*, Trabajador.nombre, Trabajador.apellido, Partida.nombrePartida, Naturaleza.nombre AS nombreNaturaleza FROM LineaTrabajo INNER JOIN Trabajador ON LineaTrabajo.codigoTrabajador = Trabajador.codigoTrabajador INNER JOIN Partida ON LineaTrabajo.codigoPartida = Partida.codigoPartida INNER JOIN Naturaleza ON LineaTrabajo.codigoNaturaleza = Naturaleza.codigoNaturaleza WHERE ([codigoParte] = @codigoParte)"
+                DeleteCommand="DELETE FROM [LineaTrabajo] WHERE [codigoLinea] = @codigoLinea"
+                InsertCommand="INSERT INTO [LineaTrabajo] ([codigoParte], [codigoTrabajador], [codigoPartida], [codigoNaturaleza], [horasNormales], [horasExtra]) VALUES (@codigoParte, @codigoTrabajador, @codigoPartida, @codigoNaturaleza, @horasNormales, @horasExtra)"
+                UpdateCommand="UPDATE [LineaTrabajo] SET [codigoParte] = @codigoParte, [codigoTrabajador] = @codigoTrabajador, [codigoPartida] = @codigoPartida, [codigoNaturaleza] = @codigoNaturaleza, [horasNormales] = @horasNormales, [horasExtra] = @horasExtra WHERE [codigoLinea] = @codigoLinea">
+                <DeleteParameters>
+                    <asp:Parameter Name="codigoLinea" Type="Int32"></asp:Parameter>
+                </DeleteParameters>
+                <InsertParameters>
+                    <asp:Parameter Name="codigoParte" Type="Int32"></asp:Parameter>
+                    <asp:Parameter Name="codigoTrabajador" Type="Int32"></asp:Parameter>
+                    <asp:Parameter Name="codigoPartida" Type="Int32"></asp:Parameter>
+                    <asp:Parameter Name="codigoNaturaleza" Type="Int32"></asp:Parameter>
+                    <asp:Parameter Name="horasNormales" Type="Int32"></asp:Parameter>
+                    <asp:Parameter Name="horasExtra" Type="Int32"></asp:Parameter>
+                </InsertParameters>
+                <SelectParameters>
+                    <asp:ControlParameter ControlID="GridView1" PropertyName="SelectedValue" Name="codigoParte" Type="Int32"></asp:ControlParameter>
+                </SelectParameters>
+                <UpdateParameters>
+                    <asp:Parameter Name="codigoParte" Type="Int32"></asp:Parameter>
+                    <asp:Parameter Name="codigoTrabajador" Type="Int32"></asp:Parameter>
+                    <asp:Parameter Name="codigoPartida" Type="Int32"></asp:Parameter>
+                    <asp:Parameter Name="codigoNaturaleza" Type="Int32"></asp:Parameter>
+                    <asp:Parameter Name="horasNormales" Type="Int32"></asp:Parameter>
+                    <asp:Parameter Name="horasExtra" Type="Int32"></asp:Parameter>
+                    <asp:Parameter Name="codigoLinea" Type="Int32"></asp:Parameter>
+                </UpdateParameters>
+            </asp:SqlDataSource>
+
+            <asp:GridView ID="GridView2" runat="server" class="table mt-3 tamanio-lineas" DataSourceID="SqlDataSourceLineas" AutoGenerateColumns="False" DataKeyNames="codigoLinea" AllowPaging="True" AllowSorting="True" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical">
+                <AlternatingRowStyle BackColor="#CCCCCC" />
+                <Columns>
+                    <asp:BoundField DataField="codigoLinea" HeaderText="ID" ReadOnly="True" InsertVisible="False" SortExpression="codigoLinea"></asp:BoundField>
+                    <asp:TemplateField HeaderText="Parte" SortExpression="codigoParte">
+                        <ItemTemplate>
+                            <%# Eval("codigoParte") %>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:DropDownList Text='<%# Bind("codigoParte") %>' class="dropdown form-control edit-dropdown" ID="idPartesDropDownList" runat="server" DataSourceID="PartesSqlDataSource" DataTextField="codigoParte" DataValueField="codigoParte"></asp:DropDownList>
+                            <asp:SqlDataSource ID="PartesSqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT [codigoParte], [codigoProyecto] FROM [Parte] WHERE ([codigoTrabajador] = @codigoTrabajador)">
+                                <SelectParameters>
+                                    <asp:SessionParameter SessionField="codigoUsuario" Name="codigoTrabajador" Type="Int32"></asp:SessionParameter>
+                                </SelectParameters>
+                            </asp:SqlDataSource>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="Trabajador" SortExpression="nombre">
+                        <ItemTemplate>
+                            <%# Eval("nombre") %>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:DropDownList Text='<%# Bind("codigoTrabajador") %>' class="dropdown form-control edit-dropdown" ID="idTrabajadoresDropDownList" runat="server" DataSourceID="TrabajadorSqlDataSource" DataTextField="nombre" DataValueField="codigoTrabajador"></asp:DropDownList>
+                            <asp:SqlDataSource ID="TrabajadorSqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT [codigoTrabajador], [nombre] FROM [Trabajador]"></asp:SqlDataSource>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="Partida" SortExpression="nombrePartida">
+                        <ItemTemplate>
+                            <%# Eval("nombrePartida") %>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:DropDownList Text='<%# Bind("codigoPartida") %>' class="dropdown form-control edit-dropdown" ID="idPartidasDropDownList" runat="server" DataSourceID="SqlDataSourcePartidasLinea" DataTextField="nombrePartida" DataValueField="codigoPartida"></asp:DropDownList>
+                            <asp:SqlDataSource ID="SqlDataSourcePartidasLinea" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT Partida.[codigoPartida], Partida.[nombrePartida] FROM Partida INNER JOIN Proyecto ON Partida.codigoProyecto = Proyecto.codigoProyecto INNER JOIN Parte ON Proyecto.codigoProyecto = Parte.codigoProyecto WHERE Parte.codigoParte = @codigoParte">
+                                <SelectParameters>
+                                    <asp:ControlParameter ControlID="GridView1" PropertyName="SelectedValue" Name="codigoParte" Type="Int32"></asp:ControlParameter>
+                                </SelectParameters>
+                            </asp:SqlDataSource>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="Naturaleza" SortExpression="nombreNaturaleza">
+                        <ItemTemplate>
+                            <%# Eval("nombreNaturaleza") %>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:DropDownList Text='<%# Bind("codigoNaturaleza") %>' class="dropdown form-control edit-dropdown" ID="idNaturalezasDropDownList" runat="server" DataSourceID="NaturalezasSqlDataSource" DataTextField="nombre" DataValueField="codigoNaturaleza"></asp:DropDownList>
+                            <asp:SqlDataSource ID="NaturalezasSqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT codigoNaturaleza, nombre FROM Naturaleza order by nombre"></asp:SqlDataSource>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="horasNormales" SortExpression="horasNormales">
+                        <ItemTemplate>
+                            <%# Eval("horasNormales") %>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox Text='<%# Bind("horasNormales") %>' class="form-control edit-textbox" runat="server" ID="horasNormalesTextBox" />
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="horasExtra" SortExpression="horasExtra">
+                        <ItemTemplate>
+                            <%# Eval("horasExtra") %>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox Text='<%# Bind("horasExtra") %>' class="form-control edit-textbox" runat="server" ID="horasExtraTextBox" />
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:CommandField ShowDeleteButton="True" ShowEditButton="True"></asp:CommandField>
+                </Columns>
+                <FooterStyle BackColor="#CCCCCC" />
+                <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+                <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
+                <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                <SortedAscendingHeaderStyle BackColor="#808080" />
+                <SortedDescendingCellStyle BackColor="#CAC9C9" />
+
+                <SortedDescendingHeaderStyle BackColor="#383838" />
+            </asp:GridView>
         </asp:Panel>
 
-        <asp:SqlDataSource runat="server" ID="SqlDataSourceLineas" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>"
-            SelectCommand="SELECT LineaTrabajo.*, Trabajador.nombre, Trabajador.apellido, Partida.nombrePartida, Naturaleza.nombre AS nombreNaturaleza FROM LineaTrabajo INNER JOIN Trabajador ON LineaTrabajo.codigoTrabajador = Trabajador.codigoTrabajador INNER JOIN Partida ON LineaTrabajo.codigoPartida = Partida.codigoPartida INNER JOIN Naturaleza ON LineaTrabajo.codigoNaturaleza = Naturaleza.codigoNaturaleza WHERE ([codigoParte] = @codigoParte)"
-            DeleteCommand="DELETE FROM [LineaTrabajo] WHERE [codigoLinea] = @codigoLinea"
-            InsertCommand="INSERT INTO [LineaTrabajo] ([codigoParte], [codigoTrabajador], [codigoPartida], [codigoNaturaleza], [horasNormales], [horasExtra]) VALUES (@codigoParte, @codigoTrabajador, @codigoPartida, @codigoNaturaleza, @horasNormales, @horasExtra)"
-            UpdateCommand="UPDATE [LineaTrabajo] SET [codigoParte] = @codigoParte, [codigoTrabajador] = @codigoTrabajador, [codigoPartida] = @codigoPartida, [codigoNaturaleza] = @codigoNaturaleza, [horasNormales] = @horasNormales, [horasExtra] = @horasExtra WHERE [codigoLinea] = @codigoLinea">
-            <DeleteParameters>
-                <asp:Parameter Name="codigoLinea" Type="Int32"></asp:Parameter>
-            </DeleteParameters>
-            <InsertParameters>
-                <asp:Parameter Name="codigoParte" Type="Int32"></asp:Parameter>
-                <asp:Parameter Name="codigoTrabajador" Type="Int32"></asp:Parameter>
-                <asp:Parameter Name="codigoPartida" Type="Int32"></asp:Parameter>
-                <asp:Parameter Name="codigoNaturaleza" Type="Int32"></asp:Parameter>
-                <asp:Parameter Name="horasNormales" Type="Int32"></asp:Parameter>
-                <asp:Parameter Name="horasExtra" Type="Int32"></asp:Parameter>
-            </InsertParameters>
-            <SelectParameters>
-                <asp:ControlParameter ControlID="GridView1" PropertyName="SelectedValue" Name="codigoParte" Type="Int32"></asp:ControlParameter>
-            </SelectParameters>
-            <UpdateParameters>
-                <asp:Parameter Name="codigoParte" Type="Int32"></asp:Parameter>
-                <asp:Parameter Name="codigoTrabajador" Type="Int32"></asp:Parameter>
-                <asp:Parameter Name="codigoPartida" Type="Int32"></asp:Parameter>
-                <asp:Parameter Name="codigoNaturaleza" Type="Int32"></asp:Parameter>
-                <asp:Parameter Name="horasNormales" Type="Int32"></asp:Parameter>
-                <asp:Parameter Name="horasExtra" Type="Int32"></asp:Parameter>
-                <asp:Parameter Name="codigoLinea" Type="Int32"></asp:Parameter>
-            </UpdateParameters>
-        </asp:SqlDataSource>
-
-        <asp:GridView ID="GridView2" runat="server" class="table mt-3" DataSourceID="SqlDataSourceLineas" AutoGenerateColumns="False" DataKeyNames="codigoLinea" AllowPaging="True" AllowSorting="True" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical">
-            <AlternatingRowStyle BackColor="#CCCCCC" />
-            <Columns>
-                <asp:BoundField DataField="codigoLinea" HeaderText="ID" ReadOnly="True" InsertVisible="False" SortExpression="codigoLinea"></asp:BoundField>
-                <asp:TemplateField HeaderText="Parte" SortExpression="codigoParte">
-                    <ItemTemplate>
-                        <%# Eval("codigoParte") %>
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:TextBox Text='<%# Bind("codigoParte") %>' runat="server" ID="codigoParteTextBox" />
-                        <asp:DropDownList Text='<%# Bind("codigoParte") %>' class="dropdown form-control edit-dropdown" ID="idPartesDropDownList" runat="server" DataSourceID="PartesSqlDataSource" DataTextField="codigoParte" DataValueField="codigoParte"></asp:DropDownList>
-                        <asp:SqlDataSource ID="PartesSqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT [codigoParte], [codigoProyecto] FROM [Parte] WHERE ([codigoTrabajador] = @codigoTrabajador)">
-                            <SelectParameters>
-                                <asp:SessionParameter SessionField="codigoUsuario" Name="codigoTrabajador" Type="Int32"></asp:SessionParameter>
-                            </SelectParameters>
-                        </asp:SqlDataSource>
-                    </EditItemTemplate>
-                </asp:TemplateField>
-
-                <asp:TemplateField HeaderText="Trabajador" SortExpression="nombre">
-                    <ItemTemplate>
-                        <%# Eval("nombre") %>
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:DropDownList Text='<%# Bind("codigoTrabajador") %>' class="dropdown form-control edit-dropdown" ID="idTrabajadoresDropDownList" runat="server" DataSourceID="TrabajadorSqlDataSource" DataTextField="nombre" DataValueField="codigoTrabajador"></asp:DropDownList>
-                        <asp:SqlDataSource ID="TrabajadorSqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT [codigoTrabajador], [nombre] FROM [Trabajador]"></asp:SqlDataSource>
-                    </EditItemTemplate>
-                </asp:TemplateField>
-
-                <asp:TemplateField HeaderText="Partida" SortExpression="nombrePartida">
-                    <ItemTemplate>
-                        <%# Eval("nombrePartida") %>
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:DropDownList Text='<%# Bind("codigoPartida") %>' class="dropdown form-control edit-dropdown" ID="idPartidasDropDownList" runat="server" DataSourceID="SqlDataSourcePartidasLinea" DataTextField="nombrePartida" DataValueField="codigoPartida"></asp:DropDownList>
-                        <asp:SqlDataSource ID="SqlDataSourcePartidasLinea" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT Partida.[codigoPartida], Partida.[nombrePartida] FROM Partida INNER JOIN Proyecto ON Partida.codigoProyecto = Proyecto.codigoProyecto INNER JOIN Parte ON Proyecto.codigoProyecto = Parte.codigoProyecto WHERE Parte.codigoParte = @codigoParte">
-                            <SelectParameters>
-                                <asp:ControlParameter ControlID="GridView1" PropertyName="SelectedValue" Name="codigoParte" Type="Int32"></asp:ControlParameter>
-                            </SelectParameters>
-                        </asp:SqlDataSource>
-                    </EditItemTemplate>
-                </asp:TemplateField>
-
-                <asp:TemplateField HeaderText="Naturaleza" SortExpression="nombreNaturaleza">
-                    <ItemTemplate>
-                        <%# Eval("nombreNaturaleza") %>
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:DropDownList Text='<%# Bind("codigoNaturaleza") %>' class="dropdown form-control edit-dropdown" ID="idNaturalezasDropDownList" runat="server" DataSourceID="NaturalezasSqlDataSource" DataTextField="nombre" DataValueField="codigoNaturaleza"></asp:DropDownList>
-                        <asp:SqlDataSource ID="NaturalezasSqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT codigoNaturaleza, nombre FROM Naturaleza order by nombre"></asp:SqlDataSource>
-                    </EditItemTemplate>
-                </asp:TemplateField>
-
-                <asp:TemplateField HeaderText="horasNormales" SortExpression="horasNormales">
-                    <ItemTemplate>
-                        <%# Eval("horasNormales") %>
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:TextBox Text='<%# Bind("horasNormales") %>' runat="server" ID="horasNormalesTextBox" />
-                    </EditItemTemplate>
-                </asp:TemplateField>
-
-                <asp:TemplateField HeaderText="horasExtra" SortExpression="horasExtra">
-                    <ItemTemplate>
-                        <%# Eval("horasExtra") %>
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:TextBox Text='<%# Bind("horasExtra") %>' runat="server" ID="horasExtraTextBox" />
-                    </EditItemTemplate>
-                </asp:TemplateField>
-
-                <asp:CommandField ShowDeleteButton="True" ShowEditButton="True"></asp:CommandField>
-            </Columns>
-            <FooterStyle BackColor="#CCCCCC" />
-            <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
-            <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
-            <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
-            <SortedAscendingCellStyle BackColor="#F1F1F1" />
-            <SortedAscendingHeaderStyle BackColor="#808080" />
-            <SortedDescendingCellStyle BackColor="#CAC9C9" />
-
-            <SortedDescendingHeaderStyle BackColor="#383838" />
-        </asp:GridView>
 
         <%--*******************************************************--%>
-        <asp:Button ID="ButtonInsertarLinea" class="ButtonStyle button1 mt-3" runat="server" Text="Insertar Linea" OnClick="ButtonInsertarLinea_Click" />
         <%--Bloque div para la inserción de una nueva línea--%>
         <asp:Panel ID="PanelInsertarLinea" runat="server" Visible="false">
             <asp:SqlDataSource runat="server" ID="SqlDataSourceInsertarLinea" ConnectionString='<%$ ConnectionStrings:mibasededatostfgConnectionString %>' DeleteCommand="DELETE FROM [LineaTrabajo] WHERE [codigoLinea] = @codigoLinea" InsertCommand="INSERT INTO [LineaTrabajo] ([codigoParte], [codigoTrabajador], [codigoPartida], [codigoNaturaleza], [horasNormales], [horasExtra]) VALUES (@codigoParte, @codigoTrabajador, @codigoPartida, @codigoNaturaleza, @horasNormales, @horasExtra)" SelectCommand="SELECT * FROM [LineaTrabajo]" UpdateCommand="UPDATE [LineaTrabajo] SET [codigoParte] = @codigoParte, [codigoTrabajador] = @codigoTrabajador, [codigoPartida] = @codigoPartida, [codigoNaturaleza] = @codigoNaturaleza, [horasNormales] = @horasNormales, [horasExtra] = @horasExtra WHERE [codigoLinea] = @codigoLinea">

@@ -47,3 +47,17 @@ body {
     pointer-events: none; /* Evitar eventos de puntero */
     opacity: 0.8; /* Opacidad reducida */
 }
+
+.tamanio-partes {
+    border-radius: 18px;
+    overflow: hidden;
+    table-layout: fixed;
+    width: 1400px;
+}
+
+.tamanio-lineas {
+    border-radius: 18px;
+    overflow: hidden;
+    table-layout: fixed;
+    width: 1150px;
+}
