@@ -48,7 +48,7 @@
                 <hr style="height: 2px; width: auto; border-width: 0; color: whitesmoke; background-color: whitesmoke">
                 <div>
                     <asp:Label ID="LabelFiltroNombreCategoria" class="text-light" runat="server" Text="Nombre:"></asp:Label>
-                    <asp:TextBox ID="TextBoxFiltrado" class="form-control" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="TextBoxFiltrocategoria" class="form-control" runat="server"></asp:TextBox>
 
                     <div class="text-center mt-2">
                         <asp:Button ID="ButtonFiltrado" class="form-control btn btn-primary btn-sm btn-block buttonFilter" runat="server" Text="Filtrar" OnClick="ButtonFiltrado_Click" />
@@ -266,7 +266,7 @@
                     <div class="row">
                         <div class="col">
                             Convenio:
-                           <asp:DropDownList Text='<%# Bind("codigoConvenio") %>' class="dropdown form-control" ID="idConveniosDropDownList" runat="server" DataSourceID="ConveniosSqlDataSourceInsertar" DataTextField="nombreConvenio" DataValueField="codigoConvenio" AppendDataBoundItems="true"></asp:DropDownList>
+                            <asp:DropDownList Text='<%# Bind("codigoConvenio") %>' class="dropdown form-control" ID="idConveniosDropDownList" runat="server" DataSourceID="ConveniosSqlDataSourceInsertar" DataTextField="nombreConvenio" DataValueField="codigoConvenio" AppendDataBoundItems="true"></asp:DropDownList>
                             <asp:SqlDataSource ID="ConveniosSqlDataSourceInsertar" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT nombreConvenio, codigoConvenio FROM Convenio;"></asp:SqlDataSource>
                         </div>
                         <div class="col">

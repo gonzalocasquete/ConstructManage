@@ -56,12 +56,12 @@
                         <div class="col">
                             <%--Fecha de Inicio--%>
                             <asp:Label ID="LabelFechaMinima" class="text-light" for="fechaMinima" runat="server" Text="Fecha Minima:"></asp:Label>
-                                                                            <input id="fechaMinima" class="form-control" runat="server" type="date" name="fechaMinima">
+                            <input id="fechaMinima" class="form-control" runat="server" type="date" name="fechaMinima">
                         </div>
                         <div class="col">
                             <%--Fecha de Fin--%>
                             <asp:Label ID="LabelFechaMaxima" class="text-light" for="fechaMaxima" runat="server" Text="Fecha Maxima:"></asp:Label>
-                                                                            <input id="fechaMaxima" class="form-control" runat="server" type="date" name="fechaMaxima" onchange="validarFechaMaxima(this)">
+                            <input id="fechaMaxima" class="form-control" runat="server" type="date" name="fechaMaxima" onchange="validarFechaMaxima(this)">
                         </div>
                     </div>
 
@@ -164,10 +164,10 @@
 
         <div class="mt-3">
             <asp:Panel ID="PanelMostrarAsociaciones" runat="server" Visible="False">
-                <asp:SqlDataSource runat="server" ID="SqlDataSource2" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" 
-                    DeleteCommand="DELETE FROM [AsociacionCostes] WHERE [codigoAsociacionCoste] = @codigoAsociacionCoste" 
-                    InsertCommand="INSERT INTO [AsociacionCostes] ([codigoConvenio], [codigoCategoria], [precioHora], [precioHoraExtra], [horasMaxDia]) VALUES (@codigoConvenio, @codigoCategoria, @precioHora, @precioHoraExtra, @horasMaxDia)" 
-                    SelectCommand="SELECT * FROM [AsociacionCostes] WHERE ([codigoConvenio] = @codigoConvenio) order by codigoAsociacion DESC" 
+                <asp:SqlDataSource runat="server" ID="SqlDataSource2" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>"
+                    DeleteCommand="DELETE FROM [AsociacionCostes] WHERE [codigoAsociacionCoste] = @codigoAsociacionCoste"
+                    InsertCommand="INSERT INTO [AsociacionCostes] ([codigoConvenio], [codigoCategoria], [precioHora], [precioHoraExtra], [horasMaxDia]) VALUES (@codigoConvenio, @codigoCategoria, @precioHora, @precioHoraExtra, @horasMaxDia)"
+                    SelectCommand="SELECT A.*, C.nombreConvenio, Ca.nombreCategoria FROM AsociacionCostes A INNER JOIN Convenio C ON A.codigoConvenio = C.codigoConvenio INNER JOIN CategoriaProfesional Ca ON A.codigoCategoria = Ca.codigoCategoria WHERE A.codigoConvenio = @codigoConvenio  ORDER BY A.codigoAsociacionCoste DESC;"
                     UpdateCommand="UPDATE [AsociacionCostes] SET [codigoConvenio] = @codigoConvenio, [codigoCategoria] = @codigoCategoria, [precioHora] = @precioHora, [precioHoraExtra] = @precioHoraExtra, [horasMaxDia] = @horasMaxDia WHERE [codigoAsociacionCoste] = @codigoAsociacionCoste">
                     <DeleteParameters>
                         <asp:Parameter Name="codigoAsociacionCoste" Type="Int32"></asp:Parameter>
@@ -192,20 +192,64 @@
                     </UpdateParameters>
                 </asp:SqlDataSource>
 
-                <asp:GridView ID="GridView2" runat="server" DataSourceID="SqlDataSource2" AutoGenerateColumns="False" DataKeyNames="codigoAsociacionCoste" AllowPaging="True" BackColor="WhiteSmoke" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical" AllowSorting="True">
+                <asp:GridView ID="GridView2" class="table mt-3 tamanio-asociacion" runat="server" DataSourceID="SqlDataSource2" AutoGenerateColumns="False" DataKeyNames="codigoAsociacionCoste" AllowPaging="True" BackColor="WhiteSmoke" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical" AllowSorting="True">
+                    <AlternatingRowStyle BackColor="#CCCCCC" />
                     <Columns>
                         <asp:BoundField DataField="codigoAsociacionCoste" HeaderText="ID" ReadOnly="True" InsertVisible="False" SortExpression="codigoAsociacionCoste"></asp:BoundField>
-                        <asp:BoundField DataField="codigoConvenio" HeaderText="Convenio" SortExpression="codigoConvenio"></asp:BoundField>
-                        <asp:BoundField DataField="codigoCategoria" HeaderText="Categoria" SortExpression="codigoCategoria"></asp:BoundField>
-                        <asp:BoundField DataField="precioHora" HeaderText="PrecioHora" SortExpression="precioHora"></asp:BoundField>
-                        <asp:BoundField DataField="precioHoraExtra" HeaderText="PrecioHoraExtra" SortExpression="precioHoraExtra"></asp:BoundField>
-                        <asp:BoundField DataField="horasMaxDia" HeaderText="HorasMaxDia" SortExpression="horasMaxDia"></asp:BoundField>
+                        <asp:TemplateField HeaderText="Convenio" SortExpression="codigoConvenio">
+                            <ItemTemplate>
+                                <%# Eval("nombreConvenio") %>
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:DropDownList Text='<%# Bind("codigoConvenio") %>' class="dropdown form-control edit-dropdown" ID="idConveniosDropDownList" runat="server" DataSourceID="ConveniosSqlDataSource" DataTextField="nombreConvenio" DataValueField="codigoConvenio"></asp:DropDownList>
+                                <asp:SqlDataSource ID="ConveniosSqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT codigoConvenio, nombreConvenio FROM Convenio order by nombreConvenio"></asp:SqlDataSource>
+                            </EditItemTemplate>
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="Categoria" SortExpression="codigoCategoria">
+                            <ItemTemplate>
+                                <%# Eval("nombreCategoria") %>
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:DropDownList Text='<%# Bind("codigoCategoria") %>' class="dropdown form-control edit-dropdown" ID="idCategoriasDropDownList" runat="server" DataSourceID="CategoriasSqlDataSource" DataTextField="nombreCategoria" DataValueField="codigoCategoria"></asp:DropDownList>
+                                <asp:SqlDataSource ID="CategoriasSqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT codigoCategoria, nombreCategoria FROM CategoriaProfesional order by nombreCategoria"></asp:SqlDataSource>
+                            </EditItemTemplate>
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="PrecioHora" SortExpression="precioHora">
+                            <ItemTemplate>
+                                <%# Eval("precioHora") %>
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <input type="number" step="any" class="form-control edit-textbox" id="txtPrecioHora" runat="server" value='<%# Bind("precioHora", "{0:F2}") %>' />
+                            </EditItemTemplate>
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="PrecioHoraExtra" SortExpression="precioHoraExtra">
+                            <ItemTemplate>
+                                <%# Eval("precioHoraExtra") %>
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <input type="number" step="any" class="form-control edit-textbox" id="txtPrecioHoraExtra" runat="server" value='<%# Bind("precioHoraExtra", "{0:F2}") %>' />
+                            </EditItemTemplate>
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="HorasMaxDia" SortExpression="horasMaxDia">
+                            <ItemTemplate>
+                                <%# Eval("horasMaxDia") %>
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <input type="number" class="form-control edit-textbox" id="txtHorasMaxDia" runat="server" value='<%# Bind("horasMaxDia") %>' />
+                            </EditItemTemplate>
+                        </asp:TemplateField>
+
                         <asp:CommandField ShowDeleteButton="True" ShowEditButton="True"></asp:CommandField>
                     </Columns>
                     <FooterStyle BackColor="#CCCCCC" />
                     <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
                     <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
                 </asp:GridView>
+
             </asp:Panel>
         </div>
 
@@ -252,7 +296,7 @@
                         </div>
                         <div class="col">
                             Horas Máximas Día:
-                            <%--                            <input type="number" value='<%# Bind("horasMaxDia") %>' class="form-control" runat="server" id="HorasMaxDiaInput" />--%>
+                            <input type="number" value='<%# Bind("horasMaxDia") %>' class="form-control" runat="server" id="HorasMaxDiaInput" />
                         </div>
                     </div>
 
@@ -298,9 +342,9 @@
                 </UpdateParameters>
             </asp:SqlDataSource>
 
-            <asp:FormView ID="FormViewInsertarConvenio" class="form-control" runat="server" DataKeyNames="codigoConvenio" DataSourceID="SqlDataSourceInsertarConvenio" DefaultMode="Insert"  OnItemInserting="FormViewInsertarConvenio_ItemInserting" OnItemCommand="FormViewInsertarConvenio_ItemCommand">
-                 <FooterStyle BackColor="#990000" ForeColor="White" Font-Bold="True" />
-                 <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
+            <asp:FormView ID="FormViewInsertarConvenio" class="form-control" runat="server" DataKeyNames="codigoConvenio" DataSourceID="SqlDataSourceInsertarConvenio" DefaultMode="Insert" OnItemInserting="FormViewInsertarConvenio_ItemInserting" OnItemCommand="FormViewInsertarConvenio_ItemCommand">
+                <FooterStyle BackColor="#990000" ForeColor="White" Font-Bold="True" />
+                <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
                 <InsertItemTemplate>
 
                     <div class="row">

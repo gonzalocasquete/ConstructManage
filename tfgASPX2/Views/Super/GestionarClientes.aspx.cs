@@ -31,6 +31,9 @@ namespace tfgASPX2.Views.Super
 
                 DropDownListUbicacionDF.DataSource = provincias;
                 DropDownListUbicacionDF.DataBind();
+            }else
+            {
+                SqlDataSource1.SelectCommand = Session["consultaSQL"].ToString();
             }
         }
 
@@ -87,12 +90,13 @@ namespace tfgASPX2.Views.Super
             }
 
             SqlDataSource1.SelectCommand = consultaSQL;
+            Session["consultaSQL"] = consultaSQL;
             SqlDataSource1.DataBind();
         }
 
         protected void Limpiar_Click(object sender, EventArgs e)
         {
-            SqlDataSource1.SelectCommand = "SELECT * FROM Cliente";
+            SqlDataSource1.SelectCommand = "SELECT * FROM Cliente order by codigoCliente DESC";
             SqlDataSource1.DataBind();
             TextBoxFiltradoEntidad.Text = "";
             DropDownListUbicacionDF.SelectedIndex = 0;

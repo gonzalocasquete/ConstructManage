@@ -89,7 +89,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="CheckBoxSuper" runat="server">
                                 <label class="form-check-label text-light" for="CheckBoxSuper">
-                                    Super
+                                    Admin
                                 </label>
                             </div>
                         </div>
@@ -160,6 +160,7 @@
                 </asp:TemplateField>
 
                 <asp:BoundField DataField="rol" HeaderText="rol" ReadOnly="True" InsertVisible="False" SortExpression="rol"></asp:BoundField>
+                
                 <asp:CommandField ShowDeleteButton="True" ShowEditButton="True"></asp:CommandField>
             </Columns>
             <FooterStyle BackColor="#CCCCCC" />

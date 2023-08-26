@@ -15,6 +15,15 @@ namespace tfgASPX2.Views.Coordinador
     {
 
         /// <summary>
+        /// Control ButtonInsertarParte.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonInsertarParte;
+
+        /// <summary>
         /// Control ButtonFiltros.
         /// </summary>
         /// <remarks>
@@ -150,15 +159,6 @@ namespace tfgASPX2.Views.Coordinador
         protected global::System.Web.UI.WebControls.GridView GridView1;
 
         /// <summary>
-        /// Control ButtonInsertarParte.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonInsertarParte;
-
-        /// <summary>
         /// Control PanelInsertarParte.
         /// </summary>
         /// <remarks>
@@ -195,13 +195,13 @@ namespace tfgASPX2.Views.Coordinador
         protected global::System.Web.UI.WebControls.Panel PanelConsultarLineasParte;
 
         /// <summary>
-        /// Control SqlDataSourceLineasParte.
+        /// Control SqlDataSourceLineas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceLineasParte;
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceLineas;
 
         /// <summary>
         /// Control GridView2.

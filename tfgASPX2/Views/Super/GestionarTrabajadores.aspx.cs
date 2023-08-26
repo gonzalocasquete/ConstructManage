@@ -12,7 +12,10 @@ namespace tfgASPX2.Views.Super
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (IsPostBack)
+            {
+                SqlDataSource1.SelectCommand = Session["consultaSQL"].ToString();
+            }
         }
 
         protected void ButtonInsertarTrabajador_Click(object sender, EventArgs e)
@@ -76,16 +79,17 @@ namespace tfgASPX2.Views.Super
         {
             string trabajador = CheckBoxTrabajador.Checked ? "trabajador" : null;
             string coordinador = CheckBoxCoordinador.Checked ? "coordinador" : null;
-            string super = CheckBoxSuper.Checked ? "super" : null;
+            string admin = CheckBoxSuper.Checked ? "super" : null;
 
             String consultaSQL = "SELECT Trabajador.codigoTrabajador, Trabajador.nombre, Trabajador.apellido, Trabajador.codigoUsuario, Trabajador.codigoCategoria, Usuario.nombreUsuario, CategoriaProfesional.nombreCategoria, Usuario.rol " +
                 "FROM Trabajador INNER JOIN Usuario ON Trabajador.codigoUsuario = Usuario.codigoUsuario INNER JOIN CategoriaProfesional ON Trabajador.codigoCategoria = CategoriaProfesional.codigoCategoria " +
-                "WHERE Trabajador.nombre LIKE '%" + TextBoxFiltradoNombre.Text + "%' OR Trabajador.apellido LIKE '%" + TextBoxFiltradoApellido.Text + "%' AND (Usuario.rol='" + trabajador + "' OR Usuario.rol='" + coordinador + "' OR Usuario.rol='" + super + "')";
+                "WHERE Trabajador.nombre LIKE '%" + TextBoxFiltradoNombre.Text + "%' OR Trabajador.apellido LIKE '%" + TextBoxFiltradoApellido.Text + "%' AND Usuario.rol='" + trabajador + "' OR Usuario.rol='" + coordinador + "' OR Usuario.rol='" + admin + "'";
 
             if (DropDownListCategorias.SelectedValue != "")
                 consultaSQL += " AND Trabajador.codigoCategoria = " + DropDownListCategorias.SelectedValue + "";
 
             SqlDataSource1.SelectCommand = consultaSQL;
+            Session["consultaSQL"] = consultaSQL;
             SqlDataSource1.DataBind();
         }
 
@@ -93,7 +97,8 @@ namespace tfgASPX2.Views.Super
 
         protected void Limpiar_Click(object sender, EventArgs e)
         {
-            SqlDataSource1.SelectCommand = "SELECT Trabajador.codigoTrabajador, Trabajador.nombre, Trabajador.apellido, Trabajador.codigoUsuario, Trabajador.codigoCategoria, Usuario.nombreUsuario, CategoriaProfesional.nombreCategoria, Usuario.rol FROM Trabajador INNER JOIN Usuario ON Trabajador.codigoUsuario = Usuario.codigoUsuario INNER JOIN CategoriaProfesional ON Trabajador.codigoCategoria = CategoriaProfesional.codigoCategoria";
+            string consultaSql= "SELECT Trabajador.codigoTrabajador, Trabajador.nombre, Trabajador.apellido, Trabajador.codigoUsuario, Trabajador.codigoCategoria, Usuario.nombreUsuario, CategoriaProfesional.nombreCategoria, Usuario.rol FROM Trabajador INNER JOIN Usuario ON Trabajador.codigoUsuario = Usuario.codigoUsuario INNER JOIN CategoriaProfesional ON Trabajador.codigoCategoria = CategoriaProfesional.codigoCategoria order by codigoTrabajador DESC";
+            SqlDataSource1.SelectCommand = consultaSql;
             SqlDataSource1.DataBind();
 
             TextBoxFiltradoNombre.Text = "";

@@ -11,6 +11,14 @@ namespace tfgASPX2.Views.Super
 {
     public partial class GestionarConvenios : System.Web.UI.Page
     {
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (IsPostBack)
+            {
+                SqlDataSource1.SelectCommand = Session["consultaSQL"].ToString();
+            }
+        }
         protected void ButtonInsertarConvenio_Click(object sender, EventArgs e)
         {  
             if (PanelInsertarConvenio.Visible)
@@ -65,9 +73,6 @@ namespace tfgASPX2.Views.Super
                 int.TryParse(codigoConvenioStr, out int codigoConvenioInt);
                 SqlDataSource1.SelectCommand = "Select * FROM Convenio WHERE codigoConvenio=" + codigoConvenioInt;
                 SqlDataSource1.DataBind();
-
-                SqlDataSource2.SelectCommand = "Select * FROM AsociacionCostes WHERE codigoConvenio=" + codigoConvenioInt;
-                SqlDataSource2.DataBind();
             }
         }
 
@@ -132,12 +137,13 @@ namespace tfgASPX2.Views.Super
                 consultaSQL += " AND fechaFin <= '" + fechaMaxima.Value + "'";
 
             SqlDataSource1.SelectCommand = consultaSQL;
+            Session["consultaSQL"] = consultaSQL;
             SqlDataSource1.DataBind();
         }
 
         protected void Todos_Click(object sender, EventArgs e)
         {
-            SqlDataSource1.SelectCommand = "SELECT * FROM Convenio";
+            SqlDataSource1.SelectCommand = "SELECT * FROM Convenio order by codigoConvenio DESC";
             SqlDataSource1.DataBind();
             TextBoxFiltradoConvenio.Text = "";
             fechaMinima.Value = "";

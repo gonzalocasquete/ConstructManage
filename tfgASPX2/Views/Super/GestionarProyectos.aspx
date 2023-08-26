@@ -89,7 +89,7 @@
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>"
             DeleteCommand="DELETE FROM [Proyecto] WHERE [codigoProyecto] = @codigoProyecto"
             InsertCommand="INSERT INTO [Proyecto] ([NombreProyecto], [Descripcion], [FechaInicio], [FechaFin], [Comentarios], [codigoCliente]) VALUES (@NombreProyecto, @Descripcion, @FechaInicio, @FechaFin, @Comentarios, @codigoCliente)"
-            SelectCommand="SELECT * FROM [Proyecto] order by codigoProyecto DESC"
+            SelectCommand="SELECT Proyecto.*, Cliente.nombreEntidad FROM Proyecto INNER JOIN Cliente ON Proyecto.codigoCliente = Cliente.codigoCliente ORDER BY Proyecto.codigoProyecto DESC;"
             UpdateCommand="UPDATE [Proyecto] SET [NombreProyecto] = @NombreProyecto, [Descripcion] = @Descripcion, [FechaInicio] = @FechaInicio, [FechaFin] = @FechaFin, [Comentarios] = @Comentarios, [codigoCliente] = @codigoCliente WHERE [codigoProyecto] = @codigoProyecto">
             <DeleteParameters>
                 <asp:Parameter Name="codigoProyecto" Type="Int32"></asp:Parameter>
@@ -169,10 +169,11 @@
 
                 <asp:TemplateField HeaderText="Cliente">
                     <ItemTemplate>
-                        <asp:Label ID="LabelCodigoCliente" runat="server" Text='<%# Bind("codigoCliente") %>'></asp:Label>
+                        <%# Eval("nombreEntidad") %>
                     </ItemTemplate>
                     <EditItemTemplate>
-                        <asp:TextBox ID="TextBoxCodigoCliente" class="form-control edit-textbox" runat="server" Text='<%# Bind("codigoCliente") %>'></asp:TextBox>
+                        <asp:DropDownList Text='<%# Bind("codigoCliente") %>' class="dropdown form-control edit-dropdown" ID="idClienteDropDownList" runat="server" DataSourceID="ClientesSqlDataSource" DataTextField="nombreEntidad" DataValueField="codigoCliente"></asp:DropDownList>
+                        <asp:SqlDataSource ID="ClientesSqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT codigoCliente, nombreEntidad FROM Cliente order by nombreEntidad"></asp:SqlDataSource>            
                     </EditItemTemplate>
 
                 </asp:TemplateField>

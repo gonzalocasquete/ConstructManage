@@ -26,3 +26,11 @@
     table-layout: fixed;
     width: 1350px
 }
+
+.tamanio-asociacion {
+    border-radius: 18px;
+    overflow: hidden;
+    table-layout: fixed;
+    width: 1000px
+}
+

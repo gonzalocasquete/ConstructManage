@@ -15,7 +15,10 @@ namespace tfgASPX2.Views.Super
        
         protected void Page_Load(object sender, EventArgs e)
         {
-         
+            if (IsPostBack)
+            {
+                SqlDataSource1.SelectCommand = Session["consultaSQL"].ToString();
+            }
         }
 
         protected void ButtonInsertarCategoria_Click(object sender, EventArgs e)
@@ -69,13 +72,16 @@ namespace tfgASPX2.Views.Super
 
         protected void ButtonFiltrado_Click(object sender, EventArgs e)
         {
-            SqlDataSource1.SelectCommand = "SELECT * FROM CategoriaProfesional WHERE (nombreCategoria LIKE '%" + TextBoxFiltrado.Text.ToString() + "%')";
+            string consultaSQL= "SELECT * FROM CategoriaProfesional WHERE (nombreCategoria LIKE '%" + TextBoxFiltrocategoria.Text.ToString() + "%')";
+            SqlDataSource1.SelectCommand = consultaSQL;
+            Session["consultaSQL"] = consultaSQL;
             SqlDataSource1.DataBind();
         }
 
         protected void Todos_Click(object sender, EventArgs e)
         {
-            SqlDataSource1.SelectCommand = "SELECT * FROM CategoriaProfesional";
+            SqlDataSource1.SelectCommand = "SELECT * FROM CategoriaProfesional order by codigoCategoria DESC";
+            TextBoxFiltrocategoria.Text = "";
             SqlDataSource1.DataBind();
         }
 

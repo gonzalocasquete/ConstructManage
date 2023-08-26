@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Ajax.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -24,19 +25,25 @@ namespace tfgASPX
             // Clear existing session data
             Session.Clear();
 
-            string usuario, contraseña;
+            string usuario, contraseña, consultaSQL;
             usuario = InputUsuario.Value.ToString();
             contraseña = InputPassword.Value.ToString();
+            Session["consultaSQL"] = "";
 
-            string consulta = "SELECT codigoUsuario, nombreUsuario, contraseñaUsuario, rol FROM USUARIO WHERE " +
-                              "nombreUsuario=@usuario AND contraseñaUsuario=@contraseña";
+            if (usuario == "admin" && contraseña == "admin") { 
+                consultaSQL= "SELECT U.codigoUsuario, U.nombreUsuario, U.contraseñaUsuario, U.rol FROM Usuario U";
+            }
+            else
+            {
+                consultaSQL = "SELECT U.codigoUsuario, U.nombreUsuario, U.contraseñaUsuario, U.rol, T.codigoTrabajador FROM Usuario U INNER JOIN Trabajador T ON U.codigoUsuario = T.codigoUsuario WHERE U.nombreUsuario = @usuario AND U.contraseñaUsuario = @contraseña";
+            }
 
             string connectionString = "Data Source=miservertfg.database.windows.net;Initial Catalog=mibasededatostfg;Persist Security Info=True;User ID=adminsql;Password=Josele6072";
 
             using (SqlConnection cnn = new SqlConnection(connectionString))
             {
                 cnn.Open();
-                using (SqlCommand cmd = new SqlCommand(consulta, cnn))
+                using (SqlCommand cmd = new SqlCommand(consultaSQL, cnn))
                 {
                     cmd.Parameters.AddWithValue("@usuario", usuario);
                     cmd.Parameters.AddWithValue("@contraseña", contraseña);
@@ -49,9 +56,11 @@ namespace tfgASPX
                             {
                                 string rol = adap.GetString(3);
                                 Session["codigoUsuario"] = adap.GetInt32(0);
-                                Session["nombreUsuario"] = adap.GetString(1);
+                                Session["nombreUsuario"] = adap.GetString(1);                        
                                 Session["rol"] = rol;
 
+                                if (usuario == "admin" && contraseña == "admin") { } else { Session["codigoTrabajador"] = adap.GetInt32(4);}
+                                         
                                 // Redirect based on role
                                 if (rol == "admin")
                                 {

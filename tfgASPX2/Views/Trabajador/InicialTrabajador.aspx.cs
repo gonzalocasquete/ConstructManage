@@ -13,19 +13,35 @@ namespace tfgASPX2.Views.Trabajador
         {
             if (!IsPostBack) // Verifica si es la primera carga de la página (no es un PostBack)
             {
-                MostrarMensajeBienvenida();
+                MostrarTitulo();
             }
         }
 
-        private void MostrarMensajeBienvenida()
+        private void MostrarTitulo()
         {
             if (Session["nombreUsuario"] != null)
             {
                 string nombreUsuario = Session["nombreUsuario"].ToString();
 
                 // Muestra el mensaje de bienvenida en un Label o Literal en tu página.
-                string mensaje = $"¡Bienvenido, {nombreUsuario}!";
+                string mensaje = $"Trabajos de {nombreUsuario}";
                 LabelMensajeBienvenida.Text = mensaje;
+            }
+        }
+
+
+        protected void ButtonFiltros_Click(object sender, EventArgs e)
+        {
+            if (!PanelFiltros.Visible)
+            {
+                PanelFiltros.Visible = true;
+                ButtonFiltros.Text = "Ocultar filtros";
+            }
+            else
+            {
+
+                PanelFiltros.Visible = false;
+                ButtonFiltros.Text = "Mostrar filtros";
             }
         }
 

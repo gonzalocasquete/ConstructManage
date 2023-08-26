@@ -69,13 +69,13 @@ namespace tfgASPX2.Views.Super
         protected global::System.Web.UI.WebControls.Label LabelFiltroNombreCategoria;
 
         /// <summary>
-        /// Control TextBoxFiltrado.
+        /// Control TextBoxFiltrocategoria.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxFiltrado;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxFiltrocategoria;
 
         /// <summary>
         /// Control ButtonFiltrado.

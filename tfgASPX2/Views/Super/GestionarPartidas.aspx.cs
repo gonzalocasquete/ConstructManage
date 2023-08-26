@@ -13,7 +13,10 @@ namespace tfgASPX2.Views.Super
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (IsPostBack)
+            {
+                SqlDataSource1.SelectCommand = Session["consultaSQL"].ToString();
+            }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -71,12 +74,13 @@ namespace tfgASPX2.Views.Super
                 consultaSQL += " AND P.Presupuesto<" + presupuestoMaximo.Value + "";
 
             SqlDataSource1.SelectCommand = consultaSQL;
+            Session["consultaSQL"] = consultaSQL;
             SqlDataSource1.DataBind();
         }
 
         protected void Todos_Click(object sender, EventArgs e)
         {
-            SqlDataSource1.SelectCommand = "SELECT P.*, Pr.nombreProyecto FROM Partida P INNER JOIN Proyecto Pr ON P.codigoProyecto = Pr.codigoProyecto;";
+            SqlDataSource1.SelectCommand = "SELECT P.*, Pr.nombreProyecto FROM Partida P INNER JOIN Proyecto Pr ON P.codigoProyecto = Pr.codigoProyecto order by codigoPartida DESC;";
             SqlDataSource1.DataBind();
             TextBoxFiltradoPartida.Text = "";
             DropDownListProyectos.SelectedIndex = 0;

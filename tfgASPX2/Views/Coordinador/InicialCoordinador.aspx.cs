@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -37,31 +38,30 @@ namespace tfgASPX2.Views.Coordinador
         {
             if (!PanelInsertarParte.Visible)
             {
+                ButtonFiltros.Visible = false;
+                GridView1.Visible = false;
                 PanelConsultarLineasParte.Visible=false;
                 PanelInsertarParte.Visible = true;
                 ButtonInsertarParte.Text = "Ocultar";
             }
             else {
-                if(GridView2.Rows.Count !=0) /*Solo se mostrara si hay valores que mostrar*/
-                    PanelConsultarLineasParte.Visible = true;
-
+                ButtonFiltros.Visible = true;
+                GridView1.Visible = true;
                 PanelInsertarParte.Visible = false;
                 ButtonInsertarParte.Text = "Insertar Parte";
             }
         }
 
-        protected void FormViewInsertarParte_DataBound(object sender, EventArgs e)
+        protected void FormViewInsertarParte_ItemInserting(object sender, FormViewInsertEventArgs e)
         {
-            if (FormViewInsertarParte.CurrentMode == FormViewMode.Insert)
-            {
-                TextBox codigoTrabajadorTextBox = (TextBox)FormViewInsertarParte.FindControl("codigoTrabajadorTextBox");
+            TextBox codigoTrabajadorTextBox = (TextBox)FormViewInsertarParte.FindControl("codigoTrabajadorTextBox");
 
-                if (codigoTrabajadorTextBox != null && Session["codigoTrabajador"] != null)
-                {
-                    codigoTrabajadorTextBox.Text = Session["codigoTrabajador"].ToString();
-                }
+            if (Session["codigoTrabajador"] != null)
+            {
+                e.Values["codigoTrabajador"] = Session["codigoTrabajador"].ToString();
             }
         }
+
 
         protected void ButtonInsertarLinea_Click(object sender, EventArgs e)
         {
@@ -142,6 +142,78 @@ namespace tfgASPX2.Views.Coordinador
             fechaMaxima.Value = null;
             DropDownListTipo.SelectedIndex = 0;
         }
+
+        protected string GetTipoText(object tipoValue)
+        {
+            if (tipoValue != null)
+            {
+                int tipo = Convert.ToInt32(tipoValue);
+                if (tipo == 1)
+                {
+                    return "Asociado";
+                }
+                else if (tipo == 2)
+                {
+                    return "No Asociado";
+                }
+            }
+            return string.Empty; // Default value if tipoValue is null or not 1 or 2
+        }
+
+        protected void idProyectosDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DropDownList proyectoDropDown = (DropDownList)sender;
+            DropDownList clienteDropDown = (DropDownList)FormViewInsertarParte.FindControl("idClientesDropDownList");
+            DropDownList tipoDropDown = (DropDownList)FormViewInsertarParte.FindControl("tipoDropDownList");
+
+            if (tipoDropDown.SelectedValue == "Asociado") // Si el tipo es "Asociado"
+            {
+                // Obtén el nombre del cliente asociado al proyecto seleccionado
+                string nombreClienteAsociado = GetNombreClienteAsociado(proyectoDropDown.SelectedValue);
+
+                // Establece el valor del DropDownList de Cliente al cliente asociado
+                clienteDropDown.SelectedValue = nombreClienteAsociado;
+
+                // Deshabilita el DropDownList de Cliente
+                clienteDropDown.Enabled = false;
+            }
+            else
+            {
+                // Habilita el DropDownList de Cliente
+                clienteDropDown.Enabled = true;
+            }
+        }
+
+        private string GetNombreClienteAsociado(string codigoProyecto)
+        {
+            string consulta = "SELECT nombreEntidad AS nombreCliente FROM Proyecto INNER JOIN Cliente ON Proyecto.codigoCliente = Cliente.codigoCliente WHERE Proyecto.codigoProyecto = @codigoProyecto";
+
+            string connectionString = "Data Source=miservertfg.database.windows.net;Initial Catalog=mibasededatostfg;Persist Security Info=True;User ID=adminsql;Password=Josele6072";
+
+            int codigoProyectoInt = int.Parse(codigoProyecto);
+
+            string nombreEntidad = "";
+
+            using (SqlConnection cnn = new SqlConnection(connectionString))
+            {
+                cnn.Open();
+                using (SqlCommand cmd = new SqlCommand(consulta, cnn))
+                {
+                    cmd.Parameters.AddWithValue("@codigoProyecto", codigoProyectoInt);
+
+                    using (SqlDataReader adap = cmd.ExecuteReader())
+                    {
+                        if (adap.Read())
+                        {
+                            nombreEntidad = adap.GetString(0);
+                        }
+                    }
+                }
+            }
+            return nombreEntidad;
+        }
+
+
 
     }
 }

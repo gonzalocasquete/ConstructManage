@@ -12,7 +12,10 @@ namespace tfgASPX2.Views.Super
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if (IsPostBack)
+            {
+                SqlDataSource1.SelectCommand = Session["consultaSQL"].ToString();
+            }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -41,22 +44,25 @@ namespace tfgASPX2.Views.Super
 
         protected void ButtonFiltrado_Click(object sender, EventArgs e)
         {
-            string trabajador, coordinador, super;
+            string trabajador, coordinador, super, consultaSQL ;
 
             trabajador = CheckBoxTrabajador.Checked ? "trabajador" : null;
             coordinador = CheckBoxCoordinador.Checked ? "coordinador" : null;
-            super = CheckBoxSuper.Checked ? "super" : null;
+            super = CheckBoxSuper.Checked ? "admin" : null;
 
             if (trabajador == null && coordinador == null && super == null)
             {
-                SqlDataSource1.SelectCommand = "SELECT * FROM Usuario WHERE (nombreUsuario LIKE '%" + TextBoxFiltradoUsuario.Text.ToString() +
+                consultaSQL= "SELECT * FROM Usuario WHERE (nombreUsuario LIKE '%" + TextBoxFiltradoUsuario.Text.ToString() +
                 "%')";
+                
             }
             else { 
-            SqlDataSource1.SelectCommand = "SELECT * FROM Usuario WHERE (nombreUsuario LIKE '%" + TextBoxFiltradoUsuario.Text.ToString() +
+           consultaSQL= "SELECT * FROM Usuario WHERE (nombreUsuario LIKE '%" + TextBoxFiltradoUsuario.Text.ToString() +
                 "%' AND rol='"+trabajador+"' OR rol='"+coordinador+"' OR rol='"+super+"')";
             }
- 
+
+            SqlDataSource1.SelectCommand = consultaSQL;
+            Session["consultaSQL"] = consultaSQL;
             SqlDataSource1.DataBind();
         }
 
@@ -95,7 +101,7 @@ namespace tfgASPX2.Views.Super
                 string rol = DataBinder.Eval(e.Row.DataItem, "rol").ToString();
 
                 // Verifica si los valores de nombreUsuario y rol son "super".
-                if (nombreUsuario == "admin" && rol == "super")
+                if (nombreUsuario == "admin" && rol == "admin")
                 {
                     // Deshabilita la edición y eliminación de la fila.
                     e.Row.Enabled = false;

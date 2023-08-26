@@ -121,6 +121,7 @@
                         <asp:DropDownList Text='<%# Bind("rol") %>' class="form-control" runat="server" ID="rolDropDownList">
                             <asp:ListItem Text="trabajador" Value="trabajador"></asp:ListItem>
                             <asp:ListItem Text="coordinador" Value="coordinador"></asp:ListItem>
+                            <asp:ListItem Text="admin" Value="admin"></asp:ListItem>
                         </asp:DropDownList>
                     </EditItemTemplate>
                 </asp:TemplateField>
