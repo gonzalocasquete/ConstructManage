@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace tfgASPX2.Views.Coordinador
@@ -15,11 +16,14 @@ namespace tfgASPX2.Views.Coordinador
           
         }
 
-
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ButtonVolver.Visible = true;
             PanelConsultarLineasParte.Visible = true;
             ButtonInsertarLinea.Visible = true;
+            ButtonFiltros.Visible = false;
+            GridView2.Visible = true;
+
             if (GridView1.SelectedIndex >= 0)
             {
                 // Obtén el valor de codigoParte de la fila seleccionada
@@ -31,7 +35,29 @@ namespace tfgASPX2.Views.Coordinador
                 {
                     codigoParteTextBox.Text = codigoParteSeleccionado;
                 }
+
+                if (GridView1.SelectedIndex >= 0)
+                {
+                    int rowIndex = GridView1.SelectedIndex;
+                    string codigoParteStr = GridView1.DataKeys[rowIndex]["codigoParte"].ToString();
+                    int.TryParse(codigoParteStr, out int codigoParteInt);
+                    SqlDataSource1.SelectCommand = "SELECT Parte.*, Proyecto.NombreProyecto, Cliente.nombreEntidad FROM Parte INNER JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto INNER JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE [codigoTrabajador] = @codigoUsuario AND codigoParte=" + codigoParteInt;
+                    SqlDataSource1.DataBind();              
+                }
             }
+        }
+
+        protected void ButtonVolver_Click(object sender, EventArgs e)
+        {
+            ButtonVolver.Visible = false;
+            ButtonInsertarLinea.Visible = false;
+            GridView1.SelectedIndex = -1;
+            PanelInsertarLinea.Visible = false;
+            ButtonFiltros.Visible = true;
+
+            ButtonInsertarLinea.Text = "Insertar Linea";
+            SqlDataSource1.SelectCommand = "SELECT Parte.*, Proyecto.NombreProyecto, Cliente.nombreEntidad FROM Parte INNER JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto INNER JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE [codigoTrabajador] = " + Session["codigoTrabajador"];
+            SqlDataSource1.DataBind();
         }
 
 
@@ -39,6 +65,7 @@ namespace tfgASPX2.Views.Coordinador
         {
             if (!PanelInsertarParte.Visible)
             {
+                ButtonInsertarLinea.Visible = false;
                 ButtonFiltros.Visible = false;
                 GridView1.Visible = false;
                 PanelConsultarLineasParte.Visible=false;
@@ -46,32 +73,57 @@ namespace tfgASPX2.Views.Coordinador
                 ButtonInsertarParte.Text = "Ocultar";
             }
             else {
+                ButtonVolver.Visible = false;
                 ButtonFiltros.Visible = true;
                 GridView1.Visible = true;
                 PanelInsertarParte.Visible = false;
                 ButtonInsertarParte.Text = "Insertar Parte";
+                GridView1.SelectedIndex = -1;
+
+                SqlDataSource1.SelectCommand = "SELECT Parte.*, Proyecto.NombreProyecto, Cliente.nombreEntidad FROM Parte INNER JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto INNER JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE [codigoTrabajador] = " + Session["codigoTrabajador"];
+                SqlDataSource1.DataBind();
             }
         }
 
         protected void FormViewInsertarParte_ItemInserting(object sender, FormViewInsertEventArgs e)
         {
             TextBox codigoTrabajadorTextBox = (TextBox)FormViewInsertarParte.FindControl("codigoTrabajadorTextBox");
+            HtmlInputControl fechaInput = (HtmlInputControl)FormViewInsertarParte.FindControl("fechaTextBox");  // Cambiamos el tipo a HtmlInputControl
+
+
+            DropDownList ddlTipo = (DropDownList)FormViewInsertarParte.FindControl("tipoDropDownList");
+            DropDownList ddlProyecto = (DropDownList)FormViewInsertarParte.FindControl("idProyectosDropDownList");
+            if (ddlTipo.SelectedValue == "2")
+            {
+                // Si el tipo es "2/No asociado", establece el valor del campo proyecto a nulo
+                ddlProyecto.SelectedIndex = -1;
+            }
+
+
 
             if (Session["codigoTrabajador"] != null)
             {
                 e.Values["codigoTrabajador"] = Session["codigoTrabajador"].ToString();
             }
+
+            // Establecemos la fecha del día de hoy
+            DateTime fechaHoy = DateTime.Now;
+            fechaInput.Value = fechaHoy.ToString("yyyy-MM-dd");
         }
+
+
 
 
         protected void ButtonInsertarLinea_Click(object sender, EventArgs e)
         {
             if (!PanelInsertarLinea.Visible)
             {
-               PanelInsertarLinea.Visible = true;
+                GridView2.Visible = false;
+                PanelInsertarLinea.Visible = true;
                 ButtonInsertarLinea.Text = "Ocultar";
             }
             else {
+                GridView2.Visible = true;
                 PanelInsertarLinea.Visible = false;
                 ButtonInsertarLinea.Text = "Insertar Linea";
             }
@@ -160,61 +212,5 @@ namespace tfgASPX2.Views.Coordinador
             }
             return string.Empty; // Default value if tipoValue is null or not 1 or 2
         }
-
-        protected void idProyectosDropDownList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DropDownList proyectoDropDown = (DropDownList)sender;
-            DropDownList clienteDropDown = (DropDownList)FormViewInsertarParte.FindControl("idClientesDropDownList");
-            DropDownList tipoDropDown = (DropDownList)FormViewInsertarParte.FindControl("tipoDropDownList");
-
-            if (tipoDropDown.SelectedValue == "Asociado") // Si el tipo es "Asociado"
-            {
-                // Obtén el nombre del cliente asociado al proyecto seleccionado
-                string nombreClienteAsociado = GetNombreClienteAsociado(proyectoDropDown.SelectedValue);
-
-                // Establece el valor del DropDownList de Cliente al cliente asociado
-                clienteDropDown.SelectedValue = nombreClienteAsociado;
-
-                // Deshabilita el DropDownList de Cliente
-                clienteDropDown.Enabled = false;
-            }
-            else
-            {
-                // Habilita el DropDownList de Cliente
-                clienteDropDown.Enabled = true;
-            }
-        }
-
-        private string GetNombreClienteAsociado(string codigoProyecto)
-        {
-            string consulta = "SELECT nombreEntidad AS nombreCliente FROM Proyecto INNER JOIN Cliente ON Proyecto.codigoCliente = Cliente.codigoCliente WHERE Proyecto.codigoProyecto = @codigoProyecto";
-
-            string connectionString = "Data Source=miservertfg.database.windows.net;Initial Catalog=mibasededatostfg;Persist Security Info=True;User ID=adminsql;Password=Josele6072";
-
-            int codigoProyectoInt = int.Parse(codigoProyecto);
-
-            string nombreEntidad = "";
-
-            using (SqlConnection cnn = new SqlConnection(connectionString))
-            {
-                cnn.Open();
-                using (SqlCommand cmd = new SqlCommand(consulta, cnn))
-                {
-                    cmd.Parameters.AddWithValue("@codigoProyecto", codigoProyectoInt);
-
-                    using (SqlDataReader adap = cmd.ExecuteReader())
-                    {
-                        if (adap.Read())
-                        {
-                            nombreEntidad = adap.GetString(0);
-                        }
-                    }
-                }
-            }
-            return nombreEntidad;
-        }
-
-
-
     }
 }

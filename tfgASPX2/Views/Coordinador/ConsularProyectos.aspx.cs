@@ -8,19 +8,15 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
-namespace tfgASPX2.Views.Super
+namespace tfgASPX2.Views.Coordinador
 {
-    public partial class GestionarProyectos : System.Web.UI.Page
+    public partial class ConsultarProyectos : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack)
             {
                 SqlDataSource1.SelectCommand = Session["consultaSQL"].ToString();
-            }
-            else
-            {
-                Session["consultaSQL"] = "SELECT Proyecto.*, Cliente.nombreEntidad FROM Proyecto INNER JOIN Cliente ON Proyecto.codigoCliente = Cliente.codigoCliente ORDER BY Proyecto.codigoProyecto DESC;";
             }
         }
 
@@ -37,8 +33,7 @@ namespace tfgASPX2.Views.Super
                 ButtonInsertarPartida.Visible = false;
                 ButtonFiltros.Visible= true;
                 ButtonInsertarProyecto.Text = "Insertar Proyecto";
-                SqlDataSource1.SelectCommand = "SELECT Proyecto.*, Cliente.nombreEntidad FROM Proyecto INNER JOIN Cliente ON Proyecto.codigoCliente = Cliente.codigoCliente ORDER BY Proyecto.codigoProyecto DESC;";
-                Session["consultaSQL"] = "SELECT Proyecto.*, Cliente.nombreEntidad FROM Proyecto INNER JOIN Cliente ON Proyecto.codigoCliente = Cliente.codigoCliente ORDER BY Proyecto.codigoProyecto DESC;";
+                SqlDataSource1.SelectCommand = "SELECT Proyecto.*, Cliente.nombreEntidad FROM Proyecto INNER JOIN Cliente ON Proyecto.codigoCliente = Cliente.codigoCliente WHERE codigoCoordinador = " + Session["codigoTrabajador"] +" ORDER BY Proyecto.codigoProyecto DESC;";
                 SqlDataSource1.DataBind();
             }
             else
@@ -99,7 +94,6 @@ namespace tfgASPX2.Views.Super
                 string codigoProyectoStr = GridView1.DataKeys[rowIndex]["codigoProyecto"].ToString();
                 int.TryParse(codigoProyectoStr, out int codigoProyectoInt);
                 SqlDataSource1.SelectCommand = "SELECT Proyecto.*, Cliente.nombreEntidad FROM Proyecto INNER JOIN Cliente ON Proyecto.codigoCliente = Cliente.codigoCliente WHERE codigoProyecto = "+codigoProyectoInt+" ORDER BY Proyecto.codigoProyecto DESC";
-                Session["consultaSQL"]= "SELECT Proyecto.*, Cliente.nombreEntidad FROM Proyecto INNER JOIN Cliente ON Proyecto.codigoCliente = Cliente.codigoCliente WHERE codigoProyecto = " + codigoProyectoInt + " ORDER BY Proyecto.codigoProyecto DESC";
                 SqlDataSource1.DataBind();
 
                 SqlDataSource2.SelectCommand = "Select * FROM Partida WHERE codigoProyecto="+codigoProyectoInt;
@@ -114,8 +108,8 @@ namespace tfgASPX2.Views.Super
             GridView1.SelectedIndex = -1;
             
             ButtonInsertarPartida.Text = "Insertar Partida";
-            SqlDataSource1.SelectCommand = "SELECT Proyecto.*, Cliente.nombreEntidad FROM Proyecto INNER JOIN Cliente ON Proyecto.codigoCliente = Cliente.codigoCliente ORDER BY Proyecto.codigoProyecto DESC;";
-            Session["consultaSQL"]= "SELECT Proyecto.*, Cliente.nombreEntidad FROM Proyecto INNER JOIN Cliente ON Proyecto.codigoCliente = Cliente.codigoCliente ORDER BY Proyecto.codigoProyecto DESC;";
+            SqlDataSource1.SelectCommand = "SELECT Proyecto.*, Cliente.nombreEntidad FROM Proyecto INNER JOIN Cliente ON Proyecto.codigoCliente = Cliente.codigoCliente WHERE codigoCoordinador = "+Session["codigoTrabajador"]+" ORDER BY Proyecto.codigoProyecto DESC;";
+
             SqlDataSource1.DataBind();
         }
 
@@ -152,7 +146,7 @@ namespace tfgASPX2.Views.Super
             if (presupuestoMaximo.Value.Length != 0)
                 consultaSQL += " AND Presupuesto<=" + presupuestoMaximo.Value + "";
 
-            consultaSQL += " ORDER BY Proyecto.codigoProyecto DESC;";
+            consultaSQL += "AND codigoCoordinador = "+Session["codigoTrabajador"]+" ORDER BY Proyecto.codigoProyecto DESC;";
             SqlDataSource1.SelectCommand = consultaSQL;
             Session["consultaSQL"] = consultaSQL;
             SqlDataSource1.DataBind();
@@ -160,8 +154,7 @@ namespace tfgASPX2.Views.Super
 
         protected void Todos_Click(object sender, EventArgs e)
         {
-            SqlDataSource1.SelectCommand = "SELECT * FROM Proyecto order by codigoProyecto DESC";
-            Session["consultaSQL"]= "SELECT * FROM Proyecto order by codigoProyecto DESC";
+            SqlDataSource1.SelectCommand = "SELECT * FROM Proyecto WHERE codigoCoordinador = "+Session["codigoTrabajador"]+" order by codigoProyecto DESC";
             SqlDataSource1.DataBind();
             TextBoxFiltradoProyecto.Text = "";
             fechaMinima.Value = "";
@@ -193,8 +186,7 @@ namespace tfgASPX2.Views.Super
             {
                 PanelInsertarPartida.Visible = false;
                 ButtonInsertarPartida.Text = "Insertar Partida";
-                SqlDataSource1.SelectCommand = "Select * FROM Proyecto order by codigoProyecto DESC";
-                Session["consultaSQL"] = "Select * FROM Proyecto order by codigoProyecto DESC";
+                SqlDataSource1.SelectCommand = "Select * FROM Proyecto WHERE codigoCoordinador = "+Session["codigoTrabajador"]+ "order by codigoProyecto DESC";
                 SqlDataSource1.DataBind();
             }
         }
@@ -315,6 +307,8 @@ namespace tfgASPX2.Views.Super
         {
             ScriptManager.RegisterStartupScript(this, GetType(), "Error", "alert('" + message + "');", true);
         }
+
+
 
     }
 }

@@ -155,7 +155,7 @@
                         </asp:DropDownList>
                     </EditItemTemplate>
                 </asp:TemplateField>
-                <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" ShowSelectButton="True" SelectText="Asociacion"></asp:CommandField>
+                <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" ShowSelectButton="True" SelectText="Detalles"></asp:CommandField>
             </Columns>
             <FooterStyle BackColor="#CCCCCC" />
             <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />

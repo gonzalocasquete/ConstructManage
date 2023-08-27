@@ -7,7 +7,8 @@
 </asp:Content>
 
 <asp:Content ID="InicialCoordinadorNavegacion" ContentPlaceHolderID="ContentPlaceHolderNavegacion" runat="server">
-    <a href="InicialCoordinador.aspx">Inicio</a>
+    <a href="InicialCoordinador.aspx">Inicio</a>  
+    <a href="ConsularProyectos.aspx">Proyectos</a>
     <a href="../Comun/Perfil.aspx">Perfil</a>
 </asp:Content>
 
@@ -31,6 +32,12 @@
             <div class="row">
                 <div class="col">
                     <asp:Button ID="ButtonInsertarLinea" class="form-control btn-info btn-sm btn-block buttonFilter mt-1" runat="server" Text="Insertar Linea" OnClick="ButtonInsertarLinea_Click" Visible="false" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <asp:Button ID="ButtonVolver" class="form-control btn-warning btn-sm btn-block mt-1" runat="server" Text="Volver" OnClick="ButtonVolver_Click" Visible="false" />
                 </div>
             </div>
 
@@ -149,18 +156,12 @@
                     <ItemTemplate>
                         <%# Eval("fecha", "{0:dd/MM/yyyy}") %>
                     </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:TextBox Text='<%# Bind("fecha", "{0:dd/MM/yyyy}") %>' class="form-control edit-textbox" Style="width: 125px;" runat="server" ID="fechaTextBox" />
-                    </EditItemTemplate>
                 </asp:TemplateField>
 
                 <asp:TemplateField HeaderText="Tipo" SortExpression="tipo">
                     <ItemTemplate>
                         <asp:Label runat="server" ID="tipoLabel" Text='<%# GetTipoText(Eval("tipo")) %>'></asp:Label>
                     </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:TextBox Text='<%# Bind("tipo") %>' class="form-control edit-textbox" Style="width: 125px;" runat="server" ID="tipoTextBox" />
-                    </EditItemTemplate>
                 </asp:TemplateField>
 
                 <asp:CommandField SelectText="Consultar" ShowDeleteButton="True" ShowEditButton="True" ShowSelectButton="True"></asp:CommandField>
@@ -212,8 +213,20 @@
 
                     <div class="row">
                         <div class="col">
+                            Tipo:
+                            <asp:DropDownList Text='<%# Bind("tipo") %>' class="form-control" runat="server" ClientIDMode="Static" ID="tipoDropDownList">
+                                <asp:ListItem Text="Asociado" Value="1"></asp:ListItem>
+                                <asp:ListItem Text="No Asociado" Value="2"></asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
                             Proyecto:
-                            <asp:DropDownList Text='<%# Bind("codigoProyecto") %>' class="dropdown form-control edit-dropdown" ID="idProyectosDropDownList" runat="server" DataSourceID="ProyectosSqlDataSource" DataTextField="NombreProyecto" DataValueField="codigoProyecto" ClientIDMode="Static" OnSelectedIndexChanged="idProyectosDropDownList_SelectedIndexChanged"></asp:DropDownList>
+                            <asp:DropDownList Text='<%# Bind("codigoProyecto") %>' class="dropdown form-control edit-dropdown" ID="idProyectosDropDownList" runat="server" DataSourceID="ProyectosSqlDataSource" DataTextField="NombreProyecto" DataValueField="codigoProyecto" ClientIDMode="Static">
+                                <asp:ListItem Text="" Value=""></asp:ListItem>
+                            </asp:DropDownList>
                             <asp:SqlDataSource ID="ProyectosSqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT [codigoProyecto], [NombreProyecto], [codigoCliente] FROM [Proyecto] WHERE ([codigoCoordinador] = @codigoCoordinador)">
                                 <SelectParameters>
                                     <asp:SessionParameter SessionField="codigoUsuario" Name="codigoCoordinador" Type="Int32"></asp:SessionParameter>
@@ -222,25 +235,16 @@
                         </div>
                         <div class="col">
                             Cliente:
-                            <asp:DropDownList Text='<%# Bind("codigoCliente") %>' class="dropdown form-control edit-dropdown" ID="idClientesDropDownList" runat="server" DataSourceID="ClientesSqlDataSource" DataTextField="nombreEntidad" DataValueField="codigoCliente" ClientIDMode="Static"></asp:DropDownList>
+                            <asp:DropDownList Text='<%# Bind("codigoCliente") %>' class="dropdown form-control edit-dropdown" ID="idClientesDropDownList" runat="server" DataSourceID="ClientesSqlDataSource" DataTextField="nombreEntidad" DataValueField="codigoCliente" ClientIDMode="Static">
+                                <asp:ListItem Text="" Value=""></asp:ListItem>
+                            </asp:DropDownList>
                             <asp:SqlDataSource ID="ClientesSqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT codigoCliente,nombreEntidad FROM Cliente order by nombreEntidad"></asp:SqlDataSource>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col">
-                            Fecha:
-                            <input type="date" class="form-control" runat="server" id="fechaTextBox" value='<%# Bind("fecha", "{0:yyyy-MM-dd}") %>' />
-                        </div>
-                        <div class="col">
-                            Tipo:
-                           <asp:DropDownList Text='<%# Bind("tipo") %>' class="form-control" runat="server" ClientIDMode="Static" ID="tipoDropDownList">
-                               <asp:ListItem Text="Asociado" Value="1"></asp:ListItem>
-                               <asp:ListItem Text="No Asociado" Value="2"></asp:ListItem>
-                           </asp:DropDownList>
 
-                        </div>
-                    </div>
+
+                    <input type="date" class="form-control" runat="server" id="fechaTextBox" value='<%# Bind("fecha", "{0:yyyy-MM-dd}") %>' visible="false" />
 
                     <div class="mt-3 text-center">
                         <asp:LinkButton runat="server" class="btn btn-success" Text="Insertar" CommandName="Insert" ID="InsertButton" CausesValidation="True" />
@@ -369,11 +373,14 @@
             </asp:GridView>
         </asp:Panel>
 
-
-        <%--*******************************************************--%>
         <%--Bloque div para la inserción de una nueva línea--%>
         <asp:Panel ID="PanelInsertarLinea" runat="server" Visible="false">
-            <asp:SqlDataSource runat="server" ID="SqlDataSourceInsertarLinea" ConnectionString='<%$ ConnectionStrings:mibasededatostfgConnectionString %>' DeleteCommand="DELETE FROM [LineaTrabajo] WHERE [codigoLinea] = @codigoLinea" InsertCommand="INSERT INTO [LineaTrabajo] ([codigoParte], [codigoTrabajador], [codigoPartida], [codigoNaturaleza], [horasNormales], [horasExtra]) VALUES (@codigoParte, @codigoTrabajador, @codigoPartida, @codigoNaturaleza, @horasNormales, @horasExtra)" SelectCommand="SELECT * FROM [LineaTrabajo]" UpdateCommand="UPDATE [LineaTrabajo] SET [codigoParte] = @codigoParte, [codigoTrabajador] = @codigoTrabajador, [codigoPartida] = @codigoPartida, [codigoNaturaleza] = @codigoNaturaleza, [horasNormales] = @horasNormales, [horasExtra] = @horasExtra WHERE [codigoLinea] = @codigoLinea">
+            <asp:SqlDataSource runat="server" ID="SqlDataSourceInsertarLinea"
+                ConnectionString='<%$ ConnectionStrings:mibasededatostfgConnectionString %>'
+                DeleteCommand="DELETE FROM [LineaTrabajo] WHERE [codigoLinea] = @codigoLinea"
+                InsertCommand="INSERT INTO [LineaTrabajo] ([codigoParte], [codigoTrabajador], [codigoPartida], [codigoNaturaleza], [horasNormales], [horasExtra]) VALUES (@codigoParteLinea, @codigoTrabajadorLinea, @codigoPartidaLinea, @codigoNaturalezaLinea, @horasNormalesLinea, @horasExtraLinea)"
+                SelectCommand="SELECT * FROM [LineaTrabajo]"
+                UpdateCommand="UPDATE [LineaTrabajo] SET [codigoParte] = @codigoParte, [codigoTrabajador] = @codigoTrabajador, [codigoPartida] = @codigoPartida, [codigoNaturaleza] = @codigoNaturaleza, [horasNormales] = @horasNormales, [horasExtra] = @horasExtra WHERE [codigoLinea] = @codigoLinea">
                 <DeleteParameters>
                     <asp:Parameter Name="codigoLinea" Type="Int32"></asp:Parameter>
                 </DeleteParameters>
@@ -410,10 +417,14 @@
                     <asp:SqlDataSource ID="SqlDataSourceCodigosTrabajadoresLinea" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT CONCAT(nombre, ' ', apellido) AS nombre_completo, codigoTrabajador  FROM Trabajador  ORDER BY nombre_completo;"></asp:SqlDataSource>
 
                     <label for="DropDownListPartidaLinea">Partida:</label>
-                    <asp:DropDownList Text='<%# Bind("codigoPartidaLinea") %>' class="form-control" ID="DropDownListPartidaLinea" runat="server" DataSourceID="SqlDataSourceCodigosPartidasLinea" DataTextField="nombrePartida" DataValueField="codigoPartida" AppendDataBoundItems="true">
+                    <asp:DropDownList Text='<%# Bind("codigoPartidaLinea") %>' class="form-control" ID="DropDownListPartidaLinea" runat="server" DataSourceID="SqlDataSourcePartidasLineaInsertar" DataTextField="nombrePartida" DataValueField="codigoPartida" AppendDataBoundItems="true">
                         <asp:ListItem Text="" Value=""></asp:ListItem>
                     </asp:DropDownList>
-                    <asp:SqlDataSource ID="SqlDataSourceCodigosPartidasLinea" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT codigoPartida, nombrePartida FROM Partida ORDER BY nombrePartida"></asp:SqlDataSource>
+                    <asp:SqlDataSource ID="SqlDataSourcePartidasLineaInsertar" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT Partida.[codigoPartida], Partida.[nombrePartida] FROM Partida INNER JOIN Proyecto ON Partida.codigoProyecto = Proyecto.codigoProyecto INNER JOIN Parte ON Proyecto.codigoProyecto = Parte.codigoProyecto WHERE Parte.codigoParte = @codigoParte">
+                        <SelectParameters>
+                            <asp:ControlParameter ControlID="GridView1" PropertyName="SelectedValue" Name="codigoParte" Type="Int32"></asp:ControlParameter>
+                        </SelectParameters>
+                    </asp:SqlDataSource>
 
                     <label for="DropDownListNaturalezaLinea">Naturaleza:</label>
                     <asp:DropDownList Text='<%# Bind("codigoNaturalezaLinea") %>' class="form-control" ID="DropDownListNaturalezaLinea" runat="server" DataSourceID="SqlDataSourceCodigosNaturalezasLinea" DataTextField="nombre" DataValueField="codigoNaturaleza" AppendDataBoundItems="true">

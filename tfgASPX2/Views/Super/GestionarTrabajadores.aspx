@@ -66,9 +66,7 @@
                         <div class="col">
                             <%--Categorias para los trabajadores--%>
                             <asp:Label ID="LabelFiltroCategorias" runat="server" class="text-light" Text="Categorias:"></asp:Label>
-                            <asp:DropDownList ID="DropDownListCategorias" class="dropdown form-control" runat="server" DataTextField="nombreCategoria" DataValueField="codigoCategoria" DataSourceID="SqlDataSourceCategorias" AppendDataBoundItems="true">
-                                <asp:ListItem Text="" Value=""></asp:ListItem>
-                            </asp:DropDownList>
+                            <asp:DropDownList ID="DropDownListCategorias" class="dropdown form-control" runat="server" DataTextField="nombreCategoria" DataValueField="codigoCategoria" DataSourceID="SqlDataSourceCategorias" AppendDataBoundItems="true"></asp:DropDownList>
                             <asp:SqlDataSource runat="server" ID="SqlDataSourceCategorias" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT [codigoCategoria], [nombreCategoria] FROM [CategoriaProfesional] ORDER BY [nombreCategoria]"></asp:SqlDataSource>
                         </div>
                         <div class="col">

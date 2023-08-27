@@ -18,6 +18,10 @@ namespace tfgASPX2.Views.Super
             {
                 SqlDataSource1.SelectCommand = Session["consultaSQL"].ToString();
             }
+            else
+            {
+                Session["consultaSQL"] = "Select * FROM Convenio order by codigoConvenio DESC";
+            }
         }
         protected void ButtonInsertarConvenio_Click(object sender, EventArgs e)
         {  
@@ -32,6 +36,7 @@ namespace tfgASPX2.Views.Super
                 ButtonInsertarConvenio.Text = "Insertar Convenio";
                 GridView1.SelectedIndex = -1;
                 SqlDataSource1.SelectCommand = "Select * FROM Convenio order by codigoConvenio DESC";
+                Session["consultaSQL"] = "Select * FROM Convenio order by codigoConvenio DESC";
                 SqlDataSource1.DataBind();
             }
             else
@@ -72,6 +77,7 @@ namespace tfgASPX2.Views.Super
                 string codigoConvenioStr = GridView1.DataKeys[rowIndex]["codigoConvenio"].ToString();
                 int.TryParse(codigoConvenioStr, out int codigoConvenioInt);
                 SqlDataSource1.SelectCommand = "Select * FROM Convenio WHERE codigoConvenio=" + codigoConvenioInt;
+                Session["consultaSQL"] = "Select * FROM Convenio WHERE codigoConvenio=" + codigoConvenioInt;
                 SqlDataSource1.DataBind();
             }
         }
@@ -101,6 +107,7 @@ namespace tfgASPX2.Views.Super
 
             ButtonInsertarConvenio.Text = "Insertar Convenio";
             SqlDataSource1.SelectCommand = "Select * FROM Convenio order by codigoConvenio DESC";
+            Session["consultaSQL"]= "Select * FROM Convenio order by codigoConvenio DESC";
             SqlDataSource1.DataBind();
         }
 
@@ -144,6 +151,7 @@ namespace tfgASPX2.Views.Super
         protected void Todos_Click(object sender, EventArgs e)
         {
             SqlDataSource1.SelectCommand = "SELECT * FROM Convenio order by codigoConvenio DESC";
+            Session["consultaSQL"] = "SELECT * FROM Convenio order by codigoConvenio DESC";
             SqlDataSource1.DataBind();
             TextBoxFiltradoConvenio.Text = "";
             fechaMinima.Value = "";
@@ -181,6 +189,7 @@ namespace tfgASPX2.Views.Super
                 ButtonInsertarConvenio.Text = "Insertar Convenio";
                 GridView1.SelectedIndex = -1;
                 SqlDataSource1.SelectCommand = "Select * FROM Convenio order by codigoConvenio DESC";
+                Session["consultaSQL"]= "Select * FROM Convenio order by codigoConvenio DESC";
                 SqlDataSource1.DataBind();
             }
         }

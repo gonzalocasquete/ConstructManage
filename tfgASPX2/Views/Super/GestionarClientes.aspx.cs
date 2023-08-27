@@ -14,6 +14,7 @@ namespace tfgASPX2.Views.Super
         {
             if (!IsPostBack)
             {
+                Session["consultaSQL"] = "SELECT * FROM Cliente order by codigoCliente DESC";
                 // Definir la lista de provincias de España
                 List<string> provincias = new List<string>
                 {

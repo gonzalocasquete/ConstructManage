@@ -15,6 +15,9 @@ namespace tfgASPX2.Views.Super
             if (IsPostBack)
             {
                 SqlDataSource1.SelectCommand = Session["consultaSQL"].ToString();
+            }else
+            {   
+                Session["consultaSQL"] = "SELECT Trabajador.codigoTrabajador, Trabajador.nombre, Trabajador.apellido, Trabajador.codigoUsuario, Trabajador.codigoCategoria, Usuario.nombreUsuario, CategoriaProfesional.nombreCategoria, Usuario.rol FROM Trabajador INNER JOIN Usuario ON Trabajador.codigoUsuario = Usuario.codigoUsuario INNER JOIN CategoriaProfesional ON Trabajador.codigoCategoria = CategoriaProfesional.codigoCategoria order by codigoTrabajador DESC";
             }
         }
 
@@ -99,6 +102,7 @@ namespace tfgASPX2.Views.Super
         {
             string consultaSql= "SELECT Trabajador.codigoTrabajador, Trabajador.nombre, Trabajador.apellido, Trabajador.codigoUsuario, Trabajador.codigoCategoria, Usuario.nombreUsuario, CategoriaProfesional.nombreCategoria, Usuario.rol FROM Trabajador INNER JOIN Usuario ON Trabajador.codigoUsuario = Usuario.codigoUsuario INNER JOIN CategoriaProfesional ON Trabajador.codigoCategoria = CategoriaProfesional.codigoCategoria order by codigoTrabajador DESC";
             SqlDataSource1.SelectCommand = consultaSql;
+            Session["consultaSQL"]=consultaSql;
             SqlDataSource1.DataBind();
 
             TextBoxFiltradoNombre.Text = "";

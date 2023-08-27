@@ -127,7 +127,7 @@
         <asp:GridView ID="GridView1" class="mt-3 table tamanio-cliente" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoCliente" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical">
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
-                <asp:BoundField DataField="codigoCliente" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="codigoCliente" />
+                <asp:BoundField DataField="codigoCliente" HeaderText="ID" InsertVisible="False" ReadOnly="True" />
                 <asp:TemplateField HeaderText="Entidad" SortExpression="nombreEntidad">
                     <ItemTemplate>
                         <%# Eval("nombreEntidad") %>

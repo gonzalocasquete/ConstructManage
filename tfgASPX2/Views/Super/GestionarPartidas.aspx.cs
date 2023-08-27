@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Org.BouncyCastle.Asn1.X509;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
@@ -16,6 +18,10 @@ namespace tfgASPX2.Views.Super
             if (IsPostBack)
             {
                 SqlDataSource1.SelectCommand = Session["consultaSQL"].ToString();
+            }
+            else
+            {
+                Session["consultaSQL"] = "SELECT P.*, Pr.nombreProyecto FROM Partida P INNER JOIN Proyecto Pr ON P.codigoProyecto = Pr.codigoProyecto order by P.codigoPartida DESC;";
             }
         }
 
@@ -81,6 +87,7 @@ namespace tfgASPX2.Views.Super
         protected void Todos_Click(object sender, EventArgs e)
         {
             SqlDataSource1.SelectCommand = "SELECT P.*, Pr.nombreProyecto FROM Partida P INNER JOIN Proyecto Pr ON P.codigoProyecto = Pr.codigoProyecto order by codigoPartida DESC;";
+            Session["consultaSQL"]= "SELECT P.*, Pr.nombreProyecto FROM Partida P INNER JOIN Proyecto Pr ON P.codigoProyecto = Pr.codigoProyecto order by codigoPartida DESC;";
             SqlDataSource1.DataBind();
             TextBoxFiltradoPartida.Text = "";
             DropDownListProyectos.SelectedIndex = 0;

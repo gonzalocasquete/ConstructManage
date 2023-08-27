@@ -16,8 +16,12 @@ namespace tfgASPX2.Views.Super
             {
                 SqlDataSource1.SelectCommand = Session["consultaSQL"].ToString();
             }
+            else
+            {
+                Session["consultaSQL"] = "SELECT * FROM [Usuario]";                   
+            }
         }
-
+      
         protected void Button1_Click(object sender, EventArgs e)
         {
             if (Panel1.Visible)
@@ -69,6 +73,7 @@ namespace tfgASPX2.Views.Super
         protected void Limpiar_Click(object sender, EventArgs e)
         {
             SqlDataSource1.SelectCommand = "SELECT * FROM Usuario ORDER BY codigoUsuario";
+            Session["consultaSQL"] = "SELECT * FROM Usuario ORDER BY codigoUsuario";
             SqlDataSource1.DataBind();
             TextBoxFiltradoUsuario.Text = "";
             CheckBoxTrabajador.Checked = false;

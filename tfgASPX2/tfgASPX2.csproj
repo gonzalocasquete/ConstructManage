@@ -185,6 +185,7 @@
     <Content Include="Styles\MasterStyle.css" />
     <Content Include="Styles\MenuSuperStyle.css" />
     <Content Include="ViewSwitcher.ascx" />
+    <Content Include="Views\Coordinador\ConsularProyectos.aspx" />
     <Content Include="Views\Coordinador\InicialCoordinador.aspx" />
     <Content Include="Views\Login.aspx" />
     <Content Include="Views\Super\GestionarCategoriasProfesionales.aspx" />
@@ -256,6 +257,13 @@
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Coordinador\ConsularProyectos.aspx.cs">
+      <DependentUpon>ConsularProyectos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Coordinador\ConsularProyectos.aspx.designer.cs">
+      <DependentUpon>ConsularProyectos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Coordinador\InicialCoordinador.aspx.cs">
       <DependentUpon>InicialCoordinador.aspx</DependentUpon>

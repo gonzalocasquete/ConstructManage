@@ -19,6 +19,10 @@ namespace tfgASPX2.Views.Super
             {
                 SqlDataSource1.SelectCommand = Session["consultaSQL"].ToString();
             }
+            else
+            {
+                Session["consultaSQL"]= "SELECT * FROM CategoriaProfesional order by codigoCategoria DESC";
+            }
         }
 
         protected void ButtonInsertarCategoria_Click(object sender, EventArgs e)
@@ -32,7 +36,7 @@ namespace tfgASPX2.Views.Super
                 GridView1.Visible = true;
                 ButtonFiltros.Visible = true;
                 ButtonInsertarCategoria.Text = "Insertar Categoria";
-
+                Session["consultaSQL"] = "SELECT * FROM CategoriaProfesional order by codigoCategoria DESC";
                 PanelInsertarCategoria.Visible = false;
                 PanelMostrarAsociaciones.Visible = false;
                 ButtonInsertarAsociacion.Visible = false;
@@ -81,6 +85,7 @@ namespace tfgASPX2.Views.Super
         protected void Todos_Click(object sender, EventArgs e)
         {
             SqlDataSource1.SelectCommand = "SELECT * FROM CategoriaProfesional order by codigoCategoria DESC";
+            Session["consultaSQL"] = "SELECT * FROM CategoriaProfesional order by codigoCategoria DESC";
             TextBoxFiltrocategoria.Text = "";
             SqlDataSource1.DataBind();
         }
@@ -106,6 +111,7 @@ namespace tfgASPX2.Views.Super
                 string codigoCategoriaStr = GridView1.DataKeys[rowIndex]["codigoCategoria"].ToString();
                 int.TryParse(codigoCategoriaStr, out int codigoCategoriaInt);
                 SqlDataSource1.SelectCommand = "Select * FROM CategoriaProfesional WHERE codigoCategoria=" + codigoCategoriaInt;
+                Session["consultaSQL"]= "Select * FROM CategoriaProfesional WHERE codigoCategoria=" + codigoCategoriaInt;
                 SqlDataSource1.DataBind();
 
                 SqlDataSource2.SelectCommand = "Select * FROM AsociacionCostes WHERE codigoCategoria=" + codigoCategoriaInt;

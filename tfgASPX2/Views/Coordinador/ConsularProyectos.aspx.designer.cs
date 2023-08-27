@@ -11,17 +11,17 @@ namespace tfgASPX2.Views.Coordinador
 {
 
 
-    public partial class InicialCoordinador
+    public partial class ConsultarProyectos
     {
 
         /// <summary>
-        /// Control ButtonInsertarParte.
+        /// Control ButtonInsertarProyecto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonInsertarParte;
+        protected global::System.Web.UI.WebControls.Button ButtonInsertarProyecto;
 
         /// <summary>
         /// Control ButtonFiltros.
@@ -33,13 +33,13 @@ namespace tfgASPX2.Views.Coordinador
         protected global::System.Web.UI.WebControls.Button ButtonFiltros;
 
         /// <summary>
-        /// Control ButtonInsertarLinea.
+        /// Control ButtonInsertarPartida.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonInsertarLinea;
+        protected global::System.Web.UI.WebControls.Button ButtonInsertarPartida;
 
         /// <summary>
         /// Control ButtonVolver.
@@ -78,24 +78,6 @@ namespace tfgASPX2.Views.Coordinador
         protected global::System.Web.UI.WebControls.TextBox TextBoxFiltradoProyecto;
 
         /// <summary>
-        /// Control LabelCliente.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelCliente;
-
-        /// <summary>
-        /// Control TextBoxFiltradoCliente.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxFiltradoCliente;
-
-        /// <summary>
         /// Control LabelFechaMinima.
         /// </summary>
         /// <remarks>
@@ -132,22 +114,40 @@ namespace tfgASPX2.Views.Coordinador
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl fechaMaxima;
 
         /// <summary>
-        /// Control LabelFiltroTipo.
+        /// Control LabelPresupuestoMinimo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelFiltroTipo;
+        protected global::System.Web.UI.WebControls.Label LabelPresupuestoMinimo;
 
         /// <summary>
-        /// Control DropDownListTipo.
+        /// Control presupuestoMinimo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListTipo;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl presupuestoMinimo;
+
+        /// <summary>
+        /// Control LabelPresupuestoMaximo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelPresupuestoMaximo;
+
+        /// <summary>
+        /// Control presupuestoMaximo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl presupuestoMaximo;
 
         /// <summary>
         /// Control ButtonFiltrado.
@@ -177,49 +177,22 @@ namespace tfgASPX2.Views.Coordinador
         protected global::System.Web.UI.WebControls.GridView GridView1;
 
         /// <summary>
-        /// Control PanelInsertarParte.
+        /// Control PanelPartidas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelInsertarParte;
+        protected global::System.Web.UI.WebControls.Panel PanelPartidas;
 
         /// <summary>
-        /// Control SqlDataSourceInsertarParte.
+        /// Control SqlDataSource2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceInsertarParte;
-
-        /// <summary>
-        /// Control FormViewInsertarParte.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FormView FormViewInsertarParte;
-
-        /// <summary>
-        /// Control PanelConsultarLineasParte.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelConsultarLineasParte;
-
-        /// <summary>
-        /// Control SqlDataSourceLineas.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceLineas;
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource2;
 
         /// <summary>
         /// Control GridView2.
@@ -231,30 +204,57 @@ namespace tfgASPX2.Views.Coordinador
         protected global::System.Web.UI.WebControls.GridView GridView2;
 
         /// <summary>
-        /// Control PanelInsertarLinea.
+        /// Control PanelInsertarPartida.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelInsertarLinea;
+        protected global::System.Web.UI.WebControls.Panel PanelInsertarPartida;
 
         /// <summary>
-        /// Control SqlDataSourceInsertarLinea.
+        /// Control SqlDataSource4.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceInsertarLinea;
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource4;
 
         /// <summary>
-        /// Control FormViewInsertarLinea.
+        /// Control FormViewInsertarPartida.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FormView FormViewInsertarLinea;
+        protected global::System.Web.UI.WebControls.FormView FormViewInsertarPartida;
+
+        /// <summary>
+        /// Control PanelInsertarProyecto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelInsertarProyecto;
+
+        /// <summary>
+        /// Control SqlDataSource3.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource3;
+
+        /// <summary>
+        /// Control FormViewInsertarProyecto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FormView FormViewInsertarProyecto;
     }
 }

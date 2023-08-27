@@ -173,7 +173,6 @@
                     </div>
 
                     <div class="row">
-
                         <div class="col">
                             Rol:
                             <asp:DropDownList Text='<%# Bind("rol") %>' class="form-control" runat="server" ID="rolDropDownList">

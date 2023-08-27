@@ -87,7 +87,7 @@
             DeleteCommand="DELETE FROM [Partida] WHERE [codigoPartida] = @original_codigoPartida"
             InsertCommand="INSERT INTO [Partida] ([nombrePartida], [fechaInicio], [fechaFin], [Presupuesto], [codigoProyecto]) VALUES (@nombrePartida, @FechaInicio, @FechaFin, @Presupuesto, @codigoProyecto)"
             OldValuesParameterFormatString="original_{0}"
-            UpdateCommand="UPDATE [Partida] SET [nombrePartida] = @nombrePartida, [fechaInicio] = @FechaInicio, [fechaFin] = @FechaFin, [Presupuesto] = @Presupuesto, [codigoProyecto] = @codigoProyecto WHERE [codigoPartida] = @original_codigoPartida">
+            UpdateCommand="UPDATE [Partida] SET [nombrePartida] = @nombrePartida, [fechaInicio] = @FechaInicio, [fechaFin] = @FechaFin, [Presupuesto] = @Presupuesto, [codigoProyecto] = @codigoProyecto WHERE [codigoPartida] = @codigoPartida">
             <DeleteParameters>
                 <asp:Parameter Name="original_codigoPartida" Type="Int32"></asp:Parameter>
             </DeleteParameters>
@@ -104,7 +104,7 @@
                 <asp:Parameter DbType="Date" Name="FechaFin"></asp:Parameter>
                 <asp:Parameter Name="Presupuesto" Type="Decimal"></asp:Parameter>
                 <asp:Parameter Name="codigoProyecto" Type="Int32"></asp:Parameter>
-                <asp:Parameter Name="original_codigoPartida" Type="Int32"></asp:Parameter>
+                <asp:Parameter Name="codigoPartida" Type="Int32"></asp:Parameter>
             </UpdateParameters>
         </asp:SqlDataSource>
         <asp:GridView ID="GridView1" class="table mt-3 tamanio-partida" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoPartida" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical" AllowSorting="True">
