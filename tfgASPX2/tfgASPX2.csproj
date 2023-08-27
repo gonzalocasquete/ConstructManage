@@ -171,6 +171,7 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
     <Content Include="Styles\ComunesStyle.css" />
+    <Content Include="Styles\ConsultarProyectosStyle - Copia.css" />
     <Content Include="Styles\InicialCoordinadorStyle.css" />
     <Content Include="Styles\InicialTrabajadorStyle.css" />
     <Content Include="Styles\PerfilTrabajadorStyle.css" />

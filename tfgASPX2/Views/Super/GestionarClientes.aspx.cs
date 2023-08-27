@@ -119,29 +119,13 @@ namespace tfgASPX2.Views.Super
         protected void FormViewInsertarCliente_ItemInserting(object sender, FormViewInsertEventArgs e)
         {
             TextBox nombreEntidadTextBox = (TextBox)FormViewInsertarCliente.FindControl("nombreEntidadTextBox");
-            TextBox ubicacionDFTextBox = (TextBox)FormViewInsertarCliente.FindControl("UbicacionDFTextBox");
-            TextBox ubicacionDETextBox = (TextBox)FormViewInsertarCliente.FindControl("UbicacionDETextBox");
-
+           
             if (string.IsNullOrEmpty(nombreEntidadTextBox.Text))
             {
                 e.Cancel = true;
                 ScriptManager.RegisterStartupScript(this, GetType(), "Error", "alert('El nombre de la entidad no puede estar vacía.');", true);
             }
-
-            if (string.IsNullOrEmpty(ubicacionDFTextBox.Text))
-            {
-                e.Cancel = true;
-                ScriptManager.RegisterStartupScript(this, GetType(), "Error", "alert('La ubicación del domicilio fiscal no puede estar vacía.');", true);
-
-            }
-
-            if (string.IsNullOrEmpty(ubicacionDETextBox.Text))
-            {
-                e.Cancel = true;
-                ScriptManager.RegisterStartupScript(this, GetType(), "Error", "alert('La ubicación del domicilio empresarial no puede estar vacía.');", true);
-
-            }
-
+   
             string consulta = "SELECT nombreEntidad FROM Cliente WHERE nombreEntidad = @nombreEntidad";
 
             string connectionString = "Data Source=miservertfg.database.windows.net;Initial Catalog=mibasededatostfg;Persist Security Info=True;User ID=adminsql;Password=Josele6072";

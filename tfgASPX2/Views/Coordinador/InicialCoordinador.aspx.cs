@@ -11,10 +11,31 @@ namespace tfgASPX2.Views.Coordinador
 {
     public partial class InicialCoordinador : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+       
+            protected void Page_Load(object sender, EventArgs e)
+            {
+                if (IsPostBack)
+                {
+                    SqlDataSource1.SelectCommand = Session["consultaSQL"].ToString();
+                }
+                else
+                {
+                    Session["consultaSQL"] = "SELECT Parte.*, Proyecto.NombreProyecto, Cliente.nombreEntidad FROM Parte INNER JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto INNER JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE [codigoTrabajador] = " + Session["codigoTrabajador"];
+                    MostrarTitulo();
+                }
+            }
+
+        private void MostrarTitulo()
         {
-          
+            if (Session["nombreUsuario"] != null)
+            {
+                string nombreUsuario = Session["nombreUsuario"].ToString();
+                // Muestra el mensaje de bienvenida en un Label o Literal en tu página.
+                string mensaje = $"Partes de {nombreUsuario}";
+                LabelMensajeBienvenida.Text = mensaje;
+            }
         }
+
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -42,6 +63,7 @@ namespace tfgASPX2.Views.Coordinador
                     string codigoParteStr = GridView1.DataKeys[rowIndex]["codigoParte"].ToString();
                     int.TryParse(codigoParteStr, out int codigoParteInt);
                     SqlDataSource1.SelectCommand = "SELECT Parte.*, Proyecto.NombreProyecto, Cliente.nombreEntidad FROM Parte INNER JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto INNER JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE [codigoTrabajador] = @codigoUsuario AND codigoParte=" + codigoParteInt;
+                    Session["consultaSQL"]= "SELECT Parte.*, Proyecto.NombreProyecto, Cliente.nombreEntidad FROM Parte INNER JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto INNER JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE [codigoTrabajador] = @codigoUsuario AND codigoParte=" + codigoParteInt;
                     SqlDataSource1.DataBind();              
                 }
             }
@@ -57,6 +79,7 @@ namespace tfgASPX2.Views.Coordinador
 
             ButtonInsertarLinea.Text = "Insertar Linea";
             SqlDataSource1.SelectCommand = "SELECT Parte.*, Proyecto.NombreProyecto, Cliente.nombreEntidad FROM Parte INNER JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto INNER JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE [codigoTrabajador] = " + Session["codigoTrabajador"];
+            Session["consultaSQL"]= "SELECT Parte.*, Proyecto.NombreProyecto, Cliente.nombreEntidad FROM Parte INNER JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto INNER JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE [codigoTrabajador] = " + Session["codigoTrabajador"];
             SqlDataSource1.DataBind();
         }
 
@@ -81,6 +104,7 @@ namespace tfgASPX2.Views.Coordinador
                 GridView1.SelectedIndex = -1;
 
                 SqlDataSource1.SelectCommand = "SELECT Parte.*, Proyecto.NombreProyecto, Cliente.nombreEntidad FROM Parte INNER JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto INNER JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE [codigoTrabajador] = " + Session["codigoTrabajador"];
+                Session["consultaSQL"]= "SELECT Parte.*, Proyecto.NombreProyecto, Cliente.nombreEntidad FROM Parte INNER JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto INNER JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE [codigoTrabajador] = " + Session["codigoTrabajador"];
                 SqlDataSource1.DataBind();
             }
         }
@@ -89,18 +113,7 @@ namespace tfgASPX2.Views.Coordinador
         {
             TextBox codigoTrabajadorTextBox = (TextBox)FormViewInsertarParte.FindControl("codigoTrabajadorTextBox");
             HtmlInputControl fechaInput = (HtmlInputControl)FormViewInsertarParte.FindControl("fechaTextBox");  // Cambiamos el tipo a HtmlInputControl
-
-
-            DropDownList ddlTipo = (DropDownList)FormViewInsertarParte.FindControl("tipoDropDownList");
-            DropDownList ddlProyecto = (DropDownList)FormViewInsertarParte.FindControl("idProyectosDropDownList");
-            if (ddlTipo.SelectedValue == "2")
-            {
-                // Si el tipo es "2/No asociado", establece el valor del campo proyecto a nulo
-                ddlProyecto.SelectedIndex = -1;
-            }
-
-
-
+      
             if (Session["codigoTrabajador"] != null)
             {
                 e.Values["codigoTrabajador"] = Session["codigoTrabajador"].ToString();
@@ -181,6 +194,7 @@ namespace tfgASPX2.Views.Coordinador
             }
 
             SqlDataSource1.SelectCommand = consultaSQL;
+            Session["consultaSQL"]= consultaSQL;
             SqlDataSource1.DataBind();
         }
 
@@ -188,6 +202,7 @@ namespace tfgASPX2.Views.Coordinador
         protected void Limpiar_Click(object sender, EventArgs e)
         {
             SqlDataSource1.SelectCommand = "SELECT Parte.codigoParte, Parte.fecha, Parte.tipo, Parte.codigoTrabajador, Proyecto.NombreProyecto, Cliente.nombreEntidad FROM Parte LEFT JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto LEFT JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE Parte.codigoTrabajador = " + Session["codigoTrabajador"] +"";
+            Session["consultaSQL"] = "SELECT Parte.codigoParte, Parte.fecha, Parte.tipo, Parte.codigoTrabajador, Proyecto.NombreProyecto, Cliente.nombreEntidad FROM Parte LEFT JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto LEFT JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE Parte.codigoTrabajador = " + Session["codigoTrabajador"] + "";
             SqlDataSource1.DataBind();
             TextBoxFiltradoProyecto.Text = "";
             TextBoxFiltradoCliente.Text = "";

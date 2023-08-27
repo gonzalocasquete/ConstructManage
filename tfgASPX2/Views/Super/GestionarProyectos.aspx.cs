@@ -85,7 +85,7 @@ namespace tfgASPX2.Views.Super
             codigoProyecto.Text = codigo.ToString();
 
             ButtonVolver.Visible = true;
-
+            ButtonFiltros.Visible = false;
             PanelPartidas.Visible = true;
             PanelInsertarProyecto.Visible = false;
             PanelInsertarPartida.Visible = false;
@@ -112,7 +112,7 @@ namespace tfgASPX2.Views.Super
             ButtonVolver.Visible = false;
             ButtonInsertarPartida.Visible= false;
             GridView1.SelectedIndex = -1;
-            
+            ButtonFiltros.Visible = true;
             ButtonInsertarPartida.Text = "Insertar Partida";
             SqlDataSource1.SelectCommand = "SELECT Proyecto.*, Cliente.nombreEntidad FROM Proyecto INNER JOIN Cliente ON Proyecto.codigoCliente = Cliente.codigoCliente ORDER BY Proyecto.codigoProyecto DESC;";
             Session["consultaSQL"]= "SELECT Proyecto.*, Cliente.nombreEntidad FROM Proyecto INNER JOIN Cliente ON Proyecto.codigoCliente = Cliente.codigoCliente ORDER BY Proyecto.codigoProyecto DESC;";

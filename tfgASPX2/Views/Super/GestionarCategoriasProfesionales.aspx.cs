@@ -21,7 +21,7 @@ namespace tfgASPX2.Views.Super
             }
             else
             {
-                Session["consultaSQL"]= "SELECT * FROM CategoriaProfesional order by codigoCategoria DESC";
+                Session["consultaSQL"] = "SELECT * FROM [CategoriaProfesional] order by codigoCategoria DESC";
             }
         }
 

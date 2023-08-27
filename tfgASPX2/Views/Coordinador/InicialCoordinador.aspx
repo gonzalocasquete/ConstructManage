@@ -7,13 +7,18 @@
 </asp:Content>
 
 <asp:Content ID="InicialCoordinadorNavegacion" ContentPlaceHolderID="ContentPlaceHolderNavegacion" runat="server">
-    <a href="InicialCoordinador.aspx">Inicio</a>  
+    <a href="InicialCoordinador.aspx">Inicio</a>
     <a href="ConsularProyectos.aspx">Proyectos</a>
     <a href="../Comun/Perfil.aspx">Perfil</a>
 </asp:Content>
 
 <asp:Content ID="InicialCoordinadorBody" ContentPlaceHolderID="ContentPlaceHolderContenido" runat="server">
     <div class="auto-style1">
+
+        <h2 class="font-weight-bold">
+            <asp:Label ID="LabelMensajeBienvenida" runat="server"></asp:Label>
+        </h2>
+
         <%--  Filtros--%>
         <div style="width: 250px">
 
@@ -49,12 +54,12 @@
                     <div class="row">
                         <div class="col">
                             <%-- Proyecto--%>
-                            <asp:Label ID="LabelFiltroProyecto" runat="server" Text="Proyecto:"></asp:Label>
+                            <asp:Label ID="LabelFiltroProyecto" class="text-light" runat="server" Text="Proyecto:"></asp:Label>
                             <asp:TextBox ID="TextBoxFiltradoProyecto" class="form-control" runat="server"></asp:TextBox>
                         </div>
                         <div class="col">
                             <%--Cliente--%>
-                            <asp:Label ID="LabelCliente" runat="server" Text="Cliente:"></asp:Label>
+                            <asp:Label ID="LabelCliente" class="text-light" runat="server" Text="Cliente:"></asp:Label>
                             <asp:TextBox ID="TextBoxFiltradoCliente" class="form-control" runat="server"></asp:TextBox>
                         </div>
                     </div>
@@ -62,12 +67,12 @@
                     <div class="row">
                         <div class="col">
                             <%--Fecha de Inicio--%>
-                            <asp:Label ID="LabelFechaMinima" for="fechaMinima" runat="server" Text="Fecha Minima:"></asp:Label>
+                            <asp:Label ID="LabelFechaMinima" class="text-light" for="fechaMinima" runat="server" Text="Fecha Minima:"></asp:Label>
                             <input id="fechaMinima" class="form-control" runat="server" type="date" name="fechaMinima">
                         </div>
                         <div class="col">
                             <%--Fecha de Fin--%>
-                            <asp:Label ID="LabelFechaMaxima" for="fechaMaxima" runat="server" Text="Fecha Maxima:"></asp:Label>
+                            <asp:Label ID="LabelFechaMaxima" class="text-light" for="fechaMaxima" runat="server" Text="Fecha Maxima:"></asp:Label>
                             <input id="fechaMaxima" class="form-control" runat="server" type="date" name="fechaMaxima" max="2023-12-31" onclick="showDatePicker()">
                         </div>
                     </div>
@@ -75,7 +80,7 @@
                     <div class="row">
                         <div class="col">
                             <%--Tipo--%>
-                            <asp:Label ID="LabelFiltroTipo" runat="server" Text="Tipo:"></asp:Label>
+                            <asp:Label ID="LabelFiltroTipo" class="text-light" runat="server" Text="Tipo:"></asp:Label>
                             <asp:DropDownList ID="DropDownListTipo" class="dropdown form-control" runat="server" DataTextField="nombreCategoria" DataValueField="codigoCategoria" AppendDataBoundItems="true">
                                 <asp:ListItem Text="" Value=""></asp:ListItem>
                                 <asp:ListItem Text="Asociado" Value="1"></asp:ListItem>
@@ -125,7 +130,7 @@
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
                 <asp:BoundField DataField="codigoParte" HeaderText="ID" ReadOnly="True" InsertVisible="False"></asp:BoundField>
-                <asp:BoundField DataField="codigoProyecto" HeaderText="ID Proyecto" ReadOnly="True" InsertVisible="False"></asp:BoundField>
+                <asp:BoundField DataField="codigoProyecto" HeaderText="ID Proyecto" ReadOnly="True" InsertVisible="False" Visible="false"></asp:BoundField>
 
                 <asp:TemplateField HeaderText="Proyecto" SortExpression="NombreProyecto">
                     <ItemTemplate>
@@ -241,8 +246,6 @@
                             <asp:SqlDataSource ID="ClientesSqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT codigoCliente,nombreEntidad FROM Cliente order by nombreEntidad"></asp:SqlDataSource>
                         </div>
                     </div>
-
-
 
                     <input type="date" class="form-control" runat="server" id="fechaTextBox" value='<%# Bind("fecha", "{0:yyyy-MM-dd}") %>' visible="false" />
 

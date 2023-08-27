@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Master/Master1.Master" AutoEventWireup="true" CodeBehind="ConsularProyectos.aspx.cs" Inherits="tfgASPX2.Views.Coordinador.ConsultarProyectos" %>
 
 <asp:Content ID="GestionarProyectosHead" ContentPlaceHolderID="head" runat="server">
-    <link href="../../Styles/GestionarProyectoStyle.css" rel="stylesheet" />
+    <link href="../../Styles/ConsultarProyectosStyle%20-%20Copia.css" rel="stylesheet" />
     <link href="../../Styles/ComunesStyle.css" rel="stylesheet" />
     <script src="../../Scripts/Views/GestionarProyectoStyle.js"></script>
 </asp:Content>
@@ -9,7 +9,7 @@
 <asp:Content ID="GestionarProyectosNavegacion" ContentPlaceHolderID="ContentPlaceHolderNavegacion" runat="server">
     <a href="InicialCoordinador.aspx">Inicio</a>
     <a href="ConsularProyectos.aspx">Proyectos</a>
-     <a href="../Comun/Perfil.aspx">Perfil</a>
+    <a href="../Comun/Perfil.aspx">Perfil</a>
 </asp:Content>
 
 <asp:Content ID="GestionarProyectosBody" ContentPlaceHolderID="ContentPlaceHolderContenido" runat="server">
@@ -182,7 +182,7 @@
                     </EditItemTemplate>
 
                 </asp:TemplateField>
-                <asp:CommandField SelectText="Partidas" ShowDeleteButton="True" ShowEditButton="True" ShowSelectButton="True"></asp:CommandField>
+                <asp:CommandField SelectText="Partidas" ShowSelectButton="True"></asp:CommandField>
             </Columns>
             <FooterStyle BackColor="#CCCCCC" />
             <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
@@ -242,7 +242,7 @@
 
                         <asp:TemplateField HeaderText="Fecha Inicio" SortExpression="FechaInicio">
                             <ItemTemplate>
-                                <%# Eval("FechaInicio", "{0:dd/MM/yy}") %>
+                             <%# Eval("FechaInicio", "{0:dd/MM/yy}") %>
                             </ItemTemplate>
                             <EditItemTemplate>
                                 <input type="date" class="form-control edit-textbox" id="dateFechaInicio" runat="server" value='<%# Bind("FechaInicio", "{0:yyyy-MM-dd}") %>' />
@@ -277,7 +277,6 @@
                             </EditItemTemplate>
                         </asp:TemplateField>
 
-                        <asp:CommandField ShowDeleteButton="True" ShowEditButton="True"></asp:CommandField>
                     </Columns>
                     <FooterStyle BackColor="#CCCCCC" />
                     <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />

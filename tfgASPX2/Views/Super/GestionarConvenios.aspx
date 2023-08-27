@@ -276,7 +276,7 @@
                 </UpdateParameters>
             </asp:SqlDataSource>
 
-            <asp:FormView ID="FormViewInsertarAsociacion" runat="server" DataSourceID="SqlDataSourceInsertarAsociacion" DefaultMode="Insert" DataKeyNames="codigoAsociacionCoste" OnItemInserting="FormViewInsertarAsociacion_ItemInserting" OnItemCommand="FormViewInsertarAsociacion_ItemCommand">
+            <asp:FormView ID="FormViewInsertarAsociacion" class="form-control" runat="server" DataSourceID="SqlDataSourceInsertarAsociacion" DefaultMode="Insert" DataKeyNames="codigoAsociacionCoste" OnItemInserting="FormViewInsertarAsociacion_ItemInserting" OnItemCommand="FormViewInsertarAsociacion_ItemCommand">
                 <FooterStyle BackColor="#990000" ForeColor="White" Font-Bold="True" />
                 <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
                 <InsertItemTemplate>
@@ -291,7 +291,7 @@
                     <div class="row">
                         <div class="col">
                             Convenio:
-                           <asp:DropDownList Text='<%# Bind("codigoConvenio") %>' class="dropdown form-control" ID="idConveniosDropDownList" runat="server" DataSourceID="ConveniosSqlDataSourceInsertar" DataTextField="nombreConvenio" DataValueField="codigoConvenio" AppendDataBoundItems="true"></asp:DropDownList>
+                            <asp:DropDownList Text='<%# Bind("codigoConvenio") %>' class="dropdown form-control" ID="idConveniosDropDownList" runat="server" DataSourceID="ConveniosSqlDataSourceInsertar" DataTextField="nombreConvenio" DataValueField="codigoConvenio" AppendDataBoundItems="true"></asp:DropDownList>
                             <asp:SqlDataSource ID="ConveniosSqlDataSourceInsertar" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT nombreConvenio, codigoConvenio FROM Convenio;"></asp:SqlDataSource>
                         </div>
                         <div class="col">
@@ -349,7 +349,7 @@
 
                     <div class="row">
                         <div class="col text-center">
-                            <h3>Insertar Asociacion</h3>
+                            <h3>Insertar Convenio</h3>
                         </div>
                     </div>
 
