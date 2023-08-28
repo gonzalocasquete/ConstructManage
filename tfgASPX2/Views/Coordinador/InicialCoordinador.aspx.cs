@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
@@ -20,8 +21,8 @@ namespace tfgASPX2.Views.Coordinador
                 }
                 else
                 {
-                    Session["consultaSQL"] = "SELECT Parte.*, Proyecto.NombreProyecto, Cliente.nombreEntidad FROM Parte INNER JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto INNER JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE [codigoTrabajador] = " + Session["codigoTrabajador"];
-                    MostrarTitulo();
+                Session["consultaSQL"] = "SELECT Parte.*, COALESCE(Proyecto.NombreProyecto, 'Sin proyecto') AS NombreProyecto, Cliente.nombreEntidad FROM Parte LEFT JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto INNER JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE Parte.codigoTrabajador = " + Session["codigoTrabajador"];
+                MostrarTitulo();
                 }
             }
 
@@ -44,6 +45,7 @@ namespace tfgASPX2.Views.Coordinador
             ButtonInsertarLinea.Visible = true;
             ButtonFiltros.Visible = false;
             GridView2.Visible = true;
+            PanelInsertarLinea.Visible = false;
 
             if (GridView1.SelectedIndex >= 0)
             {
@@ -62,8 +64,8 @@ namespace tfgASPX2.Views.Coordinador
                     int rowIndex = GridView1.SelectedIndex;
                     string codigoParteStr = GridView1.DataKeys[rowIndex]["codigoParte"].ToString();
                     int.TryParse(codigoParteStr, out int codigoParteInt);
-                    SqlDataSource1.SelectCommand = "SELECT Parte.*, Proyecto.NombreProyecto, Cliente.nombreEntidad FROM Parte INNER JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto INNER JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE [codigoTrabajador] = @codigoUsuario AND codigoParte=" + codigoParteInt;
-                    Session["consultaSQL"]= "SELECT Parte.*, Proyecto.NombreProyecto, Cliente.nombreEntidad FROM Parte INNER JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto INNER JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE [codigoTrabajador] = @codigoUsuario AND codigoParte=" + codigoParteInt;
+                    SqlDataSource1.SelectCommand = "SELECT Parte.*, COALESCE(Proyecto.NombreProyecto, 'Sin proyecto') AS NombreProyecto, Cliente.nombreEntidad FROM Parte INNER JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto INNER JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE [codigoTrabajador] = "+Session["codigoTrabajador"] +" AND codigoParte=" + codigoParteInt;
+                    Session["consultaSQL"]= "SELECT Parte.*, COALESCE(Proyecto.NombreProyecto, 'Sin proyecto') AS NombreProyecto, Cliente.nombreEntidad FROM Parte LEFT JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto INNER JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE [codigoTrabajador] = "+Session["codigoTrabajador"]+" AND codigoParte=" + codigoParteInt;
                     SqlDataSource1.DataBind();              
                 }
             }
@@ -79,7 +81,7 @@ namespace tfgASPX2.Views.Coordinador
 
             ButtonInsertarLinea.Text = "Insertar Linea";
             SqlDataSource1.SelectCommand = "SELECT Parte.*, Proyecto.NombreProyecto, Cliente.nombreEntidad FROM Parte INNER JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto INNER JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE [codigoTrabajador] = " + Session["codigoTrabajador"];
-            Session["consultaSQL"]= "SELECT Parte.*, Proyecto.NombreProyecto, Cliente.nombreEntidad FROM Parte INNER JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto INNER JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE [codigoTrabajador] = " + Session["codigoTrabajador"];
+            Session["consultaSQL"] = "SELECT Parte.*, COALESCE(Proyecto.NombreProyecto, 'Sin proyecto') AS NombreProyecto, Cliente.nombreEntidad FROM Parte LEFT JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto INNER JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE Parte.codigoTrabajador = " + Session["codigoTrabajador"];
             SqlDataSource1.DataBind();
         }
 
@@ -104,7 +106,7 @@ namespace tfgASPX2.Views.Coordinador
                 GridView1.SelectedIndex = -1;
 
                 SqlDataSource1.SelectCommand = "SELECT Parte.*, Proyecto.NombreProyecto, Cliente.nombreEntidad FROM Parte INNER JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto INNER JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE [codigoTrabajador] = " + Session["codigoTrabajador"];
-                Session["consultaSQL"]= "SELECT Parte.*, Proyecto.NombreProyecto, Cliente.nombreEntidad FROM Parte INNER JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto INNER JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE [codigoTrabajador] = " + Session["codigoTrabajador"];
+                Session["consultaSQL"] = "SELECT Parte.*, COALESCE(Proyecto.NombreProyecto, 'Sin proyecto') AS NombreProyecto, Cliente.nombreEntidad FROM Parte LEFT JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto INNER JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE Parte.codigoTrabajador = " + Session["codigoTrabajador"];
                 SqlDataSource1.DataBind();
             }
         }
@@ -123,9 +125,6 @@ namespace tfgASPX2.Views.Coordinador
             DateTime fechaHoy = DateTime.Now;
             fechaInput.Value = fechaHoy.ToString("yyyy-MM-dd");
         }
-
-
-
 
         protected void ButtonInsertarLinea_Click(object sender, EventArgs e)
         {
@@ -159,7 +158,7 @@ namespace tfgASPX2.Views.Coordinador
 
         protected void ButtonFiltrado_Click(object sender, EventArgs e)
         {
-            String consultaSQL = "SELECT Parte.codigoParte, Parte.fecha, Parte.tipo, Parte.codigoTrabajador, Proyecto.NombreProyecto, Cliente.nombreEntidad" +
+            String consultaSQL = "SELECT Parte.*, COALESCE(Proyecto.NombreProyecto, 'Sin proyecto') AS NombreProyecto, Cliente.nombreEntidad" +
                 " FROM Parte LEFT JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto LEFT JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente";
 
             bool whereAdded = false; // Bandera para controlar la adición del primer "WHERE"
@@ -201,8 +200,8 @@ namespace tfgASPX2.Views.Coordinador
 
         protected void Limpiar_Click(object sender, EventArgs e)
         {
-            SqlDataSource1.SelectCommand = "SELECT Parte.codigoParte, Parte.fecha, Parte.tipo, Parte.codigoTrabajador, Proyecto.NombreProyecto, Cliente.nombreEntidad FROM Parte LEFT JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto LEFT JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE Parte.codigoTrabajador = " + Session["codigoTrabajador"] +"";
-            Session["consultaSQL"] = "SELECT Parte.codigoParte, Parte.fecha, Parte.tipo, Parte.codigoTrabajador, Proyecto.NombreProyecto, Cliente.nombreEntidad FROM Parte LEFT JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto LEFT JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE Parte.codigoTrabajador = " + Session["codigoTrabajador"] + "";
+            Session["consultaSQL"] = "SELECT Parte.*, COALESCE(Proyecto.NombreProyecto, 'Sin proyecto') AS NombreProyecto, Cliente.nombreEntidad FROM Parte LEFT JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto INNER JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE Parte.codigoTrabajador = " + Session["codigoTrabajador"];
+            SqlDataSource1.SelectCommand = Session["consultaSQL"].ToString();
             SqlDataSource1.DataBind();
             TextBoxFiltradoProyecto.Text = "";
             TextBoxFiltradoCliente.Text = "";

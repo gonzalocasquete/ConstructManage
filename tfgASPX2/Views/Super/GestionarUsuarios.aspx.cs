@@ -72,8 +72,9 @@ namespace tfgASPX2.Views.Super
 
         protected void Limpiar_Click(object sender, EventArgs e)
         {
-            SqlDataSource1.SelectCommand = "SELECT * FROM Usuario ORDER BY codigoUsuario";
-            Session["consultaSQL"] = "SELECT * FROM Usuario ORDER BY codigoUsuario";
+            string consulta= "SELECT * FROM Usuario ORDER BY codigoUsuario";
+            SqlDataSource1.SelectCommand = consulta;
+            Session["consultaSQL"] = consulta;
             SqlDataSource1.DataBind();
             TextBoxFiltradoUsuario.Text = "";
             CheckBoxTrabajador.Checked = false;

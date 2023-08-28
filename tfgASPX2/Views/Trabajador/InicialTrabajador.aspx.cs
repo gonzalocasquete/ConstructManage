@@ -15,6 +15,10 @@ namespace tfgASPX2.Views.Trabajador
             {
                 MostrarTitulo();
             }
+            else
+            {
+                Session["consultaSQL"] = "SELECT LT.codigoLinea,P.nombrePartida AS nombrePartida,N.nombre AS nombreNaturaleza,LT.horasNormales,LT.horasExtra FROM LineaTrabajo LT JOIN Partida P ON LT.codigoPartida = P.codigoPartida JOIN Naturaleza N ON LT.codigoNaturaleza = N.codigoNaturaleza WHERE([codigoTrabajador] = " + Session["codigoTrabajador"] +");";
+            }
         }
 
         private void MostrarTitulo()
@@ -48,18 +52,7 @@ namespace tfgASPX2.Views.Trabajador
         protected void ButtonFiltrado_Click(object sender, EventArgs e)
         {
             string consultaSQL = "SELECT LT.codigoLinea,P.nombrePartida AS nombrePartida,N.nombre AS nombreNaturaleza,LT.horasNormales,LT.horasExtra FROM LineaTrabajo LT JOIN Partida P ON LT.codigoPartida = P.codigoPartida JOIN Naturaleza N ON LT.codigoNaturaleza = N.codigoNaturaleza WHERE [codigoTrabajador] = " + Session["codigoTrabajador"] + "";
-
-            if (horasMinimas.Value.Length != 0)
-                consultaSQL += " AND horasNormales>=" + horasMinimas.Value + "";
-
-            if (horasMaximas.Value.Length != 0)
-                consultaSQL += " AND horasNormales<=" + horasMaximas.Value + "";
-
-            if (horasExtraMinimas.Value.Length != 0)
-                consultaSQL += " AND horasExtra>=" + horasExtraMinimas.Value + "";
-
-            if (horasMaximas.Value.Length != 0)
-                consultaSQL += " AND horasExtra<=" + horasExtraMaximas.Value + "";   
+            Session["consultaSQL"] = consultaSQL;
             SqlDataSource1.SelectCommand = consultaSQL;
             SqlDataSource1.DataBind();
             GridView1.DataBind();
@@ -67,12 +60,9 @@ namespace tfgASPX2.Views.Trabajador
         }
 
         protected void Todos_Click(object sender, EventArgs e)
-        {
-            horasMinimas.Value = null;
-            horasMaximas.Value = null;
-            horasExtraMinimas.Value = null;
-            horasExtraMaximas.Value = null;
+        {       
             SqlDataSource1.SelectCommand = "SELECT LT.codigoLinea,P.nombrePartida AS nombrePartida,N.nombre AS nombreNaturaleza,LT.horasNormales,LT.horasExtra FROM LineaTrabajo LT JOIN Partida P ON LT.codigoPartida = P.codigoPartida JOIN Naturaleza N ON LT.codigoNaturaleza = N.codigoNaturaleza WHERE ([codigoTrabajador] = " + Session["codigoTrabajador"] + ")";
+            Session["consultaSQL"]= "SELECT LT.codigoLinea,P.nombrePartida AS nombrePartida,N.nombre AS nombreNaturaleza,LT.horasNormales,LT.horasExtra FROM LineaTrabajo LT JOIN Partida P ON LT.codigoPartida = P.codigoPartida JOIN Naturaleza N ON LT.codigoNaturaleza = N.codigoNaturaleza WHERE ([codigoTrabajador] = " + Session["codigoTrabajador"] + ")";
             SqlDataSource1.DataBind();
             GridView1.DataBind();
             CalcularHorasTotales();

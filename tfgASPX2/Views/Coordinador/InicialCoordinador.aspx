@@ -46,8 +46,6 @@
                 </div>
             </div>
 
-
-
             <asp:Panel ID="PanelFiltros" runat="server" Visible="False">
                 <hr style="margin-bottom: 2px;" />
                 <div>
@@ -101,7 +99,7 @@
             ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>"
             DeleteCommand="DELETE FROM [Parte] WHERE [codigoParte] = @codigoParte"
             InsertCommand="INSERT INTO [Parte] ([codigoProyecto], [codigoCliente], [fecha], [tipo], [codigoTrabajador]) VALUES (@codigoProyecto, @codigoCliente, @fecha, @tipo, @codigoTrabajador)"
-            SelectCommand="SELECT Parte.*, Proyecto.NombreProyecto, Cliente.nombreEntidad FROM Parte INNER JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto INNER JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE [codigoTrabajador] = @codigoUsuario"
+            SelectCommand="SELECT Parte.*, COALESCE(Proyecto.NombreProyecto, 'Sin proyecto') AS NombreProyecto, Cliente.nombreEntidad FROM Parte LEFT JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto INNER JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE Parte.codigoTrabajador = @codigoTrabajador;"
             UpdateCommand="UPDATE [Parte] SET [codigoProyecto] = @codigoProyecto, [codigoCliente] = @codigoCliente, [fecha] = @fecha, [tipo] = @tipo, [codigoTrabajador] = @codigoTrabajador WHERE [codigoParte] = @codigoParte">
             <DeleteParameters>
                 <asp:Parameter Name="codigoParte" Type="Int32"></asp:Parameter>
@@ -114,7 +112,7 @@
                 <asp:Parameter Name="codigoTrabajador" Type="Int32"></asp:Parameter>
             </InsertParameters>
             <SelectParameters>
-                <asp:SessionParameter SessionField="codigoTrabajador" Name="codigoUsuario" Type="Int32"></asp:SessionParameter>
+                <asp:SessionParameter SessionField="codigoTrabajador" Name="codigoTrabajador" Type="Int32"></asp:SessionParameter>
             </SelectParameters>
             <UpdateParameters>
                 <asp:Parameter Name="codigoProyecto" Type="Int32"></asp:Parameter>

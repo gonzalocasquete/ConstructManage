@@ -191,7 +191,6 @@
                 <PagerStyle BackColor="#FFCC66" ForeColor="#333333" HorizontalAlign="Center" />
                 <RowStyle BackColor="#6c757d" ForeColor="White" />
             </asp:FormView>
-        </asp:Panel>
-
+        </asp:Panel>  
     </div>
 </asp:Content>
