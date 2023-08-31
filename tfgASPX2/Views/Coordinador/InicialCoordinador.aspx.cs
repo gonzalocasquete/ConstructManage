@@ -21,6 +21,9 @@ namespace tfgASPX2.Views.Coordinador
                 }
                 else
                 {
+                if (Session["rol"] == null || Session["rol"].ToString() != "coordinador")
+                    Response.Redirect("../Login.aspx");
+
                 Session["consultaSQL"] = "SELECT Parte.*, COALESCE(Proyecto.NombreProyecto, 'Sin proyecto') AS NombreProyecto, Cliente.nombreEntidad FROM Parte LEFT JOIN Proyecto ON Parte.codigoProyecto = Proyecto.codigoProyecto INNER JOIN Cliente ON Parte.codigoCliente = Cliente.codigoCliente WHERE Parte.codigoTrabajador = " + Session["codigoTrabajador"];
                 MostrarTitulo();
                 }

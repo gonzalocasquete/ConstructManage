@@ -3,12 +3,15 @@
 <asp:Content ID="InicialCoordinadorHead" ContentPlaceHolderID="head" runat="server">
     <link href="../../Styles/InicialCoordinadorStyle.css" rel="stylesheet" />
     <link href="../../Styles/ComunesStyle.css" rel="stylesheet" />
+    <link href="../../Styles/ComunCoordinadorStyle.css" rel="stylesheet" />
     <script src="../../Scripts/Views/InicialCoordinadorScript.js"></script>
 </asp:Content>
 
 <asp:Content ID="InicialCoordinadorNavegacion" ContentPlaceHolderID="ContentPlaceHolderNavegacion" runat="server">
     <a href="InicialCoordinador.aspx">Inicio</a>
     <a href="ConsularProyectos.aspx">Proyectos</a>
+    <a href="Presupuestos.aspx">Balance</a>
+    <a href="Informacion.aspx.cs">Estudio</a>
     <a href="../Comun/Perfil.aspx">Perfil</a>
 </asp:Content>
 
@@ -61,6 +64,7 @@
                             <asp:TextBox ID="TextBoxFiltradoCliente" class="form-control" runat="server"></asp:TextBox>
                         </div>
                     </div>
+
 
                     <div class="row">
                         <div class="col">
@@ -230,7 +234,7 @@
                             <asp:DropDownList Text='<%# Bind("codigoProyecto") %>' class="dropdown form-control edit-dropdown" ID="idProyectosDropDownList" runat="server" DataSourceID="ProyectosSqlDataSource" DataTextField="NombreProyecto" DataValueField="codigoProyecto" ClientIDMode="Static">
                                 <asp:ListItem Text="" Value=""></asp:ListItem>
                             </asp:DropDownList>
-                            <asp:SqlDataSource ID="ProyectosSqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT [codigoProyecto], [NombreProyecto], [codigoCliente] FROM [Proyecto] WHERE ([codigoCoordinador] = @codigoCoordinador)">
+                            <asp:SqlDataSource ID="ProyectosSqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>" SelectCommand="SELECT [codigoProyecto], [NombreProyecto], [codigoCliente] FROM [Proyecto] WHERE ([codigoCoordinador] = @codigoCoordinador) ORDER BY NombreProyecto">
                                 <SelectParameters>
                                     <asp:SessionParameter SessionField="codigoUsuario" Name="codigoCoordinador" Type="Int32"></asp:SessionParameter>
                                 </SelectParameters>

@@ -12,7 +12,7 @@
 
 <asp:Content ID="MenuSuperBody" ContentPlaceHolderID="ContentPlaceHolderContenido" runat="server">
 
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col">
             <div class="image-container">
@@ -24,7 +24,7 @@
 </div>
 
    
-    <div class="vertical-menu">
+    <div class="vertical-menu container-fluid">
             <a href="GestionarUsuarios.aspx">Gestionar Usuarios</a>
             <a href="GestionarTrabajadores.aspx">Gestionar Trabajadores</a>
             <a href="GestionarCategoriasProfesionales.aspx">Gestionar Categorias</a>

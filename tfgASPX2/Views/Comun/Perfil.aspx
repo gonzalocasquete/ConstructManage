@@ -20,9 +20,11 @@
         else if (Session["rol"].ToString() == "coordinador")
         { %>
     <!-- Código para mostrar enlaces cuando la sesión "rol" es "coordinador" -->
-    <a href="../Coordinador/InicialCoordinador.aspx">Inicio</a>
-    <a href="../Coordinador/ConsularProyectos.aspx">Proyectos</a>
-    <a href="Perfil.aspx">Perfil</a>
+    <a href="InicialCoordinador.aspx">Inicio</a>
+    <a href="ConsularProyectos.aspx">Proyectos</a>
+    <a href="Presupuestos.aspx">Balance</a>
+    <a href="Informacion.aspx.cs">Estudio</a>
+    <a href="../Comun/Perfil.aspx">Perfil</a>
     <% } %>
 </asp:Content>
 
@@ -65,26 +67,15 @@
                         <asp:TextBox Text='<%# Bind("apellido") %>' class="form-control" runat="server" ID="apellidoTextBox" /><br />
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col">
-                            Categoria Profesional:
-                        <asp:DropDownList class="form-control" ID="DropDownList2" Text='<%# Bind("codigoCategoria") %>' runat="server" DataSourceID="CategoriaSqlDataSource" DataTextField="nombreCategoria" DataValueField="codigoCategoria"></asp:DropDownList>
-                            <asp:SqlDataSource ID="CategoriaSqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:mibasededatostfgConnectionString %>"
-                                SelectCommand="SELECT codigoCategoria, nombreCategoria FROM CategoriaProfesional"></asp:SqlDataSource>
-                            <br />
-                        </div>
-
-                    </div>
-
+           
                     <div class="row">
                         <div class="col">
                             Usuario:
                         <asp:TextBox Text='<%# Bind("nombreUsuario") %>' class="form-control" runat="server" ID="nombreUsuarioTextBox" /><br />
                         </div>
                         <div class="col">
-                            Contraseña:
-                        <asp:TextBox Text='<%# Bind("contraseñaUsuario") %>' class="form-control" runat="server" ID="contraseñaUsuarioTextBox" TextMode="Password" /><br />
+                            Ubicacion:
+                        <asp:TextBox Text='<%# Bind("contraseñaUsuario") %>' class="form-control" runat="server" ID="contraseñaUsuarioTextBox" /><br />
                         </div>
                     </div>
 

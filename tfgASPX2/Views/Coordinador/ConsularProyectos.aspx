@@ -2,6 +2,7 @@
 
 <asp:Content ID="GestionarProyectosHead" ContentPlaceHolderID="head" runat="server">
     <link href="../../Styles/ConsultarProyectosStyle%20-%20Copia.css" rel="stylesheet" />
+    <link href="../../Styles/ComunCoordinadorStyle.css" rel="stylesheet" />
     <link href="../../Styles/ComunesStyle.css" rel="stylesheet" />
     <script src="../../Scripts/Views/GestionarProyectoStyle.js"></script>
 </asp:Content>
@@ -9,6 +10,8 @@
 <asp:Content ID="GestionarProyectosNavegacion" ContentPlaceHolderID="ContentPlaceHolderNavegacion" runat="server">
     <a href="InicialCoordinador.aspx">Inicio</a>
     <a href="ConsularProyectos.aspx">Proyectos</a>
+    <a href="Presupuestos.aspx">Balance</a>
+    <a href="Informacion.aspx.cs">Estudio</a>
     <a href="../Comun/Perfil.aspx">Perfil</a>
 </asp:Content>
 

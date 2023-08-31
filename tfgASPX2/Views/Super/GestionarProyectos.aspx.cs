@@ -20,6 +20,9 @@ namespace tfgASPX2.Views.Super
             }
             else
             {
+                if (Session["rol"] == null || Session["rol"].ToString() != "admin")
+                    Response.Redirect("../Login.aspx");
+
                 Session["consultaSQL"] = "SELECT Proyecto.*, Cliente.nombreEntidad FROM Proyecto INNER JOIN Cliente ON Proyecto.codigoCliente = Cliente.codigoCliente ORDER BY Proyecto.codigoProyecto DESC;";
             }
         }

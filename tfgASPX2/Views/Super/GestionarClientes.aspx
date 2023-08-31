@@ -124,7 +124,7 @@
                 <asp:Parameter Name="codigoCliente" Type="Int32" />
             </UpdateParameters>
         </asp:SqlDataSource>
-        <asp:GridView ID="GridView1" class="mt-3 table tamanio-cliente" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoCliente" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical">
+        <asp:GridView ID="GridView1" class="mt-3 table tamanio-cliente" runat="server" AllowPaging="True" AllowSorting="true" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="codigoCliente" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical">
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
                 <asp:BoundField DataField="codigoCliente" HeaderText="ID" InsertVisible="False" ReadOnly="True" />
@@ -137,7 +137,7 @@
                     </EditItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="Domicilio Fiscal" SortExpression="DireccionDF">
+                <asp:TemplateField HeaderText="Domicilio Fiscal">
                     <ItemTemplate>
                         <%# Eval("DireccionDF") %>
                     </ItemTemplate>
@@ -146,7 +146,7 @@
                     </EditItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="Codigo Postal D.F" SortExpression="CodigoPostalDF">
+                <asp:TemplateField HeaderText="Codigo Postal D.F">
                     <ItemTemplate>
                         <%# Eval("CodigoPostalDF") %>
                     </ItemTemplate>
@@ -215,7 +215,7 @@
                     </EditItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="Banco D.F" SortExpression="BancoDF">
+                <asp:TemplateField HeaderText="Banco D.F">
                     <ItemTemplate>
                         <%# Eval("BancoDF") %>
                     </ItemTemplate>
@@ -224,7 +224,7 @@
                     </EditItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="Direccion D.E" SortExpression="DireccionDE">
+                <asp:TemplateField HeaderText="Direccion D.E">
                     <ItemTemplate>
                         <%# Eval("DireccionDE") %>
                     </ItemTemplate>
@@ -233,7 +233,7 @@
                     </EditItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="CodigoPostal D.E" SortExpression="CodigoPostalDE">
+                <asp:TemplateField HeaderText="CodigoPostal D.E">
                     <ItemTemplate>
                         <%# Eval("CodigoPostalDE") %>
                     </ItemTemplate>

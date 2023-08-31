@@ -154,7 +154,7 @@
             <asp:SqlDataSource runat="server" ID="SqlDataSource3" ConnectionString='<%$ ConnectionStrings:mibasededatostfgConnectionString %>'
                 DeleteCommand="DELETE FROM [AsociacionCostes] WHERE [codigoAsociacionCoste] = @codigoAsociacionCoste"
                 InsertCommand="INSERT INTO [AsociacionCostes] ([codigoConvenio], [codigoCategoria], [precioHora], [precioHoraExtra], [horasMaxDia]) VALUES (@codigoConvenio, @codigoCategoria, @precioHora, @precioHoraExtra, @horasMaxDia)"
-                SelectCommand="SELECT ac.*, c.nombreConvenio, cat.nombreCategoria FROM AsociacionCostes ac JOIN Convenio c ON ac.codigoConvenio = c.codigoConvenio JOIN CategoriaProfesional cat ON ac.codigoCategoria = cat.codigoCategoria order by codigoAsociacionCoste DESC"
+                SelectCommand="SELECT ac.*, c.nombreConvenio, cat.nombreCategoria FROM AsociacionCostes ac JOIN Convenio c ON ac.codigoConvenio = c.codigoConvenio JOIN CategoriaProfesional cat ON ac.codigoCategoria = cat.codigoCategoria WHERE ac.codigoCategoria = @codigoCategoria order by codigoAsociacionCoste DESC"
                 UpdateCommand="UPDATE [AsociacionCostes] SET [codigoConvenio] = @codigoConvenio, [codigoCategoria] = @codigoCategoria, [precioHora] = @precioHora, [precioHoraExtra] = @precioHoraExtra, [horasMaxDia] = @horasMaxDia WHERE [codigoAsociacionCoste] = @codigoAsociacionCoste">
                 <DeleteParameters>
                     <asp:Parameter Name="codigoAsociacionCoste" Type="Int32"></asp:Parameter>

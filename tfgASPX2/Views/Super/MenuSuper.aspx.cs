@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Ajax.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,10 @@ namespace tfgASPX2.Views.Super
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack) {
+                if (Session["rol"]==null || Session["rol"].ToString()!="admin")
+                    Response.Redirect("../Login.aspx");
+            }
         }
     }
 }

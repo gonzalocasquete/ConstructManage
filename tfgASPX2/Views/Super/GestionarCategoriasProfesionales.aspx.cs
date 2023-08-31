@@ -21,6 +21,8 @@ namespace tfgASPX2.Views.Super
             }
             else
             {
+                if (Session["rol"] == null || Session["rol"].ToString() != "admin")
+                    Response.Redirect("../Login.aspx");
                 Session["consultaSQL"] = "SELECT * FROM [CategoriaProfesional] order by codigoCategoria DESC";
             }
         }
@@ -150,6 +152,7 @@ namespace tfgASPX2.Views.Super
 
             ButtonInsertarCategoria.Text = "Insertar Asociacion";
             SqlDataSource1.SelectCommand = "Select * FROM CategoriaProfesional order by codigoCategoria DESC";
+            Session["consultaSQL"]= "Select * FROM CategoriaProfesional order by codigoCategoria DESC";
             SqlDataSource1.DataBind();
         }
         protected void FormViewInsertarCategoria_ItemInserted(object sender, FormViewInsertedEventArgs e)

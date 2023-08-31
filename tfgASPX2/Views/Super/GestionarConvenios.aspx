@@ -102,7 +102,7 @@
             <Columns>
                 <asp:BoundField DataField="codigoConvenio" HeaderText="ID" ReadOnly="True" InsertVisible="False" SortExpression="codigoConvenio"></asp:BoundField>
 
-                <asp:TemplateField HeaderText="Convenio">
+                <asp:TemplateField HeaderText="Convenio" SortExpression="nombreConvenio">
                     <ItemTemplate>
                         <%# Eval("nombreConvenio") %>
                     </ItemTemplate>
@@ -111,7 +111,7 @@
                     </EditItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="Fecha Inicio">
+                <asp:TemplateField HeaderText="Fecha Inicio" SortExpression="fechaInicio">
                     <ItemTemplate>
                         <%# Eval("fechaInicio", "{0:dd/MM/yyyy}") %>
                     </ItemTemplate>
@@ -120,7 +120,7 @@
                     </EditItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="Fecha Fin">
+                <asp:TemplateField HeaderText="Fecha Fin" SortExpression="fechaFin">
                     <ItemTemplate>
                         <%# Eval("fechaFin", "{0:dd/MM/yyyy}") %>
                     </ItemTemplate>
@@ -129,7 +129,7 @@
                     </EditItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="Ubicacion">
+                <asp:TemplateField HeaderText="Ubicacion" SortExpression="Ubicacion">
                     <ItemTemplate>
                         <%# Eval("Ubicacion") %>
                     </ItemTemplate>

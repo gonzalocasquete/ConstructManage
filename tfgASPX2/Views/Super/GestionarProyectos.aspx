@@ -156,7 +156,7 @@
                     </EditItemTemplate>
                 </asp:TemplateField>
 
-                <asp:BoundField DataField="Presupuesto" HeaderText="Presupuesto" ReadOnly="True" InsertVisible="False"></asp:BoundField>
+                <asp:BoundField DataField="Presupuesto" HeaderText="Presupuesto" ReadOnly="True" InsertVisible="False" SortExpression="NombreProyecto"></asp:BoundField>
                
                 <asp:TemplateField HeaderText="Comentario">
                     <ItemTemplate>
@@ -167,7 +167,7 @@
                     </EditItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="Cliente">
+                <asp:TemplateField HeaderText="Cliente" SortExpression="nombreEntidad">
                     <ItemTemplate>
                         <%# Eval("nombreEntidad") %>
                     </ItemTemplate>

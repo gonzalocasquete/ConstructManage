@@ -7,30 +7,12 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace tfgASPX2.Views.Trabajador
+namespace tfgASPX2.Views.Coordinador
 {
 
 
-    public partial class InicialTrabajador
+    public partial class Presupuesto
     {
-
-        /// <summary>
-        /// Control LabelMensajeBienvenida.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelMensajeBienvenida;
-
-        /// <summary>
-        /// Control ButtonCalcularHoras.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonCalcularHoras;
 
         /// <summary>
         /// Control ButtonFiltros.
@@ -40,6 +22,15 @@ namespace tfgASPX2.Views.Trabajador
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonFiltros;
+
+        /// <summary>
+        /// Control ButtonVolver.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonVolver;
 
         /// <summary>
         /// Control PanelFiltros.
@@ -69,112 +60,112 @@ namespace tfgASPX2.Views.Trabajador
         protected global::System.Web.UI.WebControls.TextBox TextBoxFiltradoProyecto;
 
         /// <summary>
-        /// Control LabelCliente.
+        /// Control LabelPresupuestoMinimo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelCliente;
+        protected global::System.Web.UI.WebControls.Label LabelPresupuestoMinimo;
 
         /// <summary>
-        /// Control TextBoxFiltradoCliente.
+        /// Control presupuestoMinimo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxFiltradoCliente;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl presupuestoMinimo;
 
         /// <summary>
-        /// Control LabelPartida.
+        /// Control LabelPresupuestoMaximo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelPartida;
+        protected global::System.Web.UI.WebControls.Label LabelPresupuestoMaximo;
 
         /// <summary>
-        /// Control TextBoxPartida.
+        /// Control presupuestoMaximo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxPartida;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl presupuestoMaximo;
 
         /// <summary>
-        /// Control LabelNaturaleza.
+        /// Control Label1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelNaturaleza;
+        protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// Control TextBoxNaturaleza.
+        /// Control Number1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxNaturaleza;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl Number1;
 
         /// <summary>
-        /// Control LabelFechaMinima.
+        /// Control Label2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelFechaMinima;
+        protected global::System.Web.UI.WebControls.Label Label2;
 
         /// <summary>
-        /// Control fechaMinima.
+        /// Control Number2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl fechaMinima;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl Number2;
 
         /// <summary>
-        /// Control LabelFechaMaxima.
+        /// Control Label3.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelFechaMaxima;
+        protected global::System.Web.UI.WebControls.Label Label3;
 
         /// <summary>
-        /// Control fechaMaxima.
+        /// Control Number3.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl fechaMaxima;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl Number3;
 
         /// <summary>
-        /// Control LabelFiltroTipo.
+        /// Control Label4.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelFiltroTipo;
+        protected global::System.Web.UI.WebControls.Label Label4;
 
         /// <summary>
-        /// Control DropDownListTipo.
+        /// Control Number4.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListTipo;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl Number4;
 
         /// <summary>
         /// Control ButtonFiltrado.
@@ -186,67 +177,13 @@ namespace tfgASPX2.Views.Trabajador
         protected global::System.Web.UI.WebControls.Button ButtonFiltrado;
 
         /// <summary>
-        /// Control PanelCalcularHoras.
+        /// Control SqlDataSourcePresupuestos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelCalcularHoras;
-
-        /// <summary>
-        /// Control LabelCalculoHoras.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelCalculoHoras;
-
-        /// <summary>
-        /// Control TextBoxHorasTotales.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxHorasTotales;
-
-        /// <summary>
-        /// Control LabelTipoHoras.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelTipoHoras;
-
-        /// <summary>
-        /// Control CheckBoxHorasNormales.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox CheckBoxHorasNormales;
-
-        /// <summary>
-        /// Control CheckBoxHorasExtra.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox CheckBoxHorasExtra;
-
-        /// <summary>
-        /// Control SqlDataSource1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourcePresupuestos;
 
         /// <summary>
         /// Control GridView1.

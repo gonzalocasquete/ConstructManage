@@ -14,6 +14,9 @@ namespace tfgASPX2.Views.Super
         {
             if (!IsPostBack)
             {
+                if (Session["rol"] == null || Session["rol"].ToString() != "admin")
+                    Response.Redirect("../Login.aspx");
+
                 Session["consultaSQL"] = "SELECT * FROM Cliente order by codigoCliente DESC";
                 // Definir la lista de provincias de España
                 List<string> provincias = new List<string>
@@ -32,6 +35,8 @@ namespace tfgASPX2.Views.Super
 
                 DropDownListUbicacionDF.DataSource = provincias;
                 DropDownListUbicacionDF.DataBind();
+                 if (Session["rol"]==null || Session["rol"].ToString()!="admin")
+                    Response.Redirect("../Login.aspx");
             }else
             {
                 SqlDataSource1.SelectCommand = Session["consultaSQL"].ToString();

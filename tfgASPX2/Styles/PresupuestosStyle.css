@@ -1,0 +1,32 @@
+﻿/*Tabla y boton*/
+.auto-style1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px
+} 
+
+.auto-style2 {
+    height: 443px;
+} 
+
+.auto-style3 {
+    height: 290px;
+}
+
+.auto-style4 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    height: 631px;
+}
+
+.tamanio-presupuesto {
+    border-radius: 18px;
+    overflow: hidden;
+    table-layout: fixed;
+    width: 700px
+}

@@ -16,7 +16,10 @@ namespace tfgASPX2.Views.Super
             {
                 SqlDataSource1.SelectCommand = Session["consultaSQL"].ToString();
             }else
-            {   
+            {
+                if (Session["rol"] == null || Session["rol"].ToString() != "admin")
+                    Response.Redirect("../Login.aspx");
+
                 Session["consultaSQL"] = "SELECT Trabajador.codigoTrabajador, Trabajador.nombre, Trabajador.apellido, Trabajador.codigoUsuario, Trabajador.codigoCategoria, Usuario.nombreUsuario, CategoriaProfesional.nombreCategoria, Usuario.rol FROM Trabajador INNER JOIN Usuario ON Trabajador.codigoUsuario = Usuario.codigoUsuario INNER JOIN CategoriaProfesional ON Trabajador.codigoCategoria = CategoriaProfesional.codigoCategoria order by codigoTrabajador DESC";
             }
         }

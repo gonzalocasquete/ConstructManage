@@ -13,6 +13,8 @@ namespace tfgASPX2.Views.Trabajador
         {
             if (!IsPostBack) // Verifica si es la primera carga de la página (no es un PostBack)
             {
+                if (Session["rol"] == null || Session["rol"].ToString() != "trabajador")
+                    Response.Redirect("../Login.aspx");
                 MostrarTitulo();
             }
             else
@@ -33,7 +35,19 @@ namespace tfgASPX2.Views.Trabajador
             }
         }
 
-
+        protected void ButtonCalcularHoras_Click(object sender, EventArgs e)
+        {
+            if (PanelCalcularHoras.Visible)
+            {
+                PanelCalcularHoras.Visible = false;
+                PanelCalcularHoras.GroupingText = "Calcular Horas";
+            }
+            else
+            {
+                PanelCalcularHoras.Visible = true;
+                ButtonCalcularHoras.Text = "Volver";
+            }
+        }
         protected void ButtonFiltros_Click(object sender, EventArgs e)
         {
             if (!PanelFiltros.Visible)

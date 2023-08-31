@@ -18,6 +18,10 @@ namespace tfgASPX2.Views.Coordinador
             {
                 SqlDataSource1.SelectCommand = Session["consultaSQL"].ToString();
             }
+            else {
+                if (Session["rol"] == null || Session["rol"].ToString() != "coordinador")
+                    Response.Redirect("../Login.aspx");
+            }
         }
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)

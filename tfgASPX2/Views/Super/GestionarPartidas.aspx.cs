@@ -21,6 +21,9 @@ namespace tfgASPX2.Views.Super
             }
             else
             {
+                if (Session["rol"] == null || Session["rol"].ToString() != "admin")
+                    Response.Redirect("../Login.aspx");
+
                 Session["consultaSQL"] = "SELECT P.*, Pr.nombreProyecto FROM Partida P INNER JOIN Proyecto Pr ON P.codigoProyecto = Pr.codigoProyecto order by P.codigoPartida DESC;";
             }
         }

@@ -16,8 +16,8 @@ namespace tfgASPX
             if (!IsPostBack)
             {
                 Session.RemoveAll();
-                Session.Abandon();
-            }
+                Session.Abandon();   
+            }     
         }
 
         protected void Entrar_Click(object sender, EventArgs e)
